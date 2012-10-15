@@ -1,167 +1,20 @@
-\chapter{Background and Related Work}
+\chapter{User Tracking}
 \label{chapter2}
 
 \section{Mesh Deformation Techniques}
 
-Two popular deformation techniques are regular deformations~\cite{Barr84} and Free-form deformation (FFD)~\cite{Sederberg86}. Regular deformations are nonlinear transformations that twist, taper and bend mesh models. Free-form deformation (FFD) is the first popular deformation technique that is used for deforming solid geometric models in a free-form manner. The FFD approach encloses the object to be deformed in a flexible parallelepiped box that has control points. The bounding box is deformed by moving these control points, and the object inside will be also deformed accordingly. The technique can deform any type of surfaces locally or globally. FFD basically interpolates the mesh's coordinates according to the displacement of the vertices of the bounding box. It can be applied to any 2D or 3D mesh. It is easy to implement and have low computational cost compared to numerical methods. However, FFD is not a physically-based deformation technique; thus, it is not suitable for applications that require physical realism.
+User tracking has always been both a challenge and a valued feature in Image Processing. Until the availability of Time-Of-Flight cameras, user tracking was dependent on RGB cameras. Although RGB cameras are sufficient for user tracking, they are proven to be harder to use for body articulation and joint estimation, mostly because of the complexity of human body, self occlusions and the difficulties of body segmentation based on pixel colors alone. Researchers started with still images, than experimented with image sequences from multiple cameras. Most common technique was to extract the body silhouette from the image and construct a body shape with silhouettes from multiple calibrated cameras- Shape From Sihouette (SFS) \cite{Cheung2005}. SFS algorithms evolved from spatial to temporal tracking and their accuracy improved even more \cite{Cheung2005}. 
 
-Another widely used mesh deformation technique is the mass-spring system. The mass-spring system has widespread usage areas (i.e., cloth, hair and water simulations). It is generally constructed with three types of springs, called structural, shear and bending springs (for 2D deformations); these springs obey the rule of Hooke's Law~\cite{Provot95,Lender99}. In order to be used in 3D deformations (e.g., surgery simulators), volumetric springs must be added to preserve the volume~\cite{Wang06}. Mass-spring systems are easy to implement and less costly than numerical methods to simulate dynamic systems in time domain. However, the system reduces the complex stiffness matrix $K$, which is introduced in Chapter~\ref{chapter3}, to the mass-spring constant $k$. Because of this, the potential energy is not preserved and the system cannot handle deformations with high accuracy. They are useful in simulations that require approximate solutions in real time.
+However, RGB based accurate user articulation techniques required many cameras-a financial problem. After the need for extensive imaging hardware, the processes required to calibrate the cameras initially, extract and combine the silhouettes, build a shape and articulate the result. These processes require very complex algorithms, many man-hours to implement and very powerful computing infrastructure. All these requirements made shape-from-silhouette algorithms hard to utilize for me.
 
-\section{Finite Element Method}
+Instead of RGB imaging, I searched for an alternate type of device which can capture the depth of the field in front of it. Although there are a variety of such devices, from sonars to Laser Scanners, the one most appropriate for user tracking was Time-Of-Flight cameras. They have significant advantages over Stereo-Vision and Laser Tracking in simplicity, are fast (up to 100 fps) and accurate in distance \cite{Kourosh2012}.
 
-Finite Element Method (FEM) is a variational approximation that uses piecewise continuous polynomial basis functions for the numerical solution of boundary value problems and initial boundary value problems governed by partial differential equations or integral equations. Apart from finite difference method, FEM does not use approximated differential equation solutions, which makes FEM more powerful and accurate than the finite difference method. FEM can use all types of variational methods according to requirements of the problem to be solved.
+Choosing the most accurate Time-Of-Flight camera was easy, as Microsoft Kinect was not only the cheapest and the most available of them all, it was also the most powerful and had an extensive developer community. I utilized the Kinect for XBOX rather than Kinect for Windows in this study, due to its distance and performance characteristics.
 
-Although the usage of FEM in real world simulations is a relatively new area, the development of  FEMs began in the 1940s. Hrennikoff~\cite{Hrennikoff41} and McHenry~\cite{McHenry43} used a lattice of line elements for the solution of the stresses in solids in the field of structural engineering. The energy principles were first introduced to the finite element method by Argyris~\cite{Argyris54} by using structural matrix analysis.
+\section{Software}
 
-The first solution procedure for 2D FEM was introduced by Turner~\cite{Turner56}. Turner obtained the solution of 2D triangular and rectangular elements with using stiffness matrices which is the most commonly used technique nowadays for obtaining solutions. Along with the development of computers in 1950s, the work of Turner prompted the usage of equations in matrix form. The term ``finite element'' was firstly introduced by Clough~\cite{Clough60}. He showed that the structural analysis method could be used to solve for the stresses and displacements in continuous structures~\cite{Clough99}. 3D FEM was first used by Martin~\cite{Martin61}, with the development of tetrahedral stiffness matrices. Different types of 3D elements were introduced by Argyris~\cite{Argyris64}.
+The user tracking process with Kinect was much simpler compared to SFS techniques, due to the Shape being available mostly with the depth field output. However, proper articulation still required lots of different algorithms and time.
 
-Up to 1960s, most of the research dealt with linear finite element methods that use infinitesimal strains (small deformation strains). Large deformations and thermal analysis were first considered by Turner~\cite{Turner60} and material non-linearities were considered by Gallagher~\cite{Gallagher62}.
+In order to speed up the user tracking and articulation, I utilized the OpenNI framework along with PrimeSense NITE package and SensorKinect drivers. OpenNI provides the framework for capturing and utilizing the various types of streams from Natural Interaction devices, also provides abstract modules for accessing complex functionalities, such as skeletal tracking \cite{OpenNI2102}. PrimeSense NITE package is a software that bundles with OpenNI, and provides skeletal tracking, hand tracking and other functionalities which can be accessed via OpenNI framework \cite{PS2102}. 
 
-The variational methods that use FEM were first proposed by Melosh~\cite{Melosh63}. For the problems that cannot be solved with variational methods, the finite element solution with weighted residual was introduced by Szabo and Lee~\cite{Szabo69}; it is still a very popular method to achieve the finite element solution.
-
-Finite element models are used frequently to get closer to real world simulations. With the increase in the computational power, finite elements models became popular in computer simulations recently. Due to nonlinear FEM's high computational cost, linear FEMs are introduced to use in deformable models~\cite{Koch96}. However, linear models are based on the assumption of small deformation, typically less than 1\%, which is not valid for much of the soft tissue deformation. Moreover, linear FEM cannot handle rigid motions either~\cite{Zhuangy00}. To address this problem, Cavusoglu~\cite{Cavusoglu00} proposed a method to determine elasticity parameters of a lumped element (mass-spring) model by approximating the stiffness matrix of the finite element model with the stiffness matrix of the lumped element model. Later, Cavusoglu and Natsupakpong extended the idea of lumped element models from the FEM for triangular, rectangular, and tetrahedral meshes~\cite{Natsupakpong2010}. They extended the classical linear FEM solution with
-
-\begin{equation}
-M^eu^e + K^eu^e = 0,
-\label{eqn:fem01}
-\end{equation}
-
-\noindent where $K$ is the stiffness matrix that generalizes the stiffness of Hooke's Law constant $k$ to a matrix and $M$ is the mass matrix to provide damping that comes from lumped element (mass-spring) model.
-
-Nonlinear FEM is a highly-accurate method, which takes into account nonlinear constitutive behavior of the materials, as well as large deformation strains. That's why it is very popular for high accuracy computations~\cite{Natsupakpong2010}. However, nonlinear models are computationally very intensive and not used for real time simulators. Pedersen used nonlinear large deformation strains for tetrahedral elements~\cite{Pedersen06}. However, his methodology to construct stiffness matrices are very complex. This makes already slow nonlinear FEM calculations even slower.
-We propose a solution that uses Green-Lagrange strains. Our approach is similar to the method of Pedersen; however, the proposed method uses a fast and easy approach to calculate the stiffness matrices.
-
-\section{General Steps of Finite Element Method}
-\label{sec:steps}
-
-\subsection{Finite Element Discretization}
-\label{sec:fed}
-
-In the first step, the problem domain is represented by a collection of finite number of subdomains (for 1D set of lines, 2D set of triangles or rectangles), that is called discretization of the domain. Moreover, each subdomain is called an element, and the whole domain is called finite element mesh. Elements are connected to each other with nodes. Subdomain types differ with respect to their solution domain. If it is a 1D problem, string is divided into equal length sub-strings (uniform mesh). If it is a 2D problem, it is triangulated (e.g., using Delaunay triangulation) or divided into small quadrilateral elements. Objects used in simulations, such as car crash tests and surgery simulators, are generally represented by 3D meshes that are divided into tetrahedral or hexahedral elements. The  accuracy of the solution can be increased by constructing dense meshes.
-
-2D Delaunay triangulation~\cite{Delaunay34} is described as follows. Let \textit{V} be a set of points in the plane, and \textit{T} be a triangulation of \textit{V}. \textit{T} is a Delaunay triangulation if and only if the circumcircle of any triangle does not contain a point of \textit{V} in its interior (see Figure~\ref{fig:delaunay}). An arbitrary triangulation can be converted to a Delaunay triangulation using edge flipping operations~\cite{Prep93}.
-
-\begin{figure}[h]
-\centerline{\fbox{\psfig{figure=figures/delaunay.ps,width=0.70\textwidth}}}
-\caption{ The circumscribing circle of any triangle in a Delaunay triangulation contains no other vertices.}
-\label{fig:delaunay}
-\end{figure}
-
-A tetrahedralization of a set of vertices \textit{V} is a set of tetrahedra \textit{T}, whose interiors do not intersect each other, and whose union is the convex hull of \textit{V}. Let \textit{s} be a 3-simplex\footnote{A simplex is the representation of point, line segment, triangle, or tetrahedron with an arbitrary dimension; i.e., 0-simplex is point, 1-simplex is line segment, 2-simplex triangle, and 3-simplex is tetrahedron.} whose vertices are in \textit{V}. A sphere \textit{S} is a circumscribing sphere of \textit{s} if it passes through all the vertices of \textit{s}~\cite{si2011}. It can be said that a tetrahedron satisfies the  Delaunay property if the circumscribing sphere of the tetrahedron that passes through all of its vertices is empty. Delaunay tetrahedralization is a tetrahedralization where all tetrahedra satisfy this property~\cite{Edelsbrunner01}. Edge flipping can also be applied to an arbitrary tetrahedralization to obtain a Delaunay tetrahedralization.
-
-\subsection{Element Displacement Functions}
-\label{sec:edf}
-
-After the discretization of the elements, the displacement functions must be defined for finite elements. For each element, the physical process is approximated by using these functions, which relate physical quantities at the nodes~\cite{Narasaiah08}. The functions are expressed in terms of the nodal unknowns. These functions can be linear, quadratic or a higher degree polynomial. Quadratic and polynomial equations are time consuming and hard to work with. Linear equations are used frequently because they are easy to work with. The functions are defined within finite element domain and differentiate with respect to element's degree of freedom and strain/displacement relationship.
-
-FEM is derived from the conservation of the potential energy and potential energy is defined by
-
-\begin{equation}
-\pi =  {\bf E}_{strain} + W.
-\label{eqn:1.01}
-\end{equation}
-
-\noindent where ${\bf E}_{strain}$ is the strain energy of the linear element and $W$ is the work potential. They are given by
-
-\begin{equation}
-{\bf E}_{strain} =  \frac{1}{2} \int_{\Omega^e}\varepsilon^T \sigma dx \;\;\text{and}\\
-W = {f^e} {d}^T.
-\label{eqn:1.1}
-\end{equation}
-
-\noindent where $\Omega$ is the stress, $\varepsilon$ is the strain, $f$ is the force vector and $u$ is the displacement for 1D element on x-axis. The elemental stiffness matrix is constructed using the strain energy in Equation~\ref{eqn:1.1}.
-
-\subsection{Assembly of the Elements}
-\label{sec:aote}
-
-Subdomains are connected to each other with nodes, and the nodal neighbor connections are used to assemble the elements. In this step, boundary conditions are introduced. In numerical simulations, boundary conditions are necessary to make the system solvable. Without limiting or defining the region of the simulation, it is impossible to obtain a solution (the stiffness matrix $K$ will be singular and the inverse of $K$ will not exist). In our case, we use fixed boundary conditions, which ensures that fixed node's positions cannot be changed with the effect of the external forces. After deriving the global stiffness matrix, the unused nodal displacements are cleared from the global stiffness matrix using fixed boundary conditions. At the last step, the system is solved using global force vector (Equation~\ref{eqn:1.2}).
-
-
-\begin{equation}
-\begin{bmatrix} F_{1} \\ F_{2} \\ \vdots \\ F_{n}
-\end{bmatrix}
- =
- \begin{bmatrix}
-  K_{1,1} & K_{1,2} & \cdots & K_{1,n} \\
-  K_{2,1} & K_{2,2} & \cdots & K_{2,n} \\
-  \vdots  & \vdots  & \ddots & \vdots  \\
-  K_{m,1} & K_{m,2} & \cdots & K_{m,n}
- \end{bmatrix}
- \begin{bmatrix} d_{1} \\ d_{2} \\ \vdots \\ d_{n}
-\end{bmatrix}.
-\label{eqn:1.2}
-\end{equation}
-
-\noindent $f$ is the force vector and $d$ is the unknown displacements.
-
-\subsection{Convergence of the Solution and the Error Estimation}
-\label{sec:csee}
-
-This part differentiates with respect to the FEM methodology used. If linear FEM is used, the solution may be compared with an analytical solution (if an analytical solution is obtainable). If nonlinear FEM is used, the solution procedure continues until the desired accuracy is reached. In nonlinear FEM, the solution involves Newton-Raphson method that reduces the error at each iteration. If an analytical solution exists, the error analysis can be done by comparing the approximate solution with the analytical solution. When the exact solution is not known, a conditional linear FEM error estimation can be done by taking the non-linear solution as the basis, and comparing the linear solution with it. Moreover, an independent error analysis can be done by using the approximate results and comparing the displacements of the element for two meshes with mesh densities $d$ and $\frac{d}{2}$. We have
-
-\begin{equation}
-\parallel u^d - u^{\frac{d}{2}}\parallel = \parallel (u - u^{\frac{d}{2}}) + (u^d - u) \parallel.
-\label{eqn:1.3}
-\end{equation}
-
-\noindent By triangular inequality for the energy norm~\cite{Gabaldon02}
-
-\begin{equation}
-\parallel u^d - u^{\frac{d}{2}}\parallel \le \parallel (u - u^{\frac{d}{2}}) \parallel + \parallel (u^d - u) ||.
-\label{eqn:1.4}
-\end{equation}
-
-\noindent Assuming both finite element solutions are convergent, we can express the errors as
-
-\begin{equation}
-\begin{array}{l}
-\parallel u^d - u \parallel = O(h^m) \;\;\text{and}\\
-\parallel u - u^{\frac{d}{2}} \parallel = O(h^p).
-\end{array}
-\label{eqn:1.5}
-\end{equation}
-
-\noindent The rate of convergence for Equation~\ref{eqn:1.5} becomes $m > p$.
-As the mesh becomes denser, $p$ becomes very small as compared to $m$. Thus, we obtain
-
-\begin{equation}
-\parallel u^d - u^{\frac{d}{2}}\parallel = C \parallel (u - u^{\frac{d}{2}}) \parallel.
-\label{eqn:1.7}
-\end{equation}
-
-Using Equation~\ref{eqn:1.7}, we can assume that our solution $u$ is valid and converges to the exact solution. In this case, the difference of $u^d - u^{\frac{d}{2}}$, decreases with the mesh refinement.
-
-The final goal is to interpret and analyze the results for use in the design-analysis process. The mesh model can be visualized using tools such as Autodesk's Mechanical Simulation Sofware~\cite{Autodesk2011}. We used our own visualization program that is based on OpenGL to display the mesh model.
-
-\section{Advantages of Finite Element Methods}
-
-As explained before, FEM has advantages over the analytical solutions and other approximate solutions. Most important advantages of FEM are~\cite{Logan07}:
-
-\begin{enumerate}
-\item FEM can handle very complex geometries;
-\item FEM can be used for different kinds of problem domains (mechanic, fluid, heat, magnetic, etc.);
-\item FEM can handle different kind of materials easily therefore material properties are easily added to the element equations;
-\item FEM can handle a variety of boundary conditions (fixed, linear, time varying boundary conditions);
-\item Nonlinearities are handled better;
-\item FEM can easily increase the accuracy by changing the density of the model.
-\end{enumerate}
-
-\section{Nonlinear Analysis}
-\label{sec:nonlinearities}
-
-The FEM technique used differs according to the requirements of the application (e.g., small or large deformations). Linear FEM is used for small deformations. The linear strain is easy to calculate and does not involve the solution of the nonlinear equations. Hence, it does not involve numerical methods, like Newton-Raphson, that is generally used for approximate solutions to the nonlinear systems of equations. However, they lack realism and accuracy required in applications, such as soft tissue deformations in surgical simulations~\cite{Bro98,Cotin98}. With the introduction of non-linear strains, large deformations are handled better; e.g. the high amplitude bending and twisting behavior.
-
-Linear solutions are generally approximations to the nonlinear solutions to simplify the solution process and make computation less costly. In most of the applications, the linear solution may provide acceptable results~\cite{Reddy03}. However, the applications that require high accuracy and very low error tolerance cannot be handled with the linear solution (e.g., surgical simulators, aeronautics applications, crash test applications). Nonlinear analysis is used commonly in the following areas~\cite{Wriggers08}:
-
-\begin{enumerate}
-\item Simulation of the physical phenomena (fluid, heat, magnetic field analysis);
-\item Simulation of the true material behavior (material nonlinearities, plastic deformation);
-\item Applications of aeronautics, defense industry and nuclear systems that require very high accuracy and low error tolerance;
-\item Applications of civil engineering to describe the large displacements (steel, concrete and cable constructions);
-\item Concrete constructions or soil mechanics;
-\item Manufacturing of concrete (heat analysis because of chemical reactions);
-\item Automobile industry simulations (crash tests and simulations);
-\item Medical simulations (i.e., medical visualization, analysis and surgical simulators).
-\end{enumerate}
-
-There are different types of nonlinearities that change the solution process. The solution methods have to be adjusted with respect to the type of inherent nonlinearity. Nonlinearities arise from two main sources; \textit{material} and \textit{geometric} nonlinearities~\cite{Reddy03}. Material nonlinearities are caused by constitutive behavior of the material itself, such as plastic materials. Geometric nonlinearities are caused by geometric displacement of the material, such as strain-displacement relations.
+With the integration of these modules to my application, I was able to acquire the joint positions and orientations from the depth sensor with almost no effort except the integration itself. With the current hardware/software configuration, I acquire 15 joint positions and orientations at 30 fps, which is enough to reproduce the movement of the user on the virtual model. Other than the joint information, I also acquire the depth and image streams from the depth camera. I will be using the image stream to present the results I have obtained, comparing the user movement with the simulated environment.
