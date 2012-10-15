@@ -53,6 +53,6 @@
 \contentsline {chapter}{\numberline {7}Conclusion and Future Work}{72}
 \contentsline {chapter}{Bibliography}{74}
 \contentsline {chapter}{Appendix}{74}
-\contentsline {chapter}{\numberline {A}Rhinoplasty Application}{80}
-\contentsline {section}{\numberline {A.1}Experiment 1}{80}
-\contentsline {section}{\numberline {A.2}Experiment 2}{82}
+\contentsline {chapter}{\numberline {A}Rhinoplasty Application}{75}
+\contentsline {section}{\numberline {A.1}Experiment 1}{75}
+\contentsline {section}{\numberline {A.2}Experiment 2}{77}
