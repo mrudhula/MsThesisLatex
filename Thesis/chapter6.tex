@@ -59,7 +59,7 @@ The dynamics are stable as long as the constraint solvers converge. When this cr
 The problem is parallelized by fibers, as SIMD process. With CUDA support, however, this is even parallelized more with SIMT processes, where each thread works on one fiber
 
 \subsection{Overall Structure}
-The position of a particle in the next time interval is acquired by performing Explicit Euler Integration over \deltat, where the velocity and the force are assumed to be constant during the interval. The pseudo code is given  in.
+The position of a particle in the next time interval is acquired by performing Explicit Euler Integration over $\delta$t, where the velocity and the force are assumed to be constant during the interval. The pseudo code is given  in.
 
 The overall flow is to predict the next position and velocity (1-3), then perform the corrections by solving the constraints (4-11), update the position and velocities accordingly (12:15). Finally, the damping to the velocities is introduced in line 17. 
 
