@@ -1,0 +1,15 @@
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {table}{\numberline {6.1}{\ignorespaces Element displacements (in centimeters) along the z-axis for node 4 and their corresponding error ratios for linear FEM}}{51}
+\contentsline {table}{\numberline {6.2}{\ignorespaces Element displacements (in centimeters) along the z-axis for node 4 and their corresponding error ratios for nonlinear FEM}}{52}
+\contentsline {table}{\numberline {6.3}{\ignorespaces Force displacements (in centimeters) at node 4 using linear FEM.}}{53}
+\contentsline {table}{\numberline {6.4}{\ignorespaces The displacements (in centimeters) of the nodes using the nonlinear FEM.}}{54}
+\contentsline {table}{\numberline {6.5}{\ignorespaces Comparison of the 1$^{st}$ element strain. The error represents the linear FEM's strain error according to the nonlinear FEM's strain.}}{54}
+\contentsline {table}{\numberline {6.6}{\ignorespaces Computation times (in seconds) of the stiffness matrices for all experiments (MT: Multi thread, Prop Non: The proposed nonlinear solution).}}{70}
+\contentsline {table}{\numberline {6.7}{\ignorespaces Computation times (in seconds) of the systems for all experiments. (MT: Multi thread, Prop Non: The proposed nonlinear solution).}}{70}
+\addvspace {10\p@ }
+\addvspace {10\p@ }

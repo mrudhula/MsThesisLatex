@@ -1,0 +1,22 @@
+\chapter{Conclusion and Future Work}
+\label{chapter7}
+
+We have presented a new non-linear FEM solution method. The proposed solution is easier to analyze in terms of constructing the elemental stiffness matrices and faster than Pedersen's solution. The proposed solution is approximately twice faster on the average at computing stiffness matrices and $17\%$ faster at computing the whole system than the Pedersen's solution. 
+%According to the experimental results, the proposed solution saves 1000 seconds per element that has over 1500 elements, 
+%so we can say that it has a good advantage.
+
+We compared our solution with linear FEM to see advantages and drawbacks in eight different experiments. Our proposed solution has huge advantages over the linear FEM in terms of accuracy. The proposed solution handles large deformations and small deformations perfectly although difference in small deformations is low. However, this low amount of difference cannot be neglected for applications that require very high accuracy. Parallelization is also important to speed-up the FEM solution. We obtain significant speed-ups on multicore machines. 
+
+Although the proposed solution has significant advantages over linear FEM and recent non-linear solution, there is still room for development. Possible future extensions are as follows:
+
+\begin{enumerate}
+\item Although Newton-Raphson is a fast solution technique, over $90\%$ of the computation time of the whole system spent in Newton-Raphson solution procedure. It can be implemented better to overcome jumping to the unexpected roots or different solution procedure can be implemented.
+\item The proposed solution is highly parallelizable so it can benefit from a GPU implementation. However, the nonlinear solution procedure uses over 6GB of system memory when computing the solution for over 1500 elements, so we need GPUs that has lots of memory.
+\item Although we decreased the system memory usage by simplifying the solution procedure for the nonlinear solution, it uses a significant amount of system memory. Hence, the solution procedure can be optimized more to decrease the memory usage.
+\item All experiments are conducted with the same material properties. They can be extended by measuring the exact properties of the  real objects (i.e., an actual liver).
+\end{enumerate}
+
+%As a final remark, the proposed nonlinear FEM solution is a successful technique for solving nonlinear FEM problems. 
+%It can compete with the recent methods. 
+
+

@@ -1,0 +1,325 @@
+\begin{thebibliography}{10}
+
+\bibitem{Argyris64}
+J.~H. Argyris.
+\newblock {\em Recent Advances in Matrix Methods of Structural Analysis
+  (Progress in Aeronautical Sciences)}, volume~4.
+\newblock Pergamon Press, 1964.
+
+\bibitem{Argyris54}
+J.~H. Argyris.
+\newblock Energy theorems and structural analysis.
+\newblock {\em Aircraft Engineering}, Oct., Nov., Dec. 1954, Feb., Mar., Apr.,
+  May 1955.
+
+\bibitem{Autodesk2011}
+{Autodesk, Inc.}
+\newblock Autodesk simulation - mechanical simulation sofware.
+\newblock
+  \texttt{http://usa.autodesk.com/adsk/servlet/pc/index?siteID=123112\&}
+  \texttt{id=13773836}, 2011.
+
+\bibitem{Barr84}
+A.~H. Barr.
+\newblock Global and local deformations of solid primitives.
+\newblock {\em ACM Computer Graphics (Proceedings of SIGGRAPH '84)},
+  18(3):21--30, 1984.
+
+\bibitem{BonetWood97}
+J.~Bonet and R.~D. Wood.
+\newblock {\em Nonlinear Continuum Mechanics for Finite Element Analysis}.
+\newblock Cambridge University Press, 1st edition, 1997.
+
+\bibitem{Bro96}
+M.~Bro-Nielsen.
+\newblock Surgery simulation using fast finite elements.
+\newblock In {\em Proceedings of the 4th International Conference on
+  Visualization in Biomedical Computing}, pages 529--534, London, UK, 1996.
+  Springer-Verlag.
+
+\bibitem{Bro98}
+M.~Bro-nielsen.
+\newblock Finite element modeling in surgery simulation.
+\newblock {\em Proceedings of the IEEE}, 86(3):490--503, 1998.
+
+\bibitem{Cavusoglu00}
+M.~C. Cavusoglu.
+\newblock {\em Telesurgery and Surgical Simulation: Design, Modeling, and
+  Evaluation of Haptic Interfaces to Real and Virtual Surgical Environments}.
+\newblock PhD thesis, EECS Department, University of California, Berkeley,
+  2000.
+
+\bibitem{Clough60}
+R.~Clough.
+\newblock The finite element method in plane stress analysis.
+\newblock In {\em Proceedings of the 2nd ASCE Conference on Electronic
+  Computation}, 1960.
+
+\bibitem{Clough99}
+R.~W. Clough and E.~L. Wilson.
+\newblock Early finite element research at berkeley.
+\newblock In {\em Proceedings of the Fifth US National Conference on
+  Computational Mechanics}, 1999.
+
+\bibitem{Cotin98}
+S.~Cotin, H.~Delingette, and N.~Ayache.
+\newblock Real-time elastic deformations of soft tissues for surgery
+  simulation.
+\newblock {\em IEEE Transactions on Visualization and Computer Graphics},
+  5(1):62--73, 1999.
+
+\bibitem{Cover93}
+S.~Cover, N.~Ezquerra, J.~O'Brien, R.~Rowe, T.~Gadacz, and E.~Palm.
+\newblock Interactively deformable models for surgery simulation.
+\newblock {\em IEEE Computer Graphics and Applications}, 13:68--75, November
+  1993.
+
+\bibitem{Delaunay34}
+B.~N. Delaunay.
+\newblock Sur la sph\'{e}re vide.
+\newblock {\em Bulletin of Academy of Sciences of the USSR}, (6):793--800,
+  1934.
+
+\bibitem{Edelsbrunner01}
+H.~Edelsbrunner.
+\newblock {\em Geometry and Topology for Mesh Generation}.
+\newblock Cambridge University Press, 1st edition, 2001.
+
+\bibitem{Felippa96}
+C.~A. Felippa.
+\newblock Lecture notes in nonlinear finite element methods.
+\newblock Technical Report CU-CSSC-96-16, Department of Aerospace Engineering
+  Sciences and Center for Aerospace Structures University of Colorado, 1996.
+
+\bibitem{Gabaldon02}
+F.~Gabaldon and J.~M. Goicolea.
+\newblock Linear and non-linear finite element error estimation based on
+  assumed strain fields.
+\newblock {\em International Journal for Numerical Methods in Engineering},
+  55:413--429, 2002.
+
+\bibitem{Gallagher62}
+R.~H. Galagher, J.~Padlog, and P.~P. Bijlaard.
+\newblock Stress analysis of heated complex shapes.
+\newblock {\em Journal of the American Rocket Society}, 32:700--707, 1962.
+
+\bibitem{Horton2010}
+A.~Horton, A.~Wittek, G.~R. Joldes, and K.~Miller.
+\newblock A meshless total lagrangian explicit dynamics algorithm for surgical
+  simulation.
+\newblock {\em International Journal for Numerical Methods in Biomedical
+  Engineering}, 26(8):977--998, 2010.
+
+\bibitem{Hrennikoff41}
+A.~Hrennikoff.
+\newblock Solution of problems of elasticity by the frame-work method.
+\newblock {\em American Society of Mechanical Engineers Transactions Journal of
+  Applied Mechanics}, 9(3):144--145, 1941.
+
+\bibitem{Kelly87}
+C.~T. Kelley.
+\newblock {\em Iterative Methods for Linear and Nonlinear Equations (Frontiers
+  in Applied Mathematics)}.
+\newblock Society for Industrial Mathematics, 1st edition, 1987.
+
+\bibitem{Koch96}
+R.~M. Koch, M.~H. Gross, F.~R. Carls, D.~F. von B\"{u}ren, G.~Fankhauser, and
+  Y.~I.~H. Parish.
+\newblock Simulating facial surgery using finite element models.
+\newblock {\em ACM Computer Graphics (Proceedings of SIGGRAPH '96)}, pages
+  421--428, 1996.
+
+\bibitem{Krenk09}
+S.~Krenk.
+\newblock {\em Non-linear Modeling and Analysis of Solids and Structures}.
+\newblock Cambridge University Press, 1st edition, 2009.
+
+\bibitem{Lender99}
+J.~Lander.
+\newblock Devil in the blue faceted dress: real-time cloth animation.
+\newblock {\em Game Developer Magazine}, pages 17--21, 1999.
+
+\bibitem{Logan07}
+D.~L. Logan.
+\newblock {\em First Course in the Finite Element Method}.
+\newblock First Indian Reprint, 4th edition, 2007.
+
+\bibitem{Madenci06}
+E.~Madenci and I.~Guven.
+\newblock {\em Finite Element Method and Applications in Engineering Using
+  ANSYS\textregistered}.
+\newblock Springer, 1st edition, 2006.
+
+\bibitem{Martin61}
+H.~C. Martin.
+\newblock Plane elasticity problems and the direct stiffness method.
+\newblock {\em The Trend in Engineering}, 13:5--9, 1961.
+
+\bibitem{McHenry43}
+D.~McHenry.
+\newblock A lattice analogy for the solution of plane stress problems.
+\newblock {\em Journal of Institution of Civil Engineers}, 21:59--82, 1943.
+
+\bibitem{Melosh63}
+R.~J. Melosh.
+\newblock Structural analysis of solids.
+\newblock {\em Proceedings of the American Society of Civil Engineers, Journal
+  of the Structural Division}, 89(ST4):205--223, 1963.
+
+\bibitem{Morton05}
+K.~W. Morton and D.~F. Mayers.
+\newblock {\em Numerical Solution of Partial Differential Equations}.
+\newblock Cambridge University Press, 2nd edition, 2005.
+
+\bibitem{Narasaiah08}
+G.~L. Narasaiah.
+\newblock {\em Finite Element Analysis}.
+\newblock Bspbs Publications, 1st edition, 2008.
+
+\bibitem{Natsupakpong2010}
+S.~Natsupakpong and M.~C. Cavusoglu.
+\newblock Determination of elasticity parameters in lumped element
+  (mass-spring) models of deformable objects.
+\newblock {\em Graphical Models}, 72(6):61--73, 2010.
+
+\bibitem{Pedersen06}
+P.~Pedersen.
+\newblock Analytical stiffness matrices for tetrahedral elements.
+\newblock {\em Computer Methods in Applied Mechanics and Engineering},
+  196(1-3):261--278, 2006.
+
+\bibitem{Pedersen08}
+P.~Pedersen.
+\newblock \textit{The Basic Matrix Approach for Three Simple Finite Elements}.
+\newblock \texttt{http://www.fam.web.mek.dtu.dk/febooknew.pdf}, Unpublished
+  Manuscript, 2008.
+
+\bibitem{Prep93}
+F.~P. Preparata and M.~I. Shamos.
+\newblock {\em Computational Geometry: An Introduction}.
+\newblock Springer, 1993.
+
+\bibitem{Provot95}
+X.~Provot.
+\newblock Deformation constraints in a mass-spring model to describe rigid
+  cloth behavior.
+\newblock In W.~A. Davis and P.~Prusinkiewicz, editors, {\em Graphics Interface
+  '95}, pages 147--154. Canadian Human-Computer Communications Society, 1995.
+
+\bibitem{Reddy93}
+J.~N. Reddy.
+\newblock {\em Introduction to the Finite Element Method}.
+\newblock McGraw-Hill Science-Engineering-Math, 2nd edition, 1993.
+
+\bibitem{Reddy02}
+J.~N. Reddy.
+\newblock {\em Energy Principles and Variational Methods in Applied Mechanics}.
+\newblock Wiley, 2nd edition, 2002.
+
+\bibitem{Reddy03}
+J.~N. Reddy.
+\newblock {\em An Introduction to Nonlinear Finite Element Analysis}.
+\newblock Oxford University Press, 1st edition, 2003.
+
+\bibitem{Liver2011}
+E.~Saltel.
+\newblock {Liver Mesh, 3D Meshes Research Database}.
+\newblock
+  \texttt{http://www-roc.inria.fr/gamma/download/affichage.php?dir=ANATOMY}
+  \texttt{/\&name=Liver}, 2011.
+
+\bibitem{Sederberg86}
+T.~W. Sederberg and S.~R. Parry.
+\newblock Free-form deformation of solid geometric models.
+\newblock {\em ACM Computer Graphics (Proceedings of SIGGRAPH '86)},
+  20(4):151--160, 1986.
+
+\bibitem{Tetgen2011}
+H.~Si.
+\newblock {TetGen - A Quality Tetrahedral Mesh Generator and a 3D Delaunay
+  Triangulator}.
+\newblock \texttt{http://tetgen.berlios.de/}, 2011.
+
+\bibitem{si2011}
+H.~Si and K.~G\"{a}rtner.
+\newblock {3D} boundary recovery by constrained {Delaunay} tetrahedralization.
+\newblock {\em International Journal for Numerical Methods in Engineering},
+  85(11):1341--1364, 2011.
+
+\bibitem{Szabo69}
+B.~A. Szabo and G.~C. Lee.
+\newblock Derivation of stiffness matrices for problems in plane elasticity by
+  {G}alerkin's method.
+\newblock {\em International Journal for Numerical Methods in Engineering},
+  1(3):301--310, 1969.
+
+\bibitem{Taylor07}
+Z.~Taylor, M.~Cheng, and S.~Ourselin.
+\newblock Real-time nonlinear finite element analysis for surgical simulation
+  using graphics processing units.
+\newblock In N.~Ayache, S.~Ourselin, and A.~Maeder, editors, {\em Medical Image
+  Computing and Computer-Assisted Intervention – MICCAI 2007}, volume 4791 of
+  {\em Lecture Notes in Computer Science}, pages 701--708. Springer Berlin /
+  Heidelberg, 2007.
+
+\bibitem{Terzopoulos87}
+D.~Terzopoulos, J.~Platt, A.~Barr, and K.~Fleischer.
+\newblock Elastically deformable models.
+\newblock {\em ACM Computer Graphics (Proceedings of SIGGRAPH '87)},
+  21(4):205--214, 1987.
+
+\bibitem{Matlab2011}
+{The Mathworks, Inc.}
+\newblock {MATLAB - Parallel Computing Toolbox}.
+\newblock \texttt{http://www.mathworks.com/products/parallel-computing/}, 2011.
+
+\bibitem{Turner56}
+M.~J. Turner, R.~W. Clough, H.~C. Martin, and L.~P. Topp.
+\newblock Stiffness and deflection analysis of complex structures.
+\newblock {\em J. Aeronautical Society}, 23(9):805--823, 1956.
+
+\bibitem{Turner60}
+M.~J. Turner, E.~H. Dill, H.~C. Martin, and R.~J. Melosh.
+\newblock Large deflections of structures subjected to heating and external
+  loads.
+\newblock {\em The Trend in Engineering}, 27(2):97--107, 1960.
+
+\bibitem{Wang07}
+K.~Wang, G.~Lavou\'{e}, F.~Denis, and A.~Baskurt.
+\newblock Three-dimensional meshes watermarking: Review and attack-centric
+  investigation.
+\newblock In {\em Information Hiding}, volume 4567 of {\em Lecture Notes in
+  Computer Science}, pages 50--64. Springer Berlin / Heidelberg, 2007.
+
+\bibitem{Wang06}
+Y.~Wang, Y.~Xiong, K.~Xu, K.~Tan, and G.~Guo.
+\newblock A mass-spring model for surface mesh deformation based on shape
+  matching.
+\newblock In {\em Proceedings of the 4th International Conference on Computer
+  Graphics and Interactive Techniques in Australasia and Southeast Asia},
+  GRAPHITE '06, pages 375--380, New York, NY, USA, 2006. ACM.
+
+\bibitem{Wriggers08}
+P.~Wriggers.
+\newblock {\em Nonlinear Finite Element Methods}.
+\newblock Springer-Verlag Berlin Heidelberg, 1st edition, 2008.
+
+\bibitem{Modulus2011}
+{Young's Modulus -- Britannica Online Enclopedia}.
+\newblock
+  \texttt{http://www.britannica.com/EBchecked/topic/654186/Youngs-modulus},
+  2011.
+
+\bibitem{Gortler07}
+Y.~Zhu and S.~J. Gortler.
+\newblock {3D} deformation using moving least squares.
+\newblock Technical Report TR-10-07, Department of Computer Science, Harvard
+  University, Cambridge, MA, 2007.
+
+\bibitem{Zhuangy00}
+Y.~Zhuang and J.~Canny.
+\newblock Haptic interaction with global deformations.
+\newblock In {\em Proceedings of the IEEE International Conference on Robotics
+  and Automation (ICRA '00)}, volume~3, pages 2428--2433, 2000.
+
+\end{thebibliography}

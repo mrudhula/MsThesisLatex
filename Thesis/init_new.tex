@@ -1,0 +1,82 @@
+\documentclass{buthesis}
+\usepackage{graphicx}
+\usepackage{epsfig}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{epstopdf}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\usepackage{amssymb,amsmath}
+\usepackage{pdflscape}
+
+\pagenumbering{roman}
+
+\thesistype{M.S.~}
+\teztipi{Y{\"u}ksek Lisans}
+
+\keywords{tetrahedral mesh, deformation, finite element method, Green-Lagrange strain, surgery simulation}
+\anahtarsoz{d{\"o}rt y{\"u}zl{\"u} eleman a\u{g}{\i}, deformasyon, sonlu elemanlar metodu, Green-Lagrange gerinimi, ameliyat sim{\"u}lasyonu}
+
+\title{3D TETRAHEDRAL MESH DEFORMATION FOR SURGERY SIMULATION USING NON-LINEAR FINITE ELEMENT METHOD}
+\baslik{L\.{I}NEER OLMAYAN SONLU ELEMANLAR METODU KULLANARAK AMEL\.{I}YAT S\.{I}M{\"U}LASYONU \.{I}\c{C}\.{I}N 3 BOYUTLU D{\"O}RT Y{\"U}ZL{\"U} ELEMAN A\u{G}I DEFORMASYONU}
+
+\author{Emir G{\"u}l{\"u}mser}
+\dept{Computer Engineering}
+\bolum{Bilgisayar M\"{u}hendisli\u{g}i}
+\principaladvisor{Assoc. Prof. Dr. U\u{g}ur G{\"u}d{\"u}kbay~}
+\tezyoneticisi{Do\c{c}. Dr. U\u{g}ur G{\"u}d{\"u}kbay~}
+\coadvisor{Asst. Prof. Dr. Sinan Filiz}
+\tezyoneticisiiki{Yrd. Do\c{c}. Dr. Sinan Filiz}
+\firstreader{Assoc. Prof. Dr. Y}
+\secondreader{Asst. Prof. Dr. \.{I}lker Temizer}
+\director{Prof. Dr. Levent Onural}
+%\copyrightyear{2011}
+\submitdate{December, 2011}
+\tarih{Aral{\i}k, 2011}
+
+
+\begin{document}
+\titlepageMS
+%\setcounter{page}{2}
+\signaturepageMS
+%\setlength{\baselineskip}{6mm}
+%\thispagestyle{plain}
+\begin{abstract}
+\indent Finite Element Method is a widely used numerical technique for finding approximate solutions to the complex problems of engineering and mathematical physics that cannot be solved with analytical methods. In most of the applications that requires simulation to be fast, linear FEM is preferred. Linear FEM works highly accurate with small deformations. However, linear FEM fails in accuracy when the large deformations are used. In this thesis, we presented both linear FEM and non-linear FEM in order to examine non-linear FEM's advantage over the linear FEM with using both small and large deformations. In order to make better analysis, linear FEM and non-linear FEM are both implemented with using tetrahedral elements. In addition, we do not use material nonlinearity with non-linear FEM. To state the effect of using the same material with nonlinear geometric properties, we only use geometric nonlinearity (Green-Lagrange strain definitions). In our experiments, it is shown that non-linear FEM gives more accurate results when compared to linear FEM. Moreover, the proposed non-linear solution achieved significant speed-ups for the calculation of stiffness matrices and for the solution of the whole system, compared to a state-of-the-art method. In terms of high accuracy, nonlinear FEM is the suitable method for crucial applications like surgical simulators.
+\end{abstract}
+
+\begin{ozet}
+\indent Sonlu Elemanlar Metodu, analitik metodlarla \c{c}{\"o}z{\"u}lemeyen matematiksel fizik ve m{\"u}hendisli\u{g}in karma\c{s}{\i}k  problemlerinin uygun \c{c}{\"o}z{\"u}mlerini bulmak i\c{c}in yayg{\i}n bir \c{s}ekilde kullan{\i}lan say{\i}sal bir tekniktir. Sim{\"u}lasyonun h{\i}zl{\i} olmas{\i}n{\i} gerektiren uygulamalar{\i}n \c{c}o\u{g}unda, Lineer Sonlu Elemanlar Metodu tercih edilmektedir. Lineer Sonlu Elemanlar Metodu, k{\"u}\c{c}{\"u}k deformasyonlarla y{\"u}ksek hassasiyette \c{c}al{\i}\c{s}{\i}r. Ancak bu y{\"o}ntem b{\"u}y{\"u}k deformasyonlar kullan{\i}ld{\i}\u{g}{\i} zaman hassasiyetten uzakla\c{s}{\i}r. Yap{\i}lan bu tez \c{c}al{\i}\c{s}mas{\i}nda, hem Lineer hem de Lineer Olmayan Sonlu Elemanlar Metodunu kullanarak Lineer Olmayan Sonlu Elemanlar Metodunun Lineer Sonlu Elemanlar Metoduna g{\"o}re avantaj{\i}n{\i} hem k{\"u}\c{c}{\"u}k hem de b{\"u}y{\"u}k deformasyonlar kullanarak inceledik. Daha iyi analiz yapmak i\c{c}in Lineer ve Lineer Olmayan Sonlu Elemanlar Metodu d{\"o}rt y{\"u}zl{\"u} elemanlar kullanarak denenmi\c{s}tir. Ek olarak materyal non-linearitesini Lineer Olmayan Sonlu Elemanlar Metodu ile kullanmad{\i}k. Ayn{\i} materyali kullanarak lineer Olmayan geometrik {\"o}zelliklerin etkisini belirtmek i\c{c}in sadece geometrik non-lineariteyi kulland{\i}k (Green-Lagrange gerinim ifadesi). Denemelerimizde, Lineer Olmayan Sonlu Elemanlar Metodu, Lineer Sonlu Elemanlar Metoduna g{\"o}re daha kesin sonu\c{c}lar vermektedir. Bundan ba\c{s}ka, {\"o}nerilen lineer Olmayan \c{c}{\"o}z{\"u}m en son metoda k{\i}yasla sertlik matrislerinin hesaplanmas{\i} ve t{\"u}m sistemin \c{c}{\"o}z{\"u}m{\"u} i\c{c}in {\"o}nemli h{\i}zlanmalar elde etmi\c{s}tir. Y{\"u}ksek hassasiyet a\c{c}{\i}s{\i}ndan Lineer Olmayan Sonlu Elemanlar Metodu, ameliyat sim{\"u}lat{\"o}rleri gibi hayati uygulamalar i\c{c}in uygun bir metoddur.
+\end{ozet}
+
+\begin{ack}
+
+I am deeply grateful to my supervisor Assoc. Prof. Dr. U\u{g}ur G{\"u}d{\"u}kbay, who guided and assisted me with his invaluable suggestions in every steps of this study and helped me to achieve my goals about my career in Computer Graphics from my childhood. I also chose this area os study by inspiring from his deep knowledge over this subject. I am also deeply grateful to my co-advisor Asst. Prof. Dr. Sinan Filiz whom I learned the fundamentals of the Finite Element Method from, and for his invaluable comments and contributions. I would like to address my special thanks to Asst. Prof. Dr. \.{I}lker Temizer also for his invaluable comments.
+
+I am very grateful to the members of the jury, Asst. Prof. Dr. Tolga K. \c{C}ap{\i}n and Asst. Prof. Dr. \.{I}lker Temizer for reading and reviewing my thesis.
+
+I am very grateful to Computer Engineering Department of Bilkent University for providing me scholarship for my MS study.
+
+I would like to thank Scientific and Technical Research Council of Turkey (T{\"U}B\.{I}TAK) for their financial support for this study and MS thesis.
+
+I am also grateful to my friends Muhammed B{\"u}y{\"u}ktemiz, S{\"u}leyman Fatih \.{I}\c{s}ler, Ceyhun Karbeyaz, \c{C}etin Koca, Se\c{c}kin Okkar, Muhsin Can Orhan, Ethem Bar{\i}\c{s} {\"O}zt{\"u}rk, Cem {\"O}zveri, Ata F{\i}rat Pir, Mustafa Tekin, Tuncer Turhan, Ahmet Yeni\c{c}a\u{g} and Nesim Yi\u{g}it for their friendship during my studies.
+ 
+\end{ack}
+
+\newpage
+\setcounter{page}{5}
+\vspace*{5cm}
+\begin{center}
+{\large \it to my mother, father and both grandparents...}
+\end{center}
+
+\tableofcontents
+\listoffigures
+\listoftables
+\listofalgorithms
+\newpage
+\newpage
+%\input{symbols}
+\newpage
+\pagestyle{headings}
+\makeatother

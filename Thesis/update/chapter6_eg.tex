@@ -1,0 +1,807 @@
+\chapter{Experimental Results}
+\label{chapter6}
+
+We conducted eight experiments to compare the linear and nonlinear finite element methods. Moreover, we compare the proposed nonlinear FEM method with the Pedersen's method~\cite{Pedersen06}.
+
+First, we present how we construct FEM models and continue with error analysis for linear and nonlinear FEM solution with the cube mesh. We make analysis with increasing the mesh's density and comparing the displacements for a selected node.
+
+In the first experiment, our aim is to observe the strain-displacement relationship. The test model is a cube with six elements. We also examine the force-displacement relationship for a selected node to compare the displacements for linear and nonlinear FEMs.
+
+The rest of the experiments are performed with different test models. Our aim in these experiments is to compare the accuracy of the deformations for linear and nonlinear FEMs. The results for these experiments are interpreted by comparing displacement amounts for the force applied nodes and all the nodes. Finally, the computational costs of different methods are compared, including experiments on single-core and multi-cores to assess the parallelization of the methods.
+
+\section{Construction of the FEM Models}
+
+The construction of the FEM models consists of three stages:
+
+\begin{enumerate}
+\item Reading the surface meshes. The meshes for the cube, beam and the cross surface models are constructed manually, and the liver mesh is taken from 3D Mesh Research Database~\cite{Liver2011}.
+
+\item Tetrahedralizing the surface mesh by using TetGen~\cite{Tetgen2011}. We improve the quality of the models using TetGen.
+
+\item Interactively specifying the constrained (fixed) nodes and the nodes to which the forces to be applied.
+\end{enumerate}
+
+\section{Material Properties}
+
+We did not use material nonlinearity with nonlinear FEM. To state the effect of using the same material with nonlinear geometric properties, we only used geometric nonlinearity (Green-Lagrange strain definitions), and we used linear material properties for the models in the experiments. We used $1$ for Young's modulus ($\epsilon$), and $0.25$ for poisson's ratio ($\nu$).
+
+\section{Error Analysis}
+
+The error analysis is one of the crucial steps of the finite element method to assess the quality of the computed results. We need to make error analysis using approximate results when the exact solution is not available. The error analysis is performed by comparing the displacements of the two approximate results by increasing the number of elements in meshes uniformly. We choose a cube mesh of size $10$cm$^{3}$ to work with because uniformly increasing the number of elements of the cube is much easier than using a complex mesh.
+
+\begin{figure}[htb]
+\centerline{\fbox{\psfig{figure=figures/denser.ps,width=0.90\textwidth}}}
+\caption{The cube mesh with six elements (left) and 48 elements (right).}
+\label{fig:denser}
+\end{figure}
+
+\begin{equation}
+\parallel u^d - u^{\frac{d}{2}}\parallel = C \parallel (u - u^{\frac{d}{2}}) \parallel
+\label{eqn:5.1}
+\end{equation}
+
+The error analysis is achieved by comparing the displacements with mesh density $d$ and $\frac{d}{2}$ in 1D (Equation~\ref{eqn:5.1}). If we adapt the 1D formula to 3D, we need to increase the density by 8-times (for every dimension by $d$ to $\frac{d}{2}$) for error analysis. Figure~\ref{fig:denser} shows that number of elements are increased from 6 to 48 for the first step.
+
+The force amount must be the same for each step to observe the displacement errors. Hence, the cube is constrained from the bottom face and pulled towards the direction of the black arrow with same amount of force uniformly distributed among the green nodes (4 units for both the 6- and 48-element meshes) for each step. We choose the node that is highlighted by red arrow to observe the displacements. Moreover, we limited our analysis with 1536 elements because of the high computational cost of nonlinear FEM.
+
+\begin{table}
+\center
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+\multicolumn{1}{|p{1.7cm}|}{ \textbf{Element}}
+& \multicolumn{1}{p{3.5cm}|}{\centering{\textbf{Displacement - z}}}
+& \multicolumn{1}{p{1.7cm}|}{\centering{\textbf{Element}}}
+& \multicolumn{1}{p{3.5cm}|}{\centering{\textbf{Displacement - z}}}
+& \multicolumn{1}{p{1.7cm}|}{\centering{\textbf{Error (\%)}}} \\
+\hline \hline
+6 & 0.3831 & 48 & 0.3995 & 4.105 \\ \hline
+48 & 0.3995 & 384 & 0.4027 & 0.794 \\ \hline
+384 & 0.4027 & 1536 & 0.4025 & 0.049 \\ \hline
+\end{tabular}
+\caption{Element displacements (in centimeters) along the z-axis for node 4 and their corresponding error ratios for linear FEM}
+\label{tbl:errorLin}
+\end{table}
+
+\begin{table}
+\center
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+\multicolumn{1}{|p{1.7cm}|}{ \textbf{Element}}
+& \multicolumn{1}{p{3.5cm}|}{\centering{\textbf{Displacement - z}}}
+& \multicolumn{1}{p{1.7cm}|}{\centering{\textbf{Element}}}
+& \multicolumn{1}{p{3.5cm}|}{\centering{\textbf{Displacement - z}}}
+& \multicolumn{1}{p{1.7cm}|}{\centering{\textbf{Error (\%)}}} \\
+\hline \hline
+6 & 0.3622 & 48 & 0.3795 & 4.558 \\ \hline
+48 & 0.3795 & 384 & 0.3751 & 1.159 \\ \hline
+384 & 0.375162 & 1536 & 0.375101 & 0.016 \\ \hline
+\end{tabular}
+\caption{Element displacements (in centimeters) along the z-axis for node 4 and their corresponding error ratios for nonlinear FEM}
+\label{tbl:errornonLin}
+\end{table}
+
+
+The results in Table~\ref{tbl:errorLin}~and~\ref{tbl:errornonLin} show that the difference $u^d - u^{\frac{d}{8}}$ decreases with mesh refinement in each step. Using Equation~\ref{eqn:1.7}, we can state that the solutions of the linear and nonlinear FEM are valid and converge to the exact solution for this experiment.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+The error norms are required to compute the error for the whole solution. \textit{L2} and \textit{Energy} norms are the most frequently used norms to compute the errors. They are defined as
+
+\begin{equation}
+\begin{array}{l}
+L_{2} = \sqrt{\int\int\int e^2 \; dx \; dy \; dz} \;\;\text{and} \\
+\\
+Energy = \sqrt{ \frac{1}{2} \int\int\int \frac{\partial{e}}{\partial{x}} + \frac{\partial{e}}{\partial{y}} + \frac{\partial{e}}{\partial{z}} \;  dx \; dy \; dz},
+\end{array}
+\label{eqn:norms}
+\end{equation}
+
+\noindent where $e$ is the error. The error is computed by subtracting the actual solution $u$ for mesh density $d$ from the approximate solution $u_{N}$ for mesh density $\frac{d}{2}$. Figures~\ref{fig:errlinnorm}~and~\ref{fig:errnonlinnorm} show that the error decreases linearly and converges with mesh refinement in each step.
+
+
+\begin{figure}
+\centerline{\fbox{\psfig{figure=figures/errorLinNorm.ps,width=0.85\textwidth}}}
+\caption{Linear FEM error analysis with \textit{L2} and \textit{Energy} norms}
+\label{fig:errlinnorm}
+\end{figure}
+
+\begin{figure}
+\centerline{\fbox{\psfig{figure=figures/errorNonLinNorm.ps,width=0.85\textwidth}}}
+\caption{Nonlinear FEM error analysis with \textit{L2} and \textit{Energy} norms}
+\label{fig:errnonlinnorm}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\clearpage
+\section{Experiment 1}
+\label{i}
+
+The first experiment is conducted with a cube mesh that has eight nodes and six tetrahedral elements. Figure~\ref{fig:fig1} shows that the cube is constrained from the upper four nodes and pulled downwards with a small amount of force (one unit force for each of the upper four nodes). This experiment is conducted with such a small mesh in order to examine the nodal displacements and strains for each element explicitly. Tables~\ref{tbl:exp1linear}~and~\ref{tbl:exp1nonlinear} show force displacements at node 4 using the linear and nonlinear FEMs, respectively. Figures~\ref{fig:fig2}~and~\ref{fig:fig3} show the initial and final positions of the nodes for the linear and nonlinear FEMs, respectively. As it is seen in Figures~\ref{fig:fig2}~and~\ref{fig:fig3}, the linear and nonlinear methods produce similar displacements when the force magnitude is small. Table~\ref{tbl:strain} gives a comparison of the 1$^{st}$ element strain for the linear and nonlinear FEMs. Table~\ref{tbl:strain} shows that even the force magnitude is small, there are differences in strains that can affect displacements. Figure~\ref{fig:epsFEM} shows that the displacement increases linearly with the force magnitude. However, nonlinear FEM behaves exponentially as expected due to the nonlinear strain definitions. Figure~\ref{fig:conv}~depicts the convergence of the Newton-Raphson method for the nonlinear FEM.
+
+\begin{figure}[h]
+\center{\fbox{\psfig{figure=figures/figure1.ps,width=0.50\textwidth}}}
+\caption{Experiment 1: A cube mesh of size $10$ cm$^{3}$ with eight nodes and six tetrahedra is constrained from the blue nodes and is pulled downwards from the green nodes.}
+\label{fig:fig1}
+\end{figure}
+
+{\footnotesize
+\begin{table}[h]
+\center
+\begin{tabular}{|c|c|c|c|}
+\hline
+\multicolumn{1}{|c|}{ \textbf{Node}}
+& \multicolumn{1}{p{3.5cm}|}{\centering{\textbf{Displacement - x}}}
+& \multicolumn{1}{p{3.5cm}|}{\centering{\textbf{Displacement - y}}}
+& \multicolumn{1}{p{3.5cm}|}{\centering{\textbf{Displacement - z}}} \\
+\hline \hline
+1 &
+0.027234 &
+0.011064 & -0.289965 \\
+\hline
+2 &
+0.004306 &
+-0.109719 &
+-0.440739\\
+\hline
+3 &
+-0.066065 &
+-0.056547 &
+-0.343519 \\
+\hline
+4 &
+-0.107536 &
+0.070143 &
+-0.514524 \\
+\hline
+5 &
+0 &
+0 &
+0 \\
+\hline
+6 &
+0 &
+0 &
+0 \\
+\hline
+7 &
+0 &
+0 &
+0 \\
+\hline
+8 &
+0 &
+0 &
+0 \\
+\hline
+\end{tabular}
+\caption{Force displacements (in centimeters) at node 4 using linear FEM.}
+\label{tbl:exp1linear}
+\end{table}
+}
+
+\begin{figure}[htb]
+\centerline{\fbox{\psfig{figure=figures/figure2.ps,width=0.50\textwidth}}}
+\caption{The initial and final positions of the nodes for the linear FEM.
+The red spheres show the initial positions and the green spheres show the final positions of the nodes.}
+\label{fig:fig2}
+\end{figure}
+
+{\footnotesize
+\begin{table}[htb]
+\center
+\begin{tabular}{|c|c|c|c|}
+\hline
+\multicolumn{1}{|c|}{ \textbf{Node}}
+& \multicolumn{1}{p{3.5cm}|}{\centering{\textbf{Displacement - x}}}
+& \multicolumn{1}{p{3.5cm}|}{\centering{\textbf{Displacement - y}}}
+& \multicolumn{1}{p{3.5cm}|}{\centering{\textbf{Displacement - z}}} \\
+\hline \hline
+1 &
+0.029911 &
+0.012665 & -0.278365 \\
+\hline
+2 &
+0.008606 &
+-0.103350 &
+-0.415594\\
+\hline
+3 &
+-0.058835 &
+-0.051901 &
+-0.324126 \\
+\hline
+4 &
+-0.098945 &
+0.068928 &
+-0.478495 \\
+\hline
+5 &
+0 &
+0 &
+0 \\
+\hline
+6 &
+0 &
+0 &
+0 \\
+\hline
+7 &
+0 &
+0 &
+0 \\
+\hline
+8 &
+0 &
+0 &
+0 \\
+\hline
+\end{tabular}
+\caption{The displacements (in centimeters) of the nodes using the nonlinear FEM.}
+\label{tbl:exp1nonlinear}
+\end{table}
+}
+
+
+\begin{figure}[htb]
+\centerline{\fbox{\psfig{figure=figures/figure3.ps,width=0.50\textwidth}}}
+\caption{The initial and final positions of the nodes for the nonlinear FEM.
+The red spheres show the initial positions and the green spheres show the final positions of the nodes.}
+\label{fig:fig3}
+\end{figure}
+
+
+{\footnotesize
+\begin{table}[htb]
+\center
+\begin{tabular}{|c|c|c|c|}
+\hline
+\multicolumn{1}{|c|}{ }
+& \multicolumn{1}{p{3cm}|}{\centering{\textbf{Linear FEM}}}
+& \multicolumn{1}{p{4cm}|}{\centering{\textbf{Nonlinear FEM}}}
+& \multicolumn{1}{p{4cm}|}{\centering{\textbf{Error (\%)}}}\\
+\hline \hline
+$s_{xx}$ &
+0 &
+0 &
+- \\
+\hline
+$s_{yy}$ &
+0 &
+0 &
+- \\
+\hline
+$s_{zz}$ &
+0.0290 &
+0.0282 &
+-2.76 \\
+\hline
+$s_{xy}$ &
+0 &
+0 &
+- \\
+\hline
+$s_{xz}$ &
+-0.0027 &
+-0.0030 &
+11.11 \\
+\hline
+$s_{yz}$ &
+-0.0011 &
+-0.0013 &
+18.18 \\
+\hline
+\end{tabular}
+\caption{Comparison of the 1$^{st}$ element strain. The error represents the linear FEM's strain error according to the nonlinear FEM's strain.}
+\label{tbl:strain}
+\end{table}
+}
+
+\begin{figure}
+\centerline{\fbox{\psfig{figure=figures/convergence.ps,width=0.85\textwidth}}}
+\caption{Newton-Raphson convergence graphics for the nonlinear FEM.}
+\label{fig:conv}
+\end{figure}
+
+
+\begin{figure}[h]
+\centerline{\fbox{\psfig{figure=figures/linvsnonFEM.ps,width=0.85\textwidth}}}
+\caption{Force displacements (in centimeters) at node 4 for the linear and nonlinear FEMs.}
+\label{fig:epsFEM}
+\end{figure}
+
+\clearpage
+\section{Experiment 2}
+\label{ii}
+
+The second experiment is conducted with a cube but with 82 nodes and 224-tetrahedral elements. Figure~\ref{fig:fig4} shows that the cube is constrained from the bottom face and pulled upwards with a small amount of force (one unit force for each of the lower four nodes). This experiment is conducted with more tetrahedral elements in order to examine the displacement differences and the shape of the mesh after applying two methods. As it is seen from Figures~\ref{fig:fig5}~and~\ref{fig:fig6}, the linear and nonlinear methods produce similar displacements when the force magnitude is small and the overall nodal displacement error is 0.65\%. However, the difference between the results of two methods can be seen from the upper part of the cube; the displacement at the upper face of the cube with linear FEM is more compared to the nonlinear FEM. It can be observed that the force applied nodes (green nodes) produce 5.45\% of the error. Moreover, the shape of the cube is more distorted with linear FEM; the left and the right sides of the cube are bent more in linear FEM; the shape of the cube is preserved better with nonlinear FEM.
+
+\begin{figure}[h]
+\centerline{\fbox{\psfig{figure=figures/figure4.ps,width=0.5\textwidth}}}
+\caption{Experiment 2: A cube mesh of size $10$ cm$^{3}$ with 82 nodes and 224-tetrahedra  is constrained from blue nodes and is pulled along the arrow from green nodes.}
+\label{fig:fig4}
+\end{figure}
+
+\begin{figure}[h]
+\centerline{\fbox{\psfig{figure=figures/figure5.ps,width=0.95\textwidth}}}
+\caption{The final shape of the mesh for the linear FEM (top left: wireframe tetrahedral mesh; top right: wireframe tetrahedral mesh with nodes; bottom left: wireframe surface mesh; bottom right: shaded mesh)}
+\label{fig:fig5}
+\end{figure}
+
+\begin{figure}[h]
+\centerline{\fbox{\psfig{figure=figures/figure6.ps,width=0.95\textwidth}}}
+\caption{The final shape of the mesh for the nonlinear FEM (top left: wireframe tetrahedral mesh; upper right: wireframe tetrahedralmesh with nodes; lower left: wireframe surface mesh; lower right: shaded mesh)}
+\label{fig:fig6}
+\end{figure}
+
+\clearpage
+\section{Experiment 3}
+\label{iii}
+
+The third experiment is conducted with the beam that has 90 nodes and 216-tetrahedral elements. Figures~\ref{fig:fig78}~(a)~and~(b) show that the beam is constrained from the blue nodes, and twisted from the both ends of the beam. This experiment is conducted to observe different effects of the nonlinear and the linear FEM deformations on the beam. In the twist experiment, the differences can be seen better. Figures~\ref{fig:fig9}~and~\ref{fig:fig10} show that the nodes that generate the edges of the beam differ (shown with arrow) from each other. In Figure~\ref{fig:fig9}, the nodes are straight, which is not the desired result of the twist operation. This is the result of usage of linear strains so that linear FEM produced straight displacement. However, at Figure~\ref{fig:fig10} nodes are curvy, which is is the expected result of the twist operation. Overall nodal displacement error is 3.10\% due to the curvy twist of the nonlinear FEM. It can be observed from the force applied nodes(green nodes), force applied nodes produces 9.61\% of error, in linear FEM general shape of the face that hosts the force applied nodes, is more distorted than the nonlinear FEM.
+
+\begin{figure}[h]
+\centerline{\fbox{\psfig{figure=figures/figure7.ps,width=0.95\textwidth}}}
+\centerline{(a)}
+\centerline{\ }
+\centerline{\fbox{\psfig{figure=figures/figure8.ps,width=0.75\textwidth}}}
+\centerline{(b)}
+\caption{Experiment 3: The beam mesh is constrained from the blue nodes and twisted from the green nodes. (a) Front view; (b) Side view, which also shows the force directions applied on each green node.}
+\label{fig:fig78}
+\end{figure}
+
+\begin{figure}[c]
+\centerline{\fbox{\psfig{figure=figures/figure9.ps,width=0.95\textwidth}}}
+\caption{Linear FEM solution (top left: wireframe tetrahedra and nodes; top right: only nodes; bottom left: wireframe surface mesh; lower right: shaded mesh).}
+\label{fig:fig9}
+\end{figure}
+
+\begin{figure}[c]
+\centerline{\fbox{\psfig{figure=figures/figure10.ps,width=0.95\textwidth}}}
+\caption{Nonlinear FEM solution (top left: wireframe tetrahedra and nodes; top right: only nodes; bottom left: wireframe surface mesh; lower right: shaded mesh).}
+\label{fig:fig10}
+\end{figure}
+
+\clearpage
+
+\section{Experiment 4}
+\label{iv}
+
+The fourth experiment is conducted with the same beam (Section~\ref{iii}) that has 90 nodes and 216-tetrahedral elements. Figure~\ref{fig:fig11} shows that the beam is constrained from the blue nodes, and pushed downwards at the green nodes. This experiment is conducted to observe different effects of the nonlinear and the linear FEM deformations over the beam mesh.
+It can be observed that with linear FEM, the beam is bent more than with nonlinear FEM. The width of the beam become wider with the linear FEM at the both ends (see~Figure~\ref{fig:fig12}). It can be observed that the volume is not preserved with the linear FEM. On the other hand, the deformation is smoother and the volume is preserved with nonlinear FEM (see~Figure~\ref{fig:fig13}). This volume difference results in overall 4.32\% error among all nodes, and 15.95\% error on force applied nodes (green nodes).
+
+\begin{figure}[h]
+\centerline{\fbox{\psfig{figure=figures/figure11.ps,width=0.95\textwidth}}}
+\caption{Experiment 4: The beam mesh is constrained from the blue nodes and pushed downwards at the green nodes.}
+\label{fig:fig11}
+\end{figure}
+
+\begin{figure}[c]
+\centerline{\fbox{\psfig{figure=figures/figure12.ps,width=0.95\textwidth}}}
+\caption{Linear FEM solution (top: wireframe tetrahedra and nodes; middle upper: shaded mesh; middle lower: initial mesh and the final tetrahedra are overlaid; bottom: initial and final meshes are overlaid).}
+\label{fig:fig12}
+\end{figure}
+
+\begin{figure}[c]
+\centerline{\fbox{\psfig{figure=figures/figure13.ps,width=0.95\textwidth}}}
+\caption{Nonlinear FEM solution (top: wireframe tetrahedra and nodes; middle upper: shaded mesh; middle lower: initial mesh and the final tetrahedra are overlaid; bottom: initial and final meshes are overlaid).}
+\label{fig:fig13}
+\end{figure}
+
+\clearpage
+
+\section{Experiment 5}
+\label{v}
+
+This experiment is conducted with the cross mesh that has 159 nodes and 244-tetrahedral elements. Figure~\ref{fig:fig14} shows that the cross-shape is constrained from the blue nodes and pushed towards the green nodes. This experiment is conducted to observe the different effects of nonlinear and linear FEM deformations over the cross-shaped mesh with high amount of force (50 units). It can be observed that under a high amount of force, linear FEM is unable to preserve the structural and volumetric integrity of the model (cf. Figures~\ref{fig:fig15_16}~and~\ref{fig:fig17_18}). As a result of that, the overall nodal displacement and force node displacement errors are 213.36\% and 232.56\%, respectively. It can be said that under a high amount of force, nonlinear FEM produces accurate, thus more realistic, results (cf. Figures~\ref{fig:fig19_20}~and~\ref{fig:fig21_22}).
+
+\begin{figure}[h]
+\centerline{\fbox{\psfig{figure=figures/figure14.ps,width=0.95\textwidth}}}
+\caption{Experiment 5: The cross mesh is constrained from the blue nodes and pushed towards the green nodes.}
+\label{fig:fig14}
+\end{figure}
+
+\begin{figure}[h]
+\centerline{\fbox{\psfig{figure=figures/figure15.ps,width=0.75\textwidth}}}
+\centerline{(a)}
+\centerline{\ }
+\centerline{\fbox{\psfig{figure=figures/figure16.ps,width=0.75\textwidth}}}
+\centerline{(b)}
+\caption{Linear FEM solution: (a)~wireframe mesh; (b)~shaded mesh.}
+\label{fig:fig15_16}
+\end{figure}
+
+\begin{figure}[h]
+\centerline{\fbox{\psfig{figure=figures/figure17.ps,width=0.75\textwidth}}}
+\centerline{(a)}
+\centerline{\ }
+\centerline{\fbox{\psfig{figure=figures/figure18.ps,width=0.75\textwidth}}}
+\centerline{(b)}
+\caption{Linear FEM solution: (a) initial and final wireframe meshes are overlaid; (a) initial and final shaded meshes are overlaid.}
+\label{fig:fig17_18}
+\end{figure}
+
+\begin{figure}[h]
+\centerline{\fbox{\psfig{figure=figures/figure19.ps,width=0.85\textwidth}}}
+\centerline{(a)}
+\centerline{\ }
+\centerline{\fbox{\psfig{figure=figures/figure20.ps,width=0.85\textwidth}}}
+\centerline{(b)}
+\caption{Nonlinear FEM solution: (a)~wireframe mesh; (b)~shaded mesh.}
+\label{fig:fig19_20}
+\end{figure}
+
+\begin{figure}[h]
+\centerline{\fbox{\psfig{figure=figures/figure21.ps,width=0.95\textwidth}}}
+\centerline{(a)}
+\centerline{\ }
+\centerline{\fbox{\psfig{figure=figures/figure22.ps,width=0.95\textwidth}}}
+\centerline{(b)}
+\caption{Nonlinear FEM solution: (a)~initial and final wireframe meshes are overlaid; (b)~initial and final shaded meshes are overlaid;.}
+\label{fig:fig21_22}
+\end{figure}
+
+\clearpage
+\section{Experiment 6}
+\label{vi}
+
+The sixth experiment is conducted with the liver mesh~\cite{Liver2011} that has 465 nodes and 1560-tetrahedral elements. Figure~\ref{fig:fig23} shows that the liver mesh is constrained from the blue nodes, and pulled from the green nodes towards the arrow direction. This experiment is conducted to observe the different effects of the nonlinear and the linear FEM deformations over the liver. Linear FEM produces a protrusion at the top of the mesh (see~Figure~\ref{fig:fig24_25_26}). It can be observed that the liver mesh is deformed more realistically and smoothly with nonlinear FEM (see~Figure~\ref{fig:fig27_28_29}). As a result of the protrusion generated for the linear FEM, the node displacement error becomes 12.85\%. Apart from the force-applied region, the overall shape is preserved (the overall nodal displacement error is 0.72\%) in both methods due to the low amount of force. We can conclude that with dense meshes, nonlinear FEM produces accurate, thus more realistic, results.
+
+
+\begin{figure}[h]
+\centerline{\fbox{\psfig{figure=figures/figure23.ps,width=0.95\textwidth}}}
+\caption{Experiment 6: The liver mesh is constrained from the blue nodes and pulled from the green nodes (left: initial nodes; right: initial shaded mesh and nodes).}
+\label{fig:fig23}
+\end{figure}
+
+\begin{figure}[h]
+\centerline{\fbox{\psfig{figure=figures/figure24.ps,width=0.95\textwidth}}}
+\centerline{(a)}
+\centerline{\ }
+\centerline{\fbox{\psfig{figure=figures/figure25.ps,width=0.95\textwidth}}}
+\centerline{(b)}
+\centerline{\ }
+\centerline{\fbox{\psfig{figure=figures/figure26.ps,width=0.95\textwidth}}}
+\centerline{(c)}
+\caption{Linear FEM solution: (a)~left: nodes, right: tetrahedral wireframe mesh;
+                              (b)~left: wireframe surface mesh, right: wireframe surface mesh with nodes;
+                              (c)~left: shaded mesh, right: shaded mesh with nodes.}
+\label{fig:fig24_25_26}
+\end{figure}
+
+\begin{figure}[h]
+\centerline{\fbox{\psfig{figure=figures/figure27.ps,width=0.95\textwidth}}}
+\centerline{(a)}
+\centerline{\ }
+\centerline{\fbox{\psfig{figure=figures/figure28.ps,width=0.95\textwidth}}}
+\centerline{(b)}
+\centerline{\ }
+\centerline{\fbox{\psfig{figure=figures/figure29.ps,width=0.95\textwidth}}}
+\centerline{(c)}
+\caption{Nonlinear FEM solution: (a)~left: nodes, right: tetrahedral wireframe mesh;
+                                 (b)~left: wireframe surface mesh, right: wireframe surface mesh with nodes;
+                                 (c)~left: shaded mesh, right: shaded mesh with nodes.}
+\label{fig:fig27_28_29}
+\end{figure}
+
+\clearpage
+\section{Experiment 7}
+\label{vii}
+This experiment is conducted with the liver mesh that has 465 nodes and 1560-tetrahedral elements. Figure~\ref{fig:fig30} shows that the liver mesh is constrained from the blue nodes, and pulled from the green node towards the arrow direction. This experiment is conducted to observe the different effects of the nonlinear and the linear FEM deformations over the liver with pulling only one node. It can be observed that the linear FEM produces a high amount of displacement around the force node (see~Figure~\ref{fig:fig31_32_33}). As a result of that, the node displacement error becomes 58.94\%. The liver mesh is deformed more realistically and smoothly with nonlinear FEM (see~Figure~\ref{fig:fig34_35_36}). Apart from the force-applied region, the overall shape is preserved (the overall nodal displacement error is 0.12\%). It can be said that with dense meshes, nonlinear FEM produces accurate, thus more realistic, results.
+
+\begin{figure}[h]
+\centerline{\fbox{\psfig{figure=figures/figure30.ps,width=0.95\textwidth}}}
+\caption{Experiment 7: The liver mesh is constrained from the blue nodes and pulled from the green node (left: initial nodes, right: initial shaded mesh and nodes).}
+\label{fig:fig30}
+\end{figure}
+
+\begin{figure}[h]
+\centerline{\fbox{\psfig{figure=figures/figure31.ps,width=0.95\textwidth}}}
+\centerline{(a)}
+\centerline{\ }
+\centerline{\fbox{\psfig{figure=figures/figure32.ps,width=0.95\textwidth}}}
+\centerline{(b)}
+\centerline{\ }
+\centerline{\fbox{\psfig{figure=figures/figure33.ps,width=0.95\textwidth}}}
+\centerline{(c)}
+\caption{Linear FEM solution: (a)~left: nodes, right: tetrahedral wireframe mesh;
+                              (b)~left: wireframe surface mesh, right: wireframe surface mesh with nodes;
+                              (c)~left: shaded mesh, right: shaded mesh with nodes.}
+\label{fig:fig31_32_33}
+\end{figure}
+
+\begin{figure}[h]
+\centerline{\fbox{\psfig{figure=figures/figure34.ps,width=0.95\textwidth}}}
+\centerline{(a)}
+\centerline{\ }
+\centerline{\fbox{\psfig{figure=figures/figure35.ps,width=0.95\textwidth}}}
+\centerline{(b)}
+\centerline{\ }
+\centerline{\fbox{\psfig{figure=figures/figure36.ps,width=0.95\textwidth}}}
+\centerline{(c)}
+\caption{Nonlinear FEM solution: (a)~left: nodes, right: tetrahedral wireframe mesh;
+                                 (b)~left: wireframe surface mesh, right: wireframe surface mesh with nodes;
+                                 (c)~left: shaded mesh, right: shaded mesh with nodes.}
+\label{fig:fig34_35_36}
+\end{figure}
+
+\clearpage
+\section{Experiment 8}
+\label{viii}
+This experiment is again conducted with the liver mesh that has 465 nodes and 1560-tetrahedral elements. Figure~\ref{fig:fig37} shows that the liver mesh is constrained from the blue nodes, and pushed upwards at the green nodes. This experiment is conducted to observe the different effects of the nonlinear and the linear FEM deformations over the liver when pushing the liver from several nodes. Linear FEM produced high amount of displacement around the force node (see~Figure~\ref{fig:fig38_39}). As a result of that, the node displacement error becomes 17.28\%. It can be observed that the liver mesh is deformed more realistically and smoothly with nonlinear FEM (see~Figure~\ref{fig:fig40_41}). The mesh is more collapsed inwards with linear FEM, whereas its structure is better preserved with nonlinear FEM. Apart from the force applied region, the overall shape is preserved (the overall nodal displacement error is 0.1\%).
+
+
+\begin{figure}[h]
+\centerline{\fbox{\psfig{figure=figures/figure37.ps,width=0.95\textwidth}}}
+\caption{Experiment 8: The liver mesh is constrained from the blue nodes and pushed towards the green nodes (left - initial nodes, right - initial shaded mesh and nodes).}
+\label{fig:fig37}
+\end{figure}
+
+\begin{figure}[h]
+\centerline{\fbox{\psfig{figure=figures/figure38.ps,width=0.95\textwidth}}}
+\centerline{(a)}
+\centerline{\ }
+\centerline{\fbox{\psfig{figure=figures/figure39.ps,width=0.95\textwidth}}}
+\centerline{(b)}
+\caption{Linear FEM solution: (a)~left: nodes, right: shaded mesh with nodes; (b)~the mesh from a different view, left: shaded mesh with nodes, right: shaded mesh.}
+\label{fig:fig38_39}
+\end{figure}
+
+\begin{figure}[h]
+\centerline{\fbox{\psfig{figure=figures/figure40.ps,width=0.95\textwidth}}}
+\centerline{(a)}
+\centerline{\ }
+\centerline{\fbox{\psfig{figure=figures/figure41.ps,width=0.95\textwidth}}}
+\centerline{(b)}
+\caption{Nonlinear FEM solution: (a)~left: nodes, right: shaded mesh with nodes; (b)~the mesh from a different view, left: shaded mesh with nodes, right: shaded mesh.}
+\label{fig:fig40_41}
+\end{figure}
+
+\clearpage
+\section{Computational Cost Analysis}
+
+The computation times of the finite element experiments are required to make comparison of how much our proposed solution is faster than Pedersen's solution. Moreover, we can observe that nonlinear FEM has higher computation cost than linear FEM. However, high computation cost gives us much more accurate results that we can ignore this high cost when we are working with crucial simulations like car crash tests, surgical simulators (in terms of accuracy) and concrete analysis of the building.
+
+When comparing nonlinear solutions, we calculated the computation times of construction of the stiffness matrices and the whole solution in order to state how different calculation of stiffness matrices directly affects the stiffness matrices' and the whole solution's computation time. Moreover, we conducted these experiments on two different systems to analyze how clock speed of the processor affects the computation time and to state the multi-core efficiencies on different systems. The first system is a desktop computer with Core i7 processor overclocked at $4.0GHz$ with 24GB of RAM. The second system is a laptop system with Core 2 Duo processor clocked at $2.4GHz$ with 3GB of RAM. Tables~\ref{tbl:compStiff}~and~\ref{tbl:compStiff2} show the computation times required to calculate the stiffness matrix on the desktop and laptop systems, respectively. Tables~\ref{tbl:compSolution}~and~\ref{tbl:compSolution2} show the computation times required to solve the system on the desktop and laptop systems, respectively.
+
+Figures~\ref{fig:singleStiffi7},~\ref{fig:singleSystemi7},~\ref{fig:multiStiffi7},~\ref{fig:multiSystemi7}~and~\ref{fig:averagei7} depict the speed-ups obtained by using the proposed approach with respect to the Pedersen's method for different number of cores and threads on the desktop system. Figures~\ref{fig:singleStiffc2},~\ref{fig:singleSystemc2},~\ref{fig:multiStiffc2},~\ref{fig:multiSystemc2}~and~\ref{fig:averagec2} depict the speed-ups obtained using the proposed approach with respect to the Pedersen's method on for different number of cores and threads on the laptop system. The speed-up is calculated by
+
+\begin{equation}
+\text{Speed-up} = \frac{\text{Runtime(Pedersen's method)}}{\text{Runtime(The proposed approach)}}
+\label{eqn:5.2}
+\end{equation}
+
+Figure~\ref{fig:mcEfficiencyi7} shows the speed-up of multi-core over the single-core on the desktop system that uses an i7 920 processor.
+Figure~\ref{fig:mcEfficiencyc2} shows the speed-up of multi-core over the single-core on the laptop system uses Core 2 Duo P8600 as a processor.
+Efficiency obtained using a multi-core with respect to a single core is given by
+
+\begin{equation}
+\text{Multicore Efficiency} = \left(\frac{\text{Runtime(Single-core)}}{\text{Runtime(Multi-core)}}\right) \times 100
+\label{eqn:5.3}
+\end{equation}
+
+The proposed method outperforms the Pedersen's method. The proposed method is $211\%$ faster on the average at computing stiffness matrices (cf. Figures~\ref{fig:averagei7}~and~\ref{fig:averagec2}). Simple implementation of the proposed method makes the computation of the stiffness matrix twice faster than the Pedersen's method. However, the speed-up decreases to $116\%$ when for solving the whole system (cf. Figures~\ref{fig:averagei7}~and~\ref{fig:averagec2}). Figures~\ref{fig:singleStiffi7CT},~\ref{fig:singleSystemi7CT},~\ref{fig:multiStiffi7CT},~\ref{fig:multiSystemi7CT},~\ref{fig:singleStiffc2CT},~\ref{fig:singleSystemc2CT},~\ref{fig:multiStiffc2CT}~and~\ref{fig:multiSystemc2CT} show that the simple implementation of the proposed method also positively affects the rest of the solution. Simpler stiffness matrices simplify the calculations of residuals ($r$), tangent stiffness matrices ($r'$) and Newton-Raphson method for rest of the solution, which are the same in both methods. The proposed solution is highly parallelizable; it has $3.6$ average multi-core efficiency on a 4-core system, and $1.54$ average multi-core efficiency on 2-core system. As Figure~\ref{fig:perfCompSystem} shows, the nonlinear solution highly depends on clock speed of the processor. The nonlinear solution requires a high amount of system memory. Due to low amount of system memory on the laptop system, experiments with 1560 elements could not be completed.
+
+\begin{table}[h]
+\center
+\begin{tabular}{|l|c|c|c|c|c|c|}
+\hline
+\multicolumn{1}{|p{2.5cm}|}{ \textbf{Experiment}}
+& \multicolumn{1}{p{1.7cm}|}{\centering{\textbf{Linear}}}
+& \multicolumn{1}{p{1.9cm}|}{\centering{\textbf{Pedersen}}}
+& \multicolumn{1}{p{1.9cm}|}{\centering{\textbf{Pedersen MT}}}
+& \multicolumn{1}{p{1.7cm}|}{\centering{\textbf{Prop Non}}}
+& \multicolumn{1}{p{1.7cm}|}{\centering{\textbf{Prop Non MT}}} \\
+\hline \hline
+$1^{st}$ - 6    & 0.0572 & 0.8341   & 1.8073  & 0.3783   & 0.6109 \\ \hline
+$2^{nd}$ - 224  & 0.1753 & 38.3624  & 8.4493  & 19.8544  & 3.8807 \\ \hline
+$3^{rd}$ - 226  & 0.1692 & 32.5297  & 8.0717  & 15.3335  & 3.7179 \\ \hline
+$4^{th}$ - 216  & 0.1699 & 34.1291  & 8.0912  & 16.2847  & 3.7356 \\ \hline
+$5^{th}$ - 244  & 0.1861 & 36.9055  & 8.5068  & 18.2106  & 4.0998 \\ \hline
+$6^{th}$ - 1560 & 0.9178 & 266.3396 & 65.1570 & 125.6929 & 36.7951 \\ \hline
+$7^{th}$ - 1560 & 0.8851 & 265.0623 & 65.9921 & 124.0710 & 37.0265 \\ \hline
+$8^{th}$ - 1560 & 0.9979 & 266.4710 & 65.4512 & 124.4716 & 37.1006 \\ \hline
+\end{tabular}
+\caption{Computation times (in seconds) of the stiffness matrices for all experiments (MT: Multi thread, Prop Non: The proposed nonlinear solution). Computed on Core i7 920@4.0Ghz with 24GB RAM}
+\label{tbl:compStiff}
+\end{table}
+
+\begin{table}[h]
+\center
+\begin{tabular}{|l|c|c|c|c|c|c|}
+\hline
+\multicolumn{1}{|p{2.5cm}|}{ \textbf{Experiment}}
+& \multicolumn{1}{p{1.7cm}|}{\centering{\textbf{Linear}}}
+& \multicolumn{1}{p{1.9cm}|}{\centering{\textbf{Pedersen}}}
+& \multicolumn{1}{p{1.9cm}|}{\centering{\textbf{Pedersen MT}}}
+& \multicolumn{1}{p{1.7cm}|}{\centering{\textbf{Prop Non}}}
+& \multicolumn{1}{p{1.7cm}|}{\centering{\textbf{Prop Non MT}}} \\
+\hline \hline
+$1^{st}$ - 6    & 0.0592 & 4.8396    & 3.4315    & 4.3774    & 2.1489 \\ \hline
+$2^{nd}$ - 224  & 0.2359 & 402.0249  & 94.9423   & 341.0334 & 79.4478 \\ \hline
+$3^{rd}$ - 226  & 0.2274 & 460.6526  & 128.5903  & 394.5419  & 103.0223 \\ \hline
+$4^{th}$ - 216  & 0.2282 & 459.8582  & 125.2817  & 448.9026  & 122.0369 \\ \hline
+$5^{th}$ - 244  & 0.2557 & 2267.3736 & 656.7743  & 1967.2491 & 513.2731 \\ \hline
+$6^{th}$ - 1560 & 1.4029 & 4492.5631 & 909.9521  & 3574.6976 & 865.8751 \\ \hline
+$7^{th}$ - 1560 & 1.3644 & 5736.3210 & 1274.7842 & 4636.2668 & 1224.7844 \\ \hline
+$8^{th}$ - 1560 & 1.3878 & 4849.1274 & 1004.8713 & 3926.7512 & 972.4567 \\ \hline
+\end{tabular}
+\caption{Computation times (in seconds) of the systems for all experiments. (MT: Multi thread, Prop Non: The proposed nonlinear solution). Computed on Core i7 920@ 4.0Ghz with 24GB RAM}
+\label{tbl:compSolution}
+\end{table}
+
+\begin{table}[h]
+\center
+\begin{tabular}{|l|c|c|c|c|c|c|}
+\hline
+\multicolumn{1}{|p{2.5cm}|}{ \textbf{Experiment}}
+& \multicolumn{1}{p{1.7cm}|}{\centering{\textbf{Linear}}}
+& \multicolumn{1}{p{1.9cm}|}{\centering{\textbf{Pedersen}}}
+& \multicolumn{1}{p{1.9cm}|}{\centering{\textbf{Pedersen MT}}}
+& \multicolumn{1}{p{1.7cm}|}{\centering{\textbf{Prop Non}}}
+& \multicolumn{1}{p{1.7cm}|}{\centering{\textbf{Prop Non MT}}} \\
+\hline \hline
+$1^{st}$ - 6    & 0.2904 & 1.2853  & 3.7331  & 0.5921  & 1.6720 \\ \hline
+$2^{nd}$ - 224  & 0.3448 & 55.1494 & 32.2987 & 29.9687 & 23.1548 \\ \hline
+$3^{rd}$ - 226  & 0.3336 & 45.9164 & 31.0868 & 20.0275 & 15.1338 \\ \hline
+$4^{th}$ - 216  & 0.3438 & 46.4743 & 31.5397 & 20.0311 & 15.2649 \\ \hline
+$5^{th}$ - 244  & 0.3711 & 49.9684 & 32.1528 & 23.6479 & 16.1027 \\ \hline
+$6^{th}$ - 1560 & 1.7390 & \textit{N/A}  & \textit{N/A}  & \textit{N/A}  & \textit{N/A} \\ \hline
+$7^{th}$ - 1560 & 1.7241 & \textit{N/A}  & \textit{N/A}  & \textit{N/A}  & \textit{N/A} \\ \hline
+$8^{th}$ - 1560 & 1.7335 & \textit{N/A}  & \textit{N/A}  & \textit{N/A}  & \textit{N/A} \\ \hline
+\end{tabular}
+\caption{Computation times (in seconds) of the stiffness matrices for all experiments (MT: Multi thread, Prop Non: The proposed nonlinear solution). Computed on Core 2 Duo P8600 @ 2.4Ghz with 3GB RAM}
+\label{tbl:compStiff2}
+\end{table}
+
+\begin{table}[h]
+\center
+\begin{tabular}{|l|c|c|c|c|c|c|}
+\hline
+\multicolumn{1}{|p{2.5cm}|}{ \textbf{Experiment}}
+& \multicolumn{1}{p{1.7cm}|}{\centering{\textbf{Linear}}}
+& \multicolumn{1}{p{1.9cm}|}{\centering{\textbf{Pedersen}}}
+& \multicolumn{1}{p{1.9cm}|}{\centering{\textbf{Pedersen MT}}}
+& \multicolumn{1}{p{1.7cm}|}{\centering{\textbf{Prop Non}}}
+& \multicolumn{1}{p{1.7cm}|}{\centering{\textbf{Prop Non MT}}} \\
+\hline \hline
+$1^{st}$ - 6    & 0.2935 & 8.6331    & 6.7879    & 8.0616    & 4.6688 \\ \hline
+$2^{nd}$ - 224  & 0.4972 & 889.7173  & 306.8794  & 773.2489  & 278.0905 \\ \hline
+$3^{rd}$ - 226  & 0.4293 & 909.8296  & 312.5723  & 798.9884  & 267.3989 \\ \hline
+$4^{th}$ - 216  & 0.4409 & 913.9505  & 317.2957  & 797.0655  & 295.3406 \\ \hline
+$5^{th}$ - 244  & 0.5627 & 4521.3052 & 2808.2360 & 3420.3549 & 2037.3353 \\ \hline
+$6^{th}$ - 1560 & 2.6278 & \textit{N/A}  & \textit{N/A}  & \textit{N/A}  & \textit{N/A} \\ \hline
+$7^{th}$ - 1560 & 2.6092 & \textit{N/A}  & \textit{N/A}  & \textit{N/A}  & \textit{N/A} \\ \hline
+$8^{th}$ - 1560 & 2.6156 & \textit{N/A}  & \textit{N/A}  & \textit{N/A}  & \textit{N/A} \\ \hline
+\end{tabular}
+\caption{Computation times (in seconds) for all experiments (MT: Multi thread, Prop Non: The proposed nonlinear solution). Computed on Core 2 Duo P8600 @ 2.4Ghz with 3GB RAM}
+\label{tbl:compSolution2}
+\end{table}
+
+\begin{figure}[h]
+\centerline{\fbox{\psfig{figure=figures/singleStiffi7CT.ps,width=0.85\textwidth}}}
+\caption{Comparison of the computation times required to calculate the stiffness matrix. Computed on Core i7 920 @ 4.0Ghz with 24GB RAM using single thread}
+\label{fig:singleStiffi7CT}
+\end{figure}
+
+\begin{figure}[h]
+\centerline{\fbox{\psfig{figure=figures/singleStiffi7.ps,width=0.85\textwidth}}}
+\caption{Relative performance comparison of the stiffness matrix calculation. Computed on Core i7 920 @ 4.0Ghz with 24GB RAM using single thread}
+\label{fig:singleStiffi7}
+\end{figure}
+
+\begin{figure}[h]
+\centerline{\fbox{\psfig{figure=figures/singleSystemi7CT.ps,width=0.85\textwidth}}}
+\caption{Comparison of the computation times required to solve the system. Computed on Core i7 920 @ 4.0Ghz with 24GB RAM using single thread}
+\label{fig:singleSystemi7CT}
+\end{figure}
+
+\begin{figure}[h]
+\centerline{\fbox{\psfig{figure=figures/singleSystemi7.ps,width=0.85\textwidth}}}
+\caption{Relative performance comparison of the system solution. Computed on Core i7 920 @ 4.0Ghz with 24GB RAM using used single thread}
+\label{fig:singleSystemi7}
+\end{figure}
+
+\begin{figure}[h]
+\centerline{\fbox{\psfig{figure=figures/multiStiffi7CT.ps,width=0.85\textwidth}}}
+\caption{Comparison of the computation times required to calculate the stiffness matrix. Computed on Core i7 920 @ 4.0Ghz with 24GB RAM using eight threads on four cores}
+\label{fig:multiStiffi7CT}
+\end{figure}
+
+\begin{figure}[h]
+\centerline{\fbox{\psfig{figure=figures/multiStiffi7.ps,width=0.85\textwidth}}}
+\caption{Relative performance comparison of the stiffness matrix calculation. Computed on Core i7 920 @ 4.0Ghz with 24GB RAM using eight threads on four cores}
+\label{fig:multiStiffi7}
+\end{figure}
+
+\begin{figure}[h]
+\centerline{\fbox{\psfig{figure=figures/multiSystemi7CT.ps,width=0.85\textwidth}}}
+\caption{Comparison of the computation times required to solve the system. Computed on Core i7 920 @ 4.0Ghz with 24GB RAM using eight threads on four cores}
+\label{fig:multiSystemi7CT}
+\end{figure}
+
+\begin{figure}[h]
+\centerline{\fbox{\psfig{figure=figures/multiSystemi7.ps,width=0.85\textwidth}}}
+\caption{Relative performance comparison of the system solution. Computed on Core i7 920 @ 4.0Ghz with 24GB RAM using eight threads on four cores}
+\label{fig:multiSystemi7}
+\end{figure}
+
+\begin{figure}[h]
+\centerline{\fbox{\psfig{figure=figures/averagei7.ps,width=0.85\textwidth}}}
+\caption{Relative performance comparison averaged over all experiments. Computed on Core i7 920 @ 4.0Ghz with 24GB RAM}
+\label{fig:averagei7}
+\end{figure}
+
+\begin{figure}[h]
+\centerline{\fbox{\psfig{figure=figures/mcEfficiencyi7.ps,width=0.85\textwidth}}}
+\caption{Multi-core efficiency of the proposed approach (speed-up of 4-cores and 8-threads over the single core). Computed on Core i7 920 @ 4.0Ghz with 24GB RAM}
+\label{fig:mcEfficiencyi7}
+\end{figure}
+
+\begin{figure}[h]
+\centerline{\fbox{\psfig{figure=figures/singleStiffc2CT.ps,width=0.85\textwidth}}}
+\caption{Comparison of the computation times required to calculate the stiffness matrix. Computed on Core 2 Duo P8600 @ 2.4Ghz with 3GB RAM using single thread}
+\label{fig:singleStiffc2CT}
+\end{figure}
+
+\begin{figure}[h]
+\centerline{\fbox{\psfig{figure=figures/singleStiffc2.ps,width=0.85\textwidth}}}
+\caption{Relative performance comparison of the stiffness matrix calculation. Computed on Core 2 Duo P8600 @ 2.4Ghz with 3GB RAM using single thread}
+\label{fig:singleStiffc2}
+\end{figure}
+
+\clearpage
+\begin{figure}[t]
+\centerline{\fbox{\psfig{figure=figures/singleSystemc2CT.ps,width=0.85\textwidth}}}
+\caption{Comparison of the computation times required to solve the system. Computed on Core 2 Duo P8600 @ 2.4Ghz with 3GB RAM using single thread}
+\label{fig:singleSystemc2CT}
+\end{figure}
+
+\begin{figure}[b]
+\centerline{\fbox{\psfig{figure=figures/singleSystemc2.ps,width=0.85\textwidth}}}
+\caption{Relative performance comparison of the system solution. Computed on Core 2 Duo P8600 @ 2.4Ghz with 3GB RAM using single thread}
+\label{fig:singleSystemc2}
+\end{figure}
+
+\begin{figure}[h]
+\centerline{\fbox{\psfig{figure=figures/multiStiffc2CT.ps,width=0.85\textwidth}}}
+\caption{Comparison of the computation times required to calculate the stiffness matrix. Computed on Core 2 Duo P8600 @ 2.4Ghz with 3GB RAM using single thread}
+\label{fig:multiStiffc2CT}
+\end{figure}
+
+\begin{figure}[h]
+\centerline{\fbox{\psfig{figure=figures/multiStiffc2.ps,width=0.85\textwidth}}}
+\caption{Relative performance comparison of the stiffness matrix calculation. Computed on Core 2 Duo P8600 @ 2.4Ghz with 3GB RAM using two~threads on two~cores}
+\label{fig:multiStiffc2}
+\end{figure}
+
+\begin{figure}[h]
+\centerline{\fbox{\psfig{figure=figures/multiSystemc2CT.ps,width=0.85\textwidth}}}
+\caption{Comparison of the computation times required to solve the system. Computed on Core 2 Duo P8600 @ 2.4Ghz with 3GB RAM using two~threads on two~cores}
+\label{fig:multiSystemc2CT}
+\end{figure}
+
+\begin{figure}[h]
+\centerline{\fbox{\psfig{figure=figures/multiSystemc2.ps,width=0.85\textwidth}}}
+\caption{Relative performance comparison of the system solution. Computed on Core 2 Duo P8600 @ 2.4Ghz with 3GB RAM using two~threads on two~cores}
+\label{fig:multiSystemc2}
+\end{figure}
+
+\begin{figure}[h]
+\centerline{\fbox{\psfig{figure=figures/averagec2.ps,width=0.85\textwidth}}}
+\caption{Relative performance comparison averaged over all experiments. Computed on Core 2 Duo P8600 @ 2.4Ghz with 3GB RAM}
+\label{fig:averagec2}
+\end{figure}
+
+\begin{figure}[h]
+\centerline{\fbox{\psfig{figure=figures/mcEfficiencyc2.ps,width=0.85\textwidth}}}
+\caption{Multi-core efficiency of the proposed solution (speed-up of 2-cores over the single core). Computed on Core 2 Duo P8600 @ 2.4Ghz with 3GB RAM}
+\label{fig:mcEfficiencyc2}
+\end{figure}
+
+\begin{figure}[h]
+\centerline{\fbox{\psfig{figure=figures/perfCompSystem.ps,width=0.85\textwidth}}}
+\caption{Performance comparison between two platforms using single thread}
+\label{fig:perfCompSystem}
+\end{figure}
+
