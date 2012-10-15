@@ -1,8 +1,15 @@
 \begin{thebibliography}{1}
 
-\bibitem{Muller2007}
-M.~M\"{u}ller, B.~Heidelberger, M.~Hennix, and J.~Ratcliff.
-\newblock Position based dynamics.
-\newblock {\em J. Vis. Comun. Image Represent.}, 18(2):109--118, Apr. 2007.
+\bibitem{Knot2012}
+T.~Knot.
+\newblock Ogre. open source 3d rendering engine.
+\newblock \url{http://www.ogre3d.org/}, 2012.
+
+\bibitem{Moan2012}
+J.~Moan.
+\newblock Documentation architecture. ogre- object oriented rendering engine.
+\newblock
+  \url{http://www.ogre3d.org/tikiwiki/tiki-index.php?page=Documentation+Architecture/},
+  2012.
 
 \end{thebibliography}

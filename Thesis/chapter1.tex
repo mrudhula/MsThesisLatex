@@ -1,31 +1,109 @@
-\chapter{Introduction}
+\chapter{Overall Framework-OGRE}
 \label{chapter1}
 
-A mesh is a collection of polygonal facets targeting to constitute an appropriate approximation of a real 3D object~\cite{Muller2007}. It has vertices, edges and facets. A mesh stores two kinds of information: \textit{geometry} and \textit{connectivity}. Geometry information gives the position of its vertices and the connectivity information gives the relationship between its elements. Mesh deformation means modifying the shape of the original object by using control points or external forces. 3D mesh deformation has been a highly active research area in computer graphics. Deformations have widespread usage areas like computer games, computer animations, fluid flow, heat transfer, surgical simulation, cloth simulation, crash test simulations. The major goal in mesh deformations is to establish a good balance between the accuracy of the simulation and the computational cost, which depends on the application.
-
-In order to make deformations realistic and highly accurate, Finite Element Method (FEM) could be used. FEM is a numerical method to find approximate solutions to the problems of engineering and mathematical physics. Typical problems that are solvable by use of the finite element method include structural analysis, heat transfer, fluid flow, mass transport, and electromagnetic potential~\cite{Logan07}.
-
-It is not possible to obtain an analytical solution for problems involving complicated geometries (e.g., 3D organ models), loadings, and material properties. Analytical solutions generally require the solution of ordinary or partial differential equations. However, they are not generally obtainable because of the problems mentioned above~\cite{Logan07}. When we incorporate these into the analytical solution, the degree of the partial differential equations becomes so high that the solution is not obtainable. Numerical methods that find approximate solutions are used to overcome this problem. Among these, Rayleigh-Ritz, Galerkin, and Finite Difference methods, are the most common ones. Finite difference method approximates the differential equations with equivalent difference quotients using limits over the domain. In other words, the method approximates the solution of differential equations by using approximations to the derivatives. Rayleigh-Ritz method introduces trial functions like FEM's weight functions. However, it only works for conservative systems and it gets very complicated for complex geometries, such as 3D organ meshes, crash test models. Galerkin method uses weighted residuals to calculate a global stiffness matrix, as FEM does. However, none of these techniques can handle geometrically complex domains. The approximation to the solution becomes very complicated even in simpler domains.
-
-FEM simplifies these calculations by subdividing the given domain into a finite set of subdomains, called \textit{finite elements}~\cite{Reddy93}. The problem becomes easier and solvable over these domains, such as a set of rectangles, triangles, and in our case, tetrahedra. When using FEM for all types of problems; 1D, 2D, 3D, linear or nonlinear, it follows certain steps; finite element discretization, derivation of the element displacement functions, assembly of the elements, imposition of the boundary conditions and solving the system to find an approximate solution of the given domain~\cite{Reddy93}.
-
-Surgical simulations require high accuracy, very low error tolerance and real-time interaction that cannot be fully handled with popular deformation techniques, such as regular deformations, Free-form deformation and mass spring system. Numerical solutions that require high accuracy must be used such as finite difference, variational methods and FEM. By far the most popular numerical solution technique is FEM with surgical simulations. Firstly, linear FEM models are used due to faster calculation compared to nonlinear FEM. Cover et al. used surface models to model the system~\cite{Cover93}. However, surface models are not sufficient for surgical simulators to perform internal surgical operations. Along with the increase in the computational power of the computers, the work of Bro-nielsen prompted the usage of volumetric models~\cite{Bro96}. Cavusoglu used nonlinear model's reduction to linear model using linear FEM~\cite{Cavusoglu00}. Most recent surgical simulators use nonlinear FEM~\cite{Taylor07,Horton2010} because nonlinear FEM is capable of providing realistic predictions of finite deformations of the tissue. Although these recent systems provide real-time simulations, the preprocessing step to calculate the stiffness matrices still takes many hours.
-
-\section{Contributions}
-
-We implemented linear FEM and non-linear FEM by using tetrahedral elements. We used same material properties (constitutive matrices) with linear and nonlinear FEM. In this way, we are able to observe the effect of using the same material with nonlinear geometric properties and compare the results with the results of linear FEM. The contributions can be summarized as follows:
-
+As a programmer, I embrace the do not repeat yourself mindset and extreme programming methodology. Furthermore, since my study required utilization of many different techniques in different fields in Computer Science, I searched for various 3rd party SDKs to save me from writing ground-level code. These two beliefs led me to search for the rendering engine best suited for my needs:
 
 \begin{enumerate}
-\item We propose a new formulation and finite element solution to the nonlinear 3D elasticity theory.
-\item We derived nonlinear stiffness matrices by using the Green-Lagrange strains (large deformation). Green-Lagrange strains are derived directly from the infinitesimal strains (small deformation) by adding the nonlinear terms that are discarded in infinitesimal strain theory.
-\item We propose a more comprehensible nonlinear FEM for whom has knowledge about linear FEM since proposed method directly derived from the infinitesimal strains.
-\item We use geometric nonlinearity to compare the results of nonlinear FEM with the results of linear FEM.
-\item We compare our approach with Pedersen's method to measure the performance and verify the correctness. We achieve $111\%$ speed-up for the calculation of stiffness matrices and $17\%$ on average for the solution of the whole system, compared to the Pedersen's method.
+\item Must be code oriented rather than designer oriented.
+\item Must be able to utilize both DirectX and OpenGL (for compatibility reasons).
+\item Must take care of mundane and routine programming such as the rendering pipeline, input handling, 
+\item Must be able to integrate easily with 3rd party libraries.
+\item Must be stable and mature.
+\item Must have an associated 3-D designing program which can be used to easily produce content and load into the program.
+\item Must have accurate and extensive documentation.
 \end{enumerate}
 
+Other than these, automatic material rendering, skeletal animation support were considered as bonuses.
+After experimenting with Unity, UDK and native OpenGL programming, I eventually decided on Object-Oriented Rendering Engine (will be referred as OGRE in the rest of the paper) for it complies with my requirements the best.
 
 
-\section{Overview of the Thesis}
+\section{The Features}
+Unlike the name suggests, OGRE is more than just a rendering engine. Among all the features, the ones I utilized are as following \cite{Knot2012}
 
-The rest of the thesis is organized as follows. Chapter~\ref{chapter2} describes the related work on deformation techniques, Finite Element Method, and the nonlinear analysis. Chapter~\ref{chapter3} discusses variational approaches, such as Galerkin, Rayleigh-Ritz and Weighted-Residual methods, and finite difference methods. Chapter~\ref{chapter4} explains linear FEM. Chapter~\ref{chapter5} describes the nonlinear FEM, including a detailed discussion of the Pedersen's method and the proposed approach. Chapter~\ref{chapter6} gives the experimental results obtained using the proposed approach and compares the computational overhead of the proposed approach with that of Pedersen. Chapter~\ref{chapter7} gives conclusions and possible future research directions.
+\begin{itemize}
+\item Render State Management
+\item Spatial Culling and Transparency Handling
+\item Material Rendering
+\begin{itemize}
+  \item Easy material and shader management, custom shader support.
+  \item Multitexture and Multipass blending
+  \item Lighting shader and different shadow rendering techniques
+  \item Material Level Of Detail Support
+  \item Supports a variety of image formats, volumetric textures and DXT textures.
+  \item Render-To-Texture (Frame Rendering Buffer) support
+\end{itemize}
+\item Meshes
+\begin{itemize}
+  \item Native mesh format which can be exported from Blender Designer.
+  \item Level Of Detail Support
+  \item Skeletal animation feature, can be used with models exported from Blender.
+\begin{itemize}
+  \item Multiple-bone weighted skinning
+  \item Hardware Acceleration.
+\end{itemize}
+\end{itemize}
+\item Easy scene management
+\item Easy camera and input management.
+\item Easy integration with 3rd party libraries due to code-based nature.
+\item Overlay feature which enables easy information tracking about the feature.
+\end{itemize}
+
+These features led me to choose OGRE as my base framework.
+
+
+\section{High Level Overview}
+The class diagram in Figure \ref{fig:ogre-class-diagram}  shows the Object-Oriented core of the OGRE \cite{Moan2012}:
+
+\begin{figure}[h]
+\centerline{\fbox{\psfig{figure=figures/ogre_class_diagram.png,width=1.0\textwidth}}}
+\caption{OGRE High Level Overview}
+\label{fig:ogre-class-diagram}
+\end{figure}
+
+\subsection{The Root object}
+The root object is the entry point and core of the framework.
+\begin{itemize}
+\item It is created first and destroyed last in the application lifecycle. 
+\item It configures the system, delivers pointers to the managers for various resources.
+\item Provides automatic rendering cycle, continued until an interrupt from FrameListener objects.
+\end{itemize}
+
+\subsection{The RenderSystem Object}
+Render system is an abstract class to define the underlying 3D API (either Direct 3D or OpenGL). This class is not accessed and modified by the application programmer.
+
+\subsection{The SceneManager Object}
+SceneManager is the most used object by the application programmer, as it is in charge of the contents in the scene to be rendered.
+\begin{itemize}
+\item It is used to create, destroy and update the objects.
+\item It sends the scene to the RenderSystem behind the curtains for rendering.
+\item Multiple SceneManagers can be used to create other visual resources (ex. RenderToTexture environment)
+\end{itemize}
+
+\subsection{Resource Manager}
+ReosurceManager object is an abstract class, used to create, keep and dispatch a type of resource it is associated with. 
+\begin{itemize}
+\item The associated type is defined by the class inheriting the ResourceManager, such as MaterialManager.
+\item There is always only one instance of every child of ReosurceManager in an application.
+\item Resource Managers search the pre-defined locations of the filesystem and automatically indexes the resources available, ready to be loaded upon demand.
+\end{itemize}
+
+
+\subsection{Entities, Meshes and Materials and Overlays}
+Entities are the instances of movable objects in the scene. They are based on meshes, which define the geometric and material properties of the entity. Materials contain information about what color the final pixel in the rendering should be. 
+\begin{itemize}
+\item Entities are attached to scene nodes for moving and rendering. Scene nodes can be nested, which greatly simplifies the process of rendering complex scenes.
+\item Meshes consist of submeshes, which can have different material associations. Therefore, a mesh can be composed of various parts with various materials.
+\item Materials are defined either in run-time or in .material scripts, with detailed information. They also support custom shaders.
+\item Mesh files can be created and saved with manual objects, or exported through designer programs such as Blender. The .mesh files are in binary format.
+\end{itemize}
+Overlays are used to create panels for control and HUD which are rendered above the scene. They are 2D elements are placed either by screen proportion or pixel size and rendered orthographically, last in the rendering pipeline by default (this can be overridden).
+
+\subsection{The render cycle}
+The self-explanatory render cycle of OGRE is given in Figure \ref{fig:ogre-render-cycle} \cite{Moan2012}.
+
+\begin{figure}[h]
+\centerline{\fbox{\psfig{figure=figures/ogre_render_cycle.png,width=1.0\textwidth}}}
+\caption{OGRE Render Cycle}
+\label{fig:ogre-render-cycle}
+\end{figure}
+ 
