@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2012.10.15)  15 OCT 2012 21:18
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2012.10.15)  15 OCT 2012 21:49
 entering extended mode
 **thesis.tex
 (C:\Users\Umut\workspace\MsThesisLatex\Thesis\thesis.tex
@@ -142,39 +142,62 @@ Package grfext Info: Graphics extension search list:
 G,.JBIG2,.JB2,.eps]
 (grfext)             \AppendGraphicsExtensions on input line 452.
 ))
-("C:\Program Files\MiKTeX 2.9\tex\latex\algorithms\algorithm.sty"
-Package: algorithm 2009/08/24 v0.1 Document Style `algorithm' - floating enviro
-nment
+("C:\Program Files\MiKTeX 2.9\tex\latex\algorithm2e\algorithm2e.sty"
+Package: algorithm2e 2008/00/00 v3.10 algorithms environments
+\c@AlgoLine=\count93
 
-("C:\Program Files\MiKTeX 2.9\tex\latex\float\float.sty"
-Package: float 2001/11/08 v1.3d Float enhancements (AL)
-\c@float@type=\count93
-\float@exts=\toks15
-\float@box=\box26
-\@float@everytoks=\toks16
-\@floatcapt=\box27
-)
 ("C:\Program Files\MiKTeX 2.9\tex\latex\base\ifthen.sty"
 Package: ifthen 2001/05/26 v1.1c Standard LaTeX ifthen package (DPC)
 )
-\@float@every@algorithm=\toks17
-\c@algorithm=\count94
+("C:\Program Files\MiKTeX 2.9\tex\latex\tools\xspace.sty"
+Package: xspace 2009/10/20 v1.13 Space after command names (DPC,MH)
 )
-("C:\Program Files\MiKTeX 2.9\tex\latex\algorithms\algorithmic.sty"
-Package: algorithmic 2009/08/24 v0.1 Document Style `algorithmic'
-\c@ALC@unique=\count95
-\c@ALC@line=\count96
-\c@ALC@rem=\count97
-\c@ALC@depth=\count98
-\ALC@tlm=\skip43
-\algorithmicindent=\skip44
+("C:\Program Files\MiKTeX 2.9\tex\latex\ltxmisc\relsize.sty"
+Package: relsize 2003/07/04 ver 3.1
 )
-("C:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\amssymb.sty"
+********************************************************
+Package `algorithm2e' Release 4.01 -- december 14 2009 --
+- algorithm2e-announce@lirmm.fr mailing list for announcement about releases
+- algorithm2e-discussion@lirmm.fr mailing list for discussion about package
+subscribe by emailing sympa@lirmm.fr with 'subscribe <list> <firstname name>'
+- Author: Christophe Fiorio (fiorio@lirmm.fr)
+********************************************************
+\skiptotal=\skip43
+\skiplinenumber=\skip44
+\skiprule=\skip45
+\skiphlne=\skip46
+\skiptext=\skip47
+\skiplength=\skip48
+\algomargin=\skip49
+\skipalgocfslide=\skip50
+\algowidth=\dimen121
+\inoutsize=\dimen122
+\inoutline=\dimen123
+\interspacetitleruled=\dimen124
+\interspacealgoruled=\dimen125
+\interspacetitleboxruled=\dimen126
+\algocf@inoutbox=\box26
+\algocf@inputbox=\box27
+\AlCapSkip=\skip51
+\AlCapHSkip=\skip52
+\algocf@nlbox=\box28
+\algocf@hangingbox=\box29
+\algocf@capbox=\box30
+\algoheightruledefault=\skip53
+\algoheightrule=\skip54
+\algotitleheightruledefault=\skip55
+\algotitleheightrule=\skip56
+\c@algocfline=\count94
+\c@algocfproc=\count95
+\c@algocf=\count96
+\algocf@algoframe=\box31
+\algocf@algobox=\box32
+) ("C:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\amssymb.sty"
 Package: amssymb 2009/06/22 v3.00
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\amsfonts.sty"
 Package: amsfonts 2009/06/22 v3.00 Basic AMSFonts support
-\@emptytoks=\toks18
+\@emptytoks=\toks15
 \symAMSa=\mathgroup4
 \symAMSb=\mathgroup5
 LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
@@ -182,7 +205,7 @@ LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 ))
 ("C:\Program Files\MiKTeX 2.9\tex\latex\ams\math\amsmath.sty"
 Package: amsmath 2000/07/18 v2.13 AMS math features
-\@mathmargin=\skip45
+\@mathmargin=\skip57
 
 For additional information on amsmath, use the `?' option.
 ("C:\Program Files\MiKTeX 2.9\tex\latex\ams\math\amstext.sty"
@@ -190,51 +213,51 @@ Package: amstext 2000/06/29 v2.01
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\ams\math\amsgen.sty"
 File: amsgen.sty 1999/11/30 v2.0
-\@emptytoks=\toks19
-\ex@=\dimen121
+\@emptytoks=\toks16
+\ex@=\dimen127
 ))
 ("C:\Program Files\MiKTeX 2.9\tex\latex\ams\math\amsbsy.sty"
 Package: amsbsy 1999/11/29 v1.2d
-\pmbraise@=\dimen122
+\pmbraise@=\dimen128
 )
 ("C:\Program Files\MiKTeX 2.9\tex\latex\ams\math\amsopn.sty"
 Package: amsopn 1999/12/14 v2.01 operator names
 )
-\inf@bad=\count99
+\inf@bad=\count97
 LaTeX Info: Redefining \frac on input line 211.
-\uproot@=\count100
-\leftroot@=\count101
+\uproot@=\count98
+\leftroot@=\count99
 LaTeX Info: Redefining \overline on input line 307.
-\classnum@=\count102
-\DOTSCASE@=\count103
+\classnum@=\count100
+\DOTSCASE@=\count101
 LaTeX Info: Redefining \ldots on input line 379.
 LaTeX Info: Redefining \dots on input line 382.
 LaTeX Info: Redefining \cdots on input line 467.
-\Mathstrutbox@=\box28
-\strutbox@=\box29
-\big@size=\dimen123
+\Mathstrutbox@=\box33
+\strutbox@=\box34
+\big@size=\dimen129
 LaTeX Font Info:    Redeclaring font encoding OML on input line 567.
 LaTeX Font Info:    Redeclaring font encoding OMS on input line 568.
-\macc@depth=\count104
-\c@MaxMatrixCols=\count105
+\macc@depth=\count102
+\c@MaxMatrixCols=\count103
 \dotsspace@=\muskip10
-\c@parentequation=\count106
-\dspbrk@lvl=\count107
-\tag@help=\toks20
-\row@=\count108
-\column@=\count109
-\maxfields@=\count110
-\andhelp@=\toks21
-\eqnshift@=\dimen124
-\alignsep@=\dimen125
-\tagshift@=\dimen126
-\tagwidth@=\dimen127
-\totwidth@=\dimen128
-\lineht@=\dimen129
-\@envbody=\toks22
-\multlinegap=\skip46
-\multlinetaggap=\skip47
-\mathdisplay@stack=\toks23
+\c@parentequation=\count104
+\dspbrk@lvl=\count105
+\tag@help=\toks17
+\row@=\count106
+\column@=\count107
+\maxfields@=\count108
+\andhelp@=\toks18
+\eqnshift@=\dimen130
+\alignsep@=\dimen131
+\tagshift@=\dimen132
+\tagwidth@=\dimen133
+\totwidth@=\dimen134
+\lineht@=\dimen135
+\@envbody=\toks19
+\multlinegap=\skip58
+\multlinetaggap=\skip59
+\mathdisplay@stack=\toks20
 LaTeX Info: Redefining \[ on input line 2666.
 LaTeX Info: Redefining \] on input line 2667.
 )
@@ -250,41 +273,41 @@ Package pdflscape Info: Auto-detected driver: pdftex on input line 80.
 Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
 ))
 (C:\Users\Umut\workspace\MsThesisLatex\Thesis\thesis.aux)
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 34.
-LaTeX Font Info:    ... okay on input line 34.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 33.
+LaTeX Font Info:    ... okay on input line 33.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 33.
+LaTeX Font Info:    ... okay on input line 33.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 33.
+LaTeX Font Info:    ... okay on input line 33.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 33.
+LaTeX Font Info:    ... okay on input line 33.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 33.
+LaTeX Font Info:    ... okay on input line 33.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 33.
+LaTeX Font Info:    ... okay on input line 33.
 
 ("C:\Program Files\MiKTeX 2.9\tex\context\base\supp-pdf.mkii"
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count111
-\scratchdimen=\dimen130
-\scratchbox=\box30
-\nofMPsegments=\count112
-\nofMParguments=\count113
-\everyMPshowfont=\toks24
-\MPscratchCnt=\count114
-\MPscratchDim=\dimen131
-\MPnumerator=\count115
-\makeMPintoPDFobject=\count116
-\everyMPtoPDFconversion=\toks25
+\scratchcounter=\count109
+\scratchdimen=\dimen136
+\scratchbox=\box35
+\nofMPsegments=\count110
+\nofMParguments=\count111
+\everyMPshowfont=\toks21
+\MPscratchCnt=\count112
+\MPscratchDim=\dimen137
+\MPnumerator=\count113
+\makeMPintoPDFobject=\count114
+\everyMPtoPDFconversion=\toks22
 ) [1
 
 {C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map}]
-LaTeX Font Info:    Try loading font information for U+msa on input line 37.
+LaTeX Font Info:    Try loading font information for U+msa on input line 36.
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\umsa.fd"
 File: umsa.fd 2009/06/22 v3.00 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 37.
+LaTeX Font Info:    Try loading font information for U+msb on input line 36.
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\amsfonts\umsb.fd"
 File: umsb.fd 2009/06/22 v3.00 AMS symbols B
@@ -292,7 +315,7 @@ File: umsb.fd 2009/06/22 v3.00 AMS symbols B
 ! Undefined control sequence.
 <recently read> \@coadviser 
                             
-l.37 \signaturepageMS
+l.36 \signaturepageMS
                      
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -303,7 +326,7 @@ and I'll forget about whatever was undefined.
 ! Undefined control sequence.
 <recently read> \@firstreader 
                               
-l.37 \signaturepageMS
+l.36 \signaturepageMS
                      
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -314,7 +337,7 @@ and I'll forget about whatever was undefined.
 ! Undefined control sequence.
 <recently read> \@secondreader 
                                
-l.37 \signaturepageMS
+l.36 \signaturepageMS
                      
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -326,7 +349,7 @@ and I'll forget about whatever was undefined.
 ! Undefined control sequence.
 \abstract ...@principaladviser \\ \ \ \@coadviser 
                                                   \\ \@submitdate \\ \end {c...
-l.40 \begin{abstract}
+l.39 \begin{abstract}
                      
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -338,7 +361,7 @@ and I'll forget about whatever was undefined.
 ! Undefined control sequence.
 \ozet ... \@tezyoneticisi \\ \ \@tezyoneticisiiki 
                                                   \\ \@tarih \\ \end {center...
-l.46 \begin{ozet}
+l.45 \begin{ozet}
                  
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -351,28 +374,19 @@ Missing character: There is no Ý in font cmr12!
 [4] [5] [5] (C:\Users\Umut\workspace\MsThesisLatex\Thesis\thesis.toc [6
 
 ]
-Underfull \hbox (badness 3679) in paragraph at lines 24--24
- [][][] []\OT1/cmr/m/n/12 Non-Linear FEM us-ing Tetra-he-dral El-e-ments with G
-reen- 
- []
-
 [7])
 \tf@toc=\write3
- [8] (C:\Users\Umut\workspace\MsThesisLatex\Thesis\thesis.lof
+ [8] (C:\Users\Umut\workspace\MsThesisLatex\Thesis\thesis.lof [9
 
-LaTeX Warning: Citation `Logan07' on page ix undefined on input line 10.
-
-[9
-
-] [10] [11] [12])
+] [10]
+[11] [12])
 \tf@lof=\write4
- [13] [14]
-(C:\Users\Umut\workspace\MsThesisLatex\Thesis\thesis.lot)
+ [13] [14] (C:\Users\Umut\workspace\MsThesisLatex\Thesis\thesis.lot)
 \tf@lot=\write5
- [15
 
-]
-(C:\Users\Umut\workspace\MsThesisLatex\Thesis\thesis.loa)
+[15
+
+] (C:\Users\Umut\workspace\MsThesisLatex\Thesis\thesis.loa)
 \tf@loa=\write6
  [16
 
@@ -434,162 +448,80 @@ Package pdftex.def Info: figures/open_closed_hands.png used on input line 35.
 (C:\Users\Umut\workspace\MsThesisLatex\Thesis\chapter4.tex [12 <C:/Users/Umut/w
 orkspace/MsThesisLatex/Thesis/figures/open_closed_hands.png>]
 Chapter 4.
-
-LaTeX Warning: Citation `Tetgen2011' on page 13 undefined on input line 22.
-
 [13
 
-]
+] <figures/rigging_skeleton.png, id=114, 957.5775pt x 646.415pt>
+File: figures/rigging_skeleton.png Graphic file (type png)
 
-LaTeX Warning: File `figures/tetElement.ps' not found on input line 27.
+<use figures/rigging_skeleton.png>
+Package pdftex.def Info: figures/rigging_skeleton.png used on input line 18.
+(pdftex.def)             Requested size: 412.56496pt x 278.50539pt.
+
+<figures/weight_humerus_r.png, id=115, 958.58125pt x 904.37875pt>
+File: figures/weight_humerus_r.png Graphic file (type png)
+
+<use figures/weight_humerus_r.png>
+Package pdftex.def Info: figures/weight_humerus_r.png used on input line 28.
+(pdftex.def)             Requested size: 412.56496pt x 389.23409pt.
 
 
-! LaTeX Error: Unknown graphics extension: .ps.
+LaTeX Warning: `h' float specifier changed to `ht'.
 
-See the LaTeX manual or LaTeX Companion for explanation.
+[14 <C:/Users/Umut/workspace/MsThesisLatex/Thesis/figures/rigging_skeleton.png>
+] <figures/detailed_face.png, id=121, 1010.77625pt x 569.12625pt>
+File: figures/detailed_face.png Graphic file (type png)
+
+<use figures/detailed_face.png>
+Package pdftex.def Info: figures/detailed_face.png used on input line 38.
+(pdftex.def)             Requested size: 412.56496pt x 232.30118pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[15 <C:/Users/Umut/workspace/MsThesisLatex/Thesis/figures/weight_humerus_r.png>
+] [16 <C:/Users/Umut/workspace/MsThesisLatex/Thesis/figures/detailed_face.png>]
+
+LaTeX Warning: File `figures/dress_with_body.png' not found on input line 65.
+
+
+! Package pdftex.def Error: File `figures/dress_with_body.png' not found.
+
+See the pdftex.def package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.27 ...ures/tetElement.ps,width=0.60\textwidth}}}
+l.65 ...ress_with_body.png,width=1.00\textwidth}}}
                                                   
+Using draft setting for this image.
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
 
-LaTeX Warning: Citation `Logan07' on page 14 undefined on input line 32.
+LaTeX Warning: `h' float specifier changed to `ht'.
 
-[14] [15] [16]
-
-LaTeX Warning: Citation `Logan07' on page 17 undefined on input line 292.
-
-
-LaTeX Warning: File `figures/deformation2d.ps' not found on input line 295.
-
-
-! LaTeX Error: Unknown graphics extension: .ps.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.295 .../deformation2d.ps,width=0.70\textwidth}}}
-                                                  
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-LaTeX Warning: Citation `Logan07' on page 17 undefined on input line 296.
-
-[17] [18]
-
-LaTeX Warning: Reference `eqn:1.1' on page 19 undefined on input line 444.
-
-[19]
-
-LaTeX Warning: Citation `Modulus2011' on page 20 undefined on input line 471.
-
-
-LaTeX Warning: Reference `eqn:1.1' on page 20 undefined on input line 471.
-
-[20]
-
-LaTeX Warning: Citation `Logan07' on page 21 undefined on input line 508.
-
-
-LaTeX Warning: File `figures/assemble.ps' not found on input line 518.
-
-
-! LaTeX Error: Unknown graphics extension: .ps.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.518 ...gures/assemble.ps,width=0.35\textwidth}}}
-                                                  
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-Overfull \hbox (9.92833pt too wide) detected at line 546
-\OML/cmm/m/it/12 K[] \OT1/cmr/m/n/12 = []   []  \OML/cmm/m/it/12 K[] \OT1/cmr/m
-/n/12 = [] \OML/cmm/m/it/12 :
- []
-
-[21] [22] [23
-
-]
-Overfull \hbox (23.6432pt too wide) detected at line 655
-\OML/cmm/m/it/12 K \OT1/cmr/m/n/12 = [] \OML/cmm/m/it/12 :
- []
-
-[24
-
-]) (C:\Users\Umut\workspace\MsThesisLatex\Thesis\chapter5.tex [25]
+) (C:\Users\Umut\workspace\MsThesisLatex\Thesis\chapter5.tex [17] [18]
 Chapter 5.
-[26
+Missing character: There is no ’ in font cmr12!
+[19
 
-]
-
-LaTeX Warning: Citation `BonetWood97' on page 27 undefined on input line 30.
-
-[27]
-
-LaTeX Warning: Citation `Felippa96' on page 28 undefined on input line 37.
-
-[28]
-
-LaTeX Warning: Citation `Pedersen06' on page 29 undefined on input line 134.
-
-
-LaTeX Warning: Citation `Pedersen08' on page 29 undefined on input line 134.
-
-[29]
-Overfull \hbox (44.30507pt too wide) detected at line 253
-\OT1/cmr/m/n/12 [[]] = [] [] \OML/cmm/m/it/12 :
- []
-
-
-Overfull \hbox (52.02939pt too wide) detected at line 276
-[]\OML/cmm/m/it/12 :
- []
-
-[30]
-
-LaTeX Warning: Reference `eqn:1.1' on page 31 undefined on input line 278.
-
-
-LaTeX Warning: Reference `eqn:1.1' on page 31 undefined on input line 285.
-
-[31] [32]
-
-LaTeX Warning: Citation `Kelly87' on page 33 undefined on input line 382.
-
-
-LaTeX Warning: Citation `Krenk09' on page 33 undefined on input line 382.
-
-[33] [34]
-
-LaTeX Warning: Citation `Pedersen06' on page 35 undefined on input line 443.
-
-[35] [36]) (C:\Users\Umut\workspace\MsThesisLatex\Thesis\chapter6.tex [37]
+]) (C:\Users\Umut\workspace\MsThesisLatex\Thesis\chapter6.tex [20] [21]
 Chapter 6.
 
-LaTeX Warning: Citation `Pedersen06' on page 38 undefined on input line 4.
+LaTeX Warning: Citation `Pedersen06' on page 22 undefined on input line 4.
 
-[38
+[22
 
 ]
 
-LaTeX Warning: Citation `Liver2011' on page 39 undefined on input line 17.
+LaTeX Warning: Citation `Liver2011' on page 23 undefined on input line 17.
 
 
-LaTeX Warning: Citation `Tetgen2011' on page 39 undefined on input line 19.
+LaTeX Warning: Citation `Tetgen2011' on page 23 undefined on input line 19.
 
 
-LaTeX Warning: Citation `Madenci06' on page 39 undefined on input line 26.
+LaTeX Warning: Citation `Madenci06' on page 23 undefined on input line 26.
 
-[39]
+[23]
 
 LaTeX Warning: File `figures/denser.ps' not found on input line 38.
 
@@ -606,9 +538,9 @@ Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
 
-LaTeX Warning: Reference `eqn:1.7' on page 40 undefined on input line 89.
+LaTeX Warning: Reference `eqn:1.7' on page 24 undefined on input line 89.
 
-[40]
+[24]
 
 LaTeX Warning: File `figures/errorLinNorm.ps' not found on input line 108.
 
@@ -639,7 +571,7 @@ l.114 ...rrorNonLinNorm.ps,width=0.85\textwidth}}}
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
-[41]
+[25]
 
 LaTeX Warning: File `figures/figure1.ps' not found on input line 128.
 
@@ -685,9 +617,9 @@ l.252 ...igures/figure3.ps,width=0.50\textwidth}}}
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
-[42
+[26
 
-] [43]
+] [27]
 
 LaTeX Warning: File `figures/convergence2.ps' not found on input line 307.
 
@@ -718,7 +650,7 @@ l.314 ...es/linvsnonFEM.ps,width=0.90\textwidth}}}
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
-[44
+[28
 
 ]
 
@@ -766,7 +698,7 @@ l.338 ...igures/figure6.ps,width=0.95\textwidth}}}
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
-[45
+[29
 
 ]
 
@@ -829,9 +761,9 @@ l.366 ...gures/figure10.ps,width=0.95\textwidth}}}
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
-[46
+[30
 
-] [47]
+] [31]
 
 LaTeX Warning: File `figures/figure11.ps' not found on input line 379.
 
@@ -877,9 +809,9 @@ l.391 ...gures/figure13.ps,width=0.95\textwidth}}}
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
-[48
+[32
 
-] [49]
+] [33]
 
 LaTeX Warning: File `figures/figure14.ps' not found on input line 404.
 
@@ -1021,11 +953,11 @@ If that doesn't work, type  X <return>  to quit.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[50
+[34
 
-] [51]
+] [35]
 
-LaTeX Warning: Citation `Liver2011' on page 52 undefined on input line 453.
+LaTeX Warning: Citation `Liver2011' on page 36 undefined on input line 453.
 
 
 LaTeX Warning: File `figures/figure23.ps' not found on input line 457.
@@ -1135,9 +1067,9 @@ If that doesn't work, type  X <return>  to quit.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[52
+[36
 
-] [53]
+] [37]
 
 LaTeX Warning: File `figures/figure30.ps' not found on input line 498.
 
@@ -1246,9 +1178,9 @@ If that doesn't work, type  X <return>  to quit.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[54
+[38
 
-] [55]
+] [39]
 
 LaTeX Warning: File `figures/figure37.ps' not found on input line 540.
 
@@ -1324,13 +1256,13 @@ l.559 ...gures/figure41.ps,width=0.95\textwidth}}}
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
-[56
+[40
 
-] [57
+] [41
 
 ]
 
-LaTeX Warning: Citation `Matlab2011' on page 58 undefined on input line 588.
+LaTeX Warning: Citation `Matlab2011' on page 42 undefined on input line 588.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
@@ -1509,13 +1441,13 @@ If that doesn't work, type  X <return>  to quit.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-) (C:\Users\Umut\workspace\MsThesisLatex\Thesis\chapter7.tex [58] [59] [60]
+) (C:\Users\Umut\workspace\MsThesisLatex\Thesis\chapter7.tex [42] [43] [44]
 Chapter 7.
-[61
+[45
 
-]) [62] (C:\Users\Umut\workspace\MsThesisLatex\Thesis\thesis.bbl
+]) [46] (C:\Users\Umut\workspace\MsThesisLatex\Thesis\thesis.bbl
 ! Undefined control sequence.
-l.23 \newblock \url
+l.28 \newblock \url
                    {http://www.ogre3d.org/}, 2012.
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1524,7 +1456,47 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-l.29   \url
+l.34   \url
+           {http://www.sharecg.com/v/54636/gallery/5/3D-Model/Antonia-Sundre...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 31--36
+[][]\OT1/cmr/m/n/12 LadyJewell.  An-to-nia sun-dress. sharecg.
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 31--36
+\OT1/cmr/m/n/12 http://www.sharecg.com/v/54636/gallery/5/3D-Model/Antonia-Sundr
+ess,
+ []
+
+! Undefined control sequence.
+l.41   \url
+           {http://www.zbrushcentral.com/showthread.php?49053-Free-female-ba...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 38--43
+[][]\OT1/cmr/m/n/12 Mmava.  Free fe-male base mesh. zbrush cen-tral.
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 38--43
+\OT1/cmr/m/n/12 http://www.zbrushcentral.com/showthread.php?49053-Free-female-b
+ase-
+ []
+
+! Undefined control sequence.
+l.48   \url
            {http://www.ogre3d.org/tikiwiki/tiki-index.php?page=Documentation...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1533,19 +1505,19 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 26--31
+Underfull \hbox (badness 10000) in paragraph at lines 45--50
 [][]\OT1/cmr/m/n/12 J. Moan.  Doc-u-men-ta-tion ar-chi-tec-ture. ogre- ob-ject 
 ori-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 26--31
+Underfull \hbox (badness 10000) in paragraph at lines 45--50
 \OT1/cmr/m/n/12 ented ren-der-ing en-gine.  http://www.ogre3d.org/tikiwiki/tiki
 -
  []
 
 ! Undefined control sequence.
-l.35 \newblock \url
+l.54 \newblock \url
                    {http://openni.org/Documentation/ProgrammerGuide.html}, 2...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1554,13 +1526,18 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 
-Overfull \hbox (98.09183pt too wide) in paragraph at lines 33--36
+Overfull \hbox (103.96677pt too wide) in paragraph at lines 52--55
 [][]\OT1/cmr/m/n/12 OpenNI.  Pro-gram-mer guide-openni.  http://openni.org/Docu
 mentation/ProgrammerGuide.html,
  []
 
+[47
+
+
+
+]
 ! Undefined control sequence.
-l.40 \newblock \url
+l.59 \newblock \url
                    {http://www.primesense.com/en/nite}, 2012.
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1569,16 +1546,12 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 38--41
+Underfull \hbox (badness 10000) in paragraph at lines 57--60
 [][]\OT1/cmr/m/n/12 PrimeSense.  Nite. prime-sense nat-u-ral in-ter-ac-tion.
  []
 
 Missing character: There is no ’ in font cmr12!
-) (C:\Users\Umut\workspace\MsThesisLatex\Thesis\appendix.tex [63
-
-
-
-]
+) (C:\Users\Umut\workspace\MsThesisLatex\Thesis\appendix.tex [48]
 Appendix A.
 
 LaTeX Warning: File `figures/perfect_nose.ps' not found on input line 10.
@@ -1595,7 +1568,7 @@ l.10 ...es/perfect_nose.ps,width=0.80\textwidth}}}
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
-[64
+[49
 
 ]
 
@@ -1655,7 +1628,7 @@ l.25 ...re=figures/app4.ps,width=0.46\textwidth}}}
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
-[65]
+[50]
 
 LaTeX Warning: File `figures/app5.ps' not found on input line 42.
 
@@ -1716,7 +1689,7 @@ l.45 ...re=figures/app8.ps,width=0.50\textwidth}}}
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
-) [66
+) [51
 
 ] (C:\Users\Umut\workspace\MsThesisLatex\Thesis\thesis.aux)
 
@@ -1724,34 +1697,29 @@ LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 3207 strings out of 494045
- 43098 string characters out of 3148389
- 112838 words of memory out of 3000000
- 6313 multiletter control sequences out of 15000+200000
- 14064 words of font info for 53 fonts, out of 3000000 for 9000
+ 4017 strings out of 494045
+ 54489 string characters out of 3148389
+ 138169 words of memory out of 3000000
+ 7124 multiletter control sequences out of 15000+200000
+ 12226 words of font info for 45 fonts, out of 3000000 for 9000
  715 hyphenation exceptions out of 8191
- 44i,16n,24p,1447b,449s stack positions out of 5000i,500n,10000p,200000b,50000s
-<C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Pr
-ogram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Program Fi
-les/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><C:/Program Files/MiK
-TeX 2.9/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Program Files/MiKTeX 2.9/
-fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Program Files/MiKTeX 2.9/fonts/ty
-pe1/public/amsfonts/cm/cmmi12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/publ
-ic/amsfonts/cm/cmmi6.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfon
-ts/cm/cmmi7.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmm
-i8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C
-:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program
- Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Program Files/Mi
-KTeX 2.9/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Program Files/MiKTeX 2.9/f
-onts/type1/public/amsfonts/cm/cmr7.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1
-/public/amsfonts/cm/cmr8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/am
-sfonts/cm/cmsl12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/c
-m/cmsy10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy5.
-pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/P
-rogram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti12.pfb>
-Output written on thesis.pdf (83 pages, 660651 bytes).
+ 44i,12n,24p,1447b,352s stack positions out of 5000i,500n,10000p,200000b,50000s
+<C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Pr
+ogram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><C:/Program F
+iles/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Program Files/MiK
+TeX 2.9/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Program Files/MiKTeX 2.9/
+fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Program Files/MiKTeX 2.9/fonts/typ
+e1/public/amsfonts/cm/cmmi8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public
+/amsfonts/cm/cmr12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts
+/cm/cmr17.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr6.
+pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Pr
+ogram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsl12.pfb><C:/Program Fi
+les/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files/MiKT
+eX 2.9/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/Program Files/MiKTeX 2.9/f
+onts/type1/public/amsfonts/cm/cmtt12.pfb>
+Output written on thesis.pdf (68 pages, 1157582 bytes).
 PDF statistics:
- 358 PDF objects out of 1000 (max. 8388607)
+ 292 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 21 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 36 words of extra memory for PDF output out of 10000 (max. 10000000)
 

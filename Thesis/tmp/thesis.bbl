@@ -1,4 +1,4 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
 
 \bibitem{opencv_library}
 G.~Bradski.
@@ -11,6 +11,11 @@ K.-M.~G. Cheung, S.~Baker, and T.~Kanade.
   modeling and markerless motion tracking.
 \newblock {\em Int. J. Comput. Vision}, 63(3):225--245, July 2005.
 
+\bibitem{Kavan2003}
+L.~Kavan and J.~Zara.
+\newblock Real-time skin deformation with bones blending.
+\newblock In {\em WSCG Short Papers Proceedings}, 2003.
+
 \bibitem{Kourosh2012}
 K.~Khoshelham and S.~O. Elberink.
 \newblock Accuracy and resolution of kinect depth data for indoor mapping
@@ -21,6 +26,20 @@ K.~Khoshelham and S.~O. Elberink.
 T.~Knot.
 \newblock Ogre. open source 3d rendering engine.
 \newblock \url{http://www.ogre3d.org/}, 2012.
+
+\bibitem{LadyJewell2012}
+LadyJewell.
+\newblock Antonia sundress. sharecg.
+\newblock
+  \url{http://www.sharecg.com/v/54636/gallery/5/3D-Model/Antonia-Sundress},
+  2012.
+
+\bibitem{Mmava2012}
+Mmava.
+\newblock Free female base mesh. zbrush central.
+\newblock
+  \url{http://www.zbrushcentral.com/showthread.php?49053-Free-female-base-mesh-(nudity).},
+  2012.
 
 \bibitem{Moan2012}
 J.~Moan.

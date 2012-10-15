@@ -6,54 +6,55 @@
 \contentsline {figure}{\numberline {3.1}{\ignorespaces Hand Recognition Algorithm}}{11}
 \contentsline {figure}{\numberline {3.2}{\ignorespaces Hand Images and Contours from Depth Stream}}{12}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces Tetrahedral element}}{14}
-\contentsline {figure}{\numberline {4.2}{\ignorespaces 2D element before and after deformation\nobreakspace {}\cite {Logan07}.}}{17}
-\contentsline {figure}{\numberline {4.3}{\ignorespaces A tetrahedral mesh with two elements}}{21}
+\contentsline {figure}{\numberline {4.1}{\ignorespaces The Rigging Base Skeleton}}{14}
+\contentsline {figure}{\numberline {4.2}{\ignorespaces The vertex weights for the Humerus.R bone}}{15}
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Detailed Materials on the Face}}{16}
+\contentsline {figure}{\numberline {4.4}{\ignorespaces The Dress, positioned on the body, along with the upper-part skeleton. In this shot, the bottom part is highlighted in orange border.}}{18}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {6.1}{\ignorespaces The cube mesh with six elements (left) and 48 elements (right).}}{40}
-\contentsline {figure}{\numberline {6.2}{\ignorespaces Linear FEM error analysis with \textit {L2} and \textit {Energy} norms}}{41}
-\contentsline {figure}{\numberline {6.3}{\ignorespaces Nonlinear FEM error analysis with \textit {L2} and \textit {Energy} norms}}{41}
-\contentsline {figure}{\numberline {6.4}{\ignorespaces Experiment 1: A cube mesh of size $10$ cm$^{3}$ with eight nodes and six tetrahedra is constrained from the blue nodes and is pulled downwards from the green nodes.}}{42}
-\contentsline {figure}{\numberline {6.5}{\ignorespaces The initial and final positions of the nodes for the linear FEM. The red spheres show the initial positions and the green spheres show the final positions of the nodes.}}{43}
-\contentsline {figure}{\numberline {6.6}{\ignorespaces The initial and final positions of the nodes for the nonlinear FEM. The red spheres show the initial positions and the green spheres show the final positions of the nodes.}}{43}
-\contentsline {figure}{\numberline {6.7}{\ignorespaces Newton-Raphson convergence graphics for the nonlinear FEM.}}{44}
-\contentsline {figure}{\numberline {6.8}{\ignorespaces Force displacements (in centimeters) at node 4 for the linear and nonlinear FEMs.}}{44}
-\contentsline {figure}{\numberline {6.9}{\ignorespaces Experiment 2: A cube mesh of size $10$ cm$^{3}$ with 82 nodes and 224-tetrahedra is constrained from blue nodes and is pulled along the arrow from green nodes.}}{45}
-\contentsline {figure}{\numberline {6.10}{\ignorespaces The final shape of the mesh for the linear FEM (top left: wireframe tetrahedral mesh; top right: wireframe tetrahedral mesh with nodes; bottom left: wireframe surface mesh; bottom right: shaded mesh)}}{45}
-\contentsline {figure}{\numberline {6.11}{\ignorespaces The final shape of the mesh for the nonlinear FEM (top left: wireframe tetrahedral mesh; upper right: wireframe tetrahedralmesh with nodes; lower left: wireframe surface mesh; lower right: shaded mesh)}}{45}
-\contentsline {figure}{\numberline {6.12}{\ignorespaces Experiment 3: The beam mesh is constrained from the blue nodes and twisted from the green nodes. (a) Front view; (b) Side view, which also shows the force directions applied on each green node.}}{46}
-\contentsline {figure}{\numberline {6.13}{\ignorespaces Linear FEM solution (top left: wireframe tetrahedra and nodes; top right: only nodes; bottom left: wireframe surface mesh; lower right: shaded mesh).}}{47}
-\contentsline {figure}{\numberline {6.14}{\ignorespaces Nonlinear FEM solution (top left: wireframe tetrahedra and nodes; top right: only nodes; bottom left: wireframe surface mesh; lower right: shaded mesh).}}{47}
-\contentsline {figure}{\numberline {6.15}{\ignorespaces Experiment 4: The beam mesh is constrained from the blue nodes and pushed downwards at the green nodes.}}{48}
-\contentsline {figure}{\numberline {6.16}{\ignorespaces Linear FEM solution (top: wireframe tetrahedra and nodes; middle upper: shaded mesh; middle lower: initial mesh and the final tetrahedra are overlaid; bottom: initial and final meshes are overlaid).}}{49}
-\contentsline {figure}{\numberline {6.17}{\ignorespaces Nonlinear FEM solution (top: wireframe tetrahedra and nodes; middle upper: shaded mesh; middle lower: initial mesh and the final tetrahedra are overlaid; bottom: initial and final meshes are overlaid).}}{49}
-\contentsline {figure}{\numberline {6.18}{\ignorespaces Experiment 5: The cross mesh is constrained from the blue nodes and pushed towards the green nodes.}}{50}
-\contentsline {figure}{\numberline {6.19}{\ignorespaces Linear FEM solution: (a)\nobreakspace {}wireframe mesh; (b)\nobreakspace {}shaded mesh.}}{50}
-\contentsline {figure}{\numberline {6.20}{\ignorespaces Linear FEM solution: (a) initial and final wireframe meshes are overlaid; (b) initial and final shaded meshes are overlaid.}}{50}
-\contentsline {figure}{\numberline {6.21}{\ignorespaces Nonlinear FEM solution: (a)\nobreakspace {}wireframe mesh; (b)\nobreakspace {}shaded mesh.}}{51}
-\contentsline {figure}{\numberline {6.22}{\ignorespaces Nonlinear FEM solution: (a)\nobreakspace {}initial and final wireframe meshes are overlaid; (b)\nobreakspace {}initial and final shaded meshes are overlaid.}}{51}
-\contentsline {figure}{\numberline {6.23}{\ignorespaces Experiment 6: The liver mesh is constrained from the blue nodes and pulled from the green nodes (left: initial nodes; right: initial shaded mesh and nodes).}}{52}
-\contentsline {figure}{\numberline {6.24}{\ignorespaces Linear FEM solution: (a)\nobreakspace {}left: nodes, right: tetrahedral wireframe mesh; (b)\nobreakspace {}left: wireframe surface mesh, right: wireframe surface mesh with nodes; (c)\nobreakspace {}left: shaded mesh, right: shaded mesh with nodes.}}{52}
-\contentsline {figure}{\numberline {6.25}{\ignorespaces Nonlinear FEM solution: (a)\nobreakspace {}left: nodes, right: tetrahedral wireframe mesh; (b)\nobreakspace {}left: wireframe surface mesh, right: wireframe surface mesh with nodes; (c)\nobreakspace {}left: shaded mesh, right: shaded mesh with nodes.}}{53}
-\contentsline {figure}{\numberline {6.26}{\ignorespaces Experiment 7: The liver mesh is constrained from the blue nodes and pulled from the green node (left: initial nodes, right: initial shaded mesh and nodes).}}{54}
-\contentsline {figure}{\numberline {6.27}{\ignorespaces Linear FEM solution: (a)\nobreakspace {}left: nodes, right: tetrahedral wireframe mesh; (b)\nobreakspace {}left: wireframe surface mesh, right: wireframe surface mesh with nodes; (c)\nobreakspace {}left: shaded mesh, right: shaded mesh with nodes.}}{54}
-\contentsline {figure}{\numberline {6.28}{\ignorespaces Nonlinear FEM solution: (a)\nobreakspace {}left: nodes, right: tetrahedral wireframe mesh; (b)\nobreakspace {}left: wireframe surface mesh, right: wireframe surface mesh with nodes; (c)\nobreakspace {}left: shaded mesh, right: shaded mesh with nodes.}}{55}
-\contentsline {figure}{\numberline {6.29}{\ignorespaces Experiment 8: The liver mesh is constrained from the blue nodes and pushed towards the green nodes (left - initial nodes, right - initial shaded mesh and nodes).}}{56}
-\contentsline {figure}{\numberline {6.30}{\ignorespaces Linear FEM solution: (a)\nobreakspace {}left: nodes, right: shaded mesh with nodes; (b)\nobreakspace {}the mesh from a different view, left: shaded mesh with nodes, right: shaded mesh.}}{56}
-\contentsline {figure}{\numberline {6.31}{\ignorespaces Nonlinear FEM solution: (a)\nobreakspace {}left: nodes, right: shaded mesh with nodes; (b)\nobreakspace {}the mesh from a different view, left: shaded mesh with nodes, right: shaded mesh.}}{56}
-\contentsline {figure}{\numberline {6.32}{\ignorespaces Comparison of the computation times required to calculate the stiffness matrix (single thread).}}{58}
-\contentsline {figure}{\numberline {6.33}{\ignorespaces Relative performance comparison of the stiffness matrix calculation (single thread).}}{58}
-\contentsline {figure}{\numberline {6.34}{\ignorespaces Comparison of the computation times required to solve the system (single thread).}}{58}
-\contentsline {figure}{\numberline {6.35}{\ignorespaces Relative performance comparison of the system solution (single thread).}}{59}
-\contentsline {figure}{\numberline {6.36}{\ignorespaces Comparison of the computation times required to calculate the stiffness matrix (eight threads on four cores).}}{59}
-\contentsline {figure}{\numberline {6.37}{\ignorespaces Relative performance comparison of the stiffness matrix calculation (eight threads on four cores).}}{59}
-\contentsline {figure}{\numberline {6.38}{\ignorespaces Comparison of the computation times required to solve the system (eight threads on four cores).}}{60}
-\contentsline {figure}{\numberline {6.39}{\ignorespaces Relative performance comparison of the system solution (eight threads on four cores).}}{60}
-\contentsline {figure}{\numberline {6.40}{\ignorespaces Relative performance comparison averaged over all experiments.}}{60}
-\contentsline {figure}{\numberline {6.41}{\ignorespaces Multi-core efficiency of the proposed approach (speed-up of eight threads on four cores over the single core).}}{60}
+\contentsline {figure}{\numberline {6.1}{\ignorespaces The cube mesh with six elements (left) and 48 elements (right).}}{24}
+\contentsline {figure}{\numberline {6.2}{\ignorespaces Linear FEM error analysis with \textit {L2} and \textit {Energy} norms}}{25}
+\contentsline {figure}{\numberline {6.3}{\ignorespaces Nonlinear FEM error analysis with \textit {L2} and \textit {Energy} norms}}{25}
+\contentsline {figure}{\numberline {6.4}{\ignorespaces Experiment 1: A cube mesh of size $10$ cm$^{3}$ with eight nodes and six tetrahedra is constrained from the blue nodes and is pulled downwards from the green nodes.}}{26}
+\contentsline {figure}{\numberline {6.5}{\ignorespaces The initial and final positions of the nodes for the linear FEM. The red spheres show the initial positions and the green spheres show the final positions of the nodes.}}{27}
+\contentsline {figure}{\numberline {6.6}{\ignorespaces The initial and final positions of the nodes for the nonlinear FEM. The red spheres show the initial positions and the green spheres show the final positions of the nodes.}}{27}
+\contentsline {figure}{\numberline {6.7}{\ignorespaces Newton-Raphson convergence graphics for the nonlinear FEM.}}{28}
+\contentsline {figure}{\numberline {6.8}{\ignorespaces Force displacements (in centimeters) at node 4 for the linear and nonlinear FEMs.}}{28}
+\contentsline {figure}{\numberline {6.9}{\ignorespaces Experiment 2: A cube mesh of size $10$ cm$^{3}$ with 82 nodes and 224-tetrahedra is constrained from blue nodes and is pulled along the arrow from green nodes.}}{29}
+\contentsline {figure}{\numberline {6.10}{\ignorespaces The final shape of the mesh for the linear FEM (top left: wireframe tetrahedral mesh; top right: wireframe tetrahedral mesh with nodes; bottom left: wireframe surface mesh; bottom right: shaded mesh)}}{29}
+\contentsline {figure}{\numberline {6.11}{\ignorespaces The final shape of the mesh for the nonlinear FEM (top left: wireframe tetrahedral mesh; upper right: wireframe tetrahedralmesh with nodes; lower left: wireframe surface mesh; lower right: shaded mesh)}}{29}
+\contentsline {figure}{\numberline {6.12}{\ignorespaces Experiment 3: The beam mesh is constrained from the blue nodes and twisted from the green nodes. (a) Front view; (b) Side view, which also shows the force directions applied on each green node.}}{30}
+\contentsline {figure}{\numberline {6.13}{\ignorespaces Linear FEM solution (top left: wireframe tetrahedra and nodes; top right: only nodes; bottom left: wireframe surface mesh; lower right: shaded mesh).}}{31}
+\contentsline {figure}{\numberline {6.14}{\ignorespaces Nonlinear FEM solution (top left: wireframe tetrahedra and nodes; top right: only nodes; bottom left: wireframe surface mesh; lower right: shaded mesh).}}{31}
+\contentsline {figure}{\numberline {6.15}{\ignorespaces Experiment 4: The beam mesh is constrained from the blue nodes and pushed downwards at the green nodes.}}{32}
+\contentsline {figure}{\numberline {6.16}{\ignorespaces Linear FEM solution (top: wireframe tetrahedra and nodes; middle upper: shaded mesh; middle lower: initial mesh and the final tetrahedra are overlaid; bottom: initial and final meshes are overlaid).}}{33}
+\contentsline {figure}{\numberline {6.17}{\ignorespaces Nonlinear FEM solution (top: wireframe tetrahedra and nodes; middle upper: shaded mesh; middle lower: initial mesh and the final tetrahedra are overlaid; bottom: initial and final meshes are overlaid).}}{33}
+\contentsline {figure}{\numberline {6.18}{\ignorespaces Experiment 5: The cross mesh is constrained from the blue nodes and pushed towards the green nodes.}}{34}
+\contentsline {figure}{\numberline {6.19}{\ignorespaces Linear FEM solution: (a)\nobreakspace {}wireframe mesh; (b)\nobreakspace {}shaded mesh.}}{34}
+\contentsline {figure}{\numberline {6.20}{\ignorespaces Linear FEM solution: (a) initial and final wireframe meshes are overlaid; (b) initial and final shaded meshes are overlaid.}}{34}
+\contentsline {figure}{\numberline {6.21}{\ignorespaces Nonlinear FEM solution: (a)\nobreakspace {}wireframe mesh; (b)\nobreakspace {}shaded mesh.}}{35}
+\contentsline {figure}{\numberline {6.22}{\ignorespaces Nonlinear FEM solution: (a)\nobreakspace {}initial and final wireframe meshes are overlaid; (b)\nobreakspace {}initial and final shaded meshes are overlaid.}}{35}
+\contentsline {figure}{\numberline {6.23}{\ignorespaces Experiment 6: The liver mesh is constrained from the blue nodes and pulled from the green nodes (left: initial nodes; right: initial shaded mesh and nodes).}}{36}
+\contentsline {figure}{\numberline {6.24}{\ignorespaces Linear FEM solution: (a)\nobreakspace {}left: nodes, right: tetrahedral wireframe mesh; (b)\nobreakspace {}left: wireframe surface mesh, right: wireframe surface mesh with nodes; (c)\nobreakspace {}left: shaded mesh, right: shaded mesh with nodes.}}{36}
+\contentsline {figure}{\numberline {6.25}{\ignorespaces Nonlinear FEM solution: (a)\nobreakspace {}left: nodes, right: tetrahedral wireframe mesh; (b)\nobreakspace {}left: wireframe surface mesh, right: wireframe surface mesh with nodes; (c)\nobreakspace {}left: shaded mesh, right: shaded mesh with nodes.}}{37}
+\contentsline {figure}{\numberline {6.26}{\ignorespaces Experiment 7: The liver mesh is constrained from the blue nodes and pulled from the green node (left: initial nodes, right: initial shaded mesh and nodes).}}{38}
+\contentsline {figure}{\numberline {6.27}{\ignorespaces Linear FEM solution: (a)\nobreakspace {}left: nodes, right: tetrahedral wireframe mesh; (b)\nobreakspace {}left: wireframe surface mesh, right: wireframe surface mesh with nodes; (c)\nobreakspace {}left: shaded mesh, right: shaded mesh with nodes.}}{38}
+\contentsline {figure}{\numberline {6.28}{\ignorespaces Nonlinear FEM solution: (a)\nobreakspace {}left: nodes, right: tetrahedral wireframe mesh; (b)\nobreakspace {}left: wireframe surface mesh, right: wireframe surface mesh with nodes; (c)\nobreakspace {}left: shaded mesh, right: shaded mesh with nodes.}}{39}
+\contentsline {figure}{\numberline {6.29}{\ignorespaces Experiment 8: The liver mesh is constrained from the blue nodes and pushed towards the green nodes (left - initial nodes, right - initial shaded mesh and nodes).}}{40}
+\contentsline {figure}{\numberline {6.30}{\ignorespaces Linear FEM solution: (a)\nobreakspace {}left: nodes, right: shaded mesh with nodes; (b)\nobreakspace {}the mesh from a different view, left: shaded mesh with nodes, right: shaded mesh.}}{40}
+\contentsline {figure}{\numberline {6.31}{\ignorespaces Nonlinear FEM solution: (a)\nobreakspace {}left: nodes, right: shaded mesh with nodes; (b)\nobreakspace {}the mesh from a different view, left: shaded mesh with nodes, right: shaded mesh.}}{40}
+\contentsline {figure}{\numberline {6.32}{\ignorespaces Comparison of the computation times required to calculate the stiffness matrix (single thread).}}{42}
+\contentsline {figure}{\numberline {6.33}{\ignorespaces Relative performance comparison of the stiffness matrix calculation (single thread).}}{42}
+\contentsline {figure}{\numberline {6.34}{\ignorespaces Comparison of the computation times required to solve the system (single thread).}}{42}
+\contentsline {figure}{\numberline {6.35}{\ignorespaces Relative performance comparison of the system solution (single thread).}}{43}
+\contentsline {figure}{\numberline {6.36}{\ignorespaces Comparison of the computation times required to calculate the stiffness matrix (eight threads on four cores).}}{43}
+\contentsline {figure}{\numberline {6.37}{\ignorespaces Relative performance comparison of the stiffness matrix calculation (eight threads on four cores).}}{43}
+\contentsline {figure}{\numberline {6.38}{\ignorespaces Comparison of the computation times required to solve the system (eight threads on four cores).}}{44}
+\contentsline {figure}{\numberline {6.39}{\ignorespaces Relative performance comparison of the system solution (eight threads on four cores).}}{44}
+\contentsline {figure}{\numberline {6.40}{\ignorespaces Relative performance comparison averaged over all experiments.}}{44}
+\contentsline {figure}{\numberline {6.41}{\ignorespaces Multi-core efficiency of the proposed approach (speed-up of eight threads on four cores over the single core).}}{44}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {A.1}{\ignorespaces The perfect nose.}}{65}
-\contentsline {figure}{\numberline {A.2}{\ignorespaces Experiment 1: (a) Initial misshapen nose. (b) Head mesh is constrained from the blue nodes, and is pushed upwards at the green nodes. (c)\nobreakspace {}Linear FEM Solution: left: wireframe surface mesh with nodes, right: shaded mesh with texture. (d)\nobreakspace {}Nonlinear FEM Solution: left: wireframe surface mesh with nodes, right: shaded mesh with texture.}}{65}
-\contentsline {figure}{\numberline {A.3}{\ignorespaces Experiment 2: (a) Initial misshapen nose. (b) Head mesh is constrained from the blue nodes, and is pushed upwards at the green nodes. (c)\nobreakspace {}Linear FEM Solution: left: wireframe surface mesh with nodes, right: shaded mesh with texture. (d)\nobreakspace {}Nonlinear FEM Solution: left: wireframe surface mesh with nodes, right: shaded mesh with texture.}}{66}
+\contentsline {figure}{\numberline {A.1}{\ignorespaces The perfect nose.}}{50}
+\contentsline {figure}{\numberline {A.2}{\ignorespaces Experiment 1: (a) Initial misshapen nose. (b) Head mesh is constrained from the blue nodes, and is pushed upwards at the green nodes. (c)\nobreakspace {}Linear FEM Solution: left: wireframe surface mesh with nodes, right: shaded mesh with texture. (d)\nobreakspace {}Nonlinear FEM Solution: left: wireframe surface mesh with nodes, right: shaded mesh with texture.}}{50}
+\contentsline {figure}{\numberline {A.3}{\ignorespaces Experiment 2: (a) Initial misshapen nose. (b) Head mesh is constrained from the blue nodes, and is pushed upwards at the green nodes. (c)\nobreakspace {}Linear FEM Solution: left: wireframe surface mesh with nodes, right: shaded mesh with texture. (d)\nobreakspace {}Nonlinear FEM Solution: left: wireframe surface mesh with nodes, right: shaded mesh with texture.}}{51}
