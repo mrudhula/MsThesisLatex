@@ -1,5 +1,22 @@
 \begin{thebibliography}{1}
 
+\bibitem{opencv_library}
+G.~Bradski.
+\newblock {The OpenCV Library}.
+\newblock {\em Dr. Dobb's Journal of Software Tools}, 2000.
+
+\bibitem{Cheung2005}
+K.-M.~G. Cheung, S.~Baker, and T.~Kanade.
+\newblock Shape-from-silhouette across time part ii: Applications to human
+  modeling and markerless motion tracking.
+\newblock {\em Int. J. Comput. Vision}, 63(3):225--245, July 2005.
+
+\bibitem{Kourosh2012}
+K.~Khoshelham and S.~O. Elberink.
+\newblock Accuracy and resolution of kinect depth data for indoor mapping
+  applications.
+\newblock {\em Sensors}, 12(2):1437--1454, 2012.
+
 \bibitem{Knot2012}
 T.~Knot.
 \newblock Ogre. open source 3d rendering engine.
@@ -11,5 +28,21 @@ J.~Moan.
 \newblock
   \url{http://www.ogre3d.org/tikiwiki/tiki-index.php?page=Documentation+Architecture/},
   2012.
+
+\bibitem{OpenNI2102}
+OpenNI.
+\newblock Programmer guide-openni.
+\newblock \url{http://openni.org/Documentation/ProgrammerGuide.html}, 2012.
+
+\bibitem{PS2102}
+PrimeSense.
+\newblock Nite. primesense natural interaction.
+\newblock \url{http://www.primesense.com/en/nite}, 2012.
+
+\bibitem{Tang2011}
+M.~Tang.
+\newblock Recognizing hand gestures with microsoft’s kinect.
+\newblock Technical Report MSU-CSE-00-2, Department of Computer Science,
+  Stanford University, January 2011.
 
 \end{thebibliography}

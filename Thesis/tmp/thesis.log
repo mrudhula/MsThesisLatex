@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2012.10.15)  15 OCT 2012 21:00
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2012.10.15)  15 OCT 2012 21:18
 entering extended mode
 **thesis.tex
 (C:\Users\Umut\workspace\MsThesisLatex\Thesis\thesis.tex
@@ -351,31 +351,30 @@ Missing character: There is no Ý in font cmr12!
 [4] [5] [5] (C:\Users\Umut\workspace\MsThesisLatex\Thesis\thesis.toc [6
 
 ]
-[7]
-Underfull \hbox (badness 3679) in paragraph at lines 39--39
+Underfull \hbox (badness 3679) in paragraph at lines 24--24
  [][][] []\OT1/cmr/m/n/12 Non-Linear FEM us-ing Tetra-he-dral El-e-ments with G
 reen- 
  []
 
-[8])
+[7])
 \tf@toc=\write3
- [9] (C:\Users\Umut\workspace\MsThesisLatex\Thesis\thesis.lof
+ [8] (C:\Users\Umut\workspace\MsThesisLatex\Thesis\thesis.lof
 
-LaTeX Warning: Citation `Logan07' on page x undefined on input line 9.
+LaTeX Warning: Citation `Logan07' on page ix undefined on input line 10.
 
-[10
+[9
 
-] [11] [12] [13])
+] [10] [11] [12])
 \tf@lof=\write4
- [14] [15]
+ [13] [14]
 (C:\Users\Umut\workspace\MsThesisLatex\Thesis\thesis.lot)
 \tf@lot=\write5
- [16
+ [15
 
 ]
 (C:\Users\Umut\workspace\MsThesisLatex\Thesis\thesis.loa)
 \tf@loa=\write6
- [17
+ [16
 
 ])
 (C:\Users\Umut\workspace\MsThesisLatex\Thesis\chapter1.tex
@@ -390,7 +389,7 @@ File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 24.
  [2]
-<figures/ogre_class_diagram.png, id=74, 978.65625pt x 476.78125pt>
+<figures/ogre_class_diagram.png, id=71, 978.65625pt x 476.78125pt>
 File: figures/ogre_class_diagram.png Graphic file (type png)
 
 <use figures/ogre_class_diagram.png>
@@ -398,7 +397,7 @@ Package pdftex.def Info: figures/ogre_class_diagram.png used on input line 58.
 (pdftex.def)             Requested size: 412.56496pt x 200.99608pt.
  [3 <C:/Users/Umut/workspace/MsThesisLatex/Thesis/figures/ogre_class_diagram.pn
 g>] [4]
-<figures/ogre_render_cycle.png, id=83, 978.65625pt x 577.15625pt>
+<figures/ogre_render_cycle.png, id=80, 978.65625pt x 577.15625pt>
 File: figures/ogre_render_cycle.png Graphic file (type png)
 
 <use figures/ogre_render_cycle.png>
@@ -408,199 +407,37 @@ Package pdftex.def Info: figures/ogre_render_cycle.png used on input line 105.
 (C:\Users\Umut\workspace\MsThesisLatex\Thesis\chapter2.tex [6 <C:/Users/Umut/wo
 rkspace/MsThesisLatex/Thesis/figures/ogre_render_cycle.png>]
 Chapter 2.
-
-LaTeX Warning: Citation `Barr84' on page 7 undefined on input line 6.
-
-
-LaTeX Warning: Citation `Sederberg86' on page 7 undefined on input line 6.
-
-
-LaTeX Warning: Citation `Provot95' on page 7 undefined on input line 8.
-
-
-LaTeX Warning: Citation `Lender99' on page 7 undefined on input line 8.
-
-
-LaTeX Warning: Citation `Wang06' on page 7 undefined on input line 8.
-
 [7
 
-]
-
-LaTeX Warning: Citation `Hrennikoff41' on page 8 undefined on input line 14.
-
-
-LaTeX Warning: Citation `McHenry43' on page 8 undefined on input line 14.
-
-
-LaTeX Warning: Citation `Argyris54' on page 8 undefined on input line 14.
-
-
-LaTeX Warning: Citation `Turner56' on page 8 undefined on input line 16.
-
-
-LaTeX Warning: Citation `Clough60' on page 8 undefined on input line 16.
-
-
-LaTeX Warning: Citation `Clough99' on page 8 undefined on input line 16.
-
-
-LaTeX Warning: Citation `Martin61' on page 8 undefined on input line 16.
-
-
-LaTeX Warning: Citation `Argyris64' on page 8 undefined on input line 16.
-
-[8]
-
-LaTeX Warning: Citation `Turner60' on page 9 undefined on input line 18.
-
-
-LaTeX Warning: Citation `Gallagher62' on page 9 undefined on input line 18.
-
-
-LaTeX Warning: Citation `Melosh63' on page 9 undefined on input line 20.
-
-
-LaTeX Warning: Citation `Szabo69' on page 9 undefined on input line 20.
-
-
-LaTeX Warning: Citation `Koch96' on page 9 undefined on input line 22.
-
-
-LaTeX Warning: Citation `Zhuangy00' on page 9 undefined on input line 22.
-
-
-LaTeX Warning: Citation `Cavusoglu00' on page 9 undefined on input line 22.
-
-
-LaTeX Warning: Citation `Natsupakpong2010' on page 9 undefined on input line 22
-.
-
-
-LaTeX Warning: Citation `Natsupakpong2010' on page 9 undefined on input line 31
-.
-
-
-LaTeX Warning: Citation `Pedersen06' on page 9 undefined on input line 31.
-
-[9]
-
-LaTeX Warning: Citation `Delaunay34' on page 10 undefined on input line 42.
-
-
-LaTeX Warning: Citation `Prep93' on page 10 undefined on input line 42.
-
-
-LaTeX Warning: File `figures/delaunay.ps' not found on input line 45.
-
-
-! LaTeX Error: Unknown graphics extension: .ps.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.45 ...igures/delaunay.ps,width=0.70\textwidth}}}
-                                                  
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-
-LaTeX Warning: Citation `si2011' on page 10 undefined on input line 50.
-
-
-LaTeX Warning: Citation `Edelsbrunner01' on page 10 undefined on input line 50.
-
-
-[10]
-
-LaTeX Warning: Citation `Narasaiah08' on page 11 undefined on input line 55.
-
-[11] [12]
-
-LaTeX Warning: Citation `Gabaldon02' on page 13 undefined on input line 107.
-
-[13]
-
-LaTeX Warning: Citation `Autodesk2011' on page 14 undefined on input line 134.
-
-
-LaTeX Warning: Citation `Logan07' on page 14 undefined on input line 138.
-
-
-LaTeX Warning: Citation `Bro98' on page 14 undefined on input line 152.
-
-
-LaTeX Warning: Citation `Cotin98' on page 14 undefined on input line 152.
-
-[14]
-
-LaTeX Warning: Citation `Reddy03' on page 15 undefined on input line 154.
-
-
-LaTeX Warning: Citation `Wriggers08' on page 15 undefined on input line 154.
-
-[15]
-
-LaTeX Warning: Citation `Reddy03' on page 16 undefined on input line 167.
-
-) (C:\Users\Umut\workspace\MsThesisLatex\Thesis\chapter3.tex [16]
+]) (C:\Users\Umut\workspace\MsThesisLatex\Thesis\chapter3.tex [8] [9]
 Chapter 3.
-
-LaTeX Warning: Citation `Logan07' on page 17 undefined on input line 26.
-
-[17
+[10
 
 ]
+Missing character: There is no ’ in font cmr12!
+ <figures/hand_recognition_cycle.png, id=101, 542.025pt x 289.08pt>
+File: figures/hand_recognition_cycle.png Graphic file (type png)
 
-LaTeX Warning: Citation `Reddy93' on page 18 undefined on input line 30.
+<use figures/hand_recognition_cycle.png>
+Package pdftex.def Info: figures/hand_recognition_cycle.png used on input line 
+19.
+(pdftex.def)             Requested size: 412.56496pt x 220.04272pt.
+ [11 <C:/Users/Umut/workspace/MsThesisLatex/Thesis/figures/hand_recognition_cyc
+le.png>]
+<figures/open_closed_hands.png, id=106, 938.50626pt x 239.89626pt>
+File: figures/open_closed_hands.png Graphic file (type png)
 
-
-LaTeX Warning: Citation `Reddy02' on page 18 undefined on input line 44.
-
-
-LaTeX Warning: Citation `Reddy93' on page 18 undefined on input line 48.
-
-[18]
-
-LaTeX Warning: Citation `Reddy93' on page 19 undefined on input line 86.
-
-[19]
-
-LaTeX Warning: Citation `Reddy93' on page 20 undefined on input line 116.
-
-
-LaTeX Warning: Citation `Logan07' on page 20 undefined on input line 127.
-
-[20]
-
-LaTeX Warning: Citation `Reddy02' on page 21 undefined on input line 131.
-
-[21]
-
-LaTeX Warning: Citation `Reddy03' on page 22 undefined on input line 180.
-
-[22]
-
-LaTeX Warning: Citation `Gortler07' on page 23 undefined on input line 222.
-
-[23]
-
-LaTeX Warning: Citation `Morton05' on page 24 undefined on input line 227.
-
-
-LaTeX Warning: Citation `Terzopoulos87' on page 24 undefined on input line 227.
-
-
-[24]) (C:\Users\Umut\workspace\MsThesisLatex\Thesis\chapter4.tex [25]
+<use figures/open_closed_hands.png>
+Package pdftex.def Info: figures/open_closed_hands.png used on input line 35.
+(pdftex.def)             Requested size: 412.56496pt x 105.45584pt.
+)
+(C:\Users\Umut\workspace\MsThesisLatex\Thesis\chapter4.tex [12 <C:/Users/Umut/w
+orkspace/MsThesisLatex/Thesis/figures/open_closed_hands.png>]
 Chapter 4.
 
-LaTeX Warning: Citation `Tetgen2011' on page 26 undefined on input line 22.
+LaTeX Warning: Citation `Tetgen2011' on page 13 undefined on input line 22.
 
-[26
+[13
 
 ]
 
@@ -619,11 +456,11 @@ Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
 
-LaTeX Warning: Citation `Logan07' on page 27 undefined on input line 32.
+LaTeX Warning: Citation `Logan07' on page 14 undefined on input line 32.
 
-[27] [28] [29]
+[14] [15] [16]
 
-LaTeX Warning: Citation `Logan07' on page 30 undefined on input line 292.
+LaTeX Warning: Citation `Logan07' on page 17 undefined on input line 292.
 
 
 LaTeX Warning: File `figures/deformation2d.ps' not found on input line 295.
@@ -641,15 +478,22 @@ Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
 
-LaTeX Warning: Citation `Logan07' on page 30 undefined on input line 296.
+LaTeX Warning: Citation `Logan07' on page 17 undefined on input line 296.
 
-[30] [31] [32]
+[17] [18]
 
-LaTeX Warning: Citation `Modulus2011' on page 33 undefined on input line 471.
+LaTeX Warning: Reference `eqn:1.1' on page 19 undefined on input line 444.
 
-[33]
+[19]
 
-LaTeX Warning: Citation `Logan07' on page 34 undefined on input line 508.
+LaTeX Warning: Citation `Modulus2011' on page 20 undefined on input line 471.
+
+
+LaTeX Warning: Reference `eqn:1.1' on page 20 undefined on input line 471.
+
+[20]
+
+LaTeX Warning: Citation `Logan07' on page 21 undefined on input line 508.
 
 
 LaTeX Warning: File `figures/assemble.ps' not found on input line 518.
@@ -672,35 +516,35 @@ Overfull \hbox (9.92833pt too wide) detected at line 546
 /n/12 = [] \OML/cmm/m/it/12 :
  []
 
-[34] [35] [36
+[21] [22] [23
 
 ]
 Overfull \hbox (23.6432pt too wide) detected at line 655
 \OML/cmm/m/it/12 K \OT1/cmr/m/n/12 = [] \OML/cmm/m/it/12 :
  []
 
-[37
+[24
 
-]) (C:\Users\Umut\workspace\MsThesisLatex\Thesis\chapter5.tex [38]
+]) (C:\Users\Umut\workspace\MsThesisLatex\Thesis\chapter5.tex [25]
 Chapter 5.
-[39
+[26
 
 ]
 
-LaTeX Warning: Citation `BonetWood97' on page 40 undefined on input line 30.
+LaTeX Warning: Citation `BonetWood97' on page 27 undefined on input line 30.
 
-[40]
+[27]
 
-LaTeX Warning: Citation `Felippa96' on page 41 undefined on input line 37.
+LaTeX Warning: Citation `Felippa96' on page 28 undefined on input line 37.
 
-[41]
+[28]
 
-LaTeX Warning: Citation `Pedersen06' on page 42 undefined on input line 134.
+LaTeX Warning: Citation `Pedersen06' on page 29 undefined on input line 134.
 
 
-LaTeX Warning: Citation `Pedersen08' on page 42 undefined on input line 134.
+LaTeX Warning: Citation `Pedersen08' on page 29 undefined on input line 134.
 
-[42]
+[29]
 Overfull \hbox (44.30507pt too wide) detected at line 253
 \OT1/cmr/m/n/12 [[]] = [] [] \OML/cmm/m/it/12 :
  []
@@ -710,35 +554,42 @@ Overfull \hbox (52.02939pt too wide) detected at line 276
 []\OML/cmm/m/it/12 :
  []
 
-[43] [44] [45]
+[30]
 
-LaTeX Warning: Citation `Kelly87' on page 46 undefined on input line 382.
+LaTeX Warning: Reference `eqn:1.1' on page 31 undefined on input line 278.
 
 
-LaTeX Warning: Citation `Krenk09' on page 46 undefined on input line 382.
+LaTeX Warning: Reference `eqn:1.1' on page 31 undefined on input line 285.
 
-[46] [47]
+[31] [32]
 
-LaTeX Warning: Citation `Pedersen06' on page 48 undefined on input line 443.
+LaTeX Warning: Citation `Kelly87' on page 33 undefined on input line 382.
 
-[48] [49]) (C:\Users\Umut\workspace\MsThesisLatex\Thesis\chapter6.tex [50]
+
+LaTeX Warning: Citation `Krenk09' on page 33 undefined on input line 382.
+
+[33] [34]
+
+LaTeX Warning: Citation `Pedersen06' on page 35 undefined on input line 443.
+
+[35] [36]) (C:\Users\Umut\workspace\MsThesisLatex\Thesis\chapter6.tex [37]
 Chapter 6.
 
-LaTeX Warning: Citation `Pedersen06' on page 51 undefined on input line 4.
+LaTeX Warning: Citation `Pedersen06' on page 38 undefined on input line 4.
 
-[51
+[38
 
 ]
 
-LaTeX Warning: Citation `Liver2011' on page 52 undefined on input line 17.
+LaTeX Warning: Citation `Liver2011' on page 39 undefined on input line 17.
 
 
-LaTeX Warning: Citation `Tetgen2011' on page 52 undefined on input line 19.
+LaTeX Warning: Citation `Tetgen2011' on page 39 undefined on input line 19.
 
 
-LaTeX Warning: Citation `Madenci06' on page 52 undefined on input line 26.
+LaTeX Warning: Citation `Madenci06' on page 39 undefined on input line 26.
 
-[52]
+[39]
 
 LaTeX Warning: File `figures/denser.ps' not found on input line 38.
 
@@ -754,7 +605,10 @@ l.38 ...=figures/denser.ps,width=0.90\textwidth}}}
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
-[53]
+
+LaTeX Warning: Reference `eqn:1.7' on page 40 undefined on input line 89.
+
+[40]
 
 LaTeX Warning: File `figures/errorLinNorm.ps' not found on input line 108.
 
@@ -785,7 +639,7 @@ l.114 ...rrorNonLinNorm.ps,width=0.85\textwidth}}}
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
-[54]
+[41]
 
 LaTeX Warning: File `figures/figure1.ps' not found on input line 128.
 
@@ -831,9 +685,9 @@ l.252 ...igures/figure3.ps,width=0.50\textwidth}}}
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
-[55
+[42
 
-] [56]
+] [43]
 
 LaTeX Warning: File `figures/convergence2.ps' not found on input line 307.
 
@@ -864,7 +718,7 @@ l.314 ...es/linvsnonFEM.ps,width=0.90\textwidth}}}
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
-[57
+[44
 
 ]
 
@@ -912,7 +766,7 @@ l.338 ...igures/figure6.ps,width=0.95\textwidth}}}
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
-[58
+[45
 
 ]
 
@@ -975,9 +829,9 @@ l.366 ...gures/figure10.ps,width=0.95\textwidth}}}
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
-[59
+[46
 
-] [60]
+] [47]
 
 LaTeX Warning: File `figures/figure11.ps' not found on input line 379.
 
@@ -1023,9 +877,9 @@ l.391 ...gures/figure13.ps,width=0.95\textwidth}}}
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
-[61
+[48
 
-] [62]
+] [49]
 
 LaTeX Warning: File `figures/figure14.ps' not found on input line 404.
 
@@ -1167,11 +1021,11 @@ If that doesn't work, type  X <return>  to quit.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[63
+[50
 
-] [64]
+] [51]
 
-LaTeX Warning: Citation `Liver2011' on page 65 undefined on input line 453.
+LaTeX Warning: Citation `Liver2011' on page 52 undefined on input line 453.
 
 
 LaTeX Warning: File `figures/figure23.ps' not found on input line 457.
@@ -1281,9 +1135,9 @@ If that doesn't work, type  X <return>  to quit.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[65
+[52
 
-] [66]
+] [53]
 
 LaTeX Warning: File `figures/figure30.ps' not found on input line 498.
 
@@ -1392,9 +1246,9 @@ If that doesn't work, type  X <return>  to quit.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[67
+[54
 
-] [68]
+] [55]
 
 LaTeX Warning: File `figures/figure37.ps' not found on input line 540.
 
@@ -1470,13 +1324,13 @@ l.559 ...gures/figure41.ps,width=0.95\textwidth}}}
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
-[69
+[56
 
-] [70
+] [57
 
 ]
 
-LaTeX Warning: Citation `Matlab2011' on page 71 undefined on input line 588.
+LaTeX Warning: Citation `Matlab2011' on page 58 undefined on input line 588.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
@@ -1655,14 +1509,14 @@ If that doesn't work, type  X <return>  to quit.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-) (C:\Users\Umut\workspace\MsThesisLatex\Thesis\chapter7.tex [71] [72] [73]
+) (C:\Users\Umut\workspace\MsThesisLatex\Thesis\chapter7.tex [58] [59] [60]
 Chapter 7.
-[74
+[61
 
-]) [75] (C:\Users\Umut\workspace\MsThesisLatex\Thesis\thesis.bbl
+]) [62] (C:\Users\Umut\workspace\MsThesisLatex\Thesis\thesis.bbl
 ! Undefined control sequence.
-l.6 \newblock \url
-                  {http://www.ogre3d.org/}, 2012.
+l.23 \newblock \url
+                   {http://www.ogre3d.org/}, 2012.
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
 misspelled it (e.g., `\hobx'), type `I' and the correct
@@ -1670,7 +1524,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-l.12   \url
+l.29   \url
            {http://www.ogre3d.org/tikiwiki/tiki-index.php?page=Documentation...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1679,18 +1533,48 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 9--14
+Underfull \hbox (badness 10000) in paragraph at lines 26--31
 [][]\OT1/cmr/m/n/12 J. Moan.  Doc-u-men-ta-tion ar-chi-tec-ture. ogre- ob-ject 
 ori-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 9--14
+Underfull \hbox (badness 10000) in paragraph at lines 26--31
 \OT1/cmr/m/n/12 ented ren-der-ing en-gine.  http://www.ogre3d.org/tikiwiki/tiki
 -
  []
 
-) (C:\Users\Umut\workspace\MsThesisLatex\Thesis\appendix.tex [76
+! Undefined control sequence.
+l.35 \newblock \url
+                   {http://openni.org/Documentation/ProgrammerGuide.html}, 2...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+Overfull \hbox (98.09183pt too wide) in paragraph at lines 33--36
+[][]\OT1/cmr/m/n/12 OpenNI.  Pro-gram-mer guide-openni.  http://openni.org/Docu
+mentation/ProgrammerGuide.html,
+ []
+
+! Undefined control sequence.
+l.40 \newblock \url
+                   {http://www.primesense.com/en/nite}, 2012.
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 38--41
+[][]\OT1/cmr/m/n/12 PrimeSense.  Nite. prime-sense nat-u-ral in-ter-ac-tion.
+ []
+
+Missing character: There is no ’ in font cmr12!
+) (C:\Users\Umut\workspace\MsThesisLatex\Thesis\appendix.tex [63
 
 
 
@@ -1711,7 +1595,7 @@ l.10 ...es/perfect_nose.ps,width=0.80\textwidth}}}
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
-[77
+[64
 
 ]
 
@@ -1771,7 +1655,7 @@ l.25 ...re=figures/app4.ps,width=0.46\textwidth}}}
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
-[78]
+[65]
 
 LaTeX Warning: File `figures/app5.ps' not found on input line 42.
 
@@ -1832,7 +1716,7 @@ l.45 ...re=figures/app8.ps,width=0.50\textwidth}}}
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
-) [79
+) [66
 
 ] (C:\Users\Umut\workspace\MsThesisLatex\Thesis\thesis.aux)
 
@@ -1840,13 +1724,13 @@ LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 3277 strings out of 494045
- 43565 string characters out of 3148389
- 113309 words of memory out of 3000000
- 6380 multiletter control sequences out of 15000+200000
- 15304 words of font info for 57 fonts, out of 3000000 for 9000
+ 3207 strings out of 494045
+ 43098 string characters out of 3148389
+ 112838 words of memory out of 3000000
+ 6313 multiletter control sequences out of 15000+200000
+ 14064 words of font info for 53 fonts, out of 3000000 for 9000
  715 hyphenation exceptions out of 8191
- 44i,16n,24p,1447b,438s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 44i,16n,24p,1447b,449s stack positions out of 5000i,500n,10000p,200000b,50000s
 <C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Pr
 ogram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Program Fi
 les/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><C:/Program Files/MiK
@@ -1865,9 +1749,9 @@ sfonts/cm/cmsl12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/c
 m/cmsy10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy5.
 pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/P
 rogram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti12.pfb>
-Output written on thesis.pdf (97 pages, 639831 bytes).
+Output written on thesis.pdf (83 pages, 660651 bytes).
 PDF statistics:
- 399 PDF objects out of 1000 (max. 8388607)
+ 358 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 11 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 21 words of extra memory for PDF output out of 10000 (max. 10000000)
 

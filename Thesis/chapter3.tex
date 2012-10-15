@@ -1,267 +1,42 @@
-\chapter{Numerical Techniques}
+\chapter{Hand Tracking}
 \label{chapter3}
 
-This chapter first introduces the preliminaries for variational methods and finite element method. Then it explains
-the variational approaches, such as Galerkin, Rayleigh-Ritz and Weighted-Residual methods, and finite difference methods.
+\section{OpenCV}
+ 
+Although OpenNI/NITE provided me the joint information, useful functions for a smooth user interface, such as hand state recognition or hand swipe filters were omitted in the open source natural interaction libraries I use. In order to simulate mouse-clicking behavior, I decided to track the hands of the user to be used as cursors, notice open/close hand gestures for clicking events. In order to find implementations of the algorithms in my proposed hand-track solution, I researched various libraries which came with functions implementing such algorithms. I chose to work with OpenCV, due to its maturity, community and integration with other libraries.
 
-\section{Preliminaries}
+OpenCV not only provides basic functions to perform complex and processor-intensive image processing functions such as, facial recognition system, gesture recognition, stereoscopic 3D and segmentation, it also has a very vast machine learning aspect, including boosting, decision three learning and many more features \cite{opencv_library}.
 
-\subsection{Boundary Conditions}
+\section{The Process}
 
-Boundary conditions are the additional constraints in order to solve a differential equation. For example,
-for the differential equation
+Utilizing such a powerful middleware as a depth sensor, I am able to perform very robust background subtraction with almost no effort skeletal body tracking is another embedded property of the software which I use, giving me a speed boost. Therefore, I implemented two different techniques: Hand state recognition and hand swipe recognition.
 
-\begin{equation}
--u''-2xu'+2u = f(x),
-\label{eqn:2-01}
-\end{equation}
+Hand swipe recognition is simpler compared to hand state recognition. It is just a matter of keeping track of the hand’s 3D position, and keeping a listener which is activated when the 3D velocity of the hand exceeds a certain number. I also performed a number of optimizations on this function to make it invariant with the size and location of the user.
 
-\noindent the boundary conditions can be defined as
+Open/Close Hand recognition is harder than Hand Swipe recognition. I had to perform advanced image processing in order to determine the state of the hand successfully, at relatively low resolutions and large distances. My algorithm is shown in Figure \ref{fig:hand_recognition_cycle}:
 
-\begin{equation}
-u(0) = 0, u(1) = ln(0.5).
-\label{eqn:2-02}
-\end{equation}
-
-When solving the problems with FEM over the domain boundary conditions must be satisfied. Otherwise stiffness matrix $K$ will be singular and solution of the system does not exist. This means the system is unstable. Two types of boundary conditions are used in FEM. Mostly homogeneous boundary conditions (fixed boundary conditions) are used. They ensures that the nodes are fixed and does not move with the effect of the external forces. We also use fixed boundary conditions in our proposed solution. Nonhomogeneous boundary conditions occur where finite nonzero values of displacement are specified, such as the settlement of the support points~\cite{Logan07}.
-
-\subsection{Boundary Value Problem}
-
-Boundary value problem (BVP) is a type of partial differential problem that uses boundary conditions. In this type of problems its derivatives $u'(0)=1$ and dependent variables $u(0)=c$ can take special values on the boundary. Hence, solution to the problem must satisfy boundary conditions~\cite{Reddy93}. An example BVP is given by
-
-\begin{equation}
--u'' = x,  0 < x < 1, u(0) = 0, u'(0) = 1.
-\label{eqn:2-03}
-\end{equation}
-
-\subsection{Variational Operator}
-
-\begin{equation}
-f(x) = -(ku)' + bu' + cu.
-\label{eqn:2-04}
-\end{equation}
-
-The function $f(x)$ in Equation~\ref{eqn:2-04} is dependent on $u$ and $u'$ for a fixed value of the independent variable $x$. The change $\alpha v$ in $u$ is called the variation of $u$, where $v$ is a function and $\alpha$ is constant~\cite{Reddy02}. Moreover, this variation operation is represented by $\delta u = v$, and $\delta$ is called the variational operator. Mostly, variation is used to achieve weak formulations as described as follows.
-
-\subsection{Weak Formulations}
-
-The weak form of a differential equation is the weighted integral statement of the differential equation that is used in variational methods, distributed among the dependent variable and the weight or trial functions~\cite{Reddy93}. The construction of the weak formulation is achieved in three steps.
-
-Consider a BVP by
-
-\begin{equation}
--(ku')' + bu' + cu = f(x), 0 < x < L, u(0) = u(L) = 0.
-\label{eqn:2-05}
-\end{equation}
-
-\noindent The residual is defined by
-
-\begin{equation}
-r(\hat{u}) = -(ku')' + bu' + cu - f(x).
-\label{eqn:2-06}
-\end{equation}
-
-\noindent In the first step, weight functions $\psi$ are selected to satisfy the following boundary conditions
-
-\begin{equation}
-\psi(0) = \psi(L) = 0.
-\label{eqn:2-07}
-\end{equation}
-
-\noindent In the second step, the residual is multiplied with the weight function $\psi$ and integrated over the domain.
-
-\begin{equation}
-u = \int_{0}^L \psi r(\hat{u}) dx = 0.
-\label{eqn:2-08}
-\end{equation}
-
-\noindent If $\hat{u}$ is the solution of the problem, $r(\hat{u})=0 \Rightarrow \hat{u} = u$.
-Equation~\ref{eqn:2-08} is extended by
-
-\begin{equation}
-u = \int_{0}^L \psi (-(ku')' + bu' + cu - f(x)) dx = 0.
-\label{eqn:2-09}
-\end{equation}
-
-\noindent The term $\psi$ in Equation~\ref{eqn:2-09} is called the weight function or weighted-residuals~\cite{Reddy93}.
-In the last step, the weight function is extended by integration by parts:
-
-\begin{equation}
-\int_{0}^L -\psi(x) (k(\hat{u}'))' dx = -ku\psi |^L_{0} + \int_{0}^L k \hat{u}' v' dx = \int_{0}^L k \hat{u}' \psi' \;\;\text{and}
-\label{eqn:2-010}
-\end{equation}
-
-\begin{equation}
--ku\psi |^L_{0} = 0,
-\label{eqn:2-011}
-\end{equation}
-
-\noindent since $\psi(0) = \psi(L) = 0$. Finally, the weak form or variational form of Equation~\ref{eqn:2-05} becomes
-
-\begin{equation}
-\int_{0}^L (k \hat{u}'\psi' + b\hat{u}'\psi + c\hat{u}\psi - f\psi) dx = 0.
-\label{eqn:2-012}
-\end{equation}
-
-
-\subsection{Weighted Integral Forms and Residuals}
-
-In FEM and variational methods, the solution is represented by
-
-\begin{equation}
-u = \sum\limits_{k=1}^N u_{k} \psi_{k}.
-\label{eqn:2-1}
-\end{equation}
-
-\noindent When we substitute Equation~\ref{eqn:2-1} into differential equations, it does not always result in giving the linearly dependent coefficient of $u_{k}$. In that case there is not any actual solution to N number of equations. Instead of actual solution, approximate solution to $u$ is found by using weighted integrals and residuals in order to find the unknown coefficients~\cite{Reddy93}.
-
-\begin{equation}
-u = \int_{0}^L \psi r dx = 0,
-\label{eqn:2-2}
-\end{equation}
-
-\noindent where $\psi$ is the weight function and r is the residual. This weight function differs by what kind of variational method is used to solve the problem.
-
-\section{Variational Methods}
-
-Variational method is a general method that can be used to achieve an approximate solution for both structural and nonstructural problems by using weighted integral statements or trial functions~\cite{Logan07}. 
-
-\subsection{Weighted-Residual Methods}
-
-Weighted-residual method seeks the approximate solution to the system by using weighted integral statements~\cite{Reddy02}. Weighted-residual method is the generalization of Rayleigh-Ritz Method. It does not operate in weak form, since weak form does not always exist. Moreover, test functions that form weighted integral statements must satisfy boundary conditions and must be linearly independent. For example, for the problem
-
-\begin{equation}
--(ku')' + bu' + cu = f, u(0)=u(L),
-\label{eqn:problem}
-\end{equation}
-
-\noindent the residual is defined as
-
-\begin{equation}
-r(u) = -(ku')' + bu' + cu - f.
-\label{eqn:wrm1}
-\end{equation}
-
-\noindent When we multiply the residual with the test functions, we obtain
-
-\begin{equation}
-\int_{0}^L  v r(u)dx = 0,
-\label{eqn:wrm2}
-\end{equation}
-
-\noindent where $0 < x < L$ and the weight functions are defined as
-
-\begin{equation}
-\begin{array}{l}
-v_{N}(x) = \sum\limits_{i=1}^N \beta_{i}\psi_{i}(x) \;\;\text{and}\\
-u_{N}(x) = \sum\limits_{j=1}^N \alpha_{i}\phi_{j}(x).
-\end{array}
-\label{eqn:wrm4}
-\end{equation}
-
-\noindent The choice of the weight functions and the approximation functions determine the type of the variational method.
-The trial functions ($\phi_{i}(x)$ and $\psi_{i}(x)$) must be linearly independent. If Equation~\ref{eqn:wrm4} is substituted into Equation~\ref{eqn:wrm1}, we get
-
-\begin{equation}
-\sum\limits_{i=1}^N \psi_{i} \left( \sum\limits_{j=1}^N ( K_{ij} + B_{ij} + C_{ij} ) \phi_{j} - f_{i} \right) = 0 \;\; \text{and}
-\label{eqn:wrm6}
-\end{equation}
-
-
-\begin{equation}
-\sum\limits_{j=1}^N K_{ij}\alpha_{j} = f_{i},\>\>\;\; \mbox{where}\>i = 1, 2, \ldots, N.
-\label{eqn:wrm7}
-\end{equation}
-
-If the weight functions ($\psi_{i}$) and test functions ($\phi_{i}$) are the same, Equation~\ref{eqn:wrm6} leads to Galerkin's Method (Equation~\ref{eqn:wrm7}), which is generally used to construct FEM's test functions.
-
-
-\subsection{Rayleigh-Ritz Method}
-The Rayleigh-Ritz method uses trial or weight functions to find an approximate solution to the system. These trial functions are linearly independent set of finite series~\cite{Reddy03}.
-
-\begin{equation}
-u_{N}(x) = \sum\limits_{k=1}^N \alpha_{k} \phi_{k}(x),
-\label{eqn:rrm1}
-\end{equation}
-
-\noindent where $\alpha_{k}$ constants are called Ritz coefficients. The trial functions must satisfy the condition $\sum\limits_{k=1}^N \alpha_{k} \phi_{k}(x) = u_{0}$ so that $N$ linearly independent equations are obtained. The prescribed functions ($\phi_{k}(x)$) are given to satisfy the given boundary conditions, and they may grow exponentially in the equation according to the test function's choice,
-
-\begin{equation}
- \{u\}
- =
-\begin{Bmatrix} \alpha_{1}x \\ \alpha_{2}x^2 \\ \alpha_{3}x^3 \\ \vdots \\ \alpha_{n}x^n \end{Bmatrix}.
-\label{eqn:rrm2}
-\end{equation}
-
-From the given trial functions, the stiffness matrix is computed and the system of linear equations is solved. However, guessing trial functions in a way that satisfy the boundary conditions for complex objects, such as human organ models, is almost impossible. Even if these conditions are satisfied, solving the system of equations is very difficult because of the high degree of freedom. For example, for a thousand-node mesh, the polynomial for the trial function may become $\alpha_{n}x^{1000}$.
-
-For problem $-(ku')' + bu' + cu = f$, the first residual is defined as
-
-\begin{equation}
-r(u) = -(ku')' + bu' + cu - f.
-\label{eqn:rrm-1}
-\end{equation}
-
-\noindent When we multiply the residual with test functions, we obtain
-
-\begin{equation}
-\int_{0}^L  \psi r(u)dx = 0.
-\label{eqn:rrm-2}
-\end{equation}
-
-\noindent Combining Equations~\ref{eqn:rrm-1}~and~\ref{eqn:rrm-2}, we obtain the solution to the problem:
-
-\begin{equation}
-\int_{0}^L  (ku'v' + buv' + cuv - fv) dx = 0.
-\label{eqn:rrm-3}
-\end{equation}
-
-\noindent Equation~\ref{eqn:rrm-3} is obtained by weakening Equation~\ref{eqn:rrm-1}.
-
-We cannot use Galerkin's method or Rayleigh-Ritz method directly to solve complex systems. The problem domain must be divided into subdomains (discretization) and an appropriate variational method must be used in order to solve complex problems.
-Another variational technique, Petrov-Galerkin method, uses $\psi_{i}\not=\phi_{i}$, and least-squares method uses $\psi_{i}=A(\phi_{i})$ as a weight function. Zhu and Gortler use least squares method to deform 3D models~\cite{Gortler07}.
-
-
-\section{Finite Difference Method}
-
-Finite difference method uses finite difference equations instead of partial differential equations (PDEs) like FEM uses. It approximates the PDEs with finite difference equations~\cite{Morton05}. It is based on simplifications of elasticity theory~\cite{Terzopoulos87}. It follows similar steps with FEM:
+\begin{figure}[h]
+\centerline{\fbox{\psfig{figure=figures/hand_recognition_cycle.png,width=1.0\textwidth}}}
+\caption{Hand Recognition Algorithm}
+\label{fig:hand_recognition_cycle}
+\end{figure}
 
 \begin{enumerate}
-
-\item Discretization,
-
-\item Approximating the differential equations with difference equations, and
-
-\item Solving the system in domain.
+\item The size information for the region of interest is drawn from the distance between the users head and users neck.
+\item The hand is located using skeletal body tracking.
+\item The marked region is copied from the depth stream 
+\item Two dilation and one erosion operations are performed to smooth the hand image
+\item The contour is found on the filtered image
+\item The convex hull of the found contour is calculated.
+\item The depth difference between the hull and the actual contour is taken as the reference for hand-state.
 \end{enumerate}
 
-\noindent The differential equations can be approximated as in the following difference equations:
+\begin{figure}[h]
+\centerline{\fbox{\psfig{figure=figures/open_closed_hands.png,width=1.0\textwidth}}}
+\caption{Hand Images and Contours from Depth Stream}
+\label{fig:open_closed_hands}
+\end{figure}
 
-\begin{equation}
-u'_{i} \cong	\frac{u_{i+1} - u_{i}}{h},
-\label{eqn:fdm11}
-\end{equation}
+The test run results can be seen in figure Figure \ref{fig:open_closed_hands}. The left part of the figure shows the hand in open state, whereas the hand is closed on the right part.
 
-\begin{equation}
-u'_{i} \cong	\frac{u_{i} - u_{i-1}}{h},
-\label{eqn:fdm12}
-\end{equation}
-
-\begin{equation}
-u'_{i} \cong	\frac{u_{i+1} - u_{i-1}}{2h},
-\label{eqn:fdm13}
-\end{equation}
-
-\noindent where h is the element distance in 1D. Equation~\ref{eqn:fdm11} is forward-difference formula, Equation~\ref{eqn:fdm12} is backward-difference formula and Equation~\ref{eqn:fdm13} is central-difference formula. These equations are found by using Taylor's series expansion
-
-\begin{equation}
-u_{i+1} = u_{i} + hu_{i}' + \frac{h^2}{2!}u_{i}'' + \frac{h^3}{3!}u_{i}''' + O(h^4).
-\label{eqn:fdm2}
-\end{equation}
-
-In this case, $O(h^4)$ is the error if we do not want to expand the series more. Generally, the expansion is left at $\frac{h^2}{2!}u_{i}''$ to keep the difference operation simple and less costly.
-
-In the finite element method, we relate stresses, forces or strains that are in the system by using partial differential equations. On the other hand, in the finite-difference method, we replace these PDEs with simple difference operators. It can be said that FEM is superior to the finite difference method in terms of accuracy and complexity.
-
-
-
+Ultimately, I plan to implement the algorithm described in \cite{Tang2011}, where the author claims to have achieved 96\% correct results. I have not included RGB image in the process yet, neither have I implemented complex machine learning. In addition to these methods, I will record hand images for testing objectively. These topics are in my future research plans. 
