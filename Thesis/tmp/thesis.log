@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2012.10.15)  15 OCT 2012 21:49
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2012.10.15)  15 OCT 2012 22:11
 entering extended mode
 **thesis.tex
 (C:\Users\Umut\workspace\MsThesisLatex\Thesis\thesis.tex
@@ -378,17 +378,17 @@ Missing character: There is no Ý in font cmr12!
 \tf@toc=\write3
  [8] (C:\Users\Umut\workspace\MsThesisLatex\Thesis\thesis.lof [9
 
-] [10]
-[11] [12])
+])
 \tf@lof=\write4
- [13] [14] (C:\Users\Umut\workspace\MsThesisLatex\Thesis\thesis.lot)
+ [10]
+(C:\Users\Umut\workspace\MsThesisLatex\Thesis\thesis.lot)
 \tf@lot=\write5
+ [11
 
-[15
-
-] (C:\Users\Umut\workspace\MsThesisLatex\Thesis\thesis.loa)
+]
+(C:\Users\Umut\workspace\MsThesisLatex\Thesis\thesis.loa)
 \tf@loa=\write6
- [16
+ [12
 
 ])
 (C:\Users\Umut\workspace\MsThesisLatex\Thesis\chapter1.tex
@@ -403,7 +403,7 @@ File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 24.
  [2]
-<figures/ogre_class_diagram.png, id=71, 978.65625pt x 476.78125pt>
+<figures/ogre_class_diagram.png, id=56, 978.65625pt x 476.78125pt>
 File: figures/ogre_class_diagram.png Graphic file (type png)
 
 <use figures/ogre_class_diagram.png>
@@ -411,7 +411,7 @@ Package pdftex.def Info: figures/ogre_class_diagram.png used on input line 58.
 (pdftex.def)             Requested size: 412.56496pt x 200.99608pt.
  [3 <C:/Users/Umut/workspace/MsThesisLatex/Thesis/figures/ogre_class_diagram.pn
 g>] [4]
-<figures/ogre_render_cycle.png, id=80, 978.65625pt x 577.15625pt>
+<figures/ogre_render_cycle.png, id=65, 978.65625pt x 577.15625pt>
 File: figures/ogre_render_cycle.png Graphic file (type png)
 
 <use figures/ogre_render_cycle.png>
@@ -429,7 +429,7 @@ Chapter 3.
 
 ]
 Missing character: There is no ’ in font cmr12!
- <figures/hand_recognition_cycle.png, id=101, 542.025pt x 289.08pt>
+ <figures/hand_recognition_cycle.png, id=86, 542.025pt x 289.08pt>
 File: figures/hand_recognition_cycle.png Graphic file (type png)
 
 <use figures/hand_recognition_cycle.png>
@@ -438,7 +438,7 @@ Package pdftex.def Info: figures/hand_recognition_cycle.png used on input line
 (pdftex.def)             Requested size: 412.56496pt x 220.04272pt.
  [11 <C:/Users/Umut/workspace/MsThesisLatex/Thesis/figures/hand_recognition_cyc
 le.png>]
-<figures/open_closed_hands.png, id=106, 938.50626pt x 239.89626pt>
+<figures/open_closed_hands.png, id=91, 938.50626pt x 239.89626pt>
 File: figures/open_closed_hands.png Graphic file (type png)
 
 <use figures/open_closed_hands.png>
@@ -450,14 +450,14 @@ orkspace/MsThesisLatex/Thesis/figures/open_closed_hands.png>]
 Chapter 4.
 [13
 
-] <figures/rigging_skeleton.png, id=114, 957.5775pt x 646.415pt>
+] <figures/rigging_skeleton.png, id=100, 957.5775pt x 646.415pt>
 File: figures/rigging_skeleton.png Graphic file (type png)
 
 <use figures/rigging_skeleton.png>
 Package pdftex.def Info: figures/rigging_skeleton.png used on input line 18.
 (pdftex.def)             Requested size: 412.56496pt x 278.50539pt.
 
-<figures/weight_humerus_r.png, id=115, 958.58125pt x 904.37875pt>
+<figures/weight_humerus_r.png, id=101, 958.58125pt x 904.37875pt>
 File: figures/weight_humerus_r.png Graphic file (type png)
 
 <use figures/weight_humerus_r.png>
@@ -468,7 +468,7 @@ Package pdftex.def Info: figures/weight_humerus_r.png used on input line 28.
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 [14 <C:/Users/Umut/workspace/MsThesisLatex/Thesis/figures/rigging_skeleton.png>
-] <figures/detailed_face.png, id=121, 1010.77625pt x 569.12625pt>
+] <figures/detailed_face.png, id=106, 1010.77625pt x 569.12625pt>
 File: figures/detailed_face.png Graphic file (type png)
 
 <use figures/detailed_face.png>
@@ -479,975 +479,83 @@ Package pdftex.def Info: figures/detailed_face.png used on input line 38.
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 [15 <C:/Users/Umut/workspace/MsThesisLatex/Thesis/figures/weight_humerus_r.png>
-] [16 <C:/Users/Umut/workspace/MsThesisLatex/Thesis/figures/detailed_face.png>]
+]
 
-LaTeX Warning: File `figures/dress_with_body.png' not found on input line 65.
+LaTeX Warning: Reference `fig:dress_with_body' on page 16 undefined on input li
+ne 50.
 
+[16 <C:/Users/Umut/workspace/MsThesisLatex/Thesis/figures/detailed_face.png>]
+<figures/dress_and_body.png, id=115, 954.56625pt x 697.60625pt>
+File: figures/dress_and_body.png Graphic file (type png)
 
-! Package pdftex.def Error: File `figures/dress_with_body.png' not found.
-
-See the pdftex.def package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.65 ...ress_with_body.png,width=1.00\textwidth}}}
-                                                  
-Using draft setting for this image.
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
+<use figures/dress_and_body.png>
+Package pdftex.def Info: figures/dress_and_body.png used on input line 65.
+(pdftex.def)             Requested size: 412.56496pt x 301.49765pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-) (C:\Users\Umut\workspace\MsThesisLatex\Thesis\chapter5.tex [17] [18]
+) (C:\Users\Umut\workspace\MsThesisLatex\Thesis\chapter5.tex [17] [18 <C:/Users
+/Umut/workspace/MsThesisLatex/Thesis/figures/dress_and_body.png>]
 Chapter 5.
 Missing character: There is no ’ in font cmr12!
 [19
 
 ]) (C:\Users\Umut\workspace\MsThesisLatex\Thesis\chapter6.tex [20] [21]
 Chapter 6.
-
-LaTeX Warning: Citation `Pedersen06' on page 22 undefined on input line 4.
-
+Missing character: There is no ‘ in font cmr12!
+Missing character: There is no ’ in font cmr12!
 [22
 
-]
+] <figures/cloth_fixed_vertices.png, id=137, 978.65625pt x 458.71375pt>
+File: figures/cloth_fixed_vertices.png Graphic file (type png)
 
-LaTeX Warning: Citation `Liver2011' on page 23 undefined on input line 17.
+<use figures/cloth_fixed_vertices.png>
+Package pdftex.def Info: figures/cloth_fixed_vertices.png used on input line 16
+.
+(pdftex.def)             Requested size: 412.56496pt x 193.3794pt.
+ [23 <C:/Users/Umut/workspace/MsThesisLatex/Thesis/figures/cloth_fixed_vertices
+.png>] [24]
+Missing character: There is no ü in font cmr12!
 
+! Undefined control sequence.
+l.62 ...ng Explicit Euler Integration over \deltat
+                                                  , where the velocity and t...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
 
-LaTeX Warning: Citation `Tetgen2011' on page 23 undefined on input line 19.
+[25] <figures/shear_strech_sets.png, id=149, 978.65625pt x 256.96pt>
+File: figures/shear_strech_sets.png Graphic file (type png)
 
+<use figures/shear_strech_sets.png>
+Package pdftex.def Info: figures/shear_strech_sets.png used on input line 72.
+(pdftex.def)             Requested size: 412.56496pt x 108.32631pt.
 
-LaTeX Warning: Citation `Madenci06' on page 23 undefined on input line 26.
 
-[23]
+LaTeX Warning: `h' float specifier changed to `ht'.
 
-LaTeX Warning: File `figures/denser.ps' not found on input line 38.
+[26] <figures/solver_comparison.png, id=153, 448.67625pt x 495.8525pt>
+File: figures/solver_comparison.png Graphic file (type png)
 
+<use figures/solver_comparison.png>
+Package pdftex.def Info: figures/solver_comparison.png used on input line 86.
+(pdftex.def)             Requested size: 206.28247pt x 227.9663pt.
 
-! LaTeX Error: Unknown graphics extension: .ps.
 
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.38 ...=figures/denser.ps,width=0.90\textwidth}}}
-                                                  
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
+LaTeX Warning: `h' float specifier changed to `ht'.
 
-
-LaTeX Warning: Reference `eqn:1.7' on page 24 undefined on input line 89.
-
-[24]
-
-LaTeX Warning: File `figures/errorLinNorm.ps' not found on input line 108.
-
-
-! LaTeX Error: Unknown graphics extension: .ps.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.108 ...s/errorLinNorm.ps,width=0.85\textwidth}}}
-                                                  
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-LaTeX Warning: File `figures/errorNonLinNorm.ps' not found on input line 114.
-
-
-! LaTeX Error: Unknown graphics extension: .ps.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.114 ...rrorNonLinNorm.ps,width=0.85\textwidth}}}
-                                                  
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-[25]
-
-LaTeX Warning: File `figures/figure1.ps' not found on input line 128.
-
-
-! LaTeX Error: Unknown graphics extension: .ps.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.128 ...figures/figure1.ps,width=0.50\textwidth}}
-                                                  }
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-LaTeX Warning: File `figures/figure2.ps' not found on input line 189.
-
-
-! LaTeX Error: Unknown graphics extension: .ps.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.189 ...igures/figure2.ps,width=0.50\textwidth}}}
-                                                  
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-LaTeX Warning: File `figures/figure3.ps' not found on input line 252.
-
-
-! LaTeX Error: Unknown graphics extension: .ps.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.252 ...igures/figure3.ps,width=0.50\textwidth}}}
-                                                  
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-[26
-
-] [27]
-
-LaTeX Warning: File `figures/convergence2.ps' not found on input line 307.
-
-
-! LaTeX Error: Unknown graphics extension: .ps.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.307 ...s/convergence2.ps,width=0.90\textwidth}}}
-                                                  
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-LaTeX Warning: File `figures/linvsnonFEM.ps' not found on input line 314.
-
-
-! LaTeX Error: Unknown graphics extension: .ps.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.314 ...es/linvsnonFEM.ps,width=0.90\textwidth}}}
-                                                  
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-[28
-
-]
-
-LaTeX Warning: File `figures/figure4.ps' not found on input line 326.
-
-
-! LaTeX Error: Unknown graphics extension: .ps.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.326 ...figures/figure4.ps,width=0.5\textwidth}}}
-                                                  
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-LaTeX Warning: File `figures/figure5.ps' not found on input line 332.
-
-
-! LaTeX Error: Unknown graphics extension: .ps.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.332 ...igures/figure5.ps,width=0.95\textwidth}}}
-                                                  
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-LaTeX Warning: File `figures/figure6.ps' not found on input line 338.
-
-
-! LaTeX Error: Unknown graphics extension: .ps.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.338 ...igures/figure6.ps,width=0.95\textwidth}}}
-                                                  
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
+) (C:\Users\Umut\workspace\MsThesisLatex\Thesis\chapter7.tex [27 <C:/Users/Umut
+/workspace/MsThesisLatex/Thesis/figures/shear_strech_sets.png>] [28 <C:/Users/U
+mut/workspace/MsThesisLatex/Thesis/figures/solver_comparison.png>]
+Chapter 7.
 [29
 
-]
-
-LaTeX Warning: File `figures/figure7.ps' not found on input line 350.
-
-
-! LaTeX Error: Unknown graphics extension: .ps.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.350 ...igures/figure7.ps,width=0.95\textwidth}}}
-                                                  
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-LaTeX Warning: File `figures/figure8.ps' not found on input line 353.
-
-
-! LaTeX Error: Unknown graphics extension: .ps.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.353 ...igures/figure8.ps,width=0.75\textwidth}}}
-                                                  
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-LaTeX Warning: File `figures/figure9.ps' not found on input line 360.
-
-
-! LaTeX Error: Unknown graphics extension: .ps.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.360 ...igures/figure9.ps,width=0.95\textwidth}}}
-                                                  
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-LaTeX Warning: File `figures/figure10.ps' not found on input line 366.
-
-
-! LaTeX Error: Unknown graphics extension: .ps.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.366 ...gures/figure10.ps,width=0.95\textwidth}}}
-                                                  
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-[30
-
-] [31]
-
-LaTeX Warning: File `figures/figure11.ps' not found on input line 379.
-
-
-! LaTeX Error: Unknown graphics extension: .ps.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.379 ...gures/figure11.ps,width=0.95\textwidth}}}
-                                                  
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-LaTeX Warning: File `figures/figure12.ps' not found on input line 385.
-
-
-! LaTeX Error: Unknown graphics extension: .ps.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.385 ...gures/figure12.ps,width=0.95\textwidth}}}
-                                                  
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-LaTeX Warning: File `figures/figure13.ps' not found on input line 391.
-
-
-! LaTeX Error: Unknown graphics extension: .ps.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.391 ...gures/figure13.ps,width=0.95\textwidth}}}
-                                                  
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-[32
-
-] [33]
-
-LaTeX Warning: File `figures/figure14.ps' not found on input line 404.
-
-
-! LaTeX Error: Unknown graphics extension: .ps.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.404 ...gures/figure14.ps,width=0.95\textwidth}}}
-                                                  
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-LaTeX Warning: File `figures/figure15.ps' not found on input line 410.
-
-
-! LaTeX Error: Unknown graphics extension: .ps.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.410 ...gures/figure15.ps,width=0.75\textwidth}}}
-                                                  
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-LaTeX Warning: File `figures/figure16.ps' not found on input line 413.
-
-
-! LaTeX Error: Unknown graphics extension: .ps.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.413 ...gures/figure16.ps,width=0.75\textwidth}}}
-                                                  
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-LaTeX Warning: File `figures/figure17.ps' not found on input line 420.
-
-
-! LaTeX Error: Unknown graphics extension: .ps.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.420 ...gures/figure17.ps,width=0.75\textwidth}}}
-                                                  
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-LaTeX Warning: File `figures/figure18.ps' not found on input line 423.
-
-
-! LaTeX Error: Unknown graphics extension: .ps.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.423 ...gures/figure18.ps,width=0.75\textwidth}}}
-                                                  
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-LaTeX Warning: File `figures/figure19.ps' not found on input line 430.
-
-
-! LaTeX Error: Unknown graphics extension: .ps.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.430 ...gures/figure19.ps,width=0.85\textwidth}}}
-                                                  
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-LaTeX Warning: File `figures/figure20.ps' not found on input line 433.
-
-
-! LaTeX Error: Unknown graphics extension: .ps.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.433 ...gures/figure20.ps,width=0.85\textwidth}}}
-                                                  
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-
-LaTeX Warning: File `figures/figure21.ps' not found on input line 440.
-
-
-! LaTeX Error: Unknown graphics extension: .ps.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.440 ...gures/figure21.ps,width=0.95\textwidth}}}
-                                                  
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-LaTeX Warning: File `figures/figure22.ps' not found on input line 443.
-
-
-! LaTeX Error: Unknown graphics extension: .ps.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.443 ...gures/figure22.ps,width=0.95\textwidth}}}
-                                                  
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[34
-
-] [35]
-
-LaTeX Warning: Citation `Liver2011' on page 36 undefined on input line 453.
-
-
-LaTeX Warning: File `figures/figure23.ps' not found on input line 457.
-
-
-! LaTeX Error: Unknown graphics extension: .ps.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.457 ...gures/figure23.ps,width=0.95\textwidth}}}
-                                                  
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-LaTeX Warning: File `figures/figure24.ps' not found on input line 463.
-
-
-! LaTeX Error: Unknown graphics extension: .ps.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.463 ...gures/figure24.ps,width=0.95\textwidth}}}
-                                                  
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-LaTeX Warning: File `figures/figure25.ps' not found on input line 466.
-
-
-! LaTeX Error: Unknown graphics extension: .ps.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.466 ...gures/figure25.ps,width=0.95\textwidth}}}
-                                                  
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-LaTeX Warning: File `figures/figure26.ps' not found on input line 469.
-
-
-! LaTeX Error: Unknown graphics extension: .ps.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.469 ...gures/figure26.ps,width=0.95\textwidth}}}
-                                                  
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-LaTeX Warning: File `figures/figure27.ps' not found on input line 478.
-
-
-! LaTeX Error: Unknown graphics extension: .ps.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.478 ...gures/figure27.ps,width=0.95\textwidth}}}
-                                                  
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-LaTeX Warning: File `figures/figure28.ps' not found on input line 481.
-
-
-! LaTeX Error: Unknown graphics extension: .ps.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.481 ...gures/figure28.ps,width=0.95\textwidth}}}
-                                                  
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-LaTeX Warning: File `figures/figure29.ps' not found on input line 484.
-
-
-! LaTeX Error: Unknown graphics extension: .ps.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.484 ...gures/figure29.ps,width=0.95\textwidth}}}
-                                                  
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[36
-
-] [37]
-
-LaTeX Warning: File `figures/figure30.ps' not found on input line 498.
-
-
-! LaTeX Error: Unknown graphics extension: .ps.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.498 ...gures/figure30.ps,width=0.95\textwidth}}}
-                                                  
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-LaTeX Warning: File `figures/figure31.ps' not found on input line 504.
-
-
-! LaTeX Error: Unknown graphics extension: .ps.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.504 ...gures/figure31.ps,width=0.95\textwidth}}}
-                                                  
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-LaTeX Warning: File `figures/figure32.ps' not found on input line 507.
-
-
-! LaTeX Error: Unknown graphics extension: .ps.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.507 ...gures/figure32.ps,width=0.95\textwidth}}}
-                                                  
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-LaTeX Warning: File `figures/figure33.ps' not found on input line 510.
-
-
-! LaTeX Error: Unknown graphics extension: .ps.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.510 ...gures/figure33.ps,width=0.95\textwidth}}}
-                                                  
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-LaTeX Warning: File `figures/figure34.ps' not found on input line 519.
-
-
-! LaTeX Error: Unknown graphics extension: .ps.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.519 ...gures/figure34.ps,width=0.95\textwidth}}}
-                                                  
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-LaTeX Warning: File `figures/figure35.ps' not found on input line 522.
-
-
-! LaTeX Error: Unknown graphics extension: .ps.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.522 ...gures/figure35.ps,width=0.95\textwidth}}}
-                                                  
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-LaTeX Warning: File `figures/figure36.ps' not found on input line 525.
-
-
-! LaTeX Error: Unknown graphics extension: .ps.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.525 ...gures/figure36.ps,width=0.95\textwidth}}}
-                                                  
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[38
-
-] [39]
-
-LaTeX Warning: File `figures/figure37.ps' not found on input line 540.
-
-
-! LaTeX Error: Unknown graphics extension: .ps.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.540 ...gures/figure37.ps,width=0.95\textwidth}}}
-                                                  
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-LaTeX Warning: File `figures/figure38.ps' not found on input line 546.
-
-
-! LaTeX Error: Unknown graphics extension: .ps.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.546 ...gures/figure38.ps,width=0.95\textwidth}}}
-                                                  
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-LaTeX Warning: File `figures/figure39.ps' not found on input line 549.
-
-
-! LaTeX Error: Unknown graphics extension: .ps.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.549 ...gures/figure39.ps,width=0.95\textwidth}}}
-                                                  
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-LaTeX Warning: File `figures/figure40.ps' not found on input line 556.
-
-
-! LaTeX Error: Unknown graphics extension: .ps.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.556 ...gures/figure40.ps,width=0.95\textwidth}}}
-                                                  
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-LaTeX Warning: File `figures/figure41.ps' not found on input line 559.
-
-
-! LaTeX Error: Unknown graphics extension: .ps.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.559 ...gures/figure41.ps,width=0.95\textwidth}}}
-                                                  
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-[40
-
-] [41
-
-]
-
-LaTeX Warning: Citation `Matlab2011' on page 42 undefined on input line 588.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-
-LaTeX Warning: File `figures/singleStiffi7CT.ps' not found on input line 645.
-
-
-! LaTeX Error: Unknown graphics extension: .ps.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.645 ...ingleStiffi7CT.ps,width=0.85\textwidth}}}
-                                                  
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-LaTeX Warning: File `figures/singleStiffi7.ps' not found on input line 651.
-
-
-! LaTeX Error: Unknown graphics extension: .ps.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.651 .../singleStiffi7.ps,width=0.85\textwidth}}}
-                                                  
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-LaTeX Warning: File `figures/singleSystemi7CT.ps' not found on input line 657.
-
-
-! LaTeX Error: Unknown graphics extension: .ps.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.657 ...ngleSystemi7CT.ps,width=0.85\textwidth}}}
-                                                  
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-LaTeX Warning: File `figures/singleSystemi7.ps' not found on input line 663.
-
-
-! LaTeX Error: Unknown graphics extension: .ps.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.663 ...singleSystemi7.ps,width=0.85\textwidth}}}
-                                                  
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-
-LaTeX Warning: File `figures/multiStiffi7CT.ps' not found on input line 669.
-
-
-! LaTeX Error: Unknown graphics extension: .ps.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.669 ...multiStiffi7CT.ps,width=0.85\textwidth}}}
-                                                  
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-
-LaTeX Warning: File `figures/multiStiffi7.ps' not found on input line 675.
-
-
-! LaTeX Error: Unknown graphics extension: .ps.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.675 ...s/multiStiffi7.ps,width=0.85\textwidth}}}
-                                                  
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-
-LaTeX Warning: File `figures/multiSystemi7CT.ps' not found on input line 681.
-
-
-! LaTeX Error: Unknown graphics extension: .ps.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.681 ...ultiSystemi7CT.ps,width=0.85\textwidth}}}
-                                                  
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-
-LaTeX Warning: File `figures/multiSystemi7.ps' not found on input line 687.
-
-
-! LaTeX Error: Unknown graphics extension: .ps.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.687 .../multiSystemi7.ps,width=0.85\textwidth}}}
-                                                  
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-
-LaTeX Warning: File `figures/averagei7.ps' not found on input line 693.
-
-
-! LaTeX Error: Unknown graphics extension: .ps.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.693 ...ures/averagei7.ps,width=0.85\textwidth}}}
-                                                  
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-
-LaTeX Warning: File `figures/mcEfficiencyi7.ps' not found on input line 699.
-
-
-! LaTeX Error: Unknown graphics extension: .ps.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.699 ...mcEfficiencyi7.ps,width=0.85\textwidth}}}
-                                                  
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-) (C:\Users\Umut\workspace\MsThesisLatex\Thesis\chapter7.tex [42] [43] [44]
-Chapter 7.
-[45
-
-]) [46] (C:\Users\Umut\workspace\MsThesisLatex\Thesis\thesis.bbl
+]) [30] (C:\Users\Umut\workspace\MsThesisLatex\Thesis\thesis.bbl
 ! Undefined control sequence.
-l.28 \newblock \url
+l.32 \newblock \url
                    {http://www.ogre3d.org/}, 2012.
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1456,7 +564,7 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 ! Undefined control sequence.
-l.34   \url
+l.38   \url
            {http://www.sharecg.com/v/54636/gallery/5/3D-Model/Antonia-Sundre...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1465,18 +573,18 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 31--36
+Underfull \hbox (badness 10000) in paragraph at lines 35--40
 [][]\OT1/cmr/m/n/12 LadyJewell.  An-to-nia sun-dress. sharecg.
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 31--36
+Underfull \hbox (badness 10000) in paragraph at lines 35--40
 \OT1/cmr/m/n/12 http://www.sharecg.com/v/54636/gallery/5/3D-Model/Antonia-Sundr
 ess,
  []
 
 ! Undefined control sequence.
-l.41   \url
+l.45   \url
            {http://www.zbrushcentral.com/showthread.php?49053-Free-female-ba...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1485,18 +593,18 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 38--43
+Underfull \hbox (badness 10000) in paragraph at lines 42--47
 [][]\OT1/cmr/m/n/12 Mmava.  Free fe-male base mesh. zbrush cen-tral.
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 38--43
+Underfull \hbox (badness 10000) in paragraph at lines 42--47
 \OT1/cmr/m/n/12 http://www.zbrushcentral.com/showthread.php?49053-Free-female-b
 ase-
  []
 
 ! Undefined control sequence.
-l.48   \url
+l.52   \url
            {http://www.ogre3d.org/tikiwiki/tiki-index.php?page=Documentation...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1505,19 +613,24 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 45--50
+Underfull \hbox (badness 10000) in paragraph at lines 49--54
 [][]\OT1/cmr/m/n/12 J. Moan.  Doc-u-men-ta-tion ar-chi-tec-ture. ogre- ob-ject 
 ori-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 45--50
+Underfull \hbox (badness 10000) in paragraph at lines 49--54
 \OT1/cmr/m/n/12 ented ren-der-ing en-gine.  http://www.ogre3d.org/tikiwiki/tiki
 -
  []
 
+[31
+
+
+
+]
 ! Undefined control sequence.
-l.54 \newblock \url
+l.63 \newblock \url
                    {http://openni.org/Documentation/ProgrammerGuide.html}, 2...
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1526,18 +639,13 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 
-Overfull \hbox (103.96677pt too wide) in paragraph at lines 52--55
+Overfull \hbox (103.96677pt too wide) in paragraph at lines 61--64
 [][]\OT1/cmr/m/n/12 OpenNI.  Pro-gram-mer guide-openni.  http://openni.org/Docu
 mentation/ProgrammerGuide.html,
  []
 
-[47
-
-
-
-]
 ! Undefined control sequence.
-l.59 \newblock \url
+l.68 \newblock \url
                    {http://www.primesense.com/en/nite}, 2012.
 The control sequence at the end of the top line
 of your error message was never \def'ed. If you have
@@ -1546,12 +654,12 @@ spelling (e.g., `I\hbox'). Otherwise just continue,
 and I'll forget about whatever was undefined.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 57--60
+Underfull \hbox (badness 10000) in paragraph at lines 66--69
 [][]\OT1/cmr/m/n/12 PrimeSense.  Nite. prime-sense nat-u-ral in-ter-ac-tion.
  []
 
 Missing character: There is no ’ in font cmr12!
-) (C:\Users\Umut\workspace\MsThesisLatex\Thesis\appendix.tex [48]
+) (C:\Users\Umut\workspace\MsThesisLatex\Thesis\appendix.tex [32]
 Appendix A.
 
 LaTeX Warning: File `figures/perfect_nose.ps' not found on input line 10.
@@ -1568,7 +676,7 @@ l.10 ...es/perfect_nose.ps,width=0.80\textwidth}}}
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
-[49
+[33
 
 ]
 
@@ -1628,7 +736,7 @@ l.25 ...re=figures/app4.ps,width=0.46\textwidth}}}
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
-[50]
+[34]
 
 LaTeX Warning: File `figures/app5.ps' not found on input line 42.
 
@@ -1689,7 +797,7 @@ l.45 ...re=figures/app8.ps,width=0.50\textwidth}}}
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
-) [51
+) [35
 
 ] (C:\Users\Umut\workspace\MsThesisLatex\Thesis\thesis.aux)
 
@@ -1697,29 +805,24 @@ LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 4017 strings out of 494045
- 54489 string characters out of 3148389
- 138169 words of memory out of 3000000
- 7124 multiletter control sequences out of 15000+200000
- 12226 words of font info for 45 fonts, out of 3000000 for 9000
+ 3919 strings out of 494045
+ 53857 string characters out of 3148389
+ 126526 words of memory out of 3000000
+ 7080 multiletter control sequences out of 15000+200000
+ 12057 words of font info for 44 fonts, out of 3000000 for 9000
  715 hyphenation exceptions out of 8191
- 44i,12n,24p,1447b,352s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 44i,12n,24p,1318b,352s stack positions out of 5000i,500n,10000p,200000b,50000s
 <C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Pr
 ogram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><C:/Program F
-iles/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Program Files/MiK
-TeX 2.9/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Program Files/MiKTeX 2.9/
-fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:/Program Files/MiKTeX 2.9/fonts/typ
-e1/public/amsfonts/cm/cmmi8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public
-/amsfonts/cm/cmr12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts
-/cm/cmr17.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr6.
-pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Pr
-ogram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsl12.pfb><C:/Program Fi
-les/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files/MiKT
-eX 2.9/fonts/type1/public/amsfonts/cm/cmti12.pfb><C:/Program Files/MiKTeX 2.9/f
-onts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on thesis.pdf (68 pages, 1157582 bytes).
+iles/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program Files/MiKT
+eX 2.9/fonts/type1/public/amsfonts/cm/cmr17.pfb><C:/Program Files/MiKTeX 2.9/fo
+nts/type1/public/amsfonts/cm/cmr8.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/
+public/amsfonts/cm/cmsl12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/a
+msfonts/cm/cmsy10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/
+cm/cmti12.pfb>
+Output written on thesis.pdf (48 pages, 2173515 bytes).
 PDF statistics:
- 292 PDF objects out of 1000 (max. 8388607)
+ 212 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 36 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 56 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -22,6 +22,10 @@ K.~Khoshelham and S.~O. Elberink.
   applications.
 \newblock {\em Sensors}, 12(2):1437--1454, 2012.
 
+\bibitem{Kim2011}
+T.-Y. Kim.
+\newblock Character clothing in physx-3, 2011.
+
 \bibitem{Knot2012}
 T.~Knot.
 \newblock Ogre. open source 3d rendering engine.
@@ -47,6 +51,11 @@ J.~Moan.
 \newblock
   \url{http://www.ogre3d.org/tikiwiki/tiki-index.php?page=Documentation+Architecture/},
   2012.
+
+\bibitem{Muller2007}
+M.~Muller, B.~Heidelberger, M.~Hennix, and J.~Ratcliff.
+\newblock Position based dynamics.
+\newblock {\em J. Vis. Comun. Image Represent.}, 18(2):109--118, Apr. 2007.
 
 \bibitem{OpenNI2102}
 OpenNI.

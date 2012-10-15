@@ -47,7 +47,7 @@ A major part of my thesis is on accurate cloth simulation. Next to the required 
 
 \subsection{Body Positioning and Splitting the Dress Mesh}
 
-To correctly animate and simulate the dress on a human avatar, I needed them to be in proportion with each other and properly aligned. The initial positions and proportions of the human avatar and the dress mesh were set in Blender, as it was easier to perform this with a visual tool (Figure \ref{fig:dress_with_body}).
+To correctly animate and simulate the dress on a human avatar, I needed them to be in proportion with each other and properly aligned. The initial positions and proportions of the human avatar and the dress mesh were set in Blender, as it was easier to perform this with a visual tool (Figure \ref{fig:dress_and_body}).
 After various attempts to simulate all the vertices on the dress mesh, I failed to achieve a realistic looking results due to two main reasons:
 \begin{itemize}
   \item The whole dress consisted of 4088 vertices. Although I was able to simulate in real-time, too many vertices resulted in the simulation algorithm to break down due to the very large number of vertices in the cloth. It shifted from a fabric structure to more of a jelly form, over stretching and tearing with its own weight.
@@ -58,12 +58,12 @@ In order to overcome these problems, I decided to split the dress mesh into two 
 
 \begin{itemize}
   \item The top part, which should be attached to the body, not blowing in the wind, was modeled as a static mesh, with skinning like the human avatar. It was animated with the same transformations as the human avatar, matching its position and staying on the body perfectly.
-  \item The bottom part was the part to be simulated, affected by inertia, wind and other factors. Their attachment line is just above the waist of the human avatar, which was confirmed after various experimentations with other locations (Figure \ref{fig:dress_with_body}). Keeping the line too below resulted in both unnatural collisions and the cloth being too rigid. Keeping it too high brought out the original problems. With its current setting, the dress mesh is animated naturally on the virtual avatar.
+  \item The bottom part was the part to be simulated, affected by inertia, wind and other factors. Their attachment line is just above the waist of the human avatar, which was confirmed after various experimentations with other locations (Figure \ref{fig:dress_and_body}). Keeping the line too below resulted in both unnatural collisions and the cloth being too rigid. Keeping it too high brought out the original problems. With its current setting, the dress mesh is animated naturally on the virtual avatar.
 \end{itemize}
 
 \begin{figure}[h]
-\centerline{\fbox{\psfig{figure=figures/dress_with_body.png,width=1.00\textwidth}}}
+\centerline{\fbox{\psfig{figure=figures/dress_and_body.png,width=1.00\textwidth}}}
 \caption{The  Dress, positioned on the body, along with the upper-part skeleton. In this shot, the bottom part is highlighted in orange border.}
-\label{fig:dress_with_body}
+\label{fig:dress_and_body}
 \end{figure}
 
