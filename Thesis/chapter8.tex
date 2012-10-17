@@ -273,3 +273,35 @@ $y_s=height_{weighted}/height_{cloth}$\;
 \label{algo:cloth_resize}
 \end{algorithm}
 
+\section{Temporal Optimization and Scaling}
+In the step two of the overall algorithm, we will have acquired the following usable parameters:
+
+\begin{itemize}
+\item Collision Sphere Radii	$r_i$
+\item Cloth and Avatar Scaling Parameters $x_s$ and $y_s$
+\item Multiple SceneManagers can be used to create other visual resources (ex. RenderToTexture environment)
+\end{itemize}
+
+However, these measurements will be performed with the data from a depth sensor, which has a high error rate. In order to optimize these parameters, I will repeat the process in the second step for a certain number of times and use the average parameters in the simulation phase. 
+
+Another approach would be optimizing the depth map over a time period, although this method would suffer from the users movements as well. Therefore, I plan to perform the optimization on the parameters rather than depth stream.
+
+Averaging will be simply summing up all the information from previous time frames and dividing the result buy the number of samples.
+
+After the optimized parameters are acquired, it will come to scaling the cloth and body meshes accordingly. The mesh parameters for three axis will be as $(x_s,y_s,avg(x_s,x_y))$, since we will not have enough information on z-dimension to make accurate calculations.  Therefore the value will be averaged between the scaling factors for x and y dimensions.
+
+\begin{algorithm}
+\dontprintsemicolon % Some LaTeX compilers require you to use \dontprintsemicolon instead
+\KwIn{Raw Depth Stream From Kinect}
+\KwOut{Depth Stream With Patched Holes and Gaussian Optimization }
+$s=2 \times 30 Array for x and y scaling parameters for 30 frames$ \;
+$r=16 \times 30 Array for joint radii for 30 frames$\;
+\For{i \bf{from} 0 \bf{to} $30 frames$ }{
+	r[i]=fitSpheres()\;
+	s[i]=optimizeScaleParameters()\;
+}
+$r_{final}$=avg(r)\;
+$s_{final}$=avg(s)\;
+\caption{Temporal Averaging}
+\label{algo:temporal_averaging}
+\end{algorithm}
