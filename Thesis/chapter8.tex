@@ -52,8 +52,18 @@ this case, we are only interested in one user, $D_1$ represents the depth pixels
 of the user we are interested in, whereas $U_1$ is the bit map of the user.
 Also, the non-user pixels must be filled with the mean value of the user pixels, in order to perform Gaussian filtering on the image.
 
+\begin{equation}
+D_1=(D-(D \times U_1 )) \times 1/n \times \sum\limits_{i=0}^n ((D \times U_1 )_i + d \times U_1 )
+\label{eqn:patch_depth}
+\end{equation}
+
 Next, we perform Gaussian filtering on the user’s depth map, to normalize and
 improve the quality of the depth map. The size and sigma parameters of the Gaussian filter will be varied in order to maximize the performance and the quality of the results. 
+
+\begin{equation}
+D_G=D_1*G
+\label{eqn:gaussian_convolution}
+\end{equation}
 
 After these operations, we have a normalized and filtered depth map, which also
 has better planar values (x and y) since the holes due to depth stream will be filled.
@@ -161,3 +171,105 @@ $r_m=min(r_z,r_x^-,r_x^+,r_y^-,r_y^+)$
 \caption{Sphere Fitting Algorithm}
 \label{algo:sphere_fitting}
 \end{algorithm}
+
+\section{Human Body Parameters}
+\label{section_8_3}
+
+Next step will be acquiring the optimal scaling parameters for the cloth.
+The human body proportions to be used are shown in Table \ref{tbl:human_body_proportions}. In these proportions, the unit width and height are taken as the width and height of the head. The measurements source indicates how the measurement on the user will be performed: Joint Location means algorithm will make use of the joint locations provided by NITE, whereas depth map means the filtered depth map will be used. They can be used together in order to improve the performance. Some of these proportions are not standard enough to be used as references and vary greatly, such as hip width, and will be used directly from measurement.
+
+\begin{table}
+\center
+\begin{tabular}{ | l | l | l | l |}
+\hline
+\textbf{Distance} & \textbf{Width} & \textbf{Height} & \textbf{Measure Source} \\ \hline
+Head & 1w (1) & 1h (2) & Depth Map+Joint Location \\ \hline
+Body Height & - & 7 (3) & Depth Map \\ \hline
+Hip Height & - & 4 (4) & Joint Location \\ \hline
+Elbow-Fingertip & - & 2 (5) & Depth Map+Joint Location \\ \hline
+Wrist to Fingertip & - & 1 (6) & Depth Map+Joint Location \\ \hline
+Shoulder Width & 3 (7) & - & Depth Map+Joint Location \\ \hline
+Hip Width & - (8) & - & Depth Map \\ \hline
+Torso Height & - & - (9) & Joint Location \\ 
+\hline
+\end{tabular}
+\caption{Human Body Proportions \cite{Willis2012}. Numbers in parenthesis represent the lines on Figure \ref{fig:body_proportions}.}
+\label{tbl:human_body_proportions}
+\end{table}
+
+\begin{figure}[h]
+\centerline{\fbox{\psfig{figure=figures/body_proportions.png,width=0.50\textwidth}}}
+\caption{Proportions on the Body}
+\label{fig:body_proportions}
+\end{figure}
+
+Along with the ratios, the actual size in meters in height and width shall be measured and recorded as well, since the cloth needs to be scaled according to the user. In my initial approach, I will scale the whole cloth as a whole, with different parameters for three dimensions. If this approach proves unrealistic, I will process with different scaling parameters for different portions of the cloth, although this would not prove useful in a real fitting room, since most shops do not offer extensive customization.
+
+As the types of cloth focus on different portions of the body, the human body proportions from different areas should not affect the scaling parameters equally. Therefore, the main body parameters for different types of clothes are listed in Table 3.
+
+\begin{table}
+\center
+\begin{tabular}{ | l | l | l  |}
+\hline
+\textbf{Type Of Cloth} & \textbf{Primary Height Proportions} & \textbf{Primary Width Proportions}  \\ \hline
+Trousers & Hip Height & Hip Width \\ \hline
+Long Sleeves & Body Height & Elbow-Fingertip Height,Shoulder Width \\ \hline
+Short Sleeves-Sleeveless & Torso Height & Shoulder Width \\ 
+\hline
+\end{tabular}
+\caption{Primary Proportions for Different Cloth Types}
+\label{tbl:primary_proportions}
+\end{table}
+
+The parameter estimation algorithm will go as following:
+
+\begin{enumerate}
+\item For a particular cloth, take the primary measured proportion as $P_i^0$. This will be the measured dimension of said proportion. This process will be repeated for width (W) and height (H).
+\item With all the other measured proportions, calculate the estimated value of $P_i$ as $P_i^j$. Here, R denotes the ratio from Table \ref{tbl:human_body_proportions}.
+\begin{equation}
+W,H_i^j=W,H_j \times R_i^j
+\label{eqn:proportion_estimation}
+\end{equation}
+\item Find the optimized main parameter width as the average:
+\begin{equation}
+W,H_i=1/(n+1) \times \sum\limits_{j=0}^n W,H_i^j
+\label{eqn:optimized_parameter}
+\end{equation}
+\end{enumerate}
+
+After finding the optimized main parameter in meters, it can be used to scale the virtual cloth by calculating the ratio.
+
+\begin{algorithm}
+\dontprintsemicolon % Some LaTeX compilers require you to use \dontprintsemicolon instead
+
+$t_{proportion}=import(Table \ref{tbl:human_body_proportions})$ \;
+$t_{primary}=import(Table \ref{tbl:primary_proportions})$ \;
+$ct=cloth_{type}$\;
+$width_{main}=t_{proportion}.width(ct)$\;
+$width_{sum}=0$\;
+$count_{effector}=0$\;
+\ForEach{width \bf{in} $t_{proportion}$ }{
+$w_i=measure(p_i)$\;
+$w_i^j=w \times t_{proportion}.ratio(p_i,parameter_{main})$\;
+$width_{sum}=width_{sum}+w_i^j $\;
+$count_effector++ $\;
+}
+$width_{weighted}=width_{sum}/count_effector$
+$x_s=width_{weighted}/width_{cloth}$\;
+
+$height_{main}=t_{proportion}.height(ct)$\;
+$height_{sum}=0$\;
+$count_{effector}=0$\;
+\ForEach{height \bf{in} $t_{proportion}$ }{
+$h_i=measure(p_i)$\;
+$h_i^j=h \times t_{proportion}.ratio(p_i,parameter_{main})$\;
+$height_{sum}=height_{sum}+h_i^j $\;
+$count_effector++ $\;
+}
+$height_{weighted}=height_{sum}/count_effector$
+$y_s=height_{weighted}/height_{cloth}$\;
+\Return{$(x_s,y_s)$}
+\caption{Cloth Resizing Algorithm}
+\label{algo:cloth_resize}
+\end{algorithm}
+
