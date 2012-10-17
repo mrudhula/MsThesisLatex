@@ -1,0 +1,163 @@
+\chapter{Cloth Resizing}
+\label{chapter8}
+My cloth resizing algorithm consists of three main steps:
+\begin{enumerate}
+\item Improve the raw depth map from Kinect by filtering.
+\item Fit the contour on the user blob and perform measurements. Compare with known human body proportions to acquire required scaling parameters.
+\item Perform the same measurements over a time frame in order to smooth the results. Scale the virtual avatar along with the cloth mesh prior to simulation.
+\end{enumerate}
+
+\section{Depth Map Optimization}
+\label{section_8_1}
+
+At 30 fps, Kinect provides a depth map and a user map, both at 640x480 resolution. Depth map consists of distances with the sensor in millimeters. 
+
+The depth measurement of the Kinect is not very accurate compared to high end 3D
+depth systems like laser scanners. The accuracy of the depth value decreases
+quadratically. Error values for different distances is shown in Table
+\ref{tbl:error_kinect}.
+
+\begin{table}
+\center
+\begin{tabular}{ | l | l | l | l |}
+\hline
+\textbf{Distance of Point} & 1m & 3m & 5m \\ \hline
+\textbf{Error in measurement} & 0.5cm & 1.5cm & 4cm \\ 
+\hline
+\end{tabular}
+\caption{Kinect Depth Accuracy \cite{Kourosh2012}}
+\label{tbl:error_kinect}
+\end{table}
+
+For my application, the Kinect needs to be able to see the whole human body,
+which requires at least 3m away from the sensor for a person with 1.7m height,
+resulting in an erroneous depth map. This problem can be seen in Figure
+\ref{fig:kinect_depth_output_comparison}.
+
+
+\begin{figure}[h]
+\centerline{\fbox{\psfig{figure=figures/kinect_depth_output_comparison.png,width=1.00\textwidth}}}
+\caption{Depth Output From Kinect with Improved Results. The leftmost image is
+the raw output, the application of filters results in better performance in the other two images  \cite{Tong2012}. This improvement utilizes more than one depth streams. }
+\label{fig:kinect_depth_output_comparison}
+\end{figure}
+
+In order to acquire a better depth map, I will perform the following operations:
+
+Let us take the depth map D as a 640x480 matrix. Initially, the user pixels are
+extracted by a pixel-by-pixel comparison with the user map. User map is another
+acquired map from the sensor, with the same size as depth map. The value of a
+pixel is set to a non-zero value if the pixel belongs to a recognized user. In
+this case, we are only interested in one user, $D_1$ represents the depth pixels
+of the user we are interested in, whereas $U_1$ is the bit map of the user.
+Also, the non-user pixels must be filled with the mean value of the user pixels, in order to perform Gaussian filtering on the image.
+
+Next, we perform Gaussian filtering on the user’s depth map, to normalize and
+improve the quality of the depth map. The size and sigma parameters of the Gaussian filter will be varied in order to maximize the performance and the quality of the results. 
+
+After these operations, we have a normalized and filtered depth map, which also
+has better planar values (x and y) since the holes due to depth stream will be filled.
+
+\begin{algorithm}
+\dontprintsemicolon % Some LaTeX compilers require you to use \dontprintsemicolon instead
+\KwIn{Raw Depth Stream From Kinect}
+\KwOut{Depth Stream With Patched Holes and Gaussian Optimization }
+$depth_{sum}=0$ \;
+$n_{user} =0$\;
+\For{i \bf{from} 0 \bf{to} $d_width$ }{
+\For{j \bf{from} 0 \bf{to} $d_height$ }{
+\If{$U(i,j)$} {
+  $depth_{sum}=depth_{sum}+D(i,j)$\;
+  $n_{user}+=1$\;
+ }}}
+$depth_{average}=depth_{sum}/n_{user}$ \;
+\For{i \bf{from} 0 \bf{to} $d_width$ }{
+\For{j \bf{from} 0 \bf{to} $d_height$ }{
+\If{\bf{not}  $U(i,j)$} {
+  $D(i,j)=depth_{average}$\;
+ }}}
+ 
+\For{i \bf{from} 0 \bf{to} $d_width$ }{
+\For{j \bf{from} 0 \bf{to} $d_height$ }{
+\If{$U(i,j)$} {
+  $D(i,j)=D(i-m:i+m,j-n:j+m) * Gaussian(m,n,e)$\;
+ }}}
+\Return{D}
+\caption{Depth Map Optimization Algorithm}
+\label{algo:depth_patch}
+\end{algorithm}
+
+\section{Parameter Measurement}
+In paremeter measurement, I will handle two objectives: To determine the optimal
+sizes of collision spheres for cloth simulation and the required scaling parameters for the cloth to optimally fit the user. It is important that these algorithms do not take more than a thirtieth seconds on a high-end consumer computer in order to keep the real time experience smooth, since there is an averaging over time is involved.
+
+First step will be fitting spheres in various locations in the optimized body
+map. These fitted spheres will provide the radii for the collision spheres which
+will be used to simulate the cloth. Locations of the machine-provided user
+joints are shown in Figure \ref{fig:nite_joints}. These are where spheres will
+be located.
+
+\begin{figure}[h]
+\centerline{\fbox{\psfig{figure=figures/nite_joints.png,width=1.00\textwidth}}}
+\caption{Human Joints provided by NITE }
+\label{fig:nite_joints}
+\end{figure}
+
+Sphere fitting algorithm will go as following:
+\begin{enumerate}
+\item Take vector $J_i$ which represents the coordinates of the $i^{th}$
+joint.
+First, initialize the radius of the sphere by the difference of z-dimension with the overlaying point in the depth map.
+\begin{equation}
+r_i^z=J_i^z-D^z(J_i^x,J_i^y)
+\label{eqn:z_sphere_radius}
+\end{equation}
+\item Repeat the same process for the x and y dimensions in both negative and positive directions. Take the bigger radius. If there are no points on either side, set it to zero.
+\begin{equation}
+r_i^{x,y}=max(\| \pm J_i^{x,y} \mp D^{x,y}(J_i^{y,x},J_i^z)\|)
+\label{eqn:x_y_sphere_radius}
+\end{equation}
+\item 3. The radius of the sphere is equal to the minimum of these three values.
+\begin{equation}
+r_i=min(r_i^{x,y,z})
+\label{eqn:minimum_sphere-radius}
+\end{equation}
+\end{enumerate}
+
+\begin{algorithm}
+\dontprintsemicolon % Some LaTeX compilers require you to use \dontprintsemicolon instead
+\KwIn{Optimized Depth Stream From Kinect}
+\KwOut{Collision Sphere radii for each joint }
+\ForEach{joint }{
+$p=pos_{J_m}$\;
+$r_z=\sqrt{P_z^2-D_z(P_x,P_y)^2}$
+\For{i \bf{from} $P_x$ \bf{to} $0$ }{
+\If{$D(i,P_y)$ \bf{equals}  $P_z$} {
+  $r_x^- = i$\;
+  break\;
+ }
+}
+\For{i \bf{from} $P_x$ \bf{to} $depth_width$ }{
+\If{$D(i,P_y)$ \bf{equals}  $P_z$} {
+  $r_x^+ = i$\;
+  break\;
+ }
+}
+\For{j \bf{from} $P_y$ \bf{to} $0$ }{
+\If{$D(P_x,j)$ \bf{equals}  $P_z$} {
+  $r_y^- = j$\;
+  break\;
+ }
+}
+\For{j \bf{from} $P_y$ \bf{to} $depth_height$ }{
+\If{$D(P_x,j)$ \bf{equals}  $P_z$} {
+  $r_y^+ = j$\;
+  break\;
+ }
+}
+$r_m=min(r_z,r_x^-,r_x^+,r_y^-,r_y^+)$
+}
+\Return $(r_0,r_1 \ldots r_n)$ 
+\caption{Sphere Fitting Algorithm}
+\label{algo:sphere_fitting}
+\end{algorithm}

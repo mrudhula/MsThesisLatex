@@ -6,7 +6,7 @@ The animatable body exported by Blender is in Ogre xml mesh and skeleton format.
 \section{Initialization}
 \label{section5_1}
 
-Animatable meshes are loaded and maintained via the SkeletalMesh class I have implemented, which bridges the gap between Ogre’s skeletal animating system and the input from Kinect sensor. When an instance of the object is initialized, it is given a mesh file. After the mesh is loaded with the skeleton data, the bone list is iterated through, given the initial orientation uniquely for each animatable bone with the Kinect sensor. 
+Animatable meshes are loaded and maintained via the SkeletalMesh class I have implemented, which bridges the gap between Ogreï¿½s skeletal animating system and the input from Kinect sensor. When an instance of the object is initialized, it is given a mesh file. After the mesh is loaded with the skeleton data, the bone list is iterated through, given the initial orientation uniquely for each animatable bone with the Kinect sensor. 
 
 The animatable bones are set to be manually controlled, not inherit orientation from parents, given the initial orientations. At that state, the bone is set to initial state, to be reset at every frame with updated orientations. The non-animated bones are left to be automatically controlled and inherit orientation in order to keep them aligned with their parent bones. 
 
@@ -25,5 +25,174 @@ I used linear weighted skin blending \cite{Kavan2003} in order to simulate defor
 
 \subsection{The bone transformation Pseudo Code}
 
-The pseudo code below is executed during the pre-render cycle. The bone orientations are set to be ready for animation, deformation and rendering.
+The pseudo code below is executed during the pre-render cycle. The bone
+orientations are set to be ready for animation, deformation and rendering. At
+every render cycle, update Skeleton function is called, which automatically
+fetches the coordinates from the Kinect and sets up the skeleton for vertex
+blending. 
 
+\begin{algorithm}
+\dontprintsemicolon % Some LaTeX compilers require you to use \dontprintsemicolon instead
+\SetKwBlock{function}{function}{endfunction}
+\function(transformBone\ArgSty{(bone)}){
+\KwIn{A bone and the corresponding orientation matrix from Kinect}
+\KwOut{The same bone with updated orientation}
+$q_I =$ initial orientation of bone\;
+$q_N =$ relative orientation\;
+$q_K = 3\times3$ Orientation Matrix From Kinect\;
+\If{$kinect_{confidence} > 0.5$} {
+  $q_Q = toQuaternion(q_K)$\;
+  $q_N = toLocalSpace(q_Q)$\;
+  $q = q_N \times q_I$\;
+  $bone.orientation=q.normalise{\left(\right)}$\; }}
+
+\If{$user$ ${\bf is }$ $new$} {
+  $p_{torso}.initialize()$\tcc*{Initialize torso position}  \;
+ }
+\ForEach {bone}{
+\If{$bone_{orientation}$ ${\bf is }$ $new$}{
+$transformBone(bone)$\;
+$skeleton.needsUpdate()$\;}}
+\caption{Bone transformation algorithm}
+\label{algo:transformBone}
+\end{algorithm}
+
+\subsection{Deformation Pseudo Code}
+
+Algorithm \ref{algo:updateMesh} is executed prior to rendering, to update the
+vertices of the skin. The vertex blending function is where the deformation
+actually occurs.
+
+\begin{algorithm}
+\dontprintsemicolon % Some LaTeX compilers require you to use \dontprintsemicolon instead
+\SetKwBlock{function}{function}{endfunction}
+\function(prepareBlendMatrices\ArgSty{(mesh)}){
+\ForEach {bone}{
+bone.applyScale()\;
+bone.applyTransform()\;
+bone.applyOrientation()\;
+}
+$i=0$\;
+\ForEach {bone}{
+$m[i] = bone.getTransformationMatrix4\times4$\;
+$i++$\;
+}
+mapIndex=mesh.getIndexMap() \tcc*{Index Map contains the bone pointers for
+every vertex}\;
+$i=0$\;
+\ForEach {indexSet ${\bf in }$ mapIndex}{
+$m_b[i] = indexSet[i]+m$ \tcc*{Blend matrices are pointers to the individual
+bone matrices}\;
+$i++$\; }
+\Return $m_b$\;
+}
+
+\function(vertexBlend\ArgSty{($m_b$)}){
+pos=*mesh.positions\tcc*{Pointer to the position matrix}\;
+norm=*mesh.normals\tcc*{Pointer to the normal matrix}\;
+$b_i=$*mesh.blendIndices\tcc*{Pointer to the blend index matrix}\;
+$b_w=$*mesh.blendWeights\tcc*{Pointer to the blend weight matrix}\;
+\ForEach {4 vertices ${\bf in }$ pos}{
+\ForEach {vertex ${\bf in }$ 4 vertices}{ 
+$m[1,2,3,4]=m_b[b_i[vertex]]$ \tcc*{Weighting Bones}\;
+$m_c[j]=collapseMatrix(m,b_w[vertex]){\bf (i)}$\;
+}
+$pos[4 vertex]=m_c\times pos[4 vertex]$
+$norm[4 vertex]=m_c\times norm[4 vertex]$
+}}
+\If {skeleton needs update}{
+$m_b=prepareBlendMatrices(skeleton.mesh)$\;
+$vertexBlend(m_b)$\;
+}
+\caption{Mesh update algorithm called at every frame.}
+\label{algo:updateMesh}
+\end{algorithm}
+
+{\bf (i)}:In my models, every vertex is assigned to at most 4 different bones.
+In order to speed up the deformation process, the transformation matrices for the corresponding matrices are collapsed into one. Collapsing is simply weighted addition of the four weighting matrices for a vertex.
+
+\subsubsection{Matrix Operations}
+After four sets of matrix for four vertices are collapsed into four matrices, the following matrix operations are performed. 4 vertices are processed together in order to fully utilize the matrix multiplication features.
+Let us take the weighted matrix for vertex i:
+
+\begin{equation}
+M_i=
+\begin{bmatrix}
+m_{00}^i & m_{01}^i & m_{02}^i & m_{03}^i \\
+m_{10}^i & m_{11}^i & m_{12}^i & m_{13}^i \\
+m_{20}^i & m_{21}^i & m_{22}^i & m_{23}^i \\
+0 & 0 & 0 & 1
+\end{bmatrix}
+\label{eqn:weighted_matrix_for_i}
+\end{equation}
+
+Note that this matrix is a linear combination of four linear
+transformation matrices from four weighting bones, hence the $3^{rd}$ row is by
+default  [0 0 0 1].
+
+We also have the initial positions for the 4 vertices as $[p^i_x \: p^i_y  \:
+p^i_z  \: 1]$.$3^{rd}$ value, which is one is not included in the vertex buffer
+and it will not be taken into account with the calculations.
+
+In order to generate an efficient SIMD process, I will perform 4x3 dot product
+calculations in each instruction. Dot products are commanded in the machine language, which makes it more preferable to higher level matrix calculations. To acquire the simulated x coordinates for the four vertices, we combine the first rows of all collapsed matrices for all and transpose it:
+
+\begin{equation}
+M_T=
+\begin{bmatrix}
+m_{00}^0 & m_{00}^1 & m_{00}^2 & m_{00}^3 \\
+m_{01}^0 & m_{01}^1 & m_{01}^2 & m_{01}^3 \\
+m_{02}^0 & m_{02}^1 & m_{02}^2 & m_{02}^3 \\
+m_{03}^0 & m_{03}^1 & m_{03}^2 & m_{03}^3 
+\end{bmatrix}
+\label{eqn:transposed_weight_matrix}
+\end{equation}
+
+To coincide with the transposed matrix, I also create a position matrix with positions from all vertices:
+
+\begin{equation}
+P_T=
+\begin{bmatrix}
+p_{x}^0 & p_{x}^1 & p_{x}^2 & p_{x}^3 \\
+p_{y}^0 & p_{y}^1 & p_{y}^2 & p_{y}^3 \\
+p_{z}^0 & p_{z}^1 & p_{z}^2 & p_{z}^3  
+\end{bmatrix}
+\label{eqn:transposed_weight_matrix}
+\end{equation}
+
+Next, the matrices $M_T$ and $P_T$ are multiplied in a row-by-row fashion and
+summed together:
+
+\begin{equation}
+d_x=M_{T0} \times P_{T0} + M_{T1} \times P_{T1} M_{T2} \times P_{T2} +M_{T3}
+\label{eqn:transposed_weight_matrix}
+\end{equation}
+
+The result vector $d_x$ is a 4x1 vector which has the post-blended vertex
+x-coordinates: $[P^0_x \: P^1_x  \: P^2_x  \: P^3_x]$. The same procedure is
+applied to the normal of a vertex. Process continues with the next set of four vertices.
+
+\section{Interaction Between the Body And Cloth}
+\label{section5_4}
+The movements of the user are passed on the pieces of cloth separately.
+
+\subsection{Non-Simulated Section}
+Non simulated parts of the clothes are the ones which do not get separated from
+the body most of the time. Most parts of our clothes usually stick to the body and experience the same deformation as our skin. In order to increase performance, detailed simulation on these parts are not run, instead they are deformed the same as the remained of human body. In the full-body dress I am working with, the part above the waist has a skeleton similar to the body and the information from the Kinect is passed on to this portion as well. It is treated as a part of the actual avatar.
+
+\subsection{Simulated Section}
+The movements of the body are transferred into the simulated section of the cloth in three main ways:
+
+\subsubsection{Transformation}
+The fixed vertices are transformed to match the remainder of the cloth. The
+transformation is done on the rendering level, the physx world experiences no difference in transformation manner. This process keeps the cloth aligned with the rest of the visible world.
+
+\subsubsection{Collision}
+The colliding body is updated and collided with the cloth. The colliding body
+consists of 16 spheres and the capsules connecting the spheres. The details of
+this body is explained in section \ref{section_7_1}. This process keeps the
+cloth out of the avatarâ€™s way.
+
+\subsubsection{Inertia}
+The Inertia of transformations is passed onto the simulated cloth, increasing
+the realism. The passed on inertia comes from the rotation and the transformation of the root bone of the human skeleton. With this process, although there is no actual transformation in the physics world, the resulting inertia effects are visible on the cloth itself. 
