@@ -172,4 +172,27 @@ The result vector $d_x$ is a 4x1 vector which has the post-blended vertex
 x-coordinates: $[P^0_x \: P^1_x  \: P^2_x  \: P^3_x]$. The same procedure is
 applied to the normal of a vertex. Process continues with the next set of four vertices.
 
+\section{Interaction Between the Body And Cloth}
+\label{section5_4}
+The movements of the user are passed on the pieces of cloth separately.
 
+\subsection{Non-Simulated Section}
+Non simulated parts of the clothes are the ones which do not get separated from
+the body most of the time. Most parts of our clothes usually stick to the body and experience the same deformation as our skin. In order to increase performance, detailed simulation on these parts are not run, instead they are deformed the same as the remained of human body. In the full-body dress I am working with, the part above the waist has a skeleton similar to the body and the information from the Kinect is passed on to this portion as well. It is treated as a part of the actual avatar.
+
+\subsection{Simulated Section}
+The movements of the body are transferred into the simulated section of the cloth in three main ways:
+
+\subsubsection{Transformation}
+The fixed vertices are transformed to match the remainder of the cloth. The
+transformation is done on the rendering level, the physx world experiences no difference in transformation manner. This process keeps the cloth aligned with the rest of the visible world.
+
+\subsubsection{Collision}
+The colliding body is updated and collided with the cloth. The colliding body
+consists of 16 spheres and the capsules connecting the spheres. The details of
+this body is explained in section \ref{section_7_1}. This process keeps the
+cloth out of the avatar’s way.
+
+\subsubsection{Inertia}
+The Inertia of transformations is passed onto the simulated cloth, increasing
+the realism. The passed on inertia comes from the rotation and the transformation of the root bone of the human skeleton. With this process, although there is no actual transformation in the physics world, the resulting inertia effects are visible on the cloth itself. 
