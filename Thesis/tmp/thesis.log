@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.10.16)  17 OCT 2012 17:01
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.10.16)  17 OCT 2012 17:21
 entering extended mode
  Source specials enabled.
  %&-line parsing enabled.
@@ -257,7 +257,14 @@ Package pdflscape Info: Auto-detected driver: pdftex on input line 75.
 
 (/usr/share/texmf-texlive/tex/generic/ifxetex/ifxetex.sty
 Package: ifxetex 2009/01/23 v0.5 Provides ifxetex conditional
-)) (./thesis.aux)
+)) (./thesis.aux
+
+LaTeX Warning: Label `eqn:transposed_weight_matrix' multiply defined.
+
+
+LaTeX Warning: Label `eqn:transposed_weight_matrix' multiply defined.
+
+)
 \openout1 = `thesis.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 34.
@@ -272,8 +279,7 @@ LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 34.
 LaTeX Font Info:    ... okay on input line 34.
 LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 34.
 LaTeX Font Info:    ... okay on input line 34.
-
-(/usr/share/texmf-texlive/tex/context/base/supp-pdf.mkii
+ (/usr/share/texmf-texlive/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count108
 \scratchdimen=\dimen133
@@ -472,7 +478,7 @@ Underfull \hbox (badness 10000) detected at line 109
 [][]
  []
 
-) (./chapter6.tex [21] [22]
+[21] [22] [23]) (./chapter6.tex [24]
 Chapter 6.
 Missing character: There is no ï in font cmr12!
 Missing character: There is no ¿ in font cmr12!
@@ -480,45 +486,45 @@ Missing character: There is no ½ in font cmr12!
 Missing character: There is no ï in font cmr12!
 Missing character: There is no ¿ in font cmr12!
 Missing character: There is no ½ in font cmr12!
-[23
+[25
 
-] <figures/cloth_fixed_vertices.png, id=143, 978.65625pt x 458.71375pt>
+] <figures/cloth_fixed_vertices.png, id=152, 978.65625pt x 458.71375pt>
 File: figures/cloth_fixed_vertices.png Graphic file (type png)
 
-<use figures/cloth_fixed_vertices.png> [24 <./figures/cloth_fixed_vertices.png>
-] [25]
+<use figures/cloth_fixed_vertices.png> [26 <./figures/cloth_fixed_vertices.png>
+] [27]
 Missing character: There is no ï in font cmr12!
 Missing character: There is no ¿ in font cmr12!
 Missing character: There is no ½ in font cmr12!
- [26]
+ [28]
 Underfull \hbox (badness 10000) detected at line 86
 [][]
  []
 
-[27] <figures/shear_strech_sets.png, id=160, 978.65625pt x 256.96pt>
+[29] <figures/shear_strech_sets.png, id=167, 978.65625pt x 256.96pt>
 File: figures/shear_strech_sets.png Graphic file (type png)
 
-<use figures/shear_strech_sets.png> [28 <./figures/shear_strech_sets.png>]
-<figures/solver_comparison.png, id=165, 448.67625pt x 495.8525pt>
+<use figures/shear_strech_sets.png> [30 <./figures/shear_strech_sets.png>]
+<figures/solver_comparison.png, id=173, 448.67625pt x 495.8525pt>
 File: figures/solver_comparison.png Graphic file (type png)
 
-<use figures/solver_comparison.png>) (./chapter7.tex [29 <./figures/solver_comp
+<use figures/solver_comparison.png>) (./chapter7.tex [31 <./figures/solver_comp
 arison.png>]
 Chapter 7.
-<figures/colliding_human_body.png, id=170, 978.65625pt x 516.93124pt>
+<figures/colliding_human_body.png, id=178, 978.65625pt x 516.93124pt>
 File: figures/colliding_human_body.png Graphic file (type png)
 
 <use figures/colliding_human_body.png>
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[30
+[32
 
-] [31 <./figures/colliding_human_body.png>]
-<figures/collision_pipeline.png, id=179, 978.65625pt x 396.48125pt>
+] [33 <./figures/colliding_human_body.png>]
+<figures/collision_pipeline.png, id=186, 978.65625pt x 396.48125pt>
 File: figures/collision_pipeline.png Graphic file (type png)
 
-<use figures/collision_pipeline.png>) [32 <./figures/collision_pipeline.png>]
+<use figures/collision_pipeline.png>) [34 <./figures/collision_pipeline.png>]
 (./thesis.bbl
 ! Undefined control sequence.
 l.32 \newblock \url
@@ -590,7 +596,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 49--54
 -
  []
 
-[33
+[35
 
 
 
@@ -625,7 +631,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 66--69
  []
 
 Missing character: There is no ’ in font cmr12!
-) (./appendix.tex [34]
+) (./appendix.tex [36]
 Appendix A.
 
 LaTeX Warning: File `figures/perfect_nose.ps' not found on input line 10.
@@ -642,7 +648,7 @@ l.10 ...es/perfect_nose.ps,width=0.80\textwidth}}}
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
-[35
+[37
 
 ]
 
@@ -702,7 +708,7 @@ l.25 ...re=figures/app4.ps,width=0.46\textwidth}}}
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
-[36]
+[38]
 
 LaTeX Warning: File `figures/app5.ps' not found on input line 42.
 
@@ -763,32 +769,37 @@ l.45 ...re=figures/app8.ps,width=0.50\textwidth}}}
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
-) [37
+) [39
 
-] (./thesis.aux) ) 
+] (./thesis.aux)
+
+LaTeX Warning: There were multiply-defined labels.
+
+ ) 
 Here is how much of TeX's memory you used:
- 3574 strings out of 493848
- 46673 string characters out of 1152822
- 130879 words of memory out of 3000000
- 6717 multiletter control sequences out of 15000+50000
+ 3576 strings out of 493848
+ 46730 string characters out of 1152822
+ 131940 words of memory out of 3000000
+ 6719 multiletter control sequences out of 15000+50000
  12847 words of font info for 47 fonts, out of 3000000 for 9000
  714 hyphenation exceptions out of 8191
  43i,18n,24p,1318b,439s stack positions out of 5000i,500n,10000p,200000b,50000s
-</usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbx
-12.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbx8.pfb></usr
-/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/share/tex
-mf-texlive/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texmf-texlive/
-fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texmf-texlive/fonts/type1/
-public/amsfonts/cm/cmmi8.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfo
-nts/cm/cmr12.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr17
-.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/sh
-are/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsl12.pfb></usr/share/texmf-t
-exlive/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-texlive/font
-s/type1/public/amsfonts/cm/cmti12.pfb></usr/share/texmf-texlive/fonts/type1/pub
-lic/amsfonts/cm/cmtt12.pfb>
-Output written on thesis.pdf (50 pages, 2383473 bytes).
+</usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/sha
+re/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbx8.pfb></usr/share/texmf-tex
+live/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/share/texmf-texlive/fonts
+/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texmf-texlive/fonts/type1/publ
+ic/amsfonts/cm/cmmi12.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts
+/cm/cmmi6.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmmi8.pf
+b></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/shar
+e/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texmf-texl
+ive/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texmf-texlive/fonts/typ
+e1/public/amsfonts/cm/cmsl12.pfb></usr/share/texmf-texlive/fonts/type1/public/a
+msfonts/cm/cmsy10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/
+cmti12.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
+
+Output written on thesis.pdf (52 pages, 2396492 bytes).
 PDF statistics:
- 243 PDF objects out of 1000 (max. 8388607)
+ 253 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  66 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -12,13 +12,13 @@
 \contentsline {figure}{\numberline {4.4}{\ignorespaces The Dress, positioned on the body, along with the upper-part skeleton. In this shot, the bottom part is highlighted in orange border.}}{18}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {6.1}{\ignorespaces The fixed vertices of the cloth}}{24}
-\contentsline {figure}{\numberline {6.2}{\ignorespaces Shear and Scretch Sets. The red and yellow lines are the fibers \cite {Kim2011}}}{28}
-\contentsline {figure}{\numberline {6.3}{\ignorespaces Comparison of Gauss-Seidel and Semi-Implicit Solvers \cite {Kim2011}}}{29}
+\contentsline {figure}{\numberline {6.1}{\ignorespaces The fixed vertices of the cloth}}{26}
+\contentsline {figure}{\numberline {6.2}{\ignorespaces Shear and Scretch Sets. The red and yellow lines are the fibers \cite {Kim2011}}}{30}
+\contentsline {figure}{\numberline {6.3}{\ignorespaces Comparison of Gauss-Seidel and Semi-Implicit Solvers \cite {Kim2011}}}{31}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {7.1}{\ignorespaces Character formed with collision spheres and capsules}}{31}
-\contentsline {figure}{\numberline {7.2}{\ignorespaces Collision Detection Pipeline \cite {Tonge2010} }}{32}
+\contentsline {figure}{\numberline {7.1}{\ignorespaces Character formed with collision spheres and capsules}}{33}
+\contentsline {figure}{\numberline {7.2}{\ignorespaces Collision Detection Pipeline \cite {Tonge2010} }}{34}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {A.1}{\ignorespaces The perfect nose.}}{36}
-\contentsline {figure}{\numberline {A.2}{\ignorespaces Experiment 1: (a) Initial misshapen nose. (b) Head mesh is constrained from the blue nodes, and is pushed upwards at the green nodes. (c)\nobreakspace {}Linear FEM Solution: left: wireframe surface mesh with nodes, right: shaded mesh with texture. (d)\nobreakspace {}Nonlinear FEM Solution: left: wireframe surface mesh with nodes, right: shaded mesh with texture.}}{36}
-\contentsline {figure}{\numberline {A.3}{\ignorespaces Experiment 2: (a) Initial misshapen nose. (b) Head mesh is constrained from the blue nodes, and is pushed upwards at the green nodes. (c)\nobreakspace {}Linear FEM Solution: left: wireframe surface mesh with nodes, right: shaded mesh with texture. (d)\nobreakspace {}Nonlinear FEM Solution: left: wireframe surface mesh with nodes, right: shaded mesh with texture.}}{37}
+\contentsline {figure}{\numberline {A.1}{\ignorespaces The perfect nose.}}{38}
+\contentsline {figure}{\numberline {A.2}{\ignorespaces Experiment 1: (a) Initial misshapen nose. (b) Head mesh is constrained from the blue nodes, and is pushed upwards at the green nodes. (c)\nobreakspace {}Linear FEM Solution: left: wireframe surface mesh with nodes, right: shaded mesh with texture. (d)\nobreakspace {}Nonlinear FEM Solution: left: wireframe surface mesh with nodes, right: shaded mesh with texture.}}{38}
+\contentsline {figure}{\numberline {A.3}{\ignorespaces Experiment 2: (a) Initial misshapen nose. (b) Head mesh is constrained from the blue nodes, and is pushed upwards at the green nodes. (c)\nobreakspace {}Linear FEM Solution: left: wireframe surface mesh with nodes, right: shaded mesh with texture. (d)\nobreakspace {}Nonlinear FEM Solution: left: wireframe surface mesh with nodes, right: shaded mesh with texture.}}{39}
