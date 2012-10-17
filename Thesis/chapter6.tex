@@ -10,7 +10,7 @@ I needed to provide the PhysX framework with the vertex and topology information
 
 Other than the vertex and topology information, an inverse weight needs to be specified for every vertex.  This information can be embedded into the wavefront object as a second set of texture coordinates. On the other hand, this method adds too much extra data to the file, which is not a major problem, although not necessary. Therefore I chose to embed this information into the model, by specifying the material names separately for vertex groups with different weights. 
 
-The vertices which have a non-zero inverse weight have the suffix ‘Free’ attached to their material name. The vertices are selected manually and their materials are attached. The current simulation required only two set of weights, which can be seen in Figure \ref{fig:cloth_fixed_vertices}. After the weight information is implemented, the model is exported as a Wavefront OBJ file along with the MTL, and parsed into the software.
+The vertices which have a non-zero inverse weight have the suffix ï¿½Freeï¿½ attached to their material name. The vertices are selected manually and their materials are attached. The current simulation required only two set of weights, which can be seen in Figure \ref{fig:cloth_fixed_vertices}. After the weight information is implemented, the model is exported as a Wavefront OBJ file along with the MTL, and parsed into the software.
 
 \begin{figure}[h]
 \centerline{\fbox{\psfig{figure=figures/cloth_fixed_vertices.png,width=1.00\textwidth}}}
@@ -52,16 +52,43 @@ Each frame, the workflow is as following:
 \section{The Algorithm}
 \label{section6_4}
 
-The cloth simulation algorithm is based on the Position Based Dynamics, introduced by Müller et al. \cite{Muller2007}. The main idea is to calculate the position of the particles from their previous positions and applying constraints on mutual distance and angle. The collision is also calculated as a force and applied to both particles. The approach is stable and efficient for real time applications.
+The cloth simulation algorithm is based on the Position Based Dynamics, introduced by Mï¿½ller et al. \cite{Muller2007}. The main idea is to calculate the position of the particles from their previous positions and applying constraints on mutual distance and angle. The collision is also calculated as a force and applied to both particles. The approach is stable and efficient for real time applications.
 
 The dynamics are stable as long as the constraint solvers converge. When this criteria is not met, anomalies show up, such as when a vertex is pulled too far away from the cloth. 
 
 The problem is parallelized by fibers, as SIMD process. With CUDA support, however, this is even parallelized more with SIMT processes, where each thread works on one fiber
 
 \subsection{Overall Structure}
-The position of a particle in the next time interval is acquired by performing Explicit Euler Integration over $\delta$t, where the velocity and the force are assumed to be constant during the interval. The pseudo code is given  in.
+The position of a particle in the next time interval is acquired by performing
+Explicit Euler Integration over $\delta$t, where the velocity and the force are
+assumed to be constant during the interval. The pseudo code is given  in
+Algorithm \ref{algo:position_based_dynamics}.
 
-The overall flow is to predict the next position and velocity (1-3), then perform the corrections by solving the constraints (4-11), update the position and velocities accordingly (12:15). Finally, the damping to the velocities is introduced in line 17. 
+\begin{algorithm}
+\dontprintsemicolon % Some LaTeX compilers require you to use \dontprintsemicolon instead
+\ForEach {vertices i}{
+$initialize$ $x_i=x_i^0,v_i=v_i^0,w_i=1/m_i$
+}
+\While{true}{
+\ForEach {vertices i}{$v_i \gets v_i + \Delta t w_i f_{ext}(x_i)$}
+dampVelocities($v_1,\ldots.,v_N$)\;
+\ForEach {vertices i}{$p_i \gets x_i + \Delta t v_i $\;}
+\ForEach {vertices i}{$generateCollisionConstraints(x_i \to p_i)$}
+\While{solverIterates}{$projectConstraints(C_1,\ldots,C_{M+M_{coll}},p_1,\ldots,p_N)$}
+\ForEach {vertices i}{
+$v_i \gets (p_i - x_i) / \Delta t$\;
+$x_i \gets p_i $\;
+}
+$velocityUpdate(v_1,\ldots,v_N)$\;
+}
+\caption{Position Based Dynamics}
+\label{algo:position_based_dynamics}
+\end{algorithm}
+
+The overall flow is to predict the next position and velocity (1-2), then
+perform the corrections by solving the constraints (3-12), update the position
+and velocities accordingly (13:15). Finally, the damping to the velocities is
+introduced in line 16.
 
 The key issue in the simulation is the position correction due to the constraints. Each vertex is moved either towards or away from each other, the distance is scaled by the inverse mass of the vertices. If a vertex position needs to be fixed, the inverse weight should be set to zero
 

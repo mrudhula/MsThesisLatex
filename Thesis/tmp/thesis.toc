@@ -31,7 +31,7 @@
 \contentsline {section}{\numberline {6.3}The Animation}{25}
 \contentsline {section}{\numberline {6.4}The Algorithm}{26}
 \contentsline {subsection}{\numberline {6.4.1}Overall Structure}{27}
-\contentsline {subsection}{\numberline {6.4.2}Constraints, Fibers and Sets}{27}
+\contentsline {subsection}{\numberline {6.4.2}Constraints, Fibers and Sets}{28}
 \contentsline {subsection}{\numberline {6.4.3}Set Solvers}{28}
 \contentsline {chapter}{\numberline {7}Collision}{30}
 \contentsline {section}{\numberline {7.1}Preparation and Settings}{30}
