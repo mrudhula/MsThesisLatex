@@ -1,3 +1,5 @@
 \contentsline {algocf}{\numberline {1}{\ignorespaces Bone transformation algorithm}}{21}
 \contentsline {algocf}{\numberline {2}{\ignorespaces Mesh update algorithm called at every frame.}}{22}
 \contentsline {algocf}{\numberline {3}{\ignorespaces Position Based Dynamics}}{30}
+\contentsline {algocf}{\numberline {4}{\ignorespaces Depth Map Optimization Algorithm}}{38}
+\contentsline {algocf}{\numberline {5}{\ignorespaces Sphere Fitting Algorithm}}{40}
