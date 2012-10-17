@@ -1,4 +1,45 @@
-This is BibTeX, Version 0.99dThe top-level auxiliary file: thesis.aux
-I found no \bibdata command---while reading file thesis.aux
-I found no \bibstyle command---while reading file thesis.aux
-(There were 2 error messages)
+This is BibTeX, Version 0.99c (TeX Live 2009/Debian)
+The top-level auxiliary file: thesis.aux
+The style file: abbrv.bst
+Database file #1: whole.bib
+You've used 14 entries,
+            2118 wiz_defined-function locations,
+            583 strings with 5579 characters,
+and the built_in function-call counts, 3458 in all, are:
+= -- 331
+> -- 137
+< -- 1
++ -- 56
+- -- 42
+* -- 180
+:= -- 594
+add.period$ -- 40
+call.type$ -- 14
+change.case$ -- 63
+chr.to.int$ -- 0
+cite$ -- 14
+duplicate$ -- 122
+empty$ -- 320
+format.name$ -- 42
+if$ -- 726
+int.to.chr$ -- 0
+int.to.str$ -- 14
+missing$ -- 5
+newline$ -- 71
+num.names$ -- 28
+pop$ -- 94
+preamble$ -- 1
+purify$ -- 49
+quote$ -- 0
+skip$ -- 99
+stack$ -- 0
+substring$ -- 151
+swap$ -- 15
+text.length$ -- 1
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 56
+warning$ -- 0
+while$ -- 34
+width$ -- 16
+write$ -- 142

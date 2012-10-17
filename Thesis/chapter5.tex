@@ -6,7 +6,7 @@ The animatable body exported by Blender is in Ogre xml mesh and skeleton format.
 \section{Initialization}
 \label{section5_1}
 
-Animatable meshes are loaded and maintained via the SkeletalMesh class I have implemented, which bridges the gap between Ogre’s skeletal animating system and the input from Kinect sensor. When an instance of the object is initialized, it is given a mesh file. After the mesh is loaded with the skeleton data, the bone list is iterated through, given the initial orientation uniquely for each animatable bone with the Kinect sensor. 
+Animatable meshes are loaded and maintained via the SkeletalMesh class I have implemented, which bridges the gap between Ogreï¿½s skeletal animating system and the input from Kinect sensor. When an instance of the object is initialized, it is given a mesh file. After the mesh is loaded with the skeleton data, the bone list is iterated through, given the initial orientation uniquely for each animatable bone with the Kinect sensor. 
 
 The animatable bones are set to be manually controlled, not inherit orientation from parents, given the initial orientations. At that state, the bone is set to initial state, to be reset at every frame with updated orientations. The non-animated bones are left to be automatically controlled and inherit orientation in order to keep them aligned with their parent bones. 
 
@@ -25,5 +25,80 @@ I used linear weighted skin blending \cite{Kavan2003} in order to simulate defor
 
 \subsection{The bone transformation Pseudo Code}
 
-The pseudo code below is executed during the pre-render cycle. The bone orientations are set to be ready for animation, deformation and rendering.
+The pseudo code below is executed during the pre-render cycle. The bone
+orientations are set to be ready for animation, deformation and rendering. At
+every render cycle, update Skeleton function is called, which automatically fetches the coordinates from the Kinect and sets up the skeleton for vertex blending.
 
+\begin{algorithm}
+\dontprintsemicolon % Some LaTeX compilers require you to use \dontprintsemicolon instead
+\SetKwBlock{function}{function}{endfunction}
+\function(transformBone\ArgSty{(bone)}){
+\KwIn{A bone and the corresponding orientation matrix from Kinect}
+\KwOut{The same bone with updated orientation}
+$q_I =$ initial orientation of bone\;
+$q_N =$ relative orientation\;
+$q_K = 3\times3$ Orientation Matrix From Kinect\;
+\If{$kinect_{confidence} > 0.5$} {
+  $q_Q = toQuaternion(q_K)$\;
+  $q_N = toLocalSpace(q_Q)$\;
+  $q = q_N \times q_I$\;
+  $bone.orientation=q.normalise{\left(\right)}$\; }}
+
+\If{$user$ ${\bf is }$ $new$} {
+  $p_{torso}.initialize()$\tcc*{Initialize torso position}  \;
+ }
+\ForEach {bone}{
+\If{$bone_{orientation}$ ${\bf is }$ $new$}{
+$transformBone(bone)$\;
+$skeleton.needsUpdate()$\;}}
+\caption{Bone transformation algorithm}
+\label{algo:transformBone}
+\end{algorithm}
+
+\subsection{Deformation Pseudo Code}
+
+
+\begin{algorithm}
+\dontprintsemicolon % Some LaTeX compilers require you to use \dontprintsemicolon instead
+\SetKwBlock{function}{function}{endfunction}
+\function(prepareBlendMatrices\ArgSty{(mesh)}){
+\ForEach {bone}{
+bone.applyScale()\;
+bone.applyTransform()\;
+bone.applyOrientation()\;
+}
+$i=0$\;
+\ForEach {bone}{
+$m[i] = bone.getTransformationMatrix4\times4$\;
+$i++$\;
+}
+mapIndex=mesh.getIndexMap() \tcc*{Index Map contains the bone pointers for
+every vertex}\;
+$i=0$\;
+\ForEach {indexSet ${\bf in }$ mapIndex}{
+$m_b[i] = indexSet[i]+m$ \tcc*{Blend matrices are pointers to the individual
+bone matrices}\;
+$i++$\; }
+\Return $m_b$\;
+}
+
+\function(vertexBlend\ArgSty{($m_b$)}){
+pos=*mesh.positions\tcc*{Pointer to the position matrix}\;
+norm=*mesh.normals\tcc*{Pointer to the normal matrix}\;
+$b_i=$*mesh.blendIndices\tcc*{Pointer to the blend index matrix}\;
+$b_w=$*mesh.blendWeights\tcc*{Pointer to the blend weight matrix}\;
+\ForEach {4 vertices ${\bf in }$ pos}{
+\ForEach {vertex ${\bf in }$ 4 vertices}{ 
+$m[1,2,3,4]=m_b[b_i[vertex]]$ \tcc*{Weighting Bones}\;
+$m_c[j]=collapseMatrix(m,b_w[vertex])$\;
+}
+$pos[4 vertex]=m_c\times pos[4 vertex]$
+$norm[4 vertex]=m_c\times norm[4 vertex]$
+}}
+\If {skeleton needs update}{
+$m_b=prepareBlendMatrices(skeleton.mesh)$\;
+$vertexBlend(m_b)$\;
+}
+\caption{Bone update algorithm called at every frame.}
+\label{algo:transformBone}
+\end{algorithm}
