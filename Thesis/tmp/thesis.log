@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2012.10.15)  15 OCT 2012 22:48
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2012.10.15)  15 OCT 2012 22:49
 entering extended mode
 **thesis.tex
 (C:\Users\Umut\workspace\MsThesisLatex\Thesis\thesis.tex
@@ -371,24 +371,24 @@ and I'll forget about whatever was undefined.
 
 Missing character: There is no Ý in font cmr12!
 Missing character: There is no Ý in font cmr12!
-[4] [5] [5] (C:\Users\Umut\workspace\MsThesisLatex\Thesis\thesis.toc)
+[4] [5] [5] (C:\Users\Umut\workspace\MsThesisLatex\Thesis\thesis.toc [6
+
+]
+[7])
 \tf@toc=\write3
- [6
+ [8] (C:\Users\Umut\workspace\MsThesisLatex\Thesis\thesis.lof [9
 
-]
-(C:\Users\Umut\workspace\MsThesisLatex\Thesis\thesis.lof)
+])
 \tf@lof=\write4
- [7
-
-]
+ [10]
 (C:\Users\Umut\workspace\MsThesisLatex\Thesis\thesis.lot)
 \tf@lot=\write5
- [8
+ [11
 
 ]
 (C:\Users\Umut\workspace\MsThesisLatex\Thesis\thesis.loa)
 \tf@loa=\write6
- [9
+ [12
 
 ])
 (C:\Users\Umut\workspace\MsThesisLatex\Thesis\chapter1.tex
@@ -396,20 +396,14 @@ Chapter 1.
 [1
 
 ]
-
-LaTeX Warning: Citation `Knot2012' on page 2 undefined on input line 21.
-
 LaTeX Font Info:    Try loading font information for OMS+cmr on input line 24.
-("C:\Program Files\MiKTeX 2.9\tex\latex\base\omscmr.fd"
+ ("C:\Program Files\MiKTeX 2.9\tex\latex\base\omscmr.fd"
 File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 24.
  [2]
-
-LaTeX Warning: Citation `Moan2012' on page 3 undefined on input line 55.
-
-<figures/ogre_class_diagram.png, id=46, 978.65625pt x 476.78125pt>
+<figures/ogre_class_diagram.png, id=56, 978.65625pt x 476.78125pt>
 File: figures/ogre_class_diagram.png Graphic file (type png)
 
 <use figures/ogre_class_diagram.png>
@@ -417,10 +411,7 @@ Package pdftex.def Info: figures/ogre_class_diagram.png used on input line 58.
 (pdftex.def)             Requested size: 412.56496pt x 200.99608pt.
  [3 <C:/Users/Umut/workspace/MsThesisLatex/Thesis/figures/ogre_class_diagram.pn
 g>] [4]
-
-LaTeX Warning: Citation `Moan2012' on page 5 undefined on input line 102.
-
-<figures/ogre_render_cycle.png, id=56, 978.65625pt x 577.15625pt>
+<figures/ogre_render_cycle.png, id=65, 978.65625pt x 577.15625pt>
 File: figures/ogre_render_cycle.png Graphic file (type png)
 
 <use figures/ogre_render_cycle.png>
@@ -430,34 +421,15 @@ Package pdftex.def Info: figures/ogre_render_cycle.png used on input line 105.
 (C:\Users\Umut\workspace\MsThesisLatex\Thesis\chapter2.tex [6 <C:/Users/Umut/wo
 rkspace/MsThesisLatex/Thesis/figures/ogre_render_cycle.png>]
 Chapter 2.
-
-LaTeX Warning: Citation `Cheung2005' on page 7 undefined on input line 6.
-
-
-LaTeX Warning: Citation `Cheung2005' on page 7 undefined on input line 6.
-
 [7
 
-]
-
-LaTeX Warning: Citation `Kourosh2012' on page 8 undefined on input line 10.
-
-
-LaTeX Warning: Citation `OpenNI2102' on page 8 undefined on input line 18.
-
-
-LaTeX Warning: Citation `PS2102' on page 8 undefined on input line 18.
-
-) (C:\Users\Umut\workspace\MsThesisLatex\Thesis\chapter3.tex [8] [9]
+]) (C:\Users\Umut\workspace\MsThesisLatex\Thesis\chapter3.tex [8] [9]
 Chapter 3.
-
-LaTeX Warning: Citation `opencv_library' on page 10 undefined on input line 8.
-
 [10
 
 ]
 Missing character: There is no ’ in font cmr12!
- <figures/hand_recognition_cycle.png, id=77, 542.025pt x 289.08pt>
+ <figures/hand_recognition_cycle.png, id=86, 542.025pt x 289.08pt>
 File: figures/hand_recognition_cycle.png Graphic file (type png)
 
 <use figures/hand_recognition_cycle.png>
@@ -466,32 +438,26 @@ Package pdftex.def Info: figures/hand_recognition_cycle.png used on input line
 (pdftex.def)             Requested size: 412.56496pt x 220.04272pt.
  [11 <C:/Users/Umut/workspace/MsThesisLatex/Thesis/figures/hand_recognition_cyc
 le.png>]
-<figures/open_closed_hands.png, id=82, 938.50626pt x 239.89626pt>
+<figures/open_closed_hands.png, id=91, 938.50626pt x 239.89626pt>
 File: figures/open_closed_hands.png Graphic file (type png)
 
 <use figures/open_closed_hands.png>
 Package pdftex.def Info: figures/open_closed_hands.png used on input line 35.
 (pdftex.def)             Requested size: 412.56496pt x 105.45584pt.
-
-
-LaTeX Warning: Citation `Tang2011' on page 12 undefined on input line 42.
-
-) (C:\Users\Umut\workspace\MsThesisLatex\Thesis\chapter4.tex [12 <C:/Users/Umut
-/workspace/MsThesisLatex/Thesis/figures/open_closed_hands.png>]
+)
+(C:\Users\Umut\workspace\MsThesisLatex\Thesis\chapter4.tex [12 <C:/Users/Umut/w
+orkspace/MsThesisLatex/Thesis/figures/open_closed_hands.png>]
 Chapter 4.
-
-LaTeX Warning: Citation `Mmava2012' on page 13 undefined on input line 9.
-
 [13
 
-] <figures/rigging_skeleton.png, id=90, 957.5775pt x 646.415pt>
+] <figures/rigging_skeleton.png, id=100, 957.5775pt x 646.415pt>
 File: figures/rigging_skeleton.png Graphic file (type png)
 
 <use figures/rigging_skeleton.png>
 Package pdftex.def Info: figures/rigging_skeleton.png used on input line 18.
 (pdftex.def)             Requested size: 412.56496pt x 278.50539pt.
 
-<figures/weight_humerus_r.png, id=91, 958.58125pt x 904.37875pt>
+<figures/weight_humerus_r.png, id=101, 958.58125pt x 904.37875pt>
 File: figures/weight_humerus_r.png Graphic file (type png)
 
 <use figures/weight_humerus_r.png>
@@ -502,7 +468,7 @@ Package pdftex.def Info: figures/weight_humerus_r.png used on input line 28.
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 [14 <C:/Users/Umut/workspace/MsThesisLatex/Thesis/figures/rigging_skeleton.png>
-] <figures/detailed_face.png, id=96, 1010.77625pt x 569.12625pt>
+] <figures/detailed_face.png, id=106, 1010.77625pt x 569.12625pt>
 File: figures/detailed_face.png Graphic file (type png)
 
 <use figures/detailed_face.png>
@@ -512,13 +478,9 @@ Package pdftex.def Info: figures/detailed_face.png used on input line 38.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-
-LaTeX Warning: Citation `LadyJewell2012' on page 15 undefined on input line 46.
-
-
 [15 <C:/Users/Umut/workspace/MsThesisLatex/Thesis/figures/weight_humerus_r.png>
 ] [16 <C:/Users/Umut/workspace/MsThesisLatex/Thesis/figures/detailed_face.png>]
-<figures/dress_and_body.png, id=106, 954.56625pt x 697.60625pt>
+<figures/dress_and_body.png, id=115, 954.56625pt x 697.60625pt>
 File: figures/dress_and_body.png Graphic file (type png)
 
 <use figures/dress_and_body.png>
@@ -534,59 +496,335 @@ Chapter 5.
 Missing character: There is no ’ in font cmr12!
 [19
 
+]) (C:\Users\Umut\workspace\MsThesisLatex\Thesis\chapter6.tex [20]
+Chapter 6.
+Missing character: There is no ‘ in font cmr12!
+Missing character: There is no ’ in font cmr12!
+[21
+
+] <figures/cloth_fixed_vertices.png, id=133, 978.65625pt x 458.71375pt>
+File: figures/cloth_fixed_vertices.png Graphic file (type png)
+
+<use figures/cloth_fixed_vertices.png>
+Package pdftex.def Info: figures/cloth_fixed_vertices.png used on input line 16
+.
+(pdftex.def)             Requested size: 412.56496pt x 193.3794pt.
+ [22 <C:/Users/Umut/workspace/MsThesisLatex/Thesis/figures/cloth_fixed_vertices
+.png>] [23]
+Missing character: There is no ü in font cmr12!
+ [24]
+<figures/shear_strech_sets.png, id=145, 978.65625pt x 256.96pt>
+File: figures/shear_strech_sets.png Graphic file (type png)
+
+<use figures/shear_strech_sets.png>
+Package pdftex.def Info: figures/shear_strech_sets.png used on input line 72.
+(pdftex.def)             Requested size: 412.56496pt x 108.32631pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[25] <figures/solver_comparison.png, id=150, 448.67625pt x 495.8525pt>
+File: figures/solver_comparison.png Graphic file (type png)
+
+<use figures/solver_comparison.png>
+Package pdftex.def Info: figures/solver_comparison.png used on input line 86.
+(pdftex.def)             Requested size: 206.28247pt x 227.9663pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+) (C:\Users\Umut\workspace\MsThesisLatex\Thesis\chapter7.tex [26 <C:/Users/Umut
+/workspace/MsThesisLatex/Thesis/figures/shear_strech_sets.png>] [27 <C:/Users/U
+mut/workspace/MsThesisLatex/Thesis/figures/solver_comparison.png>]
+Chapter 7.
+<figures/colliding_human_body.png, id=159, 978.65625pt x 516.93124pt>
+File: figures/colliding_human_body.png Graphic file (type png)
+
+<use figures/colliding_human_body.png>
+Package pdftex.def Info: figures/colliding_human_body.png used on input line 13
+.
+(pdftex.def)             Requested size: 412.56496pt x 217.92207pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[28
+
+] [29 <C:/Users/Umut/workspace/MsThesisLatex/Thesis/figures/colliding_human_bod
+y.png>] <figures/collision_pipeline.png, id=167, 978.65625pt x 396.48125pt>
+File: figures/collision_pipeline.png Graphic file (type png)
+
+<use figures/collision_pipeline.png>
+Package pdftex.def Info: figures/collision_pipeline.png used on input line 31.
+(pdftex.def)             Requested size: 412.56496pt x 167.1441pt.
+) [30 <C:/Users/Umut/workspace/MsThesisLatex/Thesis/figures/collision_pipeline.
+png>]
+(C:\Users\Umut\workspace\MsThesisLatex\Thesis\thesis.bbl
+! Undefined control sequence.
+l.32 \newblock \url
+                   {http://www.ogre3d.org/}, 2012.
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.38   \url
+           {http://www.sharecg.com/v/54636/gallery/5/3D-Model/Antonia-Sundre...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 35--40
+[][]\OT1/cmr/m/n/12 LadyJewell.  An-to-nia sun-dress. sharecg.
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 35--40
+\OT1/cmr/m/n/12 http://www.sharecg.com/v/54636/gallery/5/3D-Model/Antonia-Sundr
+ess,
+ []
+
+! Undefined control sequence.
+l.45   \url
+           {http://www.zbrushcentral.com/showthread.php?49053-Free-female-ba...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 42--47
+[][]\OT1/cmr/m/n/12 Mmava.  Free fe-male base mesh. zbrush cen-tral.
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 42--47
+\OT1/cmr/m/n/12 http://www.zbrushcentral.com/showthread.php?49053-Free-female-b
+ase-
+ []
+
+! Undefined control sequence.
+l.52   \url
+           {http://www.ogre3d.org/tikiwiki/tiki-index.php?page=Documentation...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 49--54
+[][]\OT1/cmr/m/n/12 J. Moan.  Doc-u-men-ta-tion ar-chi-tec-ture. ogre- ob-ject 
+ori-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 49--54
+\OT1/cmr/m/n/12 ented ren-der-ing en-gine.  http://www.ogre3d.org/tikiwiki/tiki
+-
+ []
+
+[31
+
+
+
 ]
+! Undefined control sequence.
+l.63 \newblock \url
+                   {http://openni.org/Documentation/ProgrammerGuide.html}, 2...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
 
-LaTeX Warning: Citation `Kavan2003' on page 20 undefined on input line 24.
+
+Overfull \hbox (103.96677pt too wide) in paragraph at lines 61--64
+[][]\OT1/cmr/m/n/12 OpenNI.  Pro-gram-mer guide-openni.  http://openni.org/Docu
+mentation/ProgrammerGuide.html,
+ []
+
+! Undefined control sequence.
+l.68 \newblock \url
+                   {http://www.primesense.com/en/nite}, 2012.
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
 
 
-! LaTeX Error: Not in outer par mode.
+Underfull \hbox (badness 10000) in paragraph at lines 66--69
+[][]\OT1/cmr/m/n/12 PrimeSense.  Nite. prime-sense nat-u-ral in-ter-ac-tion.
+ []
+
+Missing character: There is no ’ in font cmr12!
+) (C:\Users\Umut\workspace\MsThesisLatex\Thesis\appendix.tex [32]
+Appendix A.
+
+LaTeX Warning: File `figures/perfect_nose.ps' not found on input line 10.
+
+
+! LaTeX Error: Unknown graphics extension: .ps.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.39 \procedure{
-                updateBone}{
-You've lost some text.  Try typing  <return>  to proceed.
+l.10 ...es/perfect_nose.ps,width=0.80\textwidth}}}
+                                                  
+Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
-)
-Runaway argument?
-disjoint decomposition@\endcsname ##1{\FuncSty {\algocf@captname disj\ETC.
-! File ended while scanning use of \algocf@captname.
-<inserted text> 
-                \par 
-l.13 \input{chapter5}
-                     
-I suspect you have forgotten a `}', causing me
-to read past where you wanted me to stop.
-I'll try to recover; but if the error is serious,
-you'd better type `E' or `X' now and fix your file.
+[33
 
-! Missing \endcsname inserted.
-<to be read again> 
-                   \let 
-l.14 \input
-           {chapter6}
-The control sequence marked <to be read again> should
-not appear between \csname and \endcsname.
+]
 
-! I can't find file `{chapter6}'.
-l.14 \input{chapter6}
-                     
-Please type another input file name
-! Emergency stop.
-l.14 \input{chapter6}
-                     
-*** (job aborted, file error in nonstop mode)
+! LaTeX Error: Unknown graphics extension: .ps.
 
- 
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.22 ...re=figures/app2.ps,width=0.50\textwidth}}}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `figures/app2.ps' not found on input line 22.
+
+
+! LaTeX Error: Unknown graphics extension: .ps.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.22 ...re=figures/app2.ps,width=0.50\textwidth}}}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `figures/app3.ps' not found on input line 25.
+
+
+! LaTeX Error: Unknown graphics extension: .ps.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.25 ...re=figures/app4.ps,width=0.46\textwidth}}}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `figures/app4.ps' not found on input line 25.
+
+
+! LaTeX Error: Unknown graphics extension: .ps.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.25 ...re=figures/app4.ps,width=0.46\textwidth}}}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+[34]
+
+LaTeX Warning: File `figures/app5.ps' not found on input line 42.
+
+
+! LaTeX Error: Unknown graphics extension: .ps.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.42 ...re=figures/app6.ps,width=0.50\textwidth}}}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `figures/app6.ps' not found on input line 42.
+
+
+! LaTeX Error: Unknown graphics extension: .ps.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.42 ...re=figures/app6.ps,width=0.50\textwidth}}}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `figures/app7.ps' not found on input line 45.
+
+
+! LaTeX Error: Unknown graphics extension: .ps.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.45 ...re=figures/app8.ps,width=0.50\textwidth}}}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+LaTeX Warning: File `figures/app8.ps' not found on input line 45.
+
+
+! LaTeX Error: Unknown graphics extension: .ps.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.45 ...re=figures/app8.ps,width=0.50\textwidth}}}
+                                                  
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+) [35
+
+] (C:\Users\Umut\workspace\MsThesisLatex\Thesis\thesis.aux) ) 
 Here is how much of TeX's memory you used:
- 3881 strings out of 494045
- 52634 string characters out of 3148389
- 127335 words of memory out of 3000000
- 7065 multiletter control sequences out of 15000+200000
- 12533 words of font info for 46 fonts, out of 3000000 for 9000
+ 3931 strings out of 494045
+ 54229 string characters out of 3148389
+ 126552 words of memory out of 3000000
+ 7090 multiletter control sequences out of 15000+200000
+ 12057 words of font info for 44 fonts, out of 3000000 for 9000
  715 hyphenation exceptions out of 8191
- 44i,18n,24p,1180b,630s stack positions out of 5000i,500n,10000p,200000b,50000s
-!  ==> Fatal error occurred, no output PDF file produced!
+ 44i,8n,24p,1318b,214s stack positions out of 5000i,500n,10000p,200000b,50000s
+<C:/Program Files/
+MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Program Files/MiKTeX 2
+.9/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><C:/Program Files/MiKTeX 2.9/font
+s/type1/public/amsfonts/cm/cmmi12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/
+public/amsfonts/cm/cmr12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/am
+sfonts/cm/cmr17.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm
+/cmsl12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.
+pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti12.pfb>
+Output written on thesis.pdf (48 pages, 2296030 bytes).
+PDF statistics:
+ 216 PDF objects out of 1000 (max. 8388607)
+ 0 named destinations out of 1000 (max. 500000)
+ 66 words of extra memory for PDF output out of 10000 (max. 10000000)
+
