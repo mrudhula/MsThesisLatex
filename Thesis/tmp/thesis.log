@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.10.16)  17 OCT 2012 19:18
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.10.16)  18 OCT 2012 11:26
 entering extended mode
  Source specials enabled.
  %&-line parsing enabled.
@@ -263,9 +263,6 @@ LaTeX Warning: Label `eqn:transposed_weight_matrix' multiply defined.
 
 
 LaTeX Warning: Label `eqn:transposed_weight_matrix' multiply defined.
-
-
-LaTeX Warning: Label `algo:depth_patch' multiply defined.
 
 
 LaTeX Warning: Label `chapter8' multiply defined.
@@ -551,15 +548,29 @@ Underfull \hbox (badness 10000) detected at line 88
 [][]
  []
 
-[38] <figures/nite_joints.png, id=205, 936.49875pt x 511.9125pt>
-File: figures/nite_joints.png Graphic file (type png)
+[38]
 
-<use figures/nite_joints.png>
+LaTeX Warning: File `figures/nite_joints.png' not found on input line 101.
+
+
+! Package pdftex.def Error: File `figures/nite_joints.png' not found.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.101 ...s/nite_joints.png,width=1.00\textwidth}}}
+                                                  
+Using draft setting for this image.
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+[39]
 Underfull \hbox (badness 10000) detected at line 163
 [][]
  []
 
-) [39 <./figures/nite_joints.png (PNG copy)>] [40] (./thesis.bbl
+) [40] [41] (./thesis.bbl
 ! Undefined control sequence.
 l.32 \newblock \url
                    {http://www.ogre3d.org/}, 2012.
@@ -630,7 +641,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 49--54
 -
  []
 
-[41
+[42
 
 
 
@@ -665,7 +676,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 66--69
  []
 
 Missing character: There is no ’ in font cmr12!
-) (./appendix.tex [42]
+) (./appendix.tex [43]
 Appendix A.
 
 LaTeX Warning: File `figures/perfect_nose.ps' not found on input line 10.
@@ -682,7 +693,7 @@ l.10 ...es/perfect_nose.ps,width=0.80\textwidth}}}
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
-[43
+[44
 
 ]
 
@@ -742,7 +753,7 @@ l.25 ...re=figures/app4.ps,width=0.46\textwidth}}}
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
-[44]
+[45]
 
 LaTeX Warning: File `figures/app5.ps' not found on input line 42.
 
@@ -803,7 +814,7 @@ l.45 ...re=figures/app8.ps,width=0.50\textwidth}}}
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
-) [45
+) [46
 
 ] (./thesis.aux)
 
@@ -811,10 +822,10 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 3601 strings out of 493848
- 47340 string characters out of 1152822
- 132052 words of memory out of 3000000
- 6739 multiletter control sequences out of 15000+50000
+ 3597 strings out of 493848
+ 47225 string characters out of 1152822
+ 132061 words of memory out of 3000000
+ 6735 multiletter control sequences out of 15000+50000
  12847 words of font info for 47 fonts, out of 3000000 for 9000
  714 hyphenation exceptions out of 8191
  43i,18n,24p,1318b,439s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -831,9 +842,9 @@ e1/public/amsfonts/cm/cmsl12.pfb></usr/share/texmf-texlive/fonts/type1/public/a
 msfonts/cm/cmsy10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/
 cmsy8.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmti12.pfb><
 /usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmtt12.pfb>
-Output written on thesis.pdf (58 pages, 2648854 bytes).
+Output written on thesis.pdf (59 pages, 2578700 bytes).
 PDF statistics:
- 278 PDF objects out of 1000 (max. 8388607)
+ 280 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 76 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 71 words of extra memory for PDF output out of 10000 (max. 10000000)
 

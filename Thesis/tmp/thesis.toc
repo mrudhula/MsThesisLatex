@@ -46,8 +46,8 @@
 \contentsline {chapter}{\numberline {8}Cloth Resizing}{36}
 \contentsline {section}{\numberline {8.1}Depth Map Optimization}{36}
 \contentsline {section}{\numberline {8.2}Parameter Measurement}{38}
-\contentsline {chapter}{Bibliography}{41}
-\contentsline {chapter}{Appendix}{41}
-\contentsline {chapter}{\numberline {A}Rhinoplasty Application}{43}
-\contentsline {section}{\numberline {A.1}Experiment 1}{43}
-\contentsline {section}{\numberline {A.2}Experiment 2}{45}
+\contentsline {chapter}{Bibliography}{42}
+\contentsline {chapter}{Appendix}{42}
+\contentsline {chapter}{\numberline {A}Rhinoplasty Application}{44}
+\contentsline {section}{\numberline {A.1}Experiment 1}{44}
+\contentsline {section}{\numberline {A.2}Experiment 2}{46}
