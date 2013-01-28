@@ -1,198 +1,307 @@
-\chapter{Animation}
+\chapter{Cloth Resizing}
 \label{chapter5}
+My cloth resizing algorithm consists of three main steps:
+\begin{enumerate}
+\item Improve the raw depth map from Kinect by filtering.
+\item Fit the contour on the user blob and perform measurements. Compare with known human body proportions to acquire required scaling parameters.
+\item Perform the same measurements over a time frame in order to smooth the results. Scale the virtual avatar along with the cloth mesh prior to simulation.
+\end{enumerate}
 
-The animatable body exported by Blender is in Ogre xml mesh and skeleton format. They are converted to binary skeleton and mesh files by the OgreXML serializer, and imported natively into the software. Prior to animation, the bones are initialized to be oriented by the data from depth sensor. Afterwards, they are updated with the orientation data.
+\section{Depth Map Optimization}
+\label{section_5_1}
 
-\section{Initialization}
-\label{section5_1}
+At 30 fps, Kinect provides a depth map and a user map, both at 640x480 resolution. Depth map consists of distances with the sensor in millimeters. 
 
-Animatable meshes are loaded and maintained via the SkeletalMesh class I have implemented, which bridges the gap between Ogre�s skeletal animating system and the input from Kinect sensor. When an instance of the object is initialized, it is given a mesh file. After the mesh is loaded with the skeleton data, the bone list is iterated through, given the initial orientation uniquely for each animatable bone with the Kinect sensor. 
+The depth measurement of the Kinect is not very accurate compared to high end 3D
+depth systems like laser scanners. The accuracy of the depth value decreases
+quadratically. Error values for different distances is shown in Table
+\ref{tbl:error_kinect}.
 
-The animatable bones are set to be manually controlled, not inherit orientation from parents, given the initial orientations. At that state, the bone is set to initial state, to be reset at every frame with updated orientations. The non-animated bones are left to be automatically controlled and inherit orientation in order to keep them aligned with their parent bones. 
+\begin{table}
+\center
+\begin{tabular}{ | l | l | l | l |}
+\hline
+\textbf{Distance of Point} & 1m & 3m & 5m \\ \hline
+\textbf{Error in measurement} & 0.5cm & 1.5cm & 4cm \\ 
+\hline
+\end{tabular}
+\caption{Kinect Depth Accuracy \cite{Kourosh2012}}
+\label{tbl:error_kinect}
+\end{table}
 
-\section{Animation}
-\label{section5_2}
-Every frame, the orientation information from the bones are extracted in 3x3 matrix form., along with the confidence of the sensor in that orientation. If the confidence is less than 0.5 in 1, the bones are left as they were in the previous frame to avoid unnatural movements. 
+For my application, the Kinect needs to be able to see the whole human body,
+which requires at least 3m away from the sensor for a person with 1.7m height,
+resulting in an erroneous depth map. This problem can be seen in Figure
+\ref{fig:kinect_depth_output_comparison}.
 
-The matrix from the Kinect is row major, whereas Ogre works with column major matrices. The transpose matrix is given to Ogre, turned into a quaternion and converted to local coordinate space. The updated orientation is fed into the bone, after it is multiplied with the initial orientation. The root bone is translated in local space in the end, to simulate the translation, above rotation.
 
-This technique is used with the top-part of the dress as well, and it will be used for jackets, shirts and other clothing ware which do not leave the body surface by a great distance. 
+\begin{figure}[h]
+\centerline{\fbox{\psfig{figure=figures/kinect_depth_output_comparison.png,width=1.00\textwidth}}}
+\caption{Depth Output From Kinect with Improved Results. The leftmost image is
+the raw output, the application of filters results in better performance in the other two images  \cite{Tong2012}. This improvement utilizes more than one depth streams. }
+\label{fig:kinect_depth_output_comparison}
+\end{figure}
 
-\section{Algorithm}
-\label{section5_3}
+In order to acquire a better depth map, I will perform the following operations:
 
-I used linear weighted skin blending \cite{Kavan2003} in order to simulate deformation on the characters skin. The effects of four bones with different weights are combined linearly to change the positions and normal of vertices.
+Let us take the depth map D as a 640x480 matrix. Initially, the user pixels are
+extracted by a pixel-by-pixel comparison with the user map. User map is another
+acquired map from the sensor, with the same size as depth map. The value of a
+pixel is set to a non-zero value if the pixel belongs to a recognized user. In
+this case, we are only interested in one user, $D_1$ represents the depth pixels
+of the user we are interested in, whereas $U_1$ is the bit map of the user.
+Also, the non-user pixels must be filled with the mean value of the user pixels, in order to perform Gaussian filtering on the image.
 
-\subsection{The bone transformation Pseudo Code}
+\begin{equation}
+D_1=(D-(D \times U_1 )) \times 1/n \times \sum\limits_{i=0}^n ((D \times U_1 )_i + d \times U_1 )
+\label{eqn:patch_depth}
+\end{equation}
 
-The pseudo code below is executed during the pre-render cycle. The bone
-orientations are set to be ready for animation, deformation and rendering. At
-every render cycle, update Skeleton function is called, which automatically
-fetches the coordinates from the Kinect and sets up the skeleton for vertex
-blending. 
+Next, we perform Gaussian filtering on the user’s depth map, to normalize and
+improve the quality of the depth map. The size and sigma parameters of the Gaussian filter will be varied in order to maximize the performance and the quality of the results. 
+
+\begin{equation}
+D_G=D_1*G
+\label{eqn:gaussian_convolution}
+\end{equation}
+
+After these operations, we have a normalized and filtered depth map, which also
+has better planar values (x and y) since the holes due to depth stream will be filled.
 
 \begin{algorithm}
 \dontprintsemicolon % Some LaTeX compilers require you to use \dontprintsemicolon instead
-\SetKwBlock{function}{function}{endfunction}
-\function(transformBone\ArgSty{(bone)}){
-\KwIn{A bone and the corresponding orientation matrix from Kinect}
-\KwOut{The same bone with updated orientation}
-$q_I =$ initial orientation of bone\;
-$q_N =$ relative orientation\;
-$q_K = 3\times3$ Orientation Matrix From Kinect\;
-\If{$kinect_{confidence} > 0.5$} {
-  $q_Q = toQuaternion(q_K)$\;
-  $q_N = toLocalSpace(q_Q)$\;
-  $q = q_N \times q_I$\;
-  $bone.orientation=q.normalise{\left(\right)}$\; }}
+\KwIn{Raw Depth Stream From Kinect}
+\KwOut{Depth Stream With Patched Holes and Gaussian Optimization }
+$depth_{sum}=0$ \;
+$n_{user} =0$\;
+\For{i \bf{from} 0 \bf{to} $d_width$ }{
+\For{j \bf{from} 0 \bf{to} $d_height$ }{
+\If{$U(i,j)$} {
+  $depth_{sum}=depth_{sum}+D(i,j)$\;
+  $n_{user}+=1$\;
+ }}}
+$depth_{average}=depth_{sum}/n_{user}$ \;
+\For{i \bf{from} 0 \bf{to} $d_width$ }{
+\For{j \bf{from} 0 \bf{to} $d_height$ }{
+\If{\bf{not}  $U(i,j)$} {
+  $D(i,j)=depth_{average}$\;
+ }}}
+ 
+\For{i \bf{from} 0 \bf{to} $d_width$ }{
+\For{j \bf{from} 0 \bf{to} $d_height$ }{
+\If{$U(i,j)$} {
+  $D(i,j)=D(i-m:i+m,j-n:j+m) * Gaussian(m,n,e)$\;
+ }}}
+\Return{D}
+\caption{Depth Map Optimization Algorithm}
+\label{algo:depth_patch}
+\end{algorithm}
 
-\If{$user$ ${\bf is }$ $new$} {
-  $p_{torso}.initialize()$\tcc*{Initialize torso position}  \;
+\section{Parameter Measurement}
+In paremeter measurement, I will handle two objectives: To determine the optimal
+sizes of collision spheres for cloth simulation and the required scaling parameters for the cloth to optimally fit the user. It is important that these algorithms do not take more than a thirtieth seconds on a high-end consumer computer in order to keep the real time experience smooth, since there is an averaging over time is involved.
+
+First step will be fitting spheres in various locations in the optimized body
+map. These fitted spheres will provide the radii for the collision spheres which
+will be used to simulate the cloth. Locations of the machine-provided user
+joints are shown in Figure \ref{fig:nite_joints}. These are where spheres will
+be located.
+
+\begin{figure}[h]
+\centerline{\fbox{\psfig{figure=figures/nite_joints.png,width=1.00\textwidth}}}
+\caption{Human Joints provided by NITE }
+\label{fig:nite_joints}
+\end{figure}
+
+Sphere fitting algorithm will go as following:
+\begin{enumerate}
+\item Take vector $J_i$ which represents the coordinates of the $i^{th}$
+joint.
+First, initialize the radius of the sphere by the difference of z-dimension with the overlaying point in the depth map.
+\begin{equation}
+r_i^z=J_i^z-D^z(J_i^x,J_i^y)
+\label{eqn:z_sphere_radius}
+\end{equation}
+\item Repeat the same process for the x and y dimensions in both negative and positive directions. Take the bigger radius. If there are no points on either side, set it to zero.
+\begin{equation}
+r_i^{x,y}=max(\| \pm J_i^{x,y} \mp D^{x,y}(J_i^{y,x},J_i^z)\|)
+\label{eqn:x_y_sphere_radius}
+\end{equation}
+\item 3. The radius of the sphere is equal to the minimum of these three values.
+\begin{equation}
+r_i=min(r_i^{x,y,z})
+\label{eqn:minimum_sphere-radius}
+\end{equation}
+\end{enumerate}
+
+\begin{algorithm}
+\dontprintsemicolon % Some LaTeX compilers require you to use \dontprintsemicolon instead
+\KwIn{Optimized Depth Stream From Kinect}
+\KwOut{Collision Sphere radii for each joint }
+\ForEach{joint }{
+$p=pos_{J_m}$\;
+$r_z=\sqrt{P_z^2-D_z(P_x,P_y)^2}$
+\For{i \bf{from} $P_x$ \bf{to} $0$ }{
+\If{$D(i,P_y)$ \bf{equals}  $P_z$} {
+  $r_x^- = i$\;
+  break\;
  }
-\ForEach {bone}{
-\If{$bone_{orientation}$ ${\bf is }$ $new$}{
-$transformBone(bone)$\;
-$skeleton.needsUpdate()$\;}}
-\caption{Bone transformation algorithm}
-\label{algo:transformBone}
+}
+\For{i \bf{from} $P_x$ \bf{to} $depth_width$ }{
+\If{$D(i,P_y)$ \bf{equals}  $P_z$} {
+  $r_x^+ = i$\;
+  break\;
+ }
+}
+\For{j \bf{from} $P_y$ \bf{to} $0$ }{
+\If{$D(P_x,j)$ \bf{equals}  $P_z$} {
+  $r_y^- = j$\;
+  break\;
+ }
+}
+\For{j \bf{from} $P_y$ \bf{to} $depth_height$ }{
+\If{$D(P_x,j)$ \bf{equals}  $P_z$} {
+  $r_y^+ = j$\;
+  break\;
+ }
+}
+$r_m=min(r_z,r_x^-,r_x^+,r_y^-,r_y^+)$
+}
+\Return $(r_0,r_1 \ldots r_n)$ 
+\caption{Sphere Fitting Algorithm}
+\label{algo:sphere_fitting}
 \end{algorithm}
 
-\subsection{Deformation Pseudo Code}
+\section{Human Body Parameters}
+\label{section_5_3}
 
-Algorithm \ref{algo:updateMesh} is executed prior to rendering, to update the
-vertices of the skin. The vertex blending function is where the deformation
-actually occurs.
+Next step will be acquiring the optimal scaling parameters for the cloth.
+The human body proportions to be used are shown in Table \ref{tbl:human_body_proportions}. In these proportions, the unit width and height are taken as the width and height of the head. The measurements source indicates how the measurement on the user will be performed: Joint Location means algorithm will make use of the joint locations provided by NITE, whereas depth map means the filtered depth map will be used. They can be used together in order to improve the performance. Some of these proportions are not standard enough to be used as references and vary greatly, such as hip width, and will be used directly from measurement.
+
+\begin{table}
+\center
+\begin{tabular}{ | l | l | l | l |}
+\hline
+\textbf{Distance} & \textbf{Width} & \textbf{Height} & \textbf{Measure Source} \\ \hline
+Head & 1w (1) & 1h (2) & Depth Map+Joint Location \\ \hline
+Body Height & - & 7 (3) & Depth Map \\ \hline
+Hip Height & - & 4 (4) & Joint Location \\ \hline
+Elbow-Fingertip & - & 2 (5) & Depth Map+Joint Location \\ \hline
+Wrist to Fingertip & - & 1 (6) & Depth Map+Joint Location \\ \hline
+Shoulder Width & 3 (7) & - & Depth Map+Joint Location \\ \hline
+Hip Width & - (8) & - & Depth Map \\ \hline
+Torso Height & - & - (9) & Joint Location \\ 
+\hline
+\end{tabular}
+\caption{Human Body Proportions \cite{Willis2012}. Numbers in parenthesis represent the lines on Figure \ref{fig:body_proportions}.}
+\label{tbl:human_body_proportions}
+\end{table}
+
+\begin{figure}[h]
+\centerline{\fbox{\psfig{figure=figures/body_proportions.png,width=0.50\textwidth}}}
+\caption{Proportions on the Body}
+\label{fig:body_proportions}
+\end{figure}
+
+Along with the ratios, the actual size in meters in height and width shall be measured and recorded as well, since the cloth needs to be scaled according to the user. In my initial approach, I will scale the whole cloth as a whole, with different parameters for three dimensions. If this approach proves unrealistic, I will process with different scaling parameters for different portions of the cloth, although this would not prove useful in a real fitting room, since most shops do not offer extensive customization.
+
+As the types of cloth focus on different portions of the body, the human body proportions from different areas should not affect the scaling parameters equally. Therefore, the main body parameters for different types of clothes are listed in Table 3.
+
+\begin{table}
+\center
+\begin{tabular}{ | p{3cm} | p{5cm} | p{5cm}  |}
+\hline
+\textbf{Type Of Cloth} & \textbf{Primary Height Proportions} & \textbf{Primary Width Proportions}  \\ \hline
+Trousers & Hip Height & Hip Width \\ \hline
+Long Sleeves & Body Height & Elbow-Fingertip Height,Shoulder Width \\ \hline
+Short Sleeves-Sleeveless & Torso Height & Shoulder Width \\ 
+\hline
+\end{tabular}
+\caption{Primary Proportions for Different Cloth Types}
+\label{tbl:primary_proportions}
+\end{table}
+
+The parameter estimation algorithm will go as following:
+
+\begin{enumerate}
+\item For a particular cloth, take the primary measured proportion as $P_i^0$. This will be the measured dimension of said proportion. This process will be repeated for width (W) and height (H).
+\item With all the other measured proportions, calculate the estimated value of $P_i$ as $P_i^j$. Here, R denotes the ratio from Table \ref{tbl:human_body_proportions}.
+\begin{equation}
+W,H_i^j=W,H_j \times R_i^j
+\label{eqn:proportion_estimation}
+\end{equation}
+\item Find the optimized main parameter width as the average:
+\begin{equation}
+W,H_i=1/(n+1) \times \sum\limits_{j=0}^n W,H_i^j
+\label{eqn:optimized_parameter}
+\end{equation}
+\end{enumerate}
+
+After finding the optimized main parameter in meters, it can be used to scale the virtual cloth by calculating the ratio.
 
 \begin{algorithm}
 \dontprintsemicolon % Some LaTeX compilers require you to use \dontprintsemicolon instead
-\SetKwBlock{function}{function}{endfunction}
-\function(prepareBlendMatrices\ArgSty{(mesh)}){
-\ForEach {bone}{
-bone.applyScale()\;
-bone.applyTransform()\;
-bone.applyOrientation()\;
-}
-$i=0$\;
-\ForEach {bone}{
-$m[i] = bone.getTransformationMatrix4\times4$\;
-$i++$\;
-}
-mapIndex=mesh.getIndexMap() \tcc*{Index Map contains the bone pointers for
-every vertex}\;
-$i=0$\;
-\ForEach {indexSet ${\bf in }$ mapIndex}{
-$m_b[i] = indexSet[i]+m$ \tcc*{Blend matrices are pointers to the individual
-bone matrices}\;
-$i++$\; }
-\Return $m_b$\;
-}
 
-\function(vertexBlend\ArgSty{($m_b$)}){
-pos=*mesh.positions\tcc*{Pointer to the position matrix}\;
-norm=*mesh.normals\tcc*{Pointer to the normal matrix}\;
-$b_i=$*mesh.blendIndices\tcc*{Pointer to the blend index matrix}\;
-$b_w=$*mesh.blendWeights\tcc*{Pointer to the blend weight matrix}\;
-\ForEach {4 vertices ${\bf in }$ pos}{
-\ForEach {vertex ${\bf in }$ 4 vertices}{ 
-$m[1,2,3,4]=m_b[b_i[vertex]]$ \tcc*{Weighting Bones}\;
-$m_c[j]=collapseMatrix(m,b_w[vertex]){\bf (i)}$\;
+$t_{proportion}=import(Table \ref{tbl:human_body_proportions})$ \;
+$t_{primary}=import(Table \ref{tbl:primary_proportions})$ \;
+$ct=cloth_{type}$\;
+$width_{main}=t_{proportion}.width(ct)$\;
+$width_{sum}=0$\;
+$count_{effector}=0$\;
+\ForEach{width \bf{in} $t_{proportion}$ }{
+$w_i=measure(p_i)$\;
+$w_i^j=w \times t_{proportion}.ratio(p_i,parameter_{main})$\;
+$width_{sum}=width_{sum}+w_i^j $\;
+$count_effector++ $\;
 }
-$pos[4 vertex]=m_c\times pos[4 vertex]$
-$norm[4 vertex]=m_c\times norm[4 vertex]$
-}}
-\If {skeleton needs update}{
-$m_b=prepareBlendMatrices(skeleton.mesh)$\;
-$vertexBlend(m_b)$\;
+$width_{weighted}=width_{sum}/count_effector$
+$x_s=width_{weighted}/width_{cloth}$\;
+
+$height_{main}=t_{proportion}.height(ct)$\;
+$height_{sum}=0$\;
+$count_{effector}=0$\;
+\ForEach{height \bf{in} $t_{proportion}$ }{
+$h_i=measure(p_i)$\;
+$h_i^j=h \times t_{proportion}.ratio(p_i,parameter_{main})$\;
+$height_{sum}=height_{sum}+h_i^j $\;
+$count_effector++ $\;
 }
-\caption{Mesh update algorithm called at every frame.}
-\label{algo:updateMesh}
+$height_{weighted}=height_{sum}/count_effector$
+$y_s=height_{weighted}/height_{cloth}$\;
+\Return{$(x_s,y_s)$}
+\caption{Cloth Resizing Algorithm}
+\label{algo:cloth_resize}
 \end{algorithm}
 
-{\bf (i)}:In my models, every vertex is assigned to at most 4 different bones.
-In order to speed up the deformation process, the transformation matrices for the corresponding matrices are collapsed into one. Collapsing is simply weighted addition of the four weighting matrices for a vertex.
+\section{Temporal Optimization and Scaling}
+In the step two of the overall algorithm, we will have acquired the following usable parameters:
 
-\subsubsection{Matrix Operations}
-After four sets of matrix for four vertices are collapsed into four matrices, the following matrix operations are performed. 4 vertices are processed together in order to fully utilize the matrix multiplication features.
-Let us take the weighted matrix for vertex i:
+\begin{itemize}
+\item Collision Sphere Radii	$r_i$
+\item Cloth and Avatar Scaling Parameters $x_s$ and $y_s$
+\item Multiple SceneManagers can be used to create other visual resources (ex. RenderToTexture environment)
+\end{itemize}
 
-\begin{equation}
-M_i=
-\begin{bmatrix}
-m_{00}^i & m_{01}^i & m_{02}^i & m_{03}^i \\
-m_{10}^i & m_{11}^i & m_{12}^i & m_{13}^i \\
-m_{20}^i & m_{21}^i & m_{22}^i & m_{23}^i \\
-0 & 0 & 0 & 1
-\end{bmatrix}
-\label{eqn:weighted_matrix_for_i}
-\end{equation}
+However, these measurements will be performed with the data from a depth sensor, which has a high error rate. In order to optimize these parameters, I will repeat the process in the second step for a certain number of times and use the average parameters in the simulation phase. 
 
-Note that this matrix is a linear combination of four linear
-transformation matrices from four weighting bones, hence the $3^{rd}$ row is by
-default  [0 0 0 1].
+Another approach would be optimizing the depth map over a time period, although this method would suffer from the users movements as well. Therefore, I plan to perform the optimization on the parameters rather than depth stream.
 
-We also have the initial positions for the 4 vertices as $[p^i_x \: p^i_y  \:
-p^i_z  \: 1]$.$3^{rd}$ value, which is one is not included in the vertex buffer
-and it will not be taken into account with the calculations.
+Averaging will be simply summing up all the information from previous time frames and dividing the result buy the number of samples.
 
-In order to generate an efficient SIMD process, I will perform 4x3 dot product
-calculations in each instruction. Dot products are commanded in the machine language, which makes it more preferable to higher level matrix calculations. To acquire the simulated x coordinates for the four vertices, we combine the first rows of all collapsed matrices for all and transpose it:
+After the optimized parameters are acquired, it will come to scaling the cloth and body meshes accordingly. The mesh parameters for three axis will be as $(x_s,y_s,avg(x_s,x_y))$, since we will not have enough information on z-dimension to make accurate calculations.  Therefore the value will be averaged between the scaling factors for x and y dimensions.
 
-\begin{equation}
-M_T=
-\begin{bmatrix}
-m_{00}^0 & m_{00}^1 & m_{00}^2 & m_{00}^3 \\
-m_{01}^0 & m_{01}^1 & m_{01}^2 & m_{01}^3 \\
-m_{02}^0 & m_{02}^1 & m_{02}^2 & m_{02}^3 \\
-m_{03}^0 & m_{03}^1 & m_{03}^2 & m_{03}^3 
-\end{bmatrix}
-\label{eqn:transposed_weight_matrix}
-\end{equation}
-
-To coincide with the transposed matrix, I also create a position matrix with positions from all vertices:
-
-\begin{equation}
-P_T=
-\begin{bmatrix}
-p_{x}^0 & p_{x}^1 & p_{x}^2 & p_{x}^3 \\
-p_{y}^0 & p_{y}^1 & p_{y}^2 & p_{y}^3 \\
-p_{z}^0 & p_{z}^1 & p_{z}^2 & p_{z}^3  
-\end{bmatrix}
-\label{eqn:transposed_weight_matrix}
-\end{equation}
-
-Next, the matrices $M_T$ and $P_T$ are multiplied in a row-by-row fashion and
-summed together:
-
-\begin{equation}
-d_x=M_{T0} \times P_{T0} + M_{T1} \times P_{T1} M_{T2} \times P_{T2} +M_{T3}
-\label{eqn:transposed_weight_matrix}
-\end{equation}
-
-The result vector $d_x$ is a 4x1 vector which has the post-blended vertex
-x-coordinates: $[P^0_x \: P^1_x  \: P^2_x  \: P^3_x]$. The same procedure is
-applied to the normal of a vertex. Process continues with the next set of four vertices.
-
-\section{Interaction Between the Body And Cloth}
-\label{section5_4}
-The movements of the user are passed on the pieces of cloth separately.
-
-\subsection{Non-Simulated Section}
-Non simulated parts of the clothes are the ones which do not get separated from
-the body most of the time. Most parts of our clothes usually stick to the body and experience the same deformation as our skin. In order to increase performance, detailed simulation on these parts are not run, instead they are deformed the same as the remained of human body. In the full-body dress I am working with, the part above the waist has a skeleton similar to the body and the information from the Kinect is passed on to this portion as well. It is treated as a part of the actual avatar.
-
-\subsection{Simulated Section}
-The movements of the body are transferred into the simulated section of the cloth in three main ways:
-
-\subsubsection{Transformation}
-The fixed vertices are transformed to match the remainder of the cloth. The
-transformation is done on the rendering level, the physx world experiences no difference in transformation manner. This process keeps the cloth aligned with the rest of the visible world.
-
-\subsubsection{Collision}
-The colliding body is updated and collided with the cloth. The colliding body
-consists of 16 spheres and the capsules connecting the spheres. The details of
-this body is explained in section \ref{section_7_1}. This process keeps the
-cloth out of the avatar’s way.
-
-\subsubsection{Inertia}
-The Inertia of transformations is passed onto the simulated cloth, increasing
-the realism. The passed on inertia comes from the rotation and the transformation of the root bone of the human skeleton. With this process, although there is no actual transformation in the physics world, the resulting inertia effects are visible on the cloth itself. 
+\begin{algorithm}
+\dontprintsemicolon % Some LaTeX compilers require you to use \dontprintsemicolon instead
+\KwIn{Raw Depth Stream From Kinect}
+\KwOut{Depth Stream With Patched Holes and Gaussian Optimization }
+$s=2 \times 30 Array for x and y scaling parameters for 30 frames$ \;
+$r=16 \times 30 Array for joint radii for 30 frames$\;
+\For{i \bf{from} 0 \bf{to} $30 frames$ }{
+	r[i]=fitSpheres()\;
+	s[i]=optimizeScaleParameters()\;
+}
+$r_{final}$=avg(r)\;
+$s_{final}$=avg(s)\;
+\caption{Temporal Averaging}
+\label{algo:temporal_averaging}
+\end{algorithm}

@@ -1,0 +1,42 @@
+\chapter{Hand Tracking}
+\label{chapter3}
+
+\section{OpenCV}
+ 
+Although OpenNI/NITE provided me the joint information, useful functions for a smooth user interface, such as hand state recognition or hand swipe filters were omitted in the open source natural interaction libraries I use. In order to simulate mouse-clicking behavior, I decided to track the hands of the user to be used as cursors, notice open/close hand gestures for clicking events. In order to find implementations of the algorithms in my proposed hand-track solution, I researched various libraries which came with functions implementing such algorithms. I chose to work with OpenCV, due to its maturity, community and integration with other libraries.
+
+OpenCV not only provides basic functions to perform complex and processor-intensive image processing functions such as, facial recognition system, gesture recognition, stereoscopic 3D and segmentation, it also has a very vast machine learning aspect, including boosting, decision three learning and many more features \cite{opencv_library}.
+
+\section{The Process}
+
+Utilizing such a powerful middleware as a depth sensor, I am able to perform very robust background subtraction with almost no effort skeletal body tracking is another embedded property of the software which I use, giving me a speed boost. Therefore, I implemented two different techniques: Hand state recognition and hand swipe recognition.
+
+Hand swipe recognition is simpler compared to hand state recognition. It is just a matter of keeping track of the hand’s 3D position, and keeping a listener which is activated when the 3D velocity of the hand exceeds a certain number. I also performed a number of optimizations on this function to make it invariant with the size and location of the user.
+
+Open/Close Hand recognition is harder than Hand Swipe recognition. I had to perform advanced image processing in order to determine the state of the hand successfully, at relatively low resolutions and large distances. My algorithm is shown in Figure \ref{fig:hand_recognition_cycle}:
+
+\begin{figure}[h]
+\centerline{\fbox{\psfig{figure=figures/hand_recognition_cycle.png,width=1.0\textwidth}}}
+\caption{Hand Recognition Algorithm}
+\label{fig:hand_recognition_cycle}
+\end{figure} 
+
+\begin{enumerate}
+\item The size information for the region of interest is drawn from the distance between the users head and users neck.
+\item The hand is located using skeletal body tracking.
+\item The marked region is copied from the depth stream 
+\item Two dilation and one erosion operations are performed to smooth the hand image
+\item The contour is found on the filtered image
+\item The convex hull of the found contour is calculated.
+\item The depth difference between the hull and the actual contour is taken as the reference for hand-state.
+\end{enumerate}
+
+\begin{figure}[h]
+\centerline{\fbox{\psfig{figure=figures/open_closed_hands.png,width=1.0\textwidth}}}
+\caption{Hand Images and Contours from Depth Stream}
+\label{fig:open_closed_hands}
+\end{figure}
+
+The test run results can be seen in figure Figure \ref{fig:open_closed_hands}. The left part of the figure shows the hand in open state, whereas the hand is closed on the right part.
+
+Ultimately, I plan to implement the algorithm described in \cite{Tang2011}, where the author claims to have achieved 96\% correct results. I have not included RGB image in the process yet, neither have I implemented complex machine learning. In addition to these methods, I will record hand images for testing objectively. These topics are in my future research plans. 

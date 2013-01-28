@@ -1,69 +1,35 @@
-\chapter{3-D Model}
+\chapter{Collision}
 \label{chapter4}
 
-There are two types of 3-D models I needed for my thesis project: A cloth mesh to be simulated and a human body to dress with the simulated cloth.
+Currently, the collision between the cloth and the body parts and the self-collision of cloth particles are implemented. This collision is handled by the PhysX engine. 
 
-\section{Human Avatar}
-\label{section4_1}
+\section{Preparation and Settings}
+\label{section_4_1}
 
-Although I have experience with modeling in Blender, designing a 3-D human avatar from scratch seemed unnecessary, as it is not in my area of expertise and there are available models online. After a vast search, I decided to utilize the model I have acquired from a forum, as it was realistic in appearance, proportions and details \cite{Mmava2012}. In order to make it look more realistic, I needed to implement additional features.
+Cloth vertices can collide with pre-defined spheres, capsules or planes. In order to keep the program stable and running at real-time, it is important to find the balance between collision detail and performance. 
 
-\subsection{Rigging}
-
-Animating a 3D mesh requires skinning, which is moving the vertices with respect to a bone on a skeleton. The model I acquired from internet had no skinning or material information, which I meant I had to do it myself. And even it was a pre-skinned model, I would prefer doing it on my own, in order to be able to integrate the model easily into my software. 
-
-I performed the skinning in blender, where I used the predefined human skeleton, detailed in H-ANIM2 level with a much simplified spine (Figure \ref{fig:rigging_skeleton}). 
+The female body bone information is extracted from the input skeletal mesh class, and the colliding capsules are generated automatically, although the radii of the bones are specified manually. The collision information is specified in two arrays, one being the positions and radii of the spheres and the second defining pairs of spheres which form capsules. A total of 16 capsules and spheres are used in the whole collision model, which simulates all the movable bones of the female body (Figure \ref{fig:colliding_human_body}). The collision data is prepared before the cloth creation, and given as a parameter. 
 
 \begin{figure}[h]
-\centerline{\fbox{\psfig{figure=figures/rigging_skeleton.png,width=1.00\textwidth}}}
-\caption{The Rigging Base Skeleton}
-\label{fig:rigging_skeleton}
+\centerline{\fbox{\psfig{figure=figures/colliding_human_body.png,width=1.00\textwidth}}}
+\caption{Character formed with collision spheres and capsules}
+\label{fig:colliding_human_body}
 \end{figure}
 
-Prior to rigging, the skeleton needed to match the given mesh in position. After modifying the initial bone positions, the vertex groups are assigned to the bones with proper weights (Figure \ref{fig:weight_humerus_r}). After assigning every vertex to the appropriate bones, there were no cracked surfaces with motions which are natural for humans. 
+Other than the defined collision spheres and capsules, the cloth naturally collides with the floor actor of the PhysX environment as well. This however, introduces a problem: The models from Blender are exported as root joint coinciding with the origin. This is required for successful animation. However, in the PhysX environment, the floor is created automatically at (0,0,0), and the initial position of the lower dress is partly below floor, which produces unrealistic visuals. In order to overcome this issue, the lower cloth vertices are introduced into the software with increased y coordinates, in order to keep them above ground. In the rendering process, lower cloth is attached to a scene node with negative y offset equal to the boost in the vertices, which places the lower dress exactly where it should be. This process overcomes the floor collision problem.
 
-In the end, the model was exported in OGRE .mesh format along with the skeleton it used.
+Every frame, the collision sphere positions are updated with the data from the updated body skeleton, prior to the cloth simulation. 
+
+\section{Algorithm}
+
+PhysX provides two options for collision detection: Discrete and Continuous Collision. I chose to work with the latter due to more robust results, although it takes twice as long to do the calculation.
+
+The solution is performed for the trajectory of the capsule or sphere and the particle for frame interval. This approach is especially robust in fast motion, which is important since the motion is created in real time. The required solution is a 6th degree polynomial, which is approximated with quadratic equation. The pipeline is given in Figure \ref{fig:collision_pipeline}.
+
+The solution is performed on the GPU, which increases the parallel performance greatly, allowing for frame rates of 600+fps. The cloth is discretized as a triangle mesh, and since the collision is only detected on vertices, the density must be high enough in order to avoid penetration at the areas \cite{Kim2011}, \cite{Tonge2010}. 
 
 \begin{figure}[h]
-\centerline{\fbox{\psfig{figure=figures/weight_humerus_r.png,width=1.00\textwidth}}}
-\caption{The vertex weights for the Humerus.R bone}
-\label{fig:weight_humerus_r}
+\centerline{\fbox{\psfig{figure=figures/collision_pipeline.png,width=1.00\textwidth}}}
+\caption{Collision Detection Pipeline \cite{Tonge2010} }
+\label{fig:collision_pipeline}
 \end{figure}
-
-\subsection{Materials}
-
-The base model came with no material information. In order to improve the realism of the model, I implemented texturing/painting for various parts of the body. These parts include the general skin, eyes, nails and lips so far (Figure \ref{fig:detailed_face}).  I will continue material introduction to other parts I deem necessary to improve realism. I also added non-simulated hair and some accessories such as hair sticks and earrings to the model to make it look more realistic.
-
-\begin{figure}[h]
-\centerline{\fbox{\psfig{figure=figures/detailed_face.png,width=1.00\textwidth}}}
-\caption{Detailed Materials on the Face}
-\label{fig:detailed_face}
-\end{figure}
-
-\section{Cloth Mesh}
-\label{section4_2}
-
-A major part of my thesis is on accurate cloth simulation. Next to the required software and algorithms, I also needed accurately modeled cloth meshes to be simulated. After my searching and filtering through a variety of models online, I decided to work with a dress model \cite{LadyJewell2012}. The model comes as pure mesh, without any material information, although it was detailed well and sufficient for my research.
-
-\subsection{Body Positioning and Splitting the Dress Mesh}
-
-To correctly animate and simulate the dress on a human avatar, I needed them to be in proportion with each other and properly aligned. The initial positions and proportions of the human avatar and the dress mesh were set in Blender, as it was easier to perform this with a visual tool (Figure \ref{fig:dress_and_body}).
-After various attempts to simulate all the vertices on the dress mesh, I failed to achieve a realistic looking results due to two main reasons:
-\begin{itemize}
-  \item The whole dress consisted of 4088 vertices. Although I was able to simulate in real-time, too many vertices resulted in the simulation algorithm to break down due to the very large number of vertices in the cloth. It shifted from a fabric structure to more of a jelly form, over stretching and tearing with its own weight.
-  \item The friction necessary to keep the dress on the Human Avatars shoulders was not sufficient enough to keep the dress on the avatar. It kept sliding, stretching and acting unnaturally.
-\end{itemize}
-
-In order to overcome these problems, I decided to split the dress mesh into two parts, and utilize different animation techniques on them.
-
-\begin{itemize}
-  \item The top part, which should be attached to the body, not blowing in the wind, was modeled as a static mesh, with skinning like the human avatar. It was animated with the same transformations as the human avatar, matching its position and staying on the body perfectly.
-  \item The bottom part was the part to be simulated, affected by inertia, wind and other factors. Their attachment line is just above the waist of the human avatar, which was confirmed after various experimentations with other locations (Figure \ref{fig:dress_and_body}). Keeping the line too below resulted in both unnatural collisions and the cloth being too rigid. Keeping it too high brought out the original problems. With its current setting, the dress mesh is animated naturally on the virtual avatar.
-\end{itemize}
-
-\begin{figure}[h]
-\centerline{\fbox{\psfig{figure=figures/dress_and_body.png,width=1.00\textwidth}}}
-\caption{The  Dress, positioned on the body, along with the upper-part skeleton. In this shot, the bottom part is highlighted in orange border.}
-\label{fig:dress_and_body}
-\end{figure}
-
