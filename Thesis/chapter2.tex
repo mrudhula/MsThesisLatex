@@ -18,8 +18,61 @@ The matrix from the Kinect is row major, whereas Ogre works with column major ma
 
 This technique is used with the top-part of the dress as well, and it will be used for jackets, shirts and other clothing ware which do not leave the body surface by a great distance. 
 
-\section{Algorithm}
+
+\section{Motion Filtering}
 \label{section2_3}
+
+Application of the raw data from the sensor causes unnatural movements due to the noise in the sensor input, self-occlusions of the body and inadequate IK solvers.  In order to present a more realistic avatar animation, a series of filters and constraints are applied to the sensor data. 
+
+\subsection{Position Filtering}
+The most severe disruption of the self-occlusion problem takes place in the joint position acquisition. There is no possible way of acquiring the correct position of a limb when the sensor has no vision of it. However, the way humans move their limbs under normal conditions follow certain principles and trends, which can be used to estimate the locations of occluded body parts. The nature of these motions, demonstrating traits similar to seasonal behavior, makes them suitable for applying a variety of filters~\cite{Azimi2012}. We decided to go with the Holt-Winters double exponential smoothing~\cite{Holt2004,Kalekar2004} as it comes with the middleware, easy to use and delivers good quality results with acceptable latency for the purposes of this application. 
+
+\subsection{Rotation Filtering and Constraints}
+The joint orientations are acquired from the sensor middleware directly, however the data is not smooth. Although the middleware enforces certain constraints (such as allowing only pitch rotations on ulna), there are often significant gaps in the estimated angles that produce unnatural tremor-like movements on the avatar. Furthermore, there is no filtering of unnatural rotations that take place when an occluded body part is estimated to be in a wrong location. 
+
+The inferior quality of the orientation data is improved in two stages: applying another set of constraints on the joint data based on the natural limits of human bones, followed by an asymptotic smoothing of the joint angles to prevent the effect of gaps in the angles (see~Figure~\ref{fig:rotation-filter}). 
+
+\begin{figure}[htbp]
+	\centerline{ 
+	\fbox{\includegraphics[width=0.98\textwidth]{./figures/rotation-filter.eps}}
+	}
+\centerline{\ }
+\caption{The row and filtered samples for right the humerus roll angle}
+	\label{fig:rotation-filter}
+\end{figure}
+
+
+\subsection {Bone Splitting}
+The lower sections of human limbs contain two parallel bones allowing the twisting rotation on the hands and feet. The configurations of bones allow all portions of the lower limbs follow the bones in pitch and roll rotations, although the effect of yaw rotation decreases as it gets closer to the mid-section joint (elbow or knee). This effect is not possible to achieve with a single bone fore-arm representation, as specified in the highest level of detail in the H-ANIM standard~\cite{HANIM}, using unified weights (same for all types of rotations, transformations and scaling) and linear skinning. On the other hand, applying a different set of weights for each possible transformation, rotation or scaling requires additional space and time, which can be considered redundant because it is not going to be used in most parts of the skeleton and surface mesh; thus, it is not implemented in most of the popular rendering engines. This problem is addressed by Kavan et al.~\cite{Kavan2009}, proposing a method of introducing additional blending bones to simulate non-linear skinning. However, this approach is not suitable for a real-time application with previously unknown motions. 
+
+Because our only problematic bones for this particular case is the upper limbs, we employed a novel approach to solve this problem by introducing an additional bone connected in series for the upper limbs. The humerus and ulna bones are split halfway and the lower sections are labeled as humerus-extension and ulna-extension, respectively. The vertex weights in the corresponding sections are divided linearly among two sections, as seen in Figure~\ref{fig:forearm-weights}. 
+
+
+\begin{figure}[htbp]
+	\centerline{\includegraphics[width=0.75\textwidth]{./figures/ulna-weight.eps}}
+	\centerline{(a)}
+	\centerline{\ }
+	\centerline{\includegraphics[width=0.75\textwidth]{./figures/ulna-extent-weight.eps}}
+	\centerline{(b)} 
+	\centerline{\ } 
+	\caption{The vertex weights for (a) the upper ulna and (b) the lower ulna bone (weight increases from blue to yellow).}
+	\label{fig:forearm-weights}
+\end{figure}
+
+During runtime, the filtered local rotation of the upper limb bones are separated into two distinct rotations, one containing the yaw and the other containing pitch and roll rotations, which are applied to the extension bone and the original bone, respectively. With proper weights, the rotation of the users arm is transferred to the virtual avatar naturally without introducing any artifacts. As seen in Figure~\ref{fig:forearm-comparison}, the vertices on the forearm twist in a more natural way resembling the real motion.
+
+\begin{figure}[htbp]
+	\centerline{\includegraphics[width=1.0\columnwidth]{./figures/fore-arm-single-bone.eps}}
+	\centerline{(a)}
+	\centerline{\ }
+	\centerline{\includegraphics[width=1.0\columnwidth]{./figures/fore-arm-double-bone.eps}}
+	\centerline{(b)}
+	\caption{Comparison of a -90$^\circ$ yaw rotation on the forearm with: (a) single and (b)~double-boned skinning.}
+	\label{fig:forearm-comparison}
+\end{figure}
+
+\section{Algorithm}
+\label{section2_5}
 
 I used linear weighted skin blending \cite{Kavan2003} in order to simulate deformation on the characters skin. The effects of four bones with different weights are combined linearly to change the positions and normal of vertices.
 
