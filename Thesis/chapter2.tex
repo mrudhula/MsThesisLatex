@@ -344,26 +344,22 @@ $root.translate(d_{root})$\;
 \label{algo:foot_skating}
 \end{algorithm}
 
- 
+Joint smoothing consists of interpolating between frames, especially when there is a significant change in orientations, which would normally cause a non-continuous animation. 
+Old joint orientations are always recorded in global coordinate system and updated everyframe. After we get the new orientation from the new frame, we calculate the quaternion
+which would rotate the old orientation to the new one:
 
+\begin{equation}
+Q_{d} = Q_{new} \times Q_{old}^{-1}
+\label{eqn:rotator_quaternion}
+\end{equation} 
 
+When we get te delta quaternion, we get its axis-angle representation. Since we are interested in rotating the joint partially, we build up a new quaternion with the same axis and 
+a fraction of the same angle. The fraction varies with whether the constraint is switched recently. 
 
-
-
-
-
-
-
- 
-
-
-
-
-
-
-
-
-
-
-
-
+\begin{equation} 
+\begin{split}
+Q_{d} = Quaternion((x,y,z),\alpha) \\  
+Q_d^* = Quaternion((x,y,z), \alpha / k )
+\label{eqn:partial_rotator}
+\end{split}
+\end{equation} 
