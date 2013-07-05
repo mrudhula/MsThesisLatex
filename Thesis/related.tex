@@ -6,4 +6,35 @@ along with the history of the general framework.
 
 The overall framework can be divided into three major modules: \textit{human body animation and motion smoothing} , \textit{motion capture systems and depth sensors} and 
 \textit{physics engines, cloth simulation and collision detection}. An important offline part of the framework is the \textit{modeling humans and apparels}, which has evolved 
-significantly over the last years. 
+significantly over the last years. This chapter will start by exploring the modeling aspect of the framework, continued by the anaylsis of runtime components.
+
+\section{Human and Apparel Modeling}
+\label{section_related_modeling}
+
+Although the human and apparel modeling both have foundations in 3D mesh creation, they require different traits and qualities. Human body modeling utilizes disciplines such as rigging, 
+skinning and multi-layered deformation, whereas apparel modeling is mostly based on physics simulations.
+
+\subsection{Human Body Modeling}
+As we humans are mostly the main characters in virtual worlds, very different methods and techniques exist for human body models and animations. Determining the suitable one 
+starts with the requirements of the application. Real-time applications require a certain level of simplicity, as the simulation time cannot exceed the frame duration. Offline 
+applications can utilize very higher detail models, looking much more realistic. The basis for both extremes however, are the same, which is a skeleton. The approach is starting 
+with a connected set of rigid objects named as \textit{bones}, continuing by adding layers of muscle, skin, hair and others, depending on the required quality level. Called \textit{layered
+modeling technique}, this is a very common modeling technique used in computer graphics \cite{Chadwick1989}. The animation is achieved by rotating the bones, which are followed by 
+upper layers. This technique also improves the reusability of the framework, as the same animation sequence can be used for multiple body models with different detail levels utilizing the 
+same base skeleton.   
+
+The articulated skeleton consists of a hierarchical structure of joints and limbs to model a human-like skeleton. Joints are the points which act as the origin of the respective 
+local coordinate space. The limbs are the rigid segments which connect the joints in the hierarchy. Rotation in the local coordinate systems defined by the joints cause the rigid
+limbs to be rotated, resulting in the motion. The complexity of the model can be determined by the number of joints and the degrees of freedoms - abbreviated as \textit{DOF}s.
+Degree of freedom is defined as ``the number of independent parameters that define its configuration''\cite{Lazard2013}. A joint can rotate and translate in at most three orthagonal
+directions, hence the maximum DOF a joint can have is six. Although having the maximum number of DOFs in a human body model might seem like a good way to improve the realism, 
+however this also increases the complexity of the structure, resulting in more mathematical operations. As most human-body joints can only rotate, not translate, assigning six 
+degrees of freedom to every joint is redundant. Furthermore, angular and axis constraints with certain joints (such as knee or elbow) further simplify the model while making it 
+more realistic. 
+ 
+
+
+
+\section{Human Body Animation}
+\label{section_related_human_body_animation}
+
