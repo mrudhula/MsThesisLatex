@@ -1,17 +1,17 @@
 \chapter{Animation}
-\label{chapter2}
+\label{chapter_animation}
 
 The animatable body exported by Blender is in Ogre xml mesh and skeleton format. They are converted to binary skeleton and mesh files by the OgreXML serializer, and imported natively into the software. Prior to animation, the bones are initialized to be oriented by the data from depth sensor. Afterwards, they are updated with the orientation data.
 
 \section{Initialization}
-\label{section2_1}
+\label{section_animation_initialization}
 
 Animatable meshes are loaded and maintained via the SkeletalMesh class I have implemented, which bridges the gap between Ogre�s skeletal animating system and the input from Kinect sensor. When an instance of the object is initialized, it is given a mesh file. After the mesh is loaded with the skeleton data, the bone list is iterated through, given the initial orientation uniquely for each animatable bone with the Kinect sensor. 
 
 The animatable bones are set to be manually controlled, not inherit orientation from parents, given the initial orientations. At that state, the bone is set to initial state, to be reset at every frame with updated orientations. The non-animated bones are left to be automatically controlled and inherit orientation in order to keep them aligned with their parent bones. 
 
 \section{Animation}
-\label{section2_2}
+\label{section_animation}
 Every frame, the orientation information from the bones are extracted in 3x3 matrix form., along with the confidence of the sensor in that orientation. If the confidence is less than 0.5 in 1, the bones are left as they were in the previous frame to avoid unnatural movements. 
 
 The matrix from the Kinect is row major, whereas Ogre works with column major matrices. The transpose matrix is given to Ogre, turned into a quaternion and converted to local coordinate space. The updated orientation is fed into the bone, after it is multiplied with the initial orientation. The root bone is translated in local space in the end, to simulate the translation, above rotation.
@@ -20,7 +20,7 @@ This technique is used with the top-part of the dress as well, and it will be us
 
 
 \section{Motion Filtering}
-\label{section2_3}
+\label{section_motion_filtering}
 
 Application of the raw data from the sensor causes unnatural movements due to the noise in the sensor input, self-occlusions of the body and inadequate IK solvers.  In order to present a more realistic avatar animation, a series of filters and constraints are applied to the sensor data. 
 
@@ -72,7 +72,7 @@ During runtime, the filtered local rotation of the upper limb bones are separate
 \end{figure}
 
 \section{Algorithm}
-\label{section2_5}
+\label{section_animation_algorithm}
 
 I used linear weighted skin blending \cite{Kavan2003} in order to simulate deformation on the characters skin. The effects of four bones with different weights are combined linearly to change the positions and normal of vertices.
 
@@ -226,7 +226,7 @@ x-coordinates: $[P^0_x \: P^1_x  \: P^2_x  \: P^3_x]$. The same procedure is
 applied to the normal of a vertex. Process continues with the next set of four vertices.
 
 \section{Interaction Between the Body And Cloth}
-\label{section2_4}
+\label{section_body_cloth_interaction}
 The movements of the user are passed on the pieces of cloth separately.
 
 \subsection{Non-Simulated Section}
@@ -243,7 +243,7 @@ transformation is done on the rendering level, the physx world experiences no di
 \subsubsection{Collision}
 The colliding body is updated and collided with the cloth. The colliding body
 consists of 16 spheres and the capsules connecting the spheres. The details of
-this body is explained in section \ref{section_4_1}. This process keeps the
+this body is explained in section \ref{section_human_avatar}. This process keeps the
 cloth out of the avatar’s way.
 
 \subsubsection{Inertia}
@@ -251,7 +251,7 @@ The Inertia of transformations is passed onto the simulated cloth, increasing
 the realism. The passed on inertia comes from the rotation and the transformation of the root bone of the human skeleton. With this process, although there is no actual transformation in the physics world, the resulting inertia effects are visible on the cloth itself. 
 
 \section{Handling Foot Skating Problem}
-\label{section2_5}
+\label{section_foot_skating}
 The virtual model is aniamted by changing bone orientations and root bone position. If the orientations and root position are applied to 
 the bones respecively, the feet of the character appear to be floating on the ground which deteriorates the realism of the system. 
 
@@ -269,7 +269,8 @@ animations. It is assumed that one of the feet is always on the ground, artifact
 problem is no trivial task. There are various numerical and analytical methods for inverse kinematic problems and many implementations focusing on each. For our framework, we embedded 
 the IKAN library by Pennsylvenia University \cite{IKAN2013}, which uses the approach by Tolani et al.\cite{Tolani2000}.  
 \item Check if the foot coincides with its intended position after the inverse kinematic orientations are applied to the bones. If there is a positional mismatch, relocate the root joint to complete alignment.
-\item Smooth the joint orientation difference in order to avoid jumps from frame to frame. This is especially important when the constraint switches, as the source of the orientations are different in two cases and they do not always overlap. 
+\item Smooth the joint orientation difference in order to avoid jumps from frame to frame. This is especially important when the constraint switches, as the source of the orientations are different in two cases and they do not always overlap.
+Smoothing paramaters are optimized in a try-and-error basis, they are not viable for adaptive nature. Smoothing also helps to overcome the self-occlusion and data-noisiness.
 \end{enumerate}
 
 The overall algorithm consists of two major parts: constraint checking and adaptation (in Algorithm \ref{algo:check_foot_constraints}) and joint angle determination and application (in Algorith \ref{algo:foot_skating}).  
@@ -363,3 +364,7 @@ Q_d^* = Quaternion((x,y,z), \alpha / k )
 \label{eqn:partial_rotator}
 \end{split}
 \end{equation} 
+
+The fractional rotations are then applied to the joints to get a smoother movement. Other implicit operations include coordinate system transformations, as we are working with three
+different coordinate systems: Global-Render Coordinate System, Local-Render Coordinate System and IKAN Coordinate System. The constraints of the IKAN library require certain to-and-from  
+transformations to be used with our coordinate system. 

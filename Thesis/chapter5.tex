@@ -1,5 +1,5 @@
 \chapter{Cloth Resizing}
-\label{chapter5}
+\label{chapter_cloth_resizing}
 My cloth resizing algorithm consists of three main steps:
 \begin{enumerate}
 \item Improve the raw depth map from Kinect by filtering.
@@ -8,7 +8,7 @@ My cloth resizing algorithm consists of three main steps:
 \end{enumerate}
 
 \section{Depth Map Optimization}
-\label{section_5_1}
+\label{section_depth_map_optimization}
 
 At 30 fps, Kinect provides a depth map and a user map, both at 640x480 resolution. Depth map consists of distances with the sensor in millimeters. 
 
@@ -173,7 +173,7 @@ $r_m=min(r_z,r_x^-,r_x^+,r_y^-,r_y^+)$
 \end{algorithm}
 
 \section{Human Body Parameters}
-\label{section_5_3}
+\label{section_human_body_parameters}
 
 Next step will be acquiring the optimal scaling parameters for the cloth.
 The human body proportions to be used are shown in Table \ref{tbl:human_body_proportions}. In these proportions, the unit width and height are taken as the width and height of the head. The measurements source indicates how the measurement on the user will be performed: Joint Location means algorithm will make use of the joint locations provided by NITE, whereas depth map means the filtered depth map will be used. They can be used together in order to improve the performance. Some of these proportions are not standard enough to be used as references and vary greatly, such as hip width, and will be used directly from measurement.
