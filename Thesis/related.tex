@@ -4,9 +4,9 @@
 Virtual fitting frameworks are complex systems composed of many modules. The related works on the major components of our framework are summarized in this chapter, 
 along with the history of the general framework. 
 
-The overall framework can be divided into four major modules: \textit{human body modeling and animation} , \textit{motion capture systems}, \textit{depth sensors} and 
+The overall framework can be divided into four major modules: \textit{human body modeling and animation} , \textit{motion capture systems} and 
 \textit{physics engines, cloth modeling and simulation and collision detection}. Although these topics are connected in many ways, their foundations are distinct 
-and should be discussed seperately.
+and should be discussed seperately, followed by the discussion of the work on virtual fitting rooms.
 
 \section{Human Body Modeling And Animation}
 \label{section_related_modeling}
@@ -101,6 +101,13 @@ computational power and was not suitable for real-time applications.
  Planck Institute have played an important role in the markerless human motion capture systems from multi view video sequences \cite{Aguiar2007,Gall2009,Liu2011}. Their framework
  utilizes 8 or more cameras placed on a circle around the target. They construct a volumetric visual hull by getting the intersection of extruded 2D silhouettes 
  - which is called shape from silhouette technique\cite{Cheung2000,Cheung2005}. Using a set of cameras rather than a single camera is a remedy to the self-occlusion
- problem. After the visuall hull of the user is acquired, the hull is segmented into body parts by fitting a pre-defined body model.   
+ problem. After the visuall hull of the user is acquired, the hull is segmented into body parts by fitting a pre-defined body model. Accurate as they are, these
+ applications require immense computing power and are not suitable for real time applications. 
  
-   
+ The emergence of the consumer-level depth sensors at affordable costs opened a new page for markerless motion capturing\cite{Dutta2012}. As the depth sensors operate in real time
+ and the visual hull is the input rather than a processing product, the computation time for skeletal position estimation is considerably lower, enabling 
+ real-time motion transferring from actors to virtual avatars. However, depth sensors suffer from the same disadvantage as single-camera systems- self occlusion,
+ although this problem can be solved partially by utilizing mutliple depth sensors\cite{Berger2011}.
+ Furthermore, the IR and TOF depth sensing technology are not evolved enough yet to provide high resolution depth frames and produce quite a bit of noise, hence 
+ reducing the output motion quality. Various filters for improving the results have been developed and applied\cite{Matyunin2011,Camplani2012}. 
+ 
