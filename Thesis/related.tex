@@ -10,8 +10,8 @@ The overall framework can be divided into three major modules: \textit{human bod
 \section{Human Body Modeling And Animation}
 \label{section_related_modeling}
 
-Although the human and apparel modeling both have foundations in 3D mesh creation, they require different traits and qualities. Human body modeling utilizes disciplines such as rigging, 
-skinning and multi-layered deformation, whereas apparel modeling is mostly based on physics simulations.
+Although the human and apparel modeling both have foundations in 3D mesh creation, they require different traits and qualities. Human body modeling utilizes disciplines such as rigging and 
+skinning, whereas apparel modeling is mostly based on physics simulations.
 
 \subsection{Human Body Modeling}
 As we humans are mostly the main characters in virtual worlds, very different methods and techniques exist for human body models and animations. Determining the suitable one 
@@ -44,11 +44,8 @@ even harder with the ability of the human eye to distinguish very minor unnatura
 and evolves to multi-layered high resolution meshes. 
 
 Stick figured animation dates back to 1970s, where the technology would limit the qualities of animation to one dimensional limbs\cite{Badler1979}.
-With the advances in computer hardware, the details have improved and the complexities are increased. Today, there are two common approaches to humanoid 
-animation: \textit{Surface Based} and \textit{Volume Based} models.
-
-\subsubsection{Surface Based Humanoid Animation}
-Surface models were the first improvement on top of the original stick figure animation. A surface or ``skin'', which envelopes the articulated skeleton is 
+With the advances in computer hardware, the details have improved and the complexities are increased. Surface models were the first improvement on top 
+of the original stick figure animation. A surface or ``skin'', which envelopes the articulated skeleton is 
 introduced to the model. The translation of the surface varies depending on how the vertices are assigned to the bones. The process of assigning vertices to 
 a specific joint or set of joints is called skinning. The quality of the animation depends on both the complexity of the skeleton as well as the skinning 
 quality and technique. 
@@ -71,8 +68,11 @@ A new deformation technique called Double Quaternion Skinning overcomes these ar
 improving the performance. Quaternions, which are primarily used as a notation for rotations can also be used to define translations. Dual Quaternions can 
 be blended for rigid transformations and produce much more realistic results.
 
+Another approach to fixing the extreme rotation situations was proposed by Kavan et al.\cite{Kavan2009}, where the bones which could not produce realistic 
+results would be split into subbones in runtime. This approach, althouhg successfully correcting the otherwise present artifacts, required significantly more
+computational power and was not suitable for real-time applications. 
 
- 
+
 \section{Motion Capture Systems and Depth Sensors}
 \label{section_related_mocap}
  
