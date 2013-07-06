@@ -4,11 +4,10 @@
 Virtual fitting frameworks are complex systems composed of many modules. The related works on the major components of our framework are summarized in this chapter, 
 along with the history of the general framework. 
 
-The overall framework can be divided into three major modules: \textit{human body animation and motion smoothing} , \textit{motion capture systems and depth sensors} and 
-\textit{physics engines, cloth simulation and collision detection}. An important offline part of the framework is the \textit{modeling humans and apparels}, which has evolved 
-significantly over the last years. This chapter will start by exploring the modeling aspect of the framework, continued by the anaylsis of runtime components.
+The overall framework can be divided into three major modules: \textit{human body modeling and animation} , \textit{motion capture systems and depth sensors} and 
+\textit{physics engines, cloth modeling and simulation and collision detection}. 
 
-\section{Human and Apparel Modeling}
+\section{Human Body Modeling And Animation}
 \label{section_related_modeling}
 
 Although the human and apparel modeling both have foundations in 3D mesh creation, they require different traits and qualities. Human body modeling utilizes disciplines such as rigging, 
@@ -31,10 +30,49 @@ directions, hence the maximum DOF a joint can have is six. Although having the m
 however this also increases the complexity of the structure, resulting in more mathematical operations. As most human-body joints can only rotate, not translate, assigning six 
 degrees of freedom to every joint is redundant. Furthermore, angular and axis constraints with certain joints (such as knee or elbow) further simplify the model while making it 
 more realistic. 
- 
 
+In order to provide a common basis and a standard for modeling of 3D humans with hierarchical skeletons, Humanoid Animation (H-Anim) specification was developed by 
+Web3D Consortium\cite{HANIM}. Different levels of articulation are provided in X3D/VRML format, focusing specifically on humanoid objects rather than random 
+articulated figures. H-Anim standard provides a common ground for applications to be classified depending on their humanoid animation complexity, mainly by the 
+number of joints and DOFs. 
 
-
-\section{Human Body Animation}
+\subsection{Human Body Animation}
 \label{section_related_human_body_animation}
 
+Animating humanoid meshes is a complex and old subject of computer science, as there are many factors which contribute to the way humans move. The task gets 
+even harder with the ability of the human eye to distinguish very minor unnatural movements. The long history of humanoid animation starts with stick figures 
+and evolves to multi-layered high resolution meshes. 
+
+Stick figured animation dates back to 1970s, where the technology would limit the qualities of animation to one dimensional limbs\cite{Badler1979}.
+With the advances in computer hardware, the details have improved and the complexities are increased. Today, there are two common approaches to humanoid 
+animation: \textit{Surface Based} and \textit{Volume Based} models.
+
+\subsubsection{Surface Based Humanoid Animation}
+Surface models were the first improvement on top of the original stick figure animation. A surface or ``skin'', which envelopes the articulated skeleton is 
+introduced to the model. The translation of the surface varies depending on how the vertices are assigned to the bones. The process of assigning vertices to 
+a specific joint or set of joints is called skinning. The quality of the animation depends on both the complexity of the skeleton as well as the skinning 
+quality and technique. 
+
+The initial approach to the animation of enveloped surface was assigning weights to the individual polygons. However, this approach resulted in broken surfaces
+almost every frame. The first solution to this problem was introduced by Komatsu \cite{Komatsu1988}, where a continuous deformation function is used with respect 
+to the joints. 
+
+The next step in skinning was assigning vertices to joints instead of polygons\cite{Lander1988}. This simple difference allowed a polygon to be assigned to multiple bones, 
+preventing two polygons from seperating as the common vertices would not get ripped.
+
+Although assigning vertices instead of polygons to bones improved the realism significantly, it produced artifacts in extreme rotations. Inspired by the true 
+nature of human skin and deformation, the new solution introduced assigning a vertex to multiple joints. Called linear blend skinning, this technique further 
+improved the quality of character animations. However, it still was not sufficient with certain parts of body such as forearm and elbow, where the bone 
+positioning and configuration are more complex than a single series of connected bones. An example of this situation can be seen in Figure \ref{fig:forearm-comparison}.
+A single bone cannot imitate the twisting motion enabled by two parallel bones. Various solutions to this problem has been proposed, ours is described in 
+Section \ref{subsection_bone_splitting}. 
+
+A new deformation technique called Double Quaternion Skinning overcomes these artifacts without introducing additional time complexity\cite{Kavan2007}, even 
+improving the performance. Quaternions, which are primarily used as a notation for rotations can also be used to define translations. Dual Quaternions can 
+be blended for rigid transformations and produce much more realistic results.
+
+
+ 
+\section{Motion Capture Systems and Depth Sensors}
+\label{section_related_mocap}
+ 
