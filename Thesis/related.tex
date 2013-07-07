@@ -5,7 +5,7 @@ Virtual fitting frameworks are complex systems composed of many modules. The rel
 along with the history of the general framework. 
 
 The overall framework can be divided into four major modules: \textit{human body modeling and animation} , \textit{motion capture systems} and 
-\textit{physics engines, cloth modeling and simulation and collision detection}. Although these topics are connected in many ways, their foundations are distinct 
+\textit{cloth modeling and simulation}. Although these topics are connected in many ways, their foundations are distinct 
 and should be discussed seperately, followed by the discussion of the work on virtual fitting rooms.
 
 \section{Human Body Modeling And Animation}
@@ -111,3 +111,51 @@ computational power and was not suitable for real-time applications.
  Furthermore, the IR and TOF depth sensing technology are not evolved enough yet to provide high resolution depth frames and produce quite a bit of noise, hence 
  reducing the output motion quality. Various filters for improving the results have been developed and applied\cite{Matyunin2011,Camplani2012}. 
  
+ \section{Cloth Modeling and Simulation}
+ 
+ A number of industries, entertaintment and apparel commerce coming first, created a demand for rapid virtual apparel design and realistic simulation along 
+ with the advances in computer graphics. Like every other physical phenomenon though, garment simulation is no simple task to solve in virtual worlds. To be able
+ to create realistic render results for entertaintment industry while keeping the physical properties accurate requires very complex simulation frameworks and 
+ physics engines. 
+ 
+ \subsection{Cloth Design and Modeling}
+ 
+ Garment design aims at creating meshes which look realistic. Garments designed for virtual simulation environments must also be suitable for physics simulation. 
+ The two approaches to creating 3D garment meshes are straightforward 3D design and combining 2D designed patches by ``stitching''. However, the greater seperation
+ between garment design suites and techniques depend on the desired outcome, whether it is a production sample or a virtual model for simulation.
+ 
+\subsubsection{Production Oriented Design Systems}
+
+  The design suites explained in this section focus on product creation and industrial usage of the apparel design, rather than virtual simulation. 
+  As the goal of two systems are different, other design techniques are used for simulation purposes. However, the underlying 2D and 3D design principles 
+  are quite similar.
+  
+  First approaches of 2D garment design consisted of two parts where each have severak steps\cite{Yang2007}:  
+ 
+ \begin{enumerate}
+\item Parametric Design Based Pattern Generation
+\item Pattern Alteration Based on Grading Techniques
+\end{enumerate}    
+ 
+ A widely used CAD suite with this approach is Gerbert Technologies' AccuMark solution\cite{Gerbert2013}. 
+ 
+ A major drawback of 2D garment design systems is the necessity of a certain level of expertise with pattern design, as the 2D patches are not easy to visualize 
+ for an unexperienced person. 3D garment design is the solution to this problem as the apparel can be modeled on virtual human models directly and then seperated 
+ into multiple parts for production. In order to create realistic apparels, the underlying 3D human model must be realistic itself, best way is to obtain the mesh 
+ from a 3D full body scan. Assyst=Bullmer's design software is an example of such CAD suites\cite{Assyst2013}. 
+ 
+\subsubsection{Simulation Oriented Design Systems} 
+ 
+ Simulation oriented design systems aim at creating garment meshes which are suitable for using in virtual environments, mainly in entertaintment software such 
+ as video games, and recently, in virtual fitting rooms. The output of these suites must not be too complex to be simulated in real time, yet be realistic enough
+ to give the user the feeling of the fitting experience.
+ 
+ One of the first physics-enabled 2D garment design systems was introduced by Yang et al.\cite{Yang1992}. The suite included 2D design pannels, deformable cloth modeling and
+ a human body model which could be used to simulate the designed apparel on. Chittaro and Corvaglio\cite{Chittaro2003} aimed to develop a platform which would connect
+ the textile indsutry with computer graphics and simulation world via defining an interchangable format with VRML-based 3D meshes from 2D patterns.  Cugini and Rizzi
+ developed a framework\cite{Cugini2002} for the design of men apparel items with a 2D/3D hybrid approach using Autodesk Maya\cite{Autodesk2013} for 3D modeling and simulation.
+ Turquin et al. developed a sketch based interface for tailoring, dressing and simulating clothing pieces on virtual characters\cite{Turquin2007}.
+ 
+ 3D CAD systems suit simulation oriented design better than 2D by the nature of the general applications. 
+ 
+   
