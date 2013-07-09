@@ -17,7 +17,7 @@ of the user or on a virtual avatar, both scaled to reflect the user's body
 characteristics~\cite{FaceCake2013}. Some of them also employ physics-based 
 garment simulation for a better fitting experience~\cite{Styku2013}.
 
-In this study, we aim to develop a novel virtual fitting room framework that provides all the basic 
+This study is aimed to develop a novel virtual fitting room framework that provides all the basic 
 features expected from such an application, along with enhancements in various 
 aspects for higher realism. These enhancements include motion filtering, 
 customized user scaling, and physics engine. Motion filtering process 
@@ -25,24 +25,24 @@ starts with temporal averaging of joint positions,
 in order to overcome the high noise of the depth sensor. However, temporal
 averaging does not prove to be sufficient because unnatural movements take
 place due to limited recognition capabilities and self-occlusion.
-Therefore we implemented customized joint angle filters, along with bone
-splitting to let limbs twist in a more natural way and footskate correction filters.
+Therefore customized joint angle filters, along with bone
+splitting to let limbs twist in a more natural way and footskate correction filters are implemented.
 
-Our avatar utilizes a skeleton which conforms with the LOA 2 of H-ANIM 200x specification\cite{HANIM}, although not all bones are used for 
+The avatar utilizes a skeleton which conforms with the LOA 2 of H-ANIM 200x specification\cite{HANIM}, although not all bones are used for 
 animation due to the available data from depth sensor. The skeleton and mesh are modeled in Blender \cite{Blender}, exported and used in 
 binary format. The simulated apparel pieces are also modeled in Blender, although they are exported in Wavefront OBJ format in order 
 to be parsed by the physics engine. They are binarized on-the-run to be used by the game engine. 
 
 The cloth pieces to be fitted on the user's avatar must first be scaled
-accordingly. To this end, we implemented the body measurement process, 
+accordingly. To this end, a body measurement process is implemented, 
 which starts with depth map smoothing, in order to reduce the noise. 
-Afterwards, we utilize the filtered depth map along with filtered
+Afterwards, the filtered depth map is utilize along with filtered
 user joints to measure a set of parameters, which are used in conjunction
 to estimate the body height and width. These parameters are averaged over 
 time to minimize the error.
 
 The physics engine utilizes collision spheres and capsules to perform
-collision detection. We determine the correct sphere radii and positions 
+collision detection. The correct sphere radii and positions are determined
 during body measurements. The virtual avatar is aligned with a set of 
 invisible spheres and capsules are aligned with joints and limbs, 
 which are updated in real time and used in collision detection. 

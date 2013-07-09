@@ -17,13 +17,19 @@ Two sets of 3D meshes are required in order to perform simulation:
 % as it was realistic in appearance, proportions and details \cite{Mmava2012}. 
 % In order to make it look more realistic, I needed to implement additional features.
 
-After taking the main topic of the research, complexity of both 3D CAD programs and the human body itself into consideration, designing a complete full human body mesh was deemed to be a laborious and inessential task. Through researching various digital sources, evaluating the quality and cost of various potential candidate meshes, the model from \cite{Mmava2012} was elected, due to its realistic appearence, accurate proportions and fine details. For the purpose of improving the realism of the simulation, details are introduced to the base model, with the Blender CAD software.  
+After taking the main topic of the research, complexity of both 3D CAD programs and the human body itself into consideration, 
+designing a complete full human body mesh was deemed to be a laborious and inessential task. Through researching various digital sources, 
+evaluating the quality and cost of various potential candidate meshes, a female\cite{Mmava2012} model and a male model\cite{Gomer2013} were elected, due to their 
+realistic appearence, accurate proportions and fine details. For the purpose of improving the realism of the simulation, details are introduced to the base model,
+ with the Blender CAD software\cite{Blender}.  
 
 \subsection{Rigging}
 
-Animating a 3D mesh requires skinning, which is moving the vertices with respect to a bone on a skeleton. The model I acquired from internet had no skinning or material information, which I meant I had to do it myself. And even it was a pre-skinned model, I would prefer doing it on my own, in order to be able to integrate the model easily into my software. 
+Animating a 3D mesh requires skinning, which is moving the vertices with respect to a bone on a skeleton. The base models had no skinning or material information, they required
+custom rigging and painting. For the purposes of this research a manual rigging and painting would be preferred, in order to be able to integrate the model easily into the software. 
 
-I performed the skinning in blender, where I used the predefined human skeleton, detailed in H-ANIM2 level with a much simplified spine (Figure \ref{fig:rigging_skeleton}). 
+The rigging is performed in Blender\cite{Blender}, where the base human skeleton is provided, detailed in H-ANIM2 level with a much simplified spine 
+(Figure \ref{fig:rigging_skeleton}). 
 
 \begin{figure}[h]
 \centerline{\fbox{\psfig{figure=figures/rigging_skeleton.png,width=1.00\textwidth}}}
@@ -31,9 +37,11 @@ I performed the skinning in blender, where I used the predefined human skeleton,
 \label{fig:rigging_skeleton}
 \end{figure}
 
-Prior to rigging, the skeleton needed to match the given mesh in position. After modifying the initial bone positions, the vertex groups are assigned to the bones with proper weights (Figure \ref{fig:weight_humerus_r}). After assigning every vertex to the appropriate bones, there were no cracked surfaces with motions which are natural for humans. 
+Prior to rigging, the skeleton needs to be in perfect alignment with the mesh. After modifying the initial bone positions, 
+the vertex groups are assigned to the bones with proper weights (Figure \ref{fig:weight_humerus_r}).
+ After assigning every vertex to the appropriate bones, there were no cracked surfaces with motions which are natural for humans. 
 
-In the end, the model was exported in OGRE .mesh format along with the skeleton it used.
+In the end, the models were exported in OGRE .mesh format along with the skeleton it used.
 
 \begin{figure}[h]
 \centerline{\fbox{\psfig{figure=figures/weight_humerus_r.png,width=1.00\textwidth}}}
@@ -43,7 +51,9 @@ In the end, the model was exported in OGRE .mesh format along with the skeleton 
 
 \subsection{Materials}
 
-The base model came with no material information. In order to improve the realism of the model, I implemented texturing/painting for various parts of the body. These parts include the general skin, eyes, nails and lips so far (Figure \ref{fig:detailed_face}).  I will continue material introduction to other parts I deem necessary to improve realism. I also added non-simulated hair and some accessories such as hair sticks and earrings to the model to make it look more realistic.
+The base model came with no material information. In order to improve the realism of the model, texturing/painting tasks for various parts of the body were performed.
+ These parts include the general skin, hair, eyes and lips (Figure \ref{fig:detailed_face}). Other additions include accessories such as hair sticks and earrings
+ to achieve more realistic results.
 
 \begin{figure}[h]
 \centerline{\fbox{\psfig{figure=figures/detailed_face.png,width=1.00\textwidth}}}
@@ -54,27 +64,37 @@ The base model came with no material information. In order to improve the realis
 \section{Cloth Mesh}
 \label{section_cloth_mesh}
 
-A major part of my thesis is on accurate cloth simulation. Next to the required software and algorithms, I also needed accurately modeled cloth meshes to be simulated. After my searching and filtering through a variety of models online, I decided to work with a dress model \cite{LadyJewell2012}. The model comes as pure mesh, without any material information, although it was detailed well and sufficient for my research.
+As one of the major pieces of this study is accurate cloth simulation, accurately modeled cloth meshes which are suitable for simulation for required. 
+After my searching and filtering through a variety of models online, a set of base apparel meshes for both male and female models are selected \cite{LadyJewell2012,
+3dregenerator2013,Axel2013,Borodin2013,PS3D2013,Alperin2013}. The models vary in detail and quality, all of them were optimized and enhanced for the framework. 
 
 \subsection{Body Positioning and Splitting the Dress Mesh}
 
-To correctly animate and simulate the dress on a human avatar, I needed them to be in proportion with each other and properly aligned. The initial positions and proportions of the human avatar and the dress mesh were set in Blender, as it was easier to perform this with a visual tool (Figure \ref{fig:dress_and_body}).
-After various attempts to simulate all the vertices on the dress mesh, I failed to achieve a realistic looking results due to two main reasons:
+For a successful animation and simulation of the dress on a human avatar, both meshes must be in proportion with each other and properly aligned. 
+The required modifications to the meshes were performed in Blender(Figure \ref{fig:dress_and_body}).
+
+The initial approach was to include all the vertices of the clothing mesh in the simulation. However after various attempts to simulate all the vertices on the dress mesh,
+ this approach failed to achieve a realistic looking results due to two main reasons:
 \begin{itemize}
-  \item The whole dress consisted of 4088 vertices. Although I was able to simulate in real-time, too many vertices resulted in the simulation algorithm to break down due to the very large number of vertices in the cloth. It shifted from a fabric structure to more of a jelly form, over stretching and tearing with its own weight.
+  \item The whole dress consisted of 4088 vertices. The simulation was running in real-time, however the topography of the clothing mesh was not appropriate for the physics engine due 
+  to the very large number of vertices in the cloth. It shifted from a fabric structure to more of a jelly form, over stretching and tearing with its own weight.
   \item The friction necessary to keep the dress on the Human Avatars shoulders was not sufficient enough to keep the dress on the avatar. It kept sliding, stretching and acting unnaturally.
 \end{itemize}
 
-In order to overcome these problems, I decided to split the dress mesh into two parts, and utilize different animation techniques on them.
+In order to overcome these problems, the dress mesh is split into two parts, and utilize different animation techniques on each one.
 
 \begin{itemize}
-  \item The top part, which should be attached to the body, not blowing in the wind, was modeled as a static mesh, with skinning like the human avatar. It was animated with the same transformations as the human avatar, matching its position and staying on the body perfectly.
-  \item The bottom part was the part to be simulated, affected by inertia, wind and other factors. Their attachment line is just above the waist of the human avatar, which was confirmed after various experimentations with other locations (Figure \ref{fig:dress_and_body}). Keeping the line too below resulted in both unnatural collisions and the cloth being too rigid. Keeping it too high brought out the original problems. With its current setting, the dress mesh is animated naturally on the virtual avatar.
+  \item The static part, which should be attached to the body, not blowing in the wind, was modeled as a static mesh, with skinning like the human avatar. 
+  It was animated with the same transformations as the human avatar, matching its position and staying on the body perfectly.
+  \item The dynamic part was the part to be simulated, affected by inertia, wind and other factors. Their attachment line is just above the waist
+   of the human avatar, which was pinpointed through try-and-error experimentations with other locations (Figure \ref{fig:dress_and_body}). 
+   Keeping the line too below resulted in both unnatural collisions and the cloth being too rigid. Keeping it too high brought out the problems in the first approach.
+    With its current setting, the dress mesh is animated naturally on the virtual avatar.
 \end{itemize}
 
 \begin{figure}[h]
 \centerline{\fbox{\psfig{figure=figures/dress_and_body.png,width=1.00\textwidth}}}
-\caption{The  Dress, positioned on the body, along with the upper-part skeleton. In this shot, the bottom part is highlighted in orange border.}
+\caption{The  Dress, positioned on the body, along with the upper-part skeleton. In this shot, the dynamic part is highlighted in orange border.}
 \label{fig:dress_and_body}
 \end{figure}
 

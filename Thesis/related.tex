@@ -1,10 +1,10 @@
 \chapter{Related Work}
 \label{chapter_related_work}
 
-Virtual fitting frameworks are complex systems composed of many modules. The related works on the major components of our framework are summarized in this chapter, 
-along with the history of the general framework. 
+Virtual fitting frameworks are complex systems composed of many modules. The related works on the major components of the used framework are summarized in this chapter, 
+along with a general history of the field. 
 
-The overall framework can be divided into four major modules: \textit{human body modeling and animation}, \textit{motion capture systems} and 
+The overall framework can be divided into three major modules: \textit{human body modeling and animation}, \textit{motion capture systems} and 
 \textit{cloth modeling and simulation}. Although these topics are connected in many ways, their foundations are distinct 
 and should be discussed separately, followed by the discussion of the work on virtual fitting rooms.
 
@@ -14,7 +14,7 @@ and should be discussed separately, followed by the discussion of the work on vi
 Although the human and apparel modeling both have foundations in 3D mesh creation, they require different traits and qualities. Human body modeling utilizes disciplines such as rigging and skinning, whereas apparel modeling is mostly based on physics simulations.
 
 \subsection{Human Body Modeling}
-As we humans are mostly the main characters in virtual worlds, very different methods and techniques exist for human body models and animations. Determining the suitable one 
+As we humans are mostly the main characters in virtual worlds, various methods and techniques exist for human body models and animations. Determining the suitable one 
 starts with the requirements of the application. Real-time applications require a certain level of simplicity, as the simulation time cannot exceed the frame duration. Offline 
 applications can utilize very higher detail models, looking much more realistic. The basis for both extremes however, is the same, which is a skeleton. The approach is starting 
 with a connected set of rigid objects named as \textit{bones}, continuing by adding layers of muscle, skin, hair and others, depending on the required quality level. Called \textit{layered
@@ -26,7 +26,7 @@ The articulated skeleton consists of a hierarchical structure of joints and limb
 local coordinate space. The limbs are the rigid segments which connect the joints in the hierarchy. Rotation in the local coordinate systems defined by the joints cause the rigid
 limbs to be rotated, resulting in the motion. The complexity of the model can be determined by the number of joints and the degrees of freedoms - abbreviated as \textit{DOF}s.
 Degree of freedom is defined as ``the number of independent parameters that define its configuration''\cite{Lazard2013}. A joint can rotate and translate in at most three orthogonal
-directions, hence the maximum DOF a joint can have is six. Although having the maximum number of DOFs in a human body model might seem like a good way to improve the realism, 
+directions, hence the maximum DOF a joint can have is six. Having the maximum number of DOFs in a human body model might seem like a good way to improve the realism, 
 however this also increases the complexity of the structure, resulting in more mathematical operations. As most human-body joints can only rotate, not translate, assigning six 
 degrees of freedom to every joint is redundant. Furthermore, angular and axis constraints with certain joints (such as knee or elbow) further simplify the model while making it 
 more realistic. 
@@ -40,7 +40,7 @@ number of joints and DOFs.
 \label{section_related_human_body_animation}
 
 Animating humanoid meshes is a complex and old subject of computer science, as there are many factors which contribute to the way humans move. The task gets 
-even harder with the ability of the human eye to distinguish very minor unnatural movements. The long history of humanoid animation starts with stick figures 
+even harder with the ability of the human eye to distinguish very minor unnatural motions. The long history of humanoid animation starts with stick figures 
 and evolves to multi-layered high resolution meshes. 
 
 Stick figured animation dates back to 1970s, where the technology would limit the qualities of animation to one dimensional limbs\cite{Badler1979}.
@@ -61,7 +61,7 @@ Although assigning vertices instead of polygons to bones improved the realism si
 nature of human skin and deformation, the new solution introduced assigning a vertex to multiple joints. Called linear blend skinning, this technique further 
 improved the quality of character animations. However, it still was not sufficient with certain parts of body such as forearm and elbow, where the bone 
 positioning and configuration are more complex than a single series of connected bones. An example of this situation can be seen in Figure \ref{fig:forearm-comparison}.
-A single bone cannot imitate the twisting motion enabled by two parallel bones. Various solutions to this problem has been proposed, ours is described in 
+A single bone cannot imitate the twisting motion enabled by two parallel bones. Various solutions to this problem has been proposed, the proposed solution in this study is described in 
 Section \ref{subsection_bone_splitting}. 
 
 A new deformation technique called Double Quaternion Skinning overcomes these artifacts without introducing additional time complexity\cite{Kavan2007}, even 
@@ -105,23 +105,25 @@ computational power and was not suitable for real-time applications.
  
  The emergence of the consumer-level depth sensors at affordable costs opened a new page for markerless motion capturing\cite{Dutta2012}. As the depth sensors operate in real time
  and the visual hull is the input rather than a processing product, the computation time for skeletal position estimation is considerably lower, enabling 
- real-time motion transferring from actors to virtual avatars. However, depth sensors suffer from the same disadvantage as single-camera systems- self occlusion,
+ real-time motion transferring from actors to virtual avatars. However, depth sensors suffer from the same disadvantage as single-camera systems, self occlusion,
  although this problem can be solved partially by utilizing multiple depth sensors\cite{Berger2011}.
- Furthermore, the IR and TOF depth sensing technology are not evolved enough yet to provide high resolution depth frames and produce quite a bit of noise, hence 
- reducing the output motion quality. Various filters for improving the results have been developed and applied\cite{Matyunin2011,Camplani2012}. 
+ Furthermore, the IR and TOF depth sensing technologies are not evolved enough yet to provide high resolution depth frames and produce quite a bit of noise, hence 
+ reducing the output motion quality. This problem is analyzed in depth by Khoshelham~and~Elberink~\cite{Khoshelham2012}
+ and concluded that the standard deviation reaches two centimeters in a measuring distance of three meters. Matyunin~et~al.~\cite{Matyunin2011} attempted to improve the 
+ quality by filtering with additional information from the attached RGB camera.   
  
  \section{Cloth Modeling and Simulation}
  
  A number of industries, entertainment and apparel commerce coming first, created a demand for rapid virtual apparel design and realistic simulation along 
- with the advances in computer graphics. Like every other physical phenomenon though, garment simulation is no simple task to solve in virtual worlds. To be able
+ with the advances in computer graphics. Like every other physical phenomenon though, garment simulation is no simple task to perform in virtual worlds. To be able
  to create realistic render results for entertainment industry while keeping the physical properties accurate requires very complex simulation frameworks and 
  physics engines. 
  
  \subsection{Cloth Design and Modeling}
  
- Garment design aims at creating meshes which look realistic. Garments designed for virtual simulation environments must also be suitable for physics simulation. 
- The two approaches to creating 3D garment meshes are straightforward 3D design and combining 2D designed patches by ``stitching''. However, the greater separation
- between garment design suites and techniques depend on the desired outcome, whether it is a production sample or a virtual model for simulation.
+ Garment design aims at creating meshes which look realistic. Furthermore, designing for virtual simulation environments require the garment to be suitable for physics simulation. 
+ The two approaches to creating 3D garment meshes are straightforward 3D design and combining 2D designed patches by ``stitching''. However, the main distinction
+ between garment design suites and techniques comes from the desired outcome, whether it is a production sample or a virtual model for simulation.
  
 \subsubsection{Production Oriented Design Systems}
 
@@ -146,8 +148,8 @@ computational power and was not suitable for real-time applications.
 \subsubsection{Simulation Oriented Design Systems} 
  
  Simulation oriented design systems aim at creating garment meshes which are suitable for using in virtual environments, mainly in entertainment software such 
- as video games, and recently, in virtual fitting rooms. The output of these suites must not be too complex to be simulated in real time, yet be realistic enough
- to give the user the feeling of the fitting experience.
+ as video games, and recently, in virtual fitting rooms. The output of these suites must not be too complex to be simulated in real time, while being as realistic
+ as possible.
  
  One of the first physics-enabled 2D garment design systems was introduced by Yang et al.\cite{Yang1992}. The suite included 2D design panels, deformable cloth modeling and
  a human body model which could be used to simulate the designed apparel on. Chittaro and Corvaglio\cite{Chittaro2003} aimed to develop a platform which would connect
@@ -184,8 +186,8 @@ Physical approaches model the cloth as systems of springs-masses or particles, o
 
 The spring-mass system is first presented by Haumann and Parent\cite{Haumann1988}, which converts 
 each vertex into a point mass and converts each edge into a spring. The simulation is attained by solving the spring-mass equations. Further improvements on spring-mass systems include
-different sets of springs for orthogonal axes and distance constraints to achieve more garment-like simulations\cite{Provot1996}. The NVIDIA PhysX system utilizes an enhanced 
-spring-mass system for its simulations\cite{Kim2011}.
+different sets of springs for orthogonal axes and distance constraints to achieve more garment-like simulations\cite{Provot1996}. The NVIDIA PhysX engine utilizes an enhanced 
+spring-mass system for its cloth solver\cite{Kim2011}.
 
 Terzopoulos et al.\cite{Terzopoulos1987} presented elastically deformable models based on continuum mechanics and differential geometry. Another continuum based approach which 
 sacrifices accuracy for performance by focusing on numerical solutions was described by Baraff and Witkin\cite{Baraff1998}. Elasticity solutions rely on energy interactions between 
@@ -205,10 +207,6 @@ developed a virtual try-on system utilizing a calibrated set of Kinect and high 
 development kits (SDKs)-OpenNI~\cite{OpenNI2102} and Kinect for Windows~SDK~\cite{Microsoft2013}. While most frameworks utilize garment meshes with physics 
 simulation~\cite{Fitnect2012,Styku2013}, another intriguing approach is using a pre-recorded apparel image database, from which the images are superpositioned onto the
 RGB video of the user~\cite{Hauswiesner2013,Zhou2012}.  
-
-One problem with depth sensors is the feeble quality and noisiness of the depth stream. This problem is analyzed in depth by Khoshelham~and~Elberink~\cite{Khoshelham2012}
- and concluded that the standard deviation reaches two centimeters in a measuring distance of three meters. Matyunin~et~al.~\cite{Matyunin2011} attempted to improve the 
- quality by filtering with additional information from the attached RGB camera.  
 
 A key purpose of both virtual and real fitting rooms is giving the customer the look and feel of a cloth with a specific size on the user's body, so the user can choose
 the appropriate size for him. Embedding the feature of matching cloth sizes with users requires capturing the users' body dimensions. More advanced frameworks even construct
