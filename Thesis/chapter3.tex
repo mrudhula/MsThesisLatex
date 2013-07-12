@@ -1,143 +1,121 @@
 \chapter{Cloth Simulation}
 \label{chapter_cloth_simulation}
 
-The Nvidia PhysX engine is utilized as the physics solver\cite{Kim2011}, which provides cloth simulation framework along with collision detection. 
+The Nvidia PhysX engine is utilized as the physics solver~\cite{Kim2011}, which provides cloth simulation framework along with collision detection. 
 
-\section{Model Set Up}
-The mesh to be simulated is the dynamic part of the modeled dresses which consists vertices in the order of thousands. It is aligned precisely with the static part and the human body to 
-be simulated realistically. 
+\section{Model Setup}
+The mesh to be simulated is the dynamic part of the modeled dresses which consists vertices in the order of thousands. It is aligned precisely with the static part and the human body to be simulated realistically. 
 
-The PhysX framework requires vertex and topology information delivered separately and manually, instead of a binary file or an automatic parser. For this purpose, a custom Wavefront OBJ
- file parser was implemented to acquire the information exported from a modeling suite, and feed the data into the physics engine. 
+The PhysX framework requires vertex and topology information delivered separately and manually, instead of a binary file or an automatic parser. For this purpose, a custom Wavefront OBJ file parser is implemented to acquire the information exported from a modeling suite, and feed the data into the physics engine. 
 
-Other than the vertex and topology information, an inverse weight property needs to be specified for every vertex.  This information can be embedded into the wavefront object 
-as a second set of texture coordinates. On the other hand, this method adds too much extra data to the file, which is not a major problem, although not necessary. 
-Therefore the vertex weight information is embedded into the model by specifying the material names separately for vertex groups with different weights. 
+Other than the vertex and topology information, an inverse weight property needs to be specified for every vertex.  This information can be embedded into the wavefront object as a second set of texture coordinates. On the other hand, this method adds too much extra data to the file, which is not a major problem, although not necessary. Therefore the vertex weight information is embedded into the model by specifying the material names separately for vertex groups with different weights. 
 
-The vertices which have a non-zero inverse weight have the suffix ``Free" attached to their material name. The vertices are selected manually and their materials are attached.
- The current simulation required only two set of weights, which can be seen in Figure \ref{fig:cloth_fixed_vertices}. After the weight information is implemented, the model
-  is exported as a Wavefront OBJ file along with the MTL material file and parsed into the software.
+The vertices which have a non-zero inverse weight have the suffix ``Free'' attached to their material name. The vertices are selected manually and their materials are attached.  The current simulation required only two set of weights, which can be seen in Figure \ref{fig:cloth_fixed_vertices}. After the weight information is implemented, the model is exported as a Wavefront OBJ file along with the MTL material file and parsed into the software.
 
 \begin{figure}[h]
-\centerline{\fbox{\psfig{figure=figures/cloth_fixed_vertices.png,width=1.00\textwidth}}}
+\centerline{\psfig{figure=figures/cloth_fixed_vertices.eps,width=1.00\textwidth}}
 \caption{The fixed vertices of the cloth}
 \label{fig:cloth_fixed_vertices}
 \end{figure}
 
 \section{The Initialization}
 
-Following the parsing of the model from the OBJ file, it is stored into C++ vectors initially, to be used in different frames. First, the OBJ file is converted into the Ogre native 
-mesh format to be loaded and rendered. This simply includes feeding the vertex, topology and material information into the ogre as submeshes, to be combined as a mesh.
-Prior to creating the simulated cloth the PhysX engine needs to be initialized:
+Following the parsing of the model from the OBJ file, it is stored into C++ vectors initially, to be used in different frames. First, the OBJ file is converted into the OGRE native mesh format to be loaded and rendered. This simply includes feeding the vertex, topology and material information into the OGRE as submeshes, to be combined as a mesh. Prior to creating the simulated cloth the PhysX engine needs to be initialized:
 
 \begin{enumerate}
 \item The foundation and the SDK objects are created.
 \item In order to implement the GPU solver for the cloth and collision, the PhysX engine needs to bind with the CUDA context to deliver the GPU tasks. The CUDA Context manager object is created and given to the SDK object.
-\item Afterwards, the virtual floor and the environment are created with the gravity specified as 9.8 m/s2. 
+\item Afterwards, the virtual floor and the environment are created with the gravity specified as 9.8 m/s$^2$. 
 \end{enumerate}
 
-After the initialization, the cloth is loaded with specific stiffness, stretch, damping, friction, inertia, bending, and collision parameters. These parameters are decided through numerous try-and-error experimentations 
-in order to acquire the most realistic simulation results.
-After creating the environment and the virtual cloth, the collision spheres are created, which is be explained in chapter \ref{chapter_collision}.
+After the initialization, the cloth is loaded with specific stiffness, stretch, damping, friction, inertia, bending, and collision parameters. These parameters are decided through numerous try-and-error experimentations in order to acquire the most realistic simulation results. After creating the environment and the virtual cloth, the collision spheres are created, which is explained in Chapter~\ref{chapter_collision}.
 
 \section{The Animation}
-Each frame, the workflow is as following:
+At each frame, the following steps are performed:
 \begin{enumerate}
 \item The passed time since the last frame is added to the counter.
-\item The Kinect Sensor is checked for new data. If the data is not new, next frame is called. 
-\item If there is an active user with the Kinect, the sensor middleware pointer is sent to the human body and the upper cloth SkeletalMesh objects to be updated. If there are none, 
-the bones are reset to their initial state.
-\item The upper body mesh and the human body mesh are ordered to be updated. The update details can be found in chapter \ref{section_animation}. 
-This function returns the translation of the root node. 
-\item The returned vector from step 4 is used to translate the dynamic cloth handle. After the translation, the orientation is also updated with the root bone orientation.
-\item The colliding human capsules are updated with the human body bone orientation. Also, the orientation and the position of the dynamic cloth handle is synchronized with 
-the virtual cloth. This input automatically introduces the inertia effect on the cloth.
-\item In the end, the cloth is simulated as following:
+\item The Kinect sensor is checked for new data. If the data is not new, next frame is called. 
+\item If there is an active user with the Kinect, the sensor middleware pointer is sent to the human body and the upper cloth {\em SkeletalMesh} objects to be updated. If there are none, the bones are reset to their initial state.
+\item The upper body mesh and the human body mesh are updated. The details of the update process can be found in Section~\ref{section_animation}. This function returns the translation of the root node. 
+\item The returned vector from step 4 is used to translate the dynamic cloth handle. After the translation, the orientation is  updated with the root bone orientation.
+\item The colliding human capsules are updated with the human body bone orientation. The orientation and the position of the dynamic cloth handle is synchronized with the virtual cloth. This input automatically introduces the inertia effect on the cloth.
+\item At the end, the cloth is simulated as follows:
 \begin{enumerate}
-  \item PhysX is ordered to start the simulation on the GPU. Simulation algorithm details are explained in section \ref{section_cloth_simulation_algorithm}.
-  \item The vertex data is read from the output, and the vectors of the OBJ object are updated, except the fixed mesh vertices. The reason for omitting the fixed vertices
-   is to avoid unnatural bends and cracks on the fixed vertices.
-  \item The updated OBJ vectors are transformed into the Ogre Mesh buffers, to be rendered. 
+\item PhysX is ordered to start the simulation on the GPU. The details of the simulation algorithm are explained in Section~\ref{section_cloth_simulation_algorithm}.
+\item The vertex data is read from the output, and the vectors of the OBJ object are updated, except the fixed mesh vertices. The reason for omitting the fixed vertices is to avoid unnatural bends and cracks on the fixed vertices.
+  \item The updated OBJ vectors are transformed into the OGRE mesh buffers, to be rendered. 
 \end{enumerate}
 \end{enumerate}
 
-\section{The Algorithm}
-\label{section_cloth_simulation_algorithm}
+The cloth simulation algorithm is based on the position-based dynamics, introduced by M{\"u}ller et al.~\cite{Muller2007}. The main idea is to calculate the position of the particles from their previous positions and applying constraints on mutual distance and angle. The collision is also calculated as a force and applied to both particles. The approach is stable and efficient for real time applications.
+The dynamics are stable as long as the constraint solvers converge. When this criterion is not met, rendering anomalies occur, such as a vertex being pulled too far away from the cloth. The solutiom is parallelized by fibers, as Single Instruction Multiple Data (SIMD) process. With CUDA support, however, this is even parallelized more with Single Instruction Multiple Thread (SIMT) processes, where each thread works on one fiber.
 
-The cloth simulation algorithm is based on the Position Based Dynamics, introduced by M{\"u}ller et al. \cite{Muller2007}. The main idea is to calculate the position of the 
-particles from their previous positions and applying constraints on mutual distance and angle. The collision is also calculated as a force and applied to both particles. 
-The approach is stable and efficient for real time applications.
+\section{Numerical Solution}
+\label{section_numerical_solution}
+The position of a particle in the next time interval is acquired by performing explicit Euler integration over $\delta$t, where the velocity and the force are assumed to be constant during the interval. The pseudo code of the integration procedure is given in Algorithm \ref{algo:position_based_dynamics}.
 
-The dynamics are stable as long as the constraint solvers converge. When this criteria is not met, anomalies show up, such as a vertex being pulled too far away from the cloth. 
-
-The problem is parallelized by fibers, as SIMD process. With CUDA support, however, this is even parallelized more with SIMT processes, where each thread works on one fiber
-
-\subsection{Overall Structure}
-The position of a particle in the next time interval is acquired by performing
-Explicit Euler Integration over $\delta$t, where the velocity and the force are
-assumed to be constant during the interval. The pseudo code is given  in
-Algorithm \ref{algo:position_based_dynamics}.
-
-\begin{algorithm}
-\dontprintsemicolon % Some LaTeX compilers require you to use \dontprintsemicolon instead
+\begin{algorithm}[ht]
+\DontPrintSemicolon % Some LaTeX compilers require you to use \dontprintsemicolon instead
 \ForEach {vertices i}{
-$initialize$ $x_i=x_i^0,v_i=v_i^0,w_i=1/m_i$
+\textit{initialize} $x_i=x_i^0,v_i=v_i^0,w_i=1/m_i$
 }
 \While{true}{
 \ForEach {vertices i}{$v_i \gets v_i + \Delta t w_i f_{ext}(x_i)$}
 dampVelocities($v_1,\ldots.,v_N$)\;
 \ForEach {vertices i}{$p_i \gets x_i + \Delta t v_i $\;}
-\ForEach {vertices i}{$generateCollisionConstraints(x_i \to p_i)$}
-\While{solverIterates}{$projectConstraints(C_1,\ldots,C_{M+M_{coll}},p_1,\ldots,p_N)$}
+\ForEach {vertices i}{\textit{generateCollisionConstraints}$(x_i \to p_i)$}
+\While{solverIterates}{\textit{projectConstraints}$(C_1, \ldots, C_{M+M_{coll}}, p_1, \ldots, p_N)$}
 \ForEach {vertices i}{
 $v_i \gets (p_i - x_i) / \Delta t$\;
 $x_i \gets p_i $\;
 }
-$velocityUpdate(v_1,\ldots,v_N)$\;
+\textit{velocityUpdate}$(v_1, \ldots, v_N)$\;
 }
-\caption{Position Based Dynamics}
+\caption{Position-based dynamics}
 \label{algo:position_based_dynamics}
 \end{algorithm}
 
-The overall flow is to predict the next position and velocity (1-2), then
-perform the corrections by solving the constraints (3-12), update the position
-and velocities accordingly (13:15). Finally, the damping to the velocities is
-introduced in line 16.
-
-The key issue in the simulation is the position correction due to the constraints. Each vertex is moved either towards or away from each other, the distance is scaled by the 
-inverse mass of the vertices. If a vertex position needs to be fixed, the inverse weight should be set to zero
+Algorithm~\ref{algo:position_based_dynamics} predicts the next position and velocity (lines 1-2), performs the corrections by solving the constraints (lines 3-12), updates the position and velocities accordingly (lines 13-15), adds damping to velocities (line 16). The key issue in the simulation is the position correction due to the constraints. Each vertex is moved either towards or away from each other, the distance is scaled by the inverse mass of the vertices. If a vertex position needs to be fixed, the inverse weight should be set to zero
 
 \subsection{Constraints, Fibers and Sets}
-In order to simulate the cloth, all constraints should be solved, which is achieved through linearizing the non-linear problem. This linearization results in a sparse matrix
- problem. Although the problem is solvable in real-time, performance is increased further by pivoting vertical and horizontal constraints, solving separately. The vertical and
-  horizontal constraints are divided in the input sense by fibers and sets. Fibers represent independent sets of connected constraints and sets are non-overlapping fibers, which
-   are solved in parallel. In the implementation and mesh terms, a fiber is either a horizontal, vertical or a diagonal line, and the set is the collection of parallel lines. 
-   These fibers and sets are generated for both shear and stretch constraints by the PhysX mesh cooker, which auto-generates the fibers and sets from a given mesh topology 
-   (Figure \ref{fig:shear_strech_sets}). 
-
-\begin{figure}[h]
-\centerline{\fbox{\psfig{figure=figures/shear_strech_sets.png,width=1.00\textwidth}}}
-\caption{Shear and Scretch Sets. The red and yellow lines are the fibers \cite{Kim2011}}
-\label{fig:shear_strech_sets}
-\end{figure}
+In order to simulate the cloth, all constraints should be solved, which is achieved through linearizing the non-linear problem. This linearization results in a sparse matrix problem. Although the problem is solvable in real-time, performance is increased further by pivoting vertical and horizontal constraints, solving separately. The vertical and horizontal constraints are divided in the input sense by fibers and sets. Fibers represent independent sets of connected constraints and sets are non-overlapping fibers, which are solved in parallel. A fiber is either a horizontal, vertical or a diagonal line, and the set is the collection of parallel lines. These fibers and sets are generated for both shear and stretch constraints by the PhysX mesh cooker, which auto-generates the fibers and sets from a given mesh topology. 
 
 \subsection{Set Solvers}
-There are two possible solvers to apply on fiber block(Set) which come with PhysX:
+There are two possible solvers to apply on fiber block (set) which come with PhysX:
 \begin{itemize}
-  \item The Gauss-Seidel solver continues along the fiber after completing a constraint solution and updating the results. This solver is easy to tweak and use, 
-  has low-cost for iteration, however the convergence factor is low due to sequential update, which results in a stretchy cloth.
-  \item Semi-Implicit solver factorizes the tri-diagonal system with LDLT and solves the overall system. This method preserves momentum since it is not sequential and converges
-   ten times more than Gauss-Seidel solver. However, the matrices can be ill conditioned, which requires special treatment, iteration cost is higher and tweaking is more difficult.
+\item The Gauss-Seidel solver continues along the fiber after completing a constraint solution and updating the results. This solver is easy to tweak and use, has low-cost for iteration, however the convergence factor is low due to sequential update, which results in a stretchy cloth.
+\item Semi-implicit solver factorizes the tri-diagonal system with LDLT and solves the overall system. This method preserves momentum since it is not sequential and converges ten times more than Gauss-Seidel solver. However, the matrices can be ill conditioned, which requires special treatment, iteration cost is higher and tweaking is more difficult.
 \end{itemize}
-The comparison of these solvers can be seen in Figure \ref{fig:solver_comparison}. In order to get the best performance from these solvers, they are applied on different Sets,
- taking advantage of them being solvable in parallel. Gauss-Seidel solver is used for horizontal stretch fibers and the shear fibers, which do not experience too much stretching,
-  taking advantage of its low cost. Semi implicit solver is applied only to the vertical stretch fibers, which put up with most of the force (gravity) most of the time,
-   resulting in a both fast and robust solution
+
+In order to get the best performance from these solvers, they are applied on different sets, taking advantage of parallel implementation. The Gauss-Seidel solver is used for horizontal stretch fibers and the shear fibers, which do not experience too much stretching, taking advantage of its low cost. A semi-implicit solver is applied only to the vertical stretch fibers, resulting in both a fast and robust solution.
+
+\section{Collision Handling}
+\label{section_chapter_collision}
+
+The collision between the cloth and the body parts and the self-collision of cloth particles are implemented. The collisions are handled by the PhysX engine. 
+
+\subsection{Preparation and Setting}
+\label{section_collision_preparation}
+
+Cloth vertices can collide with pre-defined spheres, capsules or planes. In order to keep the program stable and running at real-time, it is important to find the balance between collision detail and performance. 
+
+The female body bone information is extracted from the input skeletal mesh class, and the colliding capsules are generated automatically, although the radii of the bones are either specified manually or input through the user measurement process\ref{algo:sphere_fitting}. The collision information is specified in two arrays, one being the positions and radii of the spheres and the second defining pairs of spheres which form capsules. A total of 28 capsules and spheres are used in the whole collision model, which simulates all the movable bones of the human body (see~Figure~\ref{fig:colliding_human_body}) plus a few additional bones for regions which are not close enough to a bone.  The collision data is prepared before the cloth creation, and given as a parameter. 
 
 \begin{figure}[h]
-\centerline{\fbox{\psfig{figure=figures/solver_comparison.png,width=0.50\textwidth}}}
-\caption{Comparison of Gauss-Seidel and Semi-Implicit Solvers \cite{Kim2011}}
-\label{fig:solver_comparison}
+\centerline{\psfig{figure=figures/colliding_human_body.eps,width=1.00\textwidth}}
+\caption{Character formed with collision spheres and capsules}
+\label{fig:colliding_human_body}
 \end{figure}
 
+Other than the defined collision spheres and capsules, the cloth naturally collides with the floor actor of the PhysX environment as well. This, however, introduces a problem: the models from Blender are exported as root joint coinciding with the origin. This is required for successful animation. However, in the PhysX environment, the floor is created automatically at (0,0,0), and the initial position of the lower part of the apparel is penetrates the floor, which produces unrealistic visuals. In order to overcome this issue, the lower cloth vertices are introduced into the software with modified y coordinates, in order to keep them above ground. In the rendering process, the lower part of the apparel is attached to a scene node with negative y offset equal to the boost in the vertices, which places the lower part of the apparel exactly where it should be. Every frame, the collision sphere positions are updated with the data from the updated body skeleton, prior to the cloth simulation. 
+
+\subsection{Collision Detection and Resolution}
+
+PhysX provides two options for collision detection: \em{discrete} and \em{continuous} collision. The framework works with the latter due to more robust results, although it takes twice as long to do the calculation. The solution is performed for the trajectory of the capsule or sphere and the particle for frame interval. This approach is especially robust in fast motion, which is important because the motion is created in real time. The required solution is a sixth degree polynomial, which is approximated with a quadratic equation. The pipeline is depicted in Figure \ref{fig:collision_pipeline}. The solution is performed on the GPU, which increases the performance greatly, allowing for frame rates of 600+ frames per second (fps). The cloth is discretized as a triangle mesh, and because the collision is only detected on vertices, the density must be high enough in order to avoid penetration~\cite{Kim2011},\cite{Tonge2010}. 
+
+\begin{figure}[h]
+\centerline{\fbox{\psfig{figure=figures/collision_pipeline.eps,width=1.00\textwidth}}}
+\caption{The collision detection pipeline (reproduced from~\cite{Tonge2010}).}
+\label{fig:collision_pipeline}
+\end{figure}
 

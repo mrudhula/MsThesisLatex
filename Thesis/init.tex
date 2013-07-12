@@ -14,21 +14,23 @@
 \thesistype{M.S.~}
 \teztipi{Y{\"u}ksek Lisans}
 
-\keywords{cloth simluation, computer vision, natural interaction, virtual fitting room, kinect, depth sensor}
+\keywords{cloth simulation, computer vision, natural interaction, virtual fitting room, kinect, depth sensor}
 \anahtarsoz{k{\i}yafet sim{\"u}lasyonu, bilgisayarla g{\"o}r{\"u}, do\u{g}al etkile\c{s}im, sanal giyinme kabini, kinect, derinlik sens{\"o}r{\"u}}
 
-\title{AUGMENTED CLOTH FITTING WITH REAL TIME PHYSICS SIMULATION USING TIME-OF-FLIGHT CAMERAS}
-\baslik{U\c{C}U\c{S} ZAMANI KAMERALARI KULLANAN GER\c{C}EK ZAMANLI F\.{I}Z\.{I}K S\.{I}M{\"U}LASYONLU ARTIRILMI\c{S} KIYAFET KAB\.{I}N\.{I}}
+\title{REAL TIME PHYSICS-BASED AUGMENTED FITTING ROOM USING TIME-OF-FLIGHT CAMERAS}
+\baslik{U\c{C}U\c{S} ZAMANI KAMERALARI KULLANAN \\ \vspace*{-1.25ex} GER\c{C}EK ZAMANLI F\.{I}Z\.{I}K TABANLI \\ARTTIRILMI\c{S} G\.{I}Y\.{I}NME KAB\.{I}N\.{I}}
 
 \author{Umut G{\"u}ltepe}
 \dept{Computer Engineering}
 \bolum{Bilgisayar M\"{u}hendisli\u{g}i}
-\principaladvisor{Assoc. Prof. Dr. U\u{g}ur G{\"u}d{\"u}kbay~}
-\tezyoneticisi{Do\c{c}. Dr. U\u{g}ur G{\"u}d{\"u}kbay~}
+\principaladvisor{Assoc. Prof. Dr. U\u{g}ur G\"{u}d\"{u}kbay}
+\tezyoneticisi{Do\c{c}. Dr. U\u{g}ur G\"{u}d\"{u}kbay}
+\firstreader{Assoc. Prof. Dr. \.{I}brahim K\"{o}rpeo\u{g}lu}
+\secondreader{Prof. Dr. Ahmet Enis \c{C}etin}
 \director{Prof. Dr. Levent Onural}
-%\copyrightyear{2011}
-\submitdate{December, 2012}
-\tarih{Aral{\i}k, 2012}
+%\copyrightyear{2012}
+\submitdate{August, 2013}
+\tarih{A\u{g}ustos, 2013}
 
 
 \begin{document}
@@ -38,13 +40,14 @@
 %\setlength{\baselineskip}{6mm}
 %\thispagestyle{plain}
 \begin{abstract}
-\indent This study surveys and proposes a method for an augmented cloth fitting with real time physics simulation. Augmented reality is an evolving field in computer science, finding many uses in entertainment and advertising. With the advances in cloth simulation and time-of-flight cameras, augmented cloth fitting in real-time is developed , to be used in textile industry in both design and sale stages. Delay in cloth fitting due to processing time is the main challenge in this research. Human body is identified, articulated and tracked with a time-of-flight camera. Depending on the size and position of body limbs, a virtually simulated cloth is fitted in real time on the subject. Delay is reduced with GPU computing for cloth simulation and collision detection.
+\indent This thesis proposes a framework for a real-time physically-based augmented cloth fitting environment. With the advances in cloth simulation and time-of-flight cameras, augmented cloth fitting in real-time is developed to be used in textile industry in both design and sale stages. Delay in cloth fitting due to the processing time is the main challenge in this research. Human body is identified, articulated, and tracked with a time-of-flight camera. Depending on the size and position of body limbs, 
+a virtually simulated cloth is fitted in real time on the subject. The delay is reduced by utilizing Graphics Processing Unit (GPU)  for cloth simulation and collision detection.
 \end{abstract}
 
 
 
 \begin{ozet}
-\indent Bu \c{c}al{\i}\c{s}ma fizik sim{\"u}lasyonlu bir art{\i}r{\i}lm{\i}\c{s} k{\i}yafet giydirme i\c{c}in bir metot {\"o}nermekte ve incelemektedir. Art{\i}r{\i}lm{\i}\c{s} ger\c{c}eklik bilgisayar biliminde geli\c{s}en bir aland{\i}r, e\u{g}lence ve reklam sekt{\"o}rlerinde geni\c{s} yer bulmaktad{\i}rlar. Kuma\c{s} sim{\"u}lasyonu ve u\c{c}u\c{s}-zaman{\i} kameralar{\i}n{\i}n geli\c{s}tirilmesi ile, ger\c{c}ek zamanl{\i} art{\i}r{\i}lm{\i}\c{s} k{\i}yafet giydirimi tekstil end{\"u}strisinde tasar{\i}m ve sat{\i}\c{s} a\c{s}amalar{\i}nda kullan{\i}lmak {\"u}zere geli\c{s}tirilmi\c{s}tir. �\c{s}leme zaman{\i} sebebiyle k{\i}yafet giydirilmesindeki gecikme bu ara\c{s}t{\i}rmadaki en b{\"u}y{\"u}k zorluktur. �nsan v{\"u}cudu bir u\c{c}u\c{s}-zaman{\i} kameras{\i} ile tan{\i}mlanmakta, b{\"o}l{\"u}nmekte ve takip edilmektedir. V{\"u}cut par\c{c}alar{\i}n{\i}n boyutlar{\i}na ve pozisyonlar{\i}na g{\"o}re sim{\"u}le edilen bir sanal k{\i}yafet kullan{\i}c{\i}n{\i}n {\"u}st{\"u}ne yerle\c{s}tirilmektedir. Gecikme zaman{\i} k{\i}yafet sim{\"u}lasyonunu ve \c{c}arp{\i}\c{s}ma takibini GPU {\"u}zerinde yaparak azalt{\i}lmaktad{\i}r.  
+\indent Bu tezde ger\c{c}ek zamanl{\i} fizik tabanl{\i} bir art{\i}r{\i}lm{\i}\c{s} giyinme kabini ortam{\i} i\c{c}in bir \c{c}er\c{c}eve \c{c}al{\i}\c{s}ma {\"o}nerilmektedir. Kuma\c{s} sim{\"u}lasyonu ve u\c{c}u\c{s}-zaman{\i} kameralar{\i}n{\i}n geli\c{s}tirilmesi ile, ger\c{c}ek zamanl{\i} art{\i}r{\i}lm{\i}\c{s} k{\i}yafet giydirimi tekstil end{\"u}strisinde tasar{\i}m ve sat{\i}\c{s} a\c{s}amalar{\i}nda kullan{\i}lmak {\"u}zere geli\c{s}tirilmi\c{s}tir. \.{I}\c{s}leme zaman{\i} sebebiyle k{\i}yafet giydirilmesindeki gecikme bu ara\c{s}t{\i}rmadaki en b{\"u}y{\"u}k zorluktur. \.{I}nsan v{\"u}cudu bir u\c{c}u\c{s}-zaman{\i} kameras{\i} ile tan{\i}mlanmakta, b{\"o}l{\"u}nmekte ve takip edilmektedir. V{\"u}cut par\c{c}alar{\i}n{\i}n boyutlar{\i}na ve pozisyonlar{\i}na g{\"o}re sim{\"u}le edilen bir sanal k{\i}yafet kullan{\i}c{\i}n{\i}n {\"u}st{\"u}ne yerle\c{s}tirilmektedir. Gecikme zaman{\i} k{\i}yafet sim{\"u}lasyonu ve \c{c}arp{\i}\c{s}ma takibi, grafik i\c{s}lemci \"{u}nitesi (GPU) {\"u}zerinde ger\c{c}ekle\c{s}tirilerek azalt{\i}lmaktad{\i}r.  
 \end{ozet}
 
 \begin{ack}

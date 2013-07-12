@@ -1,7 +1,9 @@
 \input{init}
-\setcounter{secnumdepth}{5}
-\setcounter{tocdepth}{4}
+\setcounter{secnumdepth}{5} %% depth of subsections
+\setcounter{tocdepth}{4} %% depth of Table of Contents
 
+
+\pagestyle{plain}
 \pagenumbering{arabic}
 \setcounter{page}{1}
 \setcounter{section}{1}
@@ -11,18 +13,20 @@
 \input{chapter1}
 \input{chapter2}
 \input{chapter3}
-\input{chapter4}
-\input{chapter5}
-\input{chapter6} 
-
-\clearpage
+\input{chapter5} 
+ 
+\newpage
 \addcontentsline{toc}{chapter}{Bibliography}
-\clearpage
-\addcontentsline{toc}{chapter}{Appendix}
-
+ 
+\bibliographystyle{ieeetr}
 \bibliography{whole}
-\bibliographystyle{abbrv}
+
+\newpage
+\addcontentsline{toc}{chapter}{Appendices}
+
+
 \input{appendix1}
 \input{appendix2}
 \input{appendix3}
-\end{document} 
+\end{document}
+ 

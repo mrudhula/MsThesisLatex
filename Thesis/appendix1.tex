@@ -1,17 +1,17 @@
 \appendix
-\chapter{Overall Framework-OGRE}
+\chapter{OGRE Framework}
 \label{appendix_ogre_framework}
 
-As a programmer, I embrace the do not repeat yourself mindset and extreme programming methodology. Furthermore, since my study required utilization of many different techniques in different fields in Computer Science, I searched for various 3rd party SDKs to save me from writing ground-level code. These two beliefs led me to search for the rendering engine best suited for my needs:
+As a programmer, I embrace the do not repeat yourself mindset and extreme programming methodology. Furthermore, since my study required utilization of many different techniques in different fields in Computer Science, I searched for various third party Software Development Kids (SDKs) to save me from writing ground-level code. These two beliefs led me to search for the rendering engine best suited for my needs:
 
 \begin{enumerate}
-\item Must be code oriented rather than designer oriented.
-\item Must be able to utilize both DirectX and OpenGL (for compatibility reasons).
-\item Must take care of mundane and routine programming such as the rendering pipeline, input handling, 
-\item Must be able to integrate easily with 3rd party libraries.
-\item Must be stable and mature.
-\item Must have an associated 3-D designing program which can be used to easily produce content and load into the program.
-\item Must have accurate and extensive documentation.
+\item must be code-oriented rather than designer-oriented;
+\item must be able to utilize both DirectX and OpenGL (for compatibility reasons);
+\item must take care of mundane and routine programming such as the rendering pipeline and input handling;
+\item must be able to integrate easily with 3rd party libraries;
+\item must be stable and mature;
+\item must have an associated 3-D designing program which can be used to easily produce content and load into the program; and
+\item must have accurate and extensive documentation.
 \end{enumerate}
 
 Other than these, automatic material rendering, skeletal animation support were considered as bonuses.
@@ -19,45 +19,44 @@ After experimenting with Unity, UDK and native OpenGL programming, I eventually 
 
 
 \section{The Features}
-Unlike the name suggests, OGRE is more than just a rendering engine. Among all the features, the ones I utilized are as following \cite{Knot2012}
+Unlike the name suggests, OGRE is more than just a rendering engine. Among all the features, the ones I utilized are as follows~\cite{Knot2012}.
 
 \begin{itemize}
-\item Render State Management
-\item Spatial Culling and Transparency Handling
-\item Material Rendering
+\item Render state management.
+\item Spatial culling and transparency handling.
+\item Material rendering:
 \begin{itemize}
-  \item Easy material and shader management, custom shader support.
-  \item Multitexture and Multipass blending
-  \item Lighting shader and different shadow rendering techniques
-  \item Material Level Of Detail Support
-  \item Supports a variety of image formats, volumetric textures and DXT textures.
-  \item Render-To-Texture (Frame Rendering Buffer) support
+  \item easy material and shader management, custom shader support,
+  \item multitexture and multipass blending,
+  \item lighting shader and different shadow rendering techniques,
+  \item material level of detail support,
+  \item support for a variety of image formats, volumetric textures and DXT textures, and
+  \item render-to-texture (frame rendering buffer) support.
 \end{itemize}
-\item Meshes
+\item Meshes:
 \begin{itemize}
-  \item Native mesh format which can be exported from Blender Designer.
-  \item Level Of Detail Support
-  \item Skeletal animation feature, can be used with models exported from Blender.
+  \item native mesh format, which can be exported from Blender Designer,
+  \item level of detail support,
+  \item skeletal animation feature, can be used with models exported from Blender:
 \begin{itemize}
-  \item Multiple-bone weighted skinning
-  \item Hardware Acceleration.
+  \item multiple-bone weighted skinning
+  \item hardware acceleration.
 \end{itemize}
 \end{itemize}
-\item Easy scene management
+\item Easy scene management.
 \item Easy camera and input management.
-\item Easy integration with 3rd party libraries due to code-based nature.
+\item Easy integration with third party libraries due to code-based nature.
 \item Overlay feature which enables easy information tracking about the feature.
 \end{itemize}
 
 These features led me to choose OGRE as my base framework.
 
-
 \section{High Level Overview}
-The class diagram in Figure \ref{fig:ogre-class-diagram}  shows the Object-Oriented core of the OGRE \cite{Moan2012}:
+Figure \ref{fig:ogre-class-diagram} shows the class diagram for the object-oriented core of OGRE~\cite{Moan2012}:
 
 \begin{figure}[h]
-\centerline{\fbox{\psfig{figure=figures/ogre_class_diagram.png,width=1.0\textwidth}}}
-\caption{OGRE High Level Overview}
+\centerline{\fbox{\psfig{figure=figures/ogre_class_diagram.eps,width=1.0\textwidth}}}
+\caption{Overview of the OGRE framework}
 \label{fig:ogre-class-diagram}
 \end{figure}
 
@@ -85,11 +84,11 @@ ReosurceManager object is an abstract class, used to create, keep and dispatch a
 \begin{itemize}
 \item The associated type is defined by the class inheriting the ResourceManager, such as MaterialManager.
 \item There is always only one instance of every child of ReosurceManager in an application.
-\item Resource Managers search the pre-defined locations of the filesystem and automatically indexes the resources available, ready to be loaded upon demand.
+\item Resource managers search the pre-defined locations of the filesystem and automatically indexes the resources available, ready to be loaded upon demand.
 \end{itemize}
 
 
-\subsection{Entities, Meshes and Materials and Overlays}
+\subsection{Entities, Meshes, Materials and Overlays}
 Entities are the instances of movable objects in the scene. They are based on meshes, which define the geometric and material properties of the entity. Materials contain information about what color the final pixel in the rendering should be. 
 \begin{itemize}
 \item Entities are attached to scene nodes for moving and rendering. Scene nodes can be nested, which greatly simplifies the process of rendering complex scenes.
@@ -99,12 +98,12 @@ Entities are the instances of movable objects in the scene. They are based on me
 \end{itemize}
 Overlays are used to create panels for control and HUD which are rendered above the scene. They are 2D elements are placed either by screen proportion or pixel size and rendered orthographically, last in the rendering pipeline by default (this can be overridden).
 
-\subsection{The render cycle}
-The self-explanatory render cycle of OGRE is given in Figure \ref{fig:ogre-render-cycle} \cite{Moan2012}.
+\subsection{The Rendering Cycle}
+The self-explanatory rendering cycle of OGRE is given in Figure \ref{fig:ogre-render-cycle}~\cite{Moan2012}.
 
 \begin{figure}[h]
-\centerline{\fbox{\psfig{figure=figures/ogre_render_cycle.png,width=1.0\textwidth}}}
-\caption{OGRE Render Cycle}
+\centerline{\fbox{\psfig{figure=figures/ogre_render_cycle.eps,width=1.0\textwidth}}}
+\caption{OGRE rendering cycle}
 \label{fig:ogre-render-cycle}
 \end{figure}
  

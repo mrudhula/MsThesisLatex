@@ -1,14 +1,10 @@
 \chapter{Cloth Resizing}
 \label{chapter_cloth_resizing}
-For a realistic fitting experience, another requirement is acquiring a set of simulation parameters from a human test-subject for a pre-modeled apparel mesh,
- which is to be displayed on a virtual avatar reflecting the body characteristics of the aforementioned subject.  The set of parameters for the simulation includes
-  the body height and width, also the radii for the collision spheres, which have their centers coinciding with the joints of the virtual avatar's skeleton.
+For a realistic fitting experience, another requirement is acquiring a set of simulation parameters from a human test-subject for a pre-modeled apparel mesh, which is to be displayed on a virtual avatar reflecting the body characteristics of the aforementioned subject.  The set of parameters for the simulation includes the body height and width, also the radii for the collision spheres, which have their centers coinciding with the joints of the virtual avatar's skeleton.
   
-The body width and height are then utilized to estimate the body size of the user, collision spheres are used in the dressing room simulation,
- to detect and resolve collision with the cloth particles.
+The body width and height are then utilized to estimate the body size of the user, collision spheres are used in the dressing room simulation to detect and resolve collision with the cloth particles.
 
-As opposed to the studies focusing on acquiring high-detail avatars of subjects for made-to measure applications, this study focuses on the speed of the overall algorithm
- for real-time purposes and acquire enough measurements for a 'fixed-size try-on' system.   
+As opposed to the studies focusing on acquiring high-detail avatars of subjects for made-to measure applications, this study focuses on the speed of the overall algorithm for real-time purposes and acquire enough measurements for a `fixed-size try-on' system.   
 
 The cloth resizing algorithm consists of three main steps:
 \begin{enumerate}
@@ -19,13 +15,7 @@ The cloth resizing algorithm consists of three main steps:
 
 \section{Depth Map Optimization}
 \label{section_depth_map_optimization}
-
-At 30 fps, Kinect provides a depth map and a user map, both at 640x480 resolution. Depth map consists of distances with the sensor in millimeters. 
-
-The depth measurement of the Kinect is not very accurate compared to high end 3D
-depth systems like laser scanners. The accuracy of the depth value decreases
-quadratically. Error values for different distances is shown in Table
-\ref{tbl:error_kinect}.
+At 30 fps, Kinect provides a depth map and a user map, both at 640 $\times$ 480 resolution. The depth map contains the distances of pixels from the sensor in millimeters. The depth measurement of the Kinect sensor is not very accurate compared to high-end 3D depth systems such as laser scanners. The error in the depth value increases quadratically with the distance. The error values for different distances are shown in Table~\ref{tbl:error_kinect}~(\cite{Kourosh2012}).
 
 \begin{table}
 \center
@@ -35,103 +25,79 @@ quadratically. Error values for different distances is shown in Table
 \textbf{Error in measurement} & 0.5cm & 1.5cm & 4cm \\ 
 \hline
 \end{tabular}
-\caption{Kinect Depth Accuracy \cite{Kourosh2012}}
+\caption{Kinect depth accuracy.}
 \label{tbl:error_kinect}
 \end{table}
 
-For the purposes of this study, the Kinect needs to be able to see the whole human body,
-which requires at least 3m away from the sensor for a person with 1.7m height,
-resulting in an erroneous depth map. This problem can be seen in Figure
-\ref{fig:kinect_depth_output_comparison}.
-
+For the purposes of this study, the Kinect sensor needs to be able to see the whole human body, which requires at least 3m away from the sensor for a person with 1.7m height, resulting in an erroneous depth map. This problem can be seen in Figure~\ref{fig:kinect_depth_output_comparison}. In order to acquire a better depth map, the following operations are performed:
 
 \begin{figure}[h]
-\centerline{\fbox{\psfig{figure=figures/kinect_depth_output_comparison.png,width=1.00\textwidth}}}
-\caption{Depth Output From Kinect with Improved Results. The leftmost image is
-the raw output, the application of filters results in better performance in the other two images  \cite{Tong2012}. This improvement utilizes more than one depth streams. }
+\centerline{\fbox{\psfig{figure=figures/kinect_depth_output_comparison.eps,width=1.00\textwidth}}}
+\caption{Depth output from Kinect with improved results. The leftmost image is the raw output, the application of filters results in better performance in the other two images \cite{Tong2012}. This improvement utilizes more than one depth streams.}
 \label{fig:kinect_depth_output_comparison}
 \end{figure}
 
-In order to acquire a better depth map, the following operations are performed:
 
-Let us take the depth map D as a 640x480 matrix. Initially, the user pixels are
-extracted by a pixel-by-pixel comparison with the user map. User map is another
-acquired map from the sensor, with the same size as depth map. The value of a
-pixel is set to a non-zero value if the pixel belongs to a recognized user. In
-this case, we are only interested in one user, $D_1$ represents the depth pixels
-of the user we are interested in, whereas $U_1$ is the bit map of the user.
-Also, the non-user pixels must be filled with the mean value of the user pixels, in order to perform Gaussian filtering on the image.
+Let us take the depth map $D$ as a 640 $\times$ 480 matrix. Initially, the user pixels are extracted by a pixel-by-pixel comparison with the user map. The user map is another acquired map from the sensor, with the same size as depth map. The value of a pixel is set to a non-zero value if the pixel belongs to a recognized user. In this case, we are only interested in one user; $D_1$ represents the depth pixels of the user and $U_1$ is the bit map of the user. Besides, the non-user pixels must be filled with the mean value of the user pixels in order to perform Gaussian filtering on the image.
 
 \begin{equation}
 D_1=(D-(D \times U_1 )) \times 1/n \times \sum\limits_{i=0}^n ((D \times U_1 )_i + d \times U_1 )
 \label{eqn:patch_depth}
 \end{equation}
 
-
-
-Next, we perform Gaussian filtering on the user's depth map, to normalize and
-improve the quality of the depth map. The size and sigma parameters of the Gaussian filter are selected through
-try-and-error experimentations in order to maximize the performance and the quality of the results. 
+Next, we perform Gaussian filtering on the user's depth map, to normalize and improve the quality of the depth map. The size and sigma parameters of the Gaussian filter are selected through try-and-error experimentations in order to maximize the performance and the quality of the results. 
 
 \begin{equation}
-D_G=D_1*G
+D_G=D_1*G,
 \label{eqn:gaussian_convolution}
 \end{equation}
 
 \noindent where `$*$' is the convolution operator. The Gaussian filtering completes the enhancement of the input depth map. 
-After these operations, we have a normalized and filtered depth map, which also
-has better planar values (x and y) since the holes due to depth stream will be filled.
+After these operations, we have a normalized and filtered depth map, which also has better planar values (x and y) since the holes due to depth stream will be filled.
 
-\begin{algorithm}
-\dontprintsemicolon % Some LaTeX compilers require you to use \dontprintsemicolon instead
+\begin{algorithm}[ht]
+\DontPrintSemicolon % Some LaTeX compilers require you to use \dontprintsemicolon instead
 \KwIn{Raw Depth Stream From Kinect}
 \KwOut{Depth Stream With Patched Holes and Gaussian Optimization }
 $depth_{sum}=0$ \;
 $n_{user} =0$\;
-\For{i \bf{from} 0 \bf{to} $d_width$ }{
-\For{j \bf{from} 0 \bf{to} $d_height$ }{
-\If{$U(i,j)$} {
-  $depth_{sum}=depth_{sum}+D(i,j)$\;
+\For{i \bf{from} 0 \bf{to} $d_\textit{width}$ }{
+\For{j \bf{from} 0 \bf{to} $d_\textit{height}$ }{
+\If{$U(i, j)$} {
+  $\textit{depth}_\textit{sum}=\textit{depth}_\textit{sum}+D(i, j)$\;
   $n_{user}+=1$\;
  }}}
-$depth_{average}=depth_{sum}/n_{user}$ \;
-\For{i \bf{from} 0 \bf{to} $d_width$ }{
-\For{j \bf{from} 0 \bf{to} $d_height$ }{
-\If{\bf{not}  $U(i,j)$} {
-  $D(i,j)=depth_{average}$\;
+$\textit{depth}_\textit{average}=\textit{depth}_\textit{sum}/n_\textit{user}$ \;
+\For{i \bf{from} 0 \bf{to} $d_\textit{width}$ }{
+\For{j \bf{from} 0 \bf{to} $d_\textit{height}$ }{
+\If{\bf{not}  $U(i, j)$} {
+  $D(i, j)=\textit{depth}_\textit{average}$\;
  }}}
  
-\For{i \bf{from} 0 \bf{to} $d_width$ }{
-\For{j \bf{from} 0 \bf{to} $d_height$ }{
-\If{$U(i,j)$} {
-  $D(i,j)=D(i-m:i+m,j-n:j+m) * Gaussian(m,n,e)$\;
+\For{i \bf{from} 0 \bf{to} $d_\textit{width}$ }{
+\For{j \bf{from} 0 \bf{to} $d_\textit{height}$ }{
+\If{$U(i, j)$} {
+  $D(i, j)=D(i-m:i+m, j-n:j+m) * \textit{Gaussian}(m, n, e)$\;
  }}}
 \Return{D}
-\caption{Depth Map Optimization Algorithm}
+\caption{Depth map optimization algorithm}
 \label{algo:depth_patch}
 \end{algorithm}
 
 \section{Parameter Measurement}
-In paremeter measurement, there are two objectives to be handled: To determine the optimal
-sizes of collision spheres for cloth simulation and the required scaling parameters for the cloth to optimally fit the user. 
-It is important that these algorithms do not take more than a thirtieth seconds on a high-end consumer computer in order to keep
- the real time experience smooth, since there is an averaging over time is involved.
+In parameter measurement, there are two objectives to be handled: To determine the optimal sizes of collision spheres for cloth simulation and the required scaling parameters for the cloth to optimally fit the user. It is important that these algorithms do not take more than a thirtieth seconds on a high-end consumer computer in order to keep the real time experience smooth, since there is an averaging over time is involved.
 
-First step is fitting spheres in various locations in the optimized body
-map. These fitted spheres will provide the radii for the collision spheres which
-will be used to simulate the cloth. Locations of the machine-provided user
-joints are shown in Figure \ref{fig:nite_joints}. These are where spheres will
-be located.
+The first step is fitting spheres in various locations in the optimized body map. These fitted spheres will provide the radii for the collision spheres, which will be used to simulate the cloth. Locations of the machine-provided user joints are shown in Figure \ref{fig:nite_joints}. These are where spheres will be located.
 
 \begin{figure}[h]
-\centerline{\fbox{\psfig{figure=figures/nite_joints.png,width=1.00\textwidth}}}
-\caption{Human Joints provided by NITE }
+\centerline{\fbox{\psfig{figure=figures/nite_joints.eps,width=0.90\textwidth}}}
+\caption{Human joints provided by NITE~\cite{Microsoft2013}.}
 \label{fig:nite_joints}
 \end{figure}
 
-Sphere fitting algorithm is as following:
+The pseudo-code of the sphere fitting is given in Algorithm~\ref{algo:sphere_fitting}. It performs the following steps:
 \begin{enumerate}
-\item Take vector $J_i$ which represents the coordinates of the $i^{th}$
+\item Take vector $J_i$, which represents the coordinates of the $i^{th}$
 joint.
 First, initialize the radius of the sphere by the difference of z-dimension with the overlaying point in the depth map.
 \begin{equation}
@@ -143,17 +109,17 @@ r_i^z=J_i^z-D^z(J_i^x,J_i^y)
 r_i^{x,y}=max(\| \pm J_i^{x,y} \mp D^{x,y}(J_i^{y,x},J_i^z)\|)
 \label{eqn:x_y_sphere_radius}
 \end{equation}
-\item 3. The radius of the sphere is equal to the minimum of these three values.
+\item The radius of the sphere is equal to the minimum of these three values.
 \begin{equation}
 r_i=min(r_i^{x,y,z})
 \label{eqn:minimum_sphere-radius}
 \end{equation}
 \end{enumerate}
 
-\begin{algorithm}
-\dontprintsemicolon % Some LaTeX compilers require you to use \dontprintsemicolon instead
-\KwIn{Optimized Depth Stream From Kinect}
-\KwOut{Collision Sphere radii for each joint }
+\begin{algorithm}[ht]
+\DontPrintSemicolon % Some LaTeX compilers require you to use \dontprintsemicolon instead
+\KwIn{Optimized depth stream from Kinect}
+\KwOut{Collision sphere radii for each joint }
 \ForEach{joint }{
 $p=pos_{J_m}$\;
 $r_z=\sqrt{P_z^2-D_z(P_x,P_y)^2}$
@@ -163,7 +129,7 @@ $r_z=\sqrt{P_z^2-D_z(P_x,P_y)^2}$
   break\;
  }
 }
-\For{i \bf{from} $P_x$ \bf{to} $depth_width$ }{
+\For{i \bf{from} $P_x$ \bf{to} $\textit{depth}_\textit{width}$ }{
 \If{$D(i,P_y)$ \bf{equals}  $P_z$} {
   $r_x^+ = i$\;
   break\;
@@ -175,41 +141,30 @@ $r_z=\sqrt{P_z^2-D_z(P_x,P_y)^2}$
   break\;
  }
 }
-\For{j \bf{from} $P_y$ \bf{to} $depth_height$ }{
+\For{j \bf{from} $P_y$ \bf{to} $\textit{depth}_\textit{height}$ }{
 \If{$D(P_x,j)$ \bf{equals}  $P_z$} {
   $r_y^+ = j$\;
   break\;
  }
 }
-$r_m=min(r_z,r_x^-,r_x^+,r_y^-,r_y^+)$
+$r_m=\textit{min}(r_z, r_x^-, r_x^+, r_y^-, r_y^+)$
 }
 \Return $(r_0,r_1 \ldots r_n)$ 
-\caption{Sphere Fitting Algorithm}
+\caption{Sphere fitting algorithm}
 \label{algo:sphere_fitting}
 \end{algorithm}
 
 \section{Human Body Parameters}
 \label{section_human_body_parameters}
 
-Next step will be acquiring the optimal scaling parameters for the cloth. 
-
-The width and height of the subject is important for determining the proper actual size for the cloth. However, a straightforward 
-estimation of the body height and shoulder width is prone to errors due to the noise and quality of the incoming depth map. In 
-order to minimize this error, an upscaled version of the subject's body is measured, to be used in width-height estimation 
-later.
-
-The human body proportions to be used are shown in Table \ref{tbl:human_body_proportions}.  In these proportions,
- the unit width and height are taken as the width and height of the head. 
- 
-The measurement source column in the table represents the source for the estimation of the respective parameter:
+The next step will be acquiring the optimal scaling parameters for the cloth. The width and height of the subject is important for determining the proper actual size for the cloth. However, a straightforward estimation of the body height and shoulder width is prone to errors due to the noise and quality of the incoming depth map. In order to minimize this error, an upscaled version of the subject's body is measured, to be used in width-height estimation later. The human body proportions to be used are shown in Table \ref{tbl:human_body_proportions}~(\cite{Willis2012}). In these proportions, the unit width and height are taken as the width and height of the head. The measurement source column in the table represents the source for the estimation of the respective parameter:
 \begin{itemize} 
 \item
 The joint location represents that the measurement will take the input subject joint locations as the reference.
 \item 
 The depth map represents the measurement will instead perform measurements based on the pixel distribution in the filtered subject depth map. 
 \end{itemize}
-They are often used together for better performance. Please note that some of these parameters are not standard to be used as relative references, such as the hip width. 
-These parameters do not effect others in the estimation process and vice versa.
+They are often used together for better performance. Please note that some of these parameters are not standard to be used as relative references, such as the hip width. These parameters do not effect others in the estimation process and vice versa.
 
 \begin{table}
 \center
@@ -226,37 +181,33 @@ Hip Width & - (8) & - & Depth Map \\ \hline
 Torso Height & - & - (9) & Joint Location \\ 
 \hline
 \end{tabular}
-\caption{Human Body Proportions \cite{Willis2012}. Numbers in parenthesis represent the lines on Figure \ref{fig:body_proportions}.}
+\caption{Human body proportions. Numbers in parenthesis represent the lines on Figure \ref{fig:body_proportions}.}
 \label{tbl:human_body_proportions}
 \end{table}
 
 \begin{figure}[h]
-\centerline{\fbox{\psfig{figure=figures/body_proportions.png,width=0.50\textwidth}}}
-\caption{Proportions on the Body}
+\centerline{\psfig{figure=figures/body_proportions.eps,width=0.50\textwidth}}
+\caption{Proportions on the body}
 \label{fig:body_proportions}
 \end{figure}
 
-Along with the ratios, the actual size in meters in height and width shall be measured and recorded as well, since the cloth needs to be scaled according to the user. 
-In the proposed approach, the whole cloth is scaled as a whole, with different parameters for three dimensions. This approach qualifies as the best option
-for the purposes of this application, as most shops do not offer extensive customization.
-
-As the types of cloth focus on different portions of the body, the human body proportions from different areas should not affect the scaling parameters equally. Therefore, the main body parameters for different types of clothes are listed in Table 3.
+Along with the ratios, the actual size in meters in height and width shall be measured and recorded as well, since the cloth needs to be scaled according to the user. In the proposed approach, the whole cloth is scaled as a whole, with different parameters for three dimensions. This approach qualifies as the best option for the purposes of this application, as most shops do not offer extensive customization. As the types of cloth focus on different portions of the body, the human body proportions from different areas should not affect the scaling parameters equally. Therefore, the main body parameters for different types of clothes are listed in Table 3.
 
 \begin{table}
 \center
-\begin{tabular}{ | p{3cm} | p{5cm} | p{5cm}  |}
+\begin{tabular}{ | p{3cm} | p{3.5cm} | p{3.5cm}  |}
 \hline
-\textbf{Type Of Cloth} & \textbf{Primary Height Proportions} & \textbf{Primary Width Proportions}  \\ \hline
+\textbf{Type of Cloth} & \textbf{Primary Height Proportions} & \textbf{Primary Width Proportions}  \\ \hline
 Trousers & Hip Height & Hip Width \\ \hline
-Long Sleeves & Body Height & Elbow-Fingertip Height,Shoulder Width \\ \hline
+Long Sleeves & Body Height & Elbow-Fingertip Height, Shoulder Width \\ \hline
 Short Sleeves-Sleeveless & Torso Height & Shoulder Width \\ 
 \hline
 \end{tabular}
-\caption{Primary Proportions for Different Cloth Types}
+\caption{Primary proportions for different cloth types}
 \label{tbl:primary_proportions}
 \end{table}
 
-The parameter estimation algorithm will go as following:
+The pseudo-code of the parameter estimation is given in Algorithm~\ref{algo:sphere_fitting}. It performs the following steps:
 
 \begin{enumerate}
 \item For a particular cloth, take the primary measured proportion as $P_i^0$. This will be the measured dimension of said proportion. 
@@ -275,74 +226,66 @@ W,H_i=1/(n+1) \times \sum\limits_{j=0}^n W,H_i^j
 
 After finding the optimized main parameter in meters, it can be used to scale the virtual cloth by calculating the ratio.
 
-\begin{algorithm}
-\dontprintsemicolon % Some LaTeX compilers require you to use \dontprintsemicolon instead
+\begin{algorithm}[ht]
+\DontPrintSemicolon % Some LaTeX compilers require you to use \dontprintsemicolon instead
 
-$t_{proportion}=import(Table \ref{tbl:human_body_proportions})$ \;
-$t_{primary}=import(Table \ref{tbl:primary_proportions})$ \;
-$ct=cloth_{type}$\;
-$width_{main}=t_{proportion}.width(ct)$\;
-$width_{sum}=0$\;
-$count_{effector}=0$\;
-\ForEach{width \bf{in} $t_{proportion}$ }{
-$w_i=measure(p_i)$\;
-$w_i^j=w \times t_{proportion}.ratio(p_i,parameter_{main})$\;
-$width_{sum}=width_{sum}+w_i^j $\;
-$count_effector++ $\;
+$t_\textit{proportion}$ = {\textrm import}({\textrm Table \ref{tbl:human_body_proportions}}) \;
+$t_\textit{primary}$ = {\textrm import}({\textrm Table \ref{tbl:primary_proportions}}) \;
+$ct=\textit{cloth}_\textit{type}$\;
+$\textit{width}_\textit{main}=t_\textit{proportion}.width(ct)$\;
+$\textit{width}_\textit{sum}=0$\;
+$\textit{count}_\textit{effector}=0$\;
+\ForEach{width \bf{in} $t_\textit{proportion}$ }{
+$w_i = \textit{measure}(p_i)$\;
+$w_i^j=w \times t_\textit{proportion}.\textit{ratio}(p_i, \textit{parameter}_\textit{main})$\;
+$\textit{width}_\textit{sum} = \textit{width}_\textit{sum}+w_i^j $\;
+$\textit{count}_\textit{effector}++ $\;
 }
-$width_{weighted}=width_{sum}/count_effector$
-$x_s=width_{weighted}/width_{cloth}$\;
+$\textit{width}_\textit{weighted}=\frac{\textit{width}_\textit{sum}}{\textit{count}_{\textit{effector}}}$\;
+$x_s=\frac{\textit{width}_\textit{weighted}}{\textit{width}_\textit{cloth}}$\;
 
-$height_{main}=t_{proportion}.height(ct)$\;
-$height_{sum}=0$\;
-$count_{effector}=0$\;
-\ForEach{height \bf{in} $t_{proportion}$ }{
-$h_i=measure(p_i)$\;
-$h_i^j=h \times t_{proportion}.ratio(p_i,parameter_{main})$\;
-$height_{sum}=height_{sum}+h_i^j $\;
-$count_effector++ $\;
+$\textit{height}_\textit{main}=t_\textit{proportion}.\textit{height}(ct)$\;
+$\textit{height}_\textit{sum}=0$\;
+$\textit{count}_\textit{effector}=0$\;
+\ForEach{height \bf{in} $t_\textit{proportion}$ }{
+$h_i=\textit{ measure}(p_i)$\;
+$h_i^j=h \times t_\textit{proportion}.\textit{ ratio}(p_i, \textit{parameter}_\textit{main})$\;
+$\textit{height}_\textit{sum}=\textit{height}_\textit{sum}+h_i^j $\;
+$\textit{count}_\textit{effector}++ $\;
 }
-$height_{weighted}=height_{sum}/count_effector$
-$y_s=height_{weighted}/height_{cloth}$\;
-\Return{$(x_s,y_s)$}
-\caption{Cloth Resizing Algorithm}
+$\textit{height}_\textit{weighted}=\frac{\textit{height}_\textit{sum}}{\textit{count}_{\textit{effector}}}$\;
+$y_s=\frac{\textit{height}_\textit{weighted}}{\textit{height}_\textit{cloth}}$\;
+\Return{$(x_s, y_s)$}
+\caption{Cloth resizing algorithm}
 \label{algo:cloth_resize}
 \end{algorithm}
 
 \section{Temporal Optimization and Scaling}
-In the step two of the overall algorithm, we will have acquired the following usable parameters:
+After performing Step 2 of the overall algorithm, we acquired the following usable parameters:
 
 \begin{itemize}
-\item Collision Sphere Radii	$r_i$
-\item Cloth and Avatar Scaling Parameters $x_s$ and $y_s$
+\item collision sphere radii, ($r_i$) and
+\item cloth and avatar scaling parameters ($x_s$, $y_s$).
 \end{itemize}
 
-By now, tje required body dimensions and collision sphere parameters for a realistic simulation are acquired. 
-Yet, the measurements are performed on a filtered version of a depth sensor with high error rates. In order to overcome the noise and overall depth-sense faults,
- the prior measurements are repeated for the duration of one second, which corresponds to 30 frames of input depth map. 
-A considerably different approach here would be to employ the temporal averaging on the depth map instead of the measured parameters. 
-However it is observed that the results suffer due to the motions of the subject because most subjects fail to keep their exact form for one second. 
+By now, the required body dimensions and collision sphere parameters for a realistic simulation are acquired. Yet, the measurements are performed on a filtered version of a depth sensor with high error rates. In order to overcome the noise and overall depth-sense faults,
+ the prior measurements are repeated for the duration of one second, which corresponds to 30 frames of input depth map. A considerably different approach here would be to employ the temporal averaging on the depth map instead of the measured parameters. However it is observed that the results suffer due to the motions of the subject because most subjects fail to keep their exact form for one second. 
 To overcome these problems, temporal averaging that takes the mean of the specified parameters for the frames in one second is used. 
-This step finalizes the parameters and delivers the required parameters for simulation environment synthesis.
+This step finalizes the parameters and delivers the required parameters for simulation environment synthesis. The averaging process includes summing up all the information from previous time frames and dividing the result buy the number of samples. After the optimized parameters are acquired, the cloth and body meshes are scaled accordingly. The mesh parameters for three axis will be as $(x_s, y_s, avg(x_s, x_y))$, because there is not enough information on z-dimension to make accurate calculations. Therefore the value will be
+ according to the scaling factors for x and y dimensions.
 
-Averaging process includes summing up all the information from previous time frames and dividing the result buy the number of samples.
-
-After the optimized parameters are acquired, the cloth and body meshes are scaled accordingly. The mesh parameters for three axis will be as 
-$(x_s,y_s,avg(x_s,x_y))$, since there is not enough information on z-dimension to make accurate calculations.  Therefore the value will be
- averaged between the scaling factors for x and y dimensions.
-
-\begin{algorithm}
-\dontprintsemicolon % Some LaTeX compilers require you to use \dontprintsemicolon instead
-\KwIn{Raw Depth Stream From Kinect}
-\KwOut{Depth Stream With Patched Holes and Gaussian Optimization }
-$s=2 \times 30 Array for x and y scaling parameters for 30 frames$ \;
-$r=16 \times 30 Array for joint radii for 30 frames$\;
-\For{i \bf{from} 0 \bf{to} $30 frames$ }{
+\begin{algorithm}[ht]
+\DontPrintSemicolon % Some LaTeX compilers require you to use \dontprintsemicolon instead
+\KwIn{Raw depth stream from Kinect}
+\KwOut{Depth stream with patched holes and Gaussian optimization }
+$s=2 \times 30 $ Array for x and y scaling parameters for 30 frames\;
+$r=16 \times 30 $ Array for joint radii for 30 frames\;
+\For{i \bf{from} 0 \bf{to} $30$ frames }{
 	r[i]=fitSpheres()\;
 	s[i]=optimizeScaleParameters()\;
 }
-$r_{final}$=avg(r)\;
-$s_{final}$=avg(s)\;
-\caption{Temporal Averaging}
+$r_\textit{final}$=avg(r)\;
+$s_\textit{final}$=avg(s)\;
+\caption{Temporal averaging}
 \label{algo:temporal_averaging}
 \end{algorithm}
