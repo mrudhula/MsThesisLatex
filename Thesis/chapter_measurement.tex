@@ -29,16 +29,7 @@ At 30 fps, Kinect provides a depth map and a user map, both at 640 $\times$ 480 
 \label{tbl:error_kinect}
 \end{table}
 
-For the purposes of this study, the Kinect sensor needs to be able to see the whole human body, which requires at least 3m away from the sensor for a person with 1.7m height, resulting in an erroneous depth map. This problem can be seen in Figure~\ref{fig:kinect_depth_output_comparison}. In order to acquire a better depth map, the following operations are performed:
-
-\begin{figure}[h]
-\centerline{\fbox{\psfig{figure=figures/kinect_depth_output_comparison.eps,width=1.00\textwidth}}}
-\caption{Depth output from Kinect with improved results. The leftmost image is the raw output, the application of filters results in better performance in the other two images \cite{Tong2012}. This improvement utilizes more than one depth streams.}
-\label{fig:kinect_depth_output_comparison}
-\end{figure}
-
-
-Let us take the depth map $D$ as a 640 $\times$ 480 matrix. Initially, the user pixels are extracted by a pixel-by-pixel comparison with the user map. The user map is another acquired map from the sensor, with the same size as depth map. The value of a pixel is set to a non-zero value if the pixel belongs to a recognized user. In this case, we are only interested in one user; $D_1$ represents the depth pixels of the user and $U_1$ is the bit map of the user. Besides, the non-user pixels must be filled with the mean value of the user pixels in order to perform Gaussian filtering on the image.
+For the purposes of this study, the Kinect sensor needs to be able to see the whole human body, which requires at least 3m away from the sensor for a person with 1.7m height, resulting in an erroneous depth map. In order to acquire a better depth map, the following operations are performed: Let us take the depth map $D$ as a 640 $\times$ 480 matrix. Initially, the user pixels are extracted by a pixel-by-pixel comparison with the user map. The user map is another acquired map from the sensor, with the same size as depth map. The value of a pixel is set to a non-zero value if the pixel belongs to a recognized user. In this case, we are only interested in one user; $D_1$ represents the depth pixels of the user and $U_1$ is the bit map of the user. Besides, the non-user pixels must be filled with the mean value of the user pixels in order to perform Gaussian filtering on the image.
 
 \begin{equation}
 D_1=(D-(D \times U_1 )) \times 1/n \times \sum\limits_{i=0}^n ((D \times U_1 )_i + d \times U_1 )
@@ -87,13 +78,7 @@ $\textit{depth}_\textit{average}=\textit{depth}_\textit{sum}/n_\textit{user}$ \;
 \section{Parameter Measurement}
 In parameter measurement, there are two objectives to be handled: To determine the optimal sizes of collision spheres for cloth simulation and the required scaling parameters for the cloth to optimally fit the user. It is important that these algorithms do not take more than a thirtieth seconds on a high-end consumer computer in order to keep the real time experience smooth, since there is an averaging over time is involved.
 
-\begin{figure}[h]
-\centerline{\fbox{\psfig{figure=figures/nite_joints.eps,width=0.90\textwidth}}}
-\caption{Human joints provided by NITE~\cite{Microsoft2013}.}
-\label{fig:nite_joints}
-\end{figure}
-
-The first step is fitting spheres in various locations in the optimized body map. These fitted spheres will provide the radii for the collision spheres, which will be used to simulate the cloth. Locations of the machine-provided user joints are shown in Figure \ref{fig:nite_joints}. These are where spheres will be located. The pseudo-code of the sphere fitting is given in Algorithm~\ref{algo:sphere_fitting}. It performs the following steps:
+The first step is fitting spheres in various locations in the optimized body map. These fitted spheres will provide the radii for the collision spheres, which will be used to simulate the cloth. Locations of the machine-provided user joints are where spheres will be located. The pseudo-code of the sphere fitting is given in Algorithm~\ref{algo:sphere_fitting}. It performs the following steps:
 
 \begin{enumerate}
 \item Take vector $J_i$, which represents the coordinates of the $i^{th}$
