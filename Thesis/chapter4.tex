@@ -39,8 +39,7 @@ The solution is performed for the trajectory of the capsule or sphere and the pa
  since the motion is created in real time. The required solution is a 6th degree polynomial, which is approximated with quadratic equation. The pipeline is given in Figure
   \ref{fig:collision_pipeline}.
 
-The solution is performed on the GPU, which increases the parallel performance greatly, allowing for frame rates of 600+fps. The cloth is discretized as a triangle mesh,
- and since the collision is only detected on vertices, the density must be high enough in order to avoid penetration at the areas \cite{Kim2011}, \cite{Tonge2010}. 
+The solution is performed on the GPU, which increases the parallel performance greatly, allowing for frame rates of 600+fps. The cloth is discretized as a triangle mesh, and since the collision is only detected on vertices, the density must be high enough in order to avoid penetration at the areas \cite{Kim2011}, \cite{Tonge2010}. 
 
 \begin{figure}[h]
 \centerline{\fbox{\psfig{figure=figures/collision_pipeline.png,width=1.00\textwidth}}}
