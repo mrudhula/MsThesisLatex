@@ -27,7 +27,7 @@ Unlike the name suggests, OGRE is more than just a rendering engine. Among all t
 \item Material rendering:
 \begin{itemize}
   \item easy material and shader management, custom shader support,
-  \item multitexture and multipass blending,
+  \item multitexture and multi pass blending,
   \item lighting shader and different shadow rendering techniques,
   \item material level of detail support,
   \item support for a variety of image formats, volumetric textures and DXT textures, and
@@ -52,18 +52,10 @@ Unlike the name suggests, OGRE is more than just a rendering engine. Among all t
 These features led me to choose OGRE as my base framework.
 
 \section{High Level Overview}
-Figure \ref{fig:ogre-class-diagram} shows the class diagram for the object-oriented core of OGRE~\cite{Moan2012}:
-
-\begin{figure}[h]
-\centerline{\fbox{\psfig{figure=figures/ogre_class_diagram.eps,width=1.0\textwidth}}}
-\caption{Overview of the OGRE framework}
-\label{fig:ogre-class-diagram}
-\end{figure}
-
 \subsection{The Root object}
 The root object is the entry point and core of the framework.
 \begin{itemize}
-\item It is created first and destroyed last in the application lifecycle. 
+\item It is created first and destroyed last in the application life cycle. 
 \item It configures the system, delivers pointers to the managers for various resources.
 \item Provides automatic rendering cycle, continued until an interrupt from FrameListener objects.
 \end{itemize}
@@ -84,7 +76,7 @@ ReosurceManager object is an abstract class, used to create, keep and dispatch a
 \begin{itemize}
 \item The associated type is defined by the class inheriting the ResourceManager, such as MaterialManager.
 \item There is always only one instance of every child of ReosurceManager in an application.
-\item Resource managers search the pre-defined locations of the filesystem and automatically indexes the resources available, ready to be loaded upon demand.
+\item Resource managers search the pre-defined locations of the file system and automatically indexes the resources available, ready to be loaded upon demand.
 \end{itemize}
 
 
@@ -92,18 +84,8 @@ ReosurceManager object is an abstract class, used to create, keep and dispatch a
 Entities are the instances of movable objects in the scene. They are based on meshes, which define the geometric and material properties of the entity. Materials contain information about what color the final pixel in the rendering should be. 
 \begin{itemize}
 \item Entities are attached to scene nodes for moving and rendering. Scene nodes can be nested, which greatly simplifies the process of rendering complex scenes.
-\item Meshes consist of submeshes, which can have different material associations. Therefore, a mesh can be composed of various parts with various materials.
+\item Meshes consist of sub meshes, which can have different material associations. Therefore, a mesh can be composed of various parts with various materials.
 \item Materials are defined either in run-time or in .material scripts, with detailed information. They also support custom shaders.
 \item Mesh files can be created and saved with manual objects, or exported through designer programs such as Blender. The .mesh files are in binary format.
 \end{itemize}
 Overlays are used to create panels for control and HUD which are rendered above the scene. They are 2D elements are placed either by screen proportion or pixel size and rendered orthographically, last in the rendering pipeline by default (this can be overridden).
-
-\subsection{The Rendering Cycle}
-The self-explanatory rendering cycle of OGRE is given in Figure \ref{fig:ogre-render-cycle}~\cite{Moan2012}.
-
-\begin{figure}[h]
-\centerline{\fbox{\psfig{figure=figures/ogre_render_cycle.eps,width=1.0\textwidth}}}
-\caption{OGRE rendering cycle}
-\label{fig:ogre-render-cycle}
-\end{figure}
- 

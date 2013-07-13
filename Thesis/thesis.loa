@@ -13,11 +13,11 @@
 \contentsline {algocf}{\numberline {4}{\ignorespaces Foot skating filtering}}{34}
 \contentsline {algocf}{\numberline {5}{\ignorespaces Position-based dynamics}}{39}
 \addvspace {10\p@ }
-\contentsline {algocf}{\numberline {6}{\ignorespaces Depth map optimization algorithm}}{47}
-\contentsline {algocf}{\numberline {7}{\ignorespaces Sphere fitting algorithm}}{49}
-\contentsline {algocf}{\numberline {8}{\ignorespaces Cloth resizing algorithm}}{52}
+\contentsline {algocf}{\numberline {6}{\ignorespaces Depth map optimization algorithm}}{45}
+\contentsline {algocf}{\numberline {7}{\ignorespaces Sphere fitting algorithm}}{47}
+\contentsline {algocf}{\numberline {8}{\ignorespaces Cloth resizing algorithm}}{50}
+\contentsline {algocf}{\numberline {9}{\ignorespaces Temporal averaging}}{51}
 \addvspace {10\p@ }
-\contentsline {algocf}{\numberline {9}{\ignorespaces Temporal averaging}}{54}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }

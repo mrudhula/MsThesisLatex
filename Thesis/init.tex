@@ -40,19 +40,21 @@
 %\setlength{\baselineskip}{6mm}
 %\thispagestyle{plain}
 \begin{abstract}
-\indent This thesis proposes a framework for a real-time physically-based augmented cloth fitting environment. With the advances in cloth simulation and time-of-flight cameras, augmented cloth fitting in real-time is developed to be used in textile industry in both design and sale stages. Delay in cloth fitting due to the processing time is the main challenge in this research. Human body is identified, articulated, and tracked with a time-of-flight camera. Depending on the size and position of body limbs, 
-a virtually simulated cloth is fitted in real time on the subject. The delay is reduced by utilizing Graphics Processing Unit (GPU)  for cloth simulation and collision detection.
+\indent This thesis proposes a framework for a real-time physically-based augmented cloth fitting environment. The required 3D meshes for the human avatar and apparels are modeled with specific constraints. The models are then animated in real-time using input from a user tracked by a depth sensor. A set of motion filters are introduced in order to improve the quality of the simulation. The physical effects such as inertia, external and forces and collision are imposed on the apparel meshes. The avatar and the apparels can be customized according to the user. The system runs in real-time on a high-end consumer PC with realistic rendering results.
 \end{abstract}
 
 
+%Ýnsan avatarý ve kýyafet için gerekli üç boyutlu modeller özel sýnýrlar çerçevesinde modellenmiþtir. Bu modeller daha sonra bir derinlik alýcýsý tarafýndan takip edilen bir kullanýcýdan alýnan girdi ile gerçek zamanlý olarak hareket ettirilmektedir. Simülasyon kalitesini arttýrmak amacý ile hareketler çeþitli filtrelerden geçirilmektedir.  Eylemsizlik, dýþ kuvvetler ve çarpýþma gibi dýþ etkenler kýyafet modeline uygulanmaktadýr. Avatar ve kýyafet modelleri, kullanýcýnýn boyutlarýna göre özelleþtirilebilir. Sistem üst kalite bir kiþisel bilgisayar üzerinde gerçek zamanlý olarak gerçekçi görüntüler oluþturarak çalýþmaktadýr. 
+
 
 \begin{ozet}
-\indent Bu tezde ger\c{c}ek zamanl{\i} fizik tabanl{\i} bir art{\i}r{\i}lm{\i}\c{s} giyinme kabini ortam{\i} i\c{c}in bir \c{c}er\c{c}eve \c{c}al{\i}\c{s}ma {\"o}nerilmektedir. Kuma\c{s} sim{\"u}lasyonu ve u\c{c}u\c{s}-zaman{\i} kameralar{\i}n{\i}n geli\c{s}tirilmesi ile, ger\c{c}ek zamanl{\i} art{\i}r{\i}lm{\i}\c{s} k{\i}yafet giydirimi tekstil end{\"u}strisinde tasar{\i}m ve sat{\i}\c{s} a\c{s}amalar{\i}nda kullan{\i}lmak {\"u}zere geli\c{s}tirilmi\c{s}tir. \.{I}\c{s}leme zaman{\i} sebebiyle k{\i}yafet giydirilmesindeki gecikme bu ara\c{s}t{\i}rmadaki en b{\"u}y{\"u}k zorluktur. \.{I}nsan v{\"u}cudu bir u\c{c}u\c{s}-zaman{\i} kameras{\i} ile tan{\i}mlanmakta, b{\"o}l{\"u}nmekte ve takip edilmektedir. V{\"u}cut par\c{c}alar{\i}n{\i}n boyutlar{\i}na ve pozisyonlar{\i}na g{\"o}re sim{\"u}le edilen bir sanal k{\i}yafet kullan{\i}c{\i}n{\i}n {\"u}st{\"u}ne yerle\c{s}tirilmektedir. Gecikme zaman{\i} k{\i}yafet sim{\"u}lasyonu ve \c{c}arp{\i}\c{s}ma takibi, grafik i\c{s}lemci \"{u}nitesi (GPU) {\"u}zerinde ger\c{c}ekle\c{s}tirilerek azalt{\i}lmaktad{\i}r.  
+\indent Bu tezde ger\c{c}ek zamanl{\i} fizik tabanl{\i} bir art{\i}r{\i}lm{\i}\c{s} giyinme kabini ortam{\i} i\c{c}in bir \c{c}al{\i}\c{s}ma \c{c}er\c{c}evesi {\"o}nerilmektedir. {\.I}nsan avatar{\i} ve k{\i}yafet i\c{c}in gerekli {\"u}\c{c} boyutlu modeller {\"o}zel s{\i}n{\i}rlar \c{c}er\c{c}evesinde modellenmi\c{s}tir. Bu modeller daha sonra bir derinlik al{\i}c{\i}s{\i} taraf{\i}ndan takip edilen bir kullan{\i}c{\i}dan al{\i}nan girdi ile ger\c{c}ek zamanl{\i} olarak hareket ettirilmektedir. Sim{\"u}lasyon kalitesini artt{\i}rmak amac{\i} ile hareketler \c{c}e\c{s}itli filtrelerden ge\c{c}irilmektedir.  Eylemsizlik, d{\i}\c{s} kuvvetler ve \c{c}arp{\i}\c{s}ma gibi d{\i}\c{s} etkenler k{\i}yafet modeline uygulanmaktad{\i}r. Avatar ve k{\i}yafet modelleri, kullan{\i}c{\i}n{\i}n boyutlar{\i}na g{\"o}re {\"o}zelle\c{s}tirilebilir. Sistem {\"u}st kalite bir ki\c{s}isel bilgisayar {\"u}zerinde ger\c{c}ek zamanl{\i} olarak ger\c{c}ek\c{c}i g{\"o}r{\"u}nt{\"u}ler olu\c{s}turarak \c{c}al{\i}\c{s}maktad{\i}r. 
 \end{ozet}
 
 \begin{ack}
 
 I am deeply grateful to my supervisor Assoc. Prof. Dr. U\u{g}ur G{\"u}d{\"u}kbay, who guided and assisted me with his invaluable suggestions in all stages of this study. I also chose this area of study by inspiring from his deep knowledge over this subject.
+
 
 I am very grateful to Computer Engineering Department of Bilkent University for providing me scholarship for my MS study. 
 
