@@ -12,13 +12,9 @@ The animatable bones are set to be manually controlled and given the initial ori
 
 \section{Animation}
 \label{section_animation}
-Every frame, the orientation information from the bones are extracted in quaternion form, along with the confidence of the sensor in that orientation. If the confidence is less than 0.5 over 1, the bones are left as they were in the previous frame to avoid unnatural movements. The new orientation is fed into the bone after it is multiplied with the initial orientation. The root bone is translated in local space at the end to simulate the translation above rotation. This technique is used with the static parts of the apparel meshes as well. 
+Every frame, the orientation information from the bones are extracted in quaternion form, along with the confidence of the sensor in that orientation. If the confidence is less than 0.5 over 1, the bones are left as they were in the previous frame to avoid unnatural movements. The new orientation is fed into the bone after it is multiplied with the initial orientation. The root bone is translated in local space at the end to simulate the translation above rotation. This technique is used with the static parts of the apparel meshes as well. The linear weighted skin blending~\cite{Kavan2003} is used in order to simulate deformation on the characters skin. The effects of four bones with different weights are combined linearly to change the positions and normal of vertices. 
 
-The linear weighted skin blending~\cite{Kavan2003} is used in order to simulate deformation on the characters skin. The effects of four bones with different weights are combined linearly to change the positions and normal of vertices.
-
-\subsection{The bone transformation Pseudo Code}
-
-The pseudo code below is executed during the pre-render cycle. The bone orientations are set to be ready for animation, deformation and rendering. At every render cycle, update Skeleton function is called, which automatically fetches the coordinates from the Kinect and sets up the skeleton for vertex blending. 
+The algorithm in Algorithm~\ref{algo:transformBone} is executed during the pre-render cycle. The bone orientations are set to be ready for animation, deformation and rendering. At every render cycle, update Skeleton function is called, which automatically fetches the coordinates from the Kinect and sets up the skeleton for vertex blending. 
 
 \begin{algorithm}[ht]
 \DontPrintSemicolon % Some LaTeX compilers require you to use \dontprintsemicolon instead
@@ -48,10 +44,9 @@ $q_K = 3\times3$ Orientation matrix from Kinect\;
 \label{algo:transformBone}
 \end{algorithm}
 
-\subsection{Deformation Algorithm}
-
 Algorithm \ref{algo:updateMesh} is executed prior to rendering, to update the vertices of the skin. The vertex blending function is where the deformation
-actually occurs.
+actually occurs. Every vertex is assigned to at most four different bones. In order to speed up the deformation process, the transformation matrices for the corresponding matrices are collapsed into one. Collapsing is simply weighted addition of the four weighting matrices for a vertex.
+
 
 \begin{algorithm}[ht]
 \DontPrintSemicolon % Some LaTeX compilers require you to use \dontprintsemicolon instead
@@ -98,9 +93,6 @@ $m_b$ = \textit{prepareBlendMatrices(skeleton.mesh)}\;
 \label{algo:updateMesh}
 \end{algorithm}
 
-Every vertex is assigned to at most four different bones. In order to speed up the deformation process, the transformation matrices for the corresponding matrices are collapsed into one. Collapsing is simply weighted addition of the four weighting matrices for a vertex.
-
-\subsubsection{Matrix Operations}
 %%Bir sonraki cumle yeniden yazilmali....
 After four weighting matrices for each of four vertices are collapsed into four matrices, the following matrix operations are performed. Four vertices are processed together in order to fully utilize the parallel matrix multiplication features. Let us take the weighted matrix for vertex $i$:
 
@@ -152,22 +144,9 @@ The result vector $d_x$ is a $4 \times 1$ vector, which has the post-blended ver
 
 \section{Interaction Between the Body and Cloth}
 \label{section_body_cloth_interaction}
-The movements of the user are passed on the pieces of cloth separately.
+The movements of the user are passed on the pieces of cloth separately. Non simulated parts of the clothes are the ones which do not get separated from the body most of the time. Most parts of our clothes usually stick to the body and experience the same deformation as our skin. In order to increase performance and get better results, detailed simulation on these parts are not run, instead they are deformed the same as the remained of human body. For instance, in the full-body dress mesh, the part above the waist has a skeleton similar to the body and the information from the Kinect is passed on to this portion as well. It is treated as a part of the actual avatar.
 
-\subsection{Non-Simulated Section}
-Non simulated parts of the clothes are the ones which do not get separated from the body most of the time. Most parts of our clothes usually stick to the body and experience the same deformation as our skin. In order to increase performance and get better results, detailed simulation on these parts are not run, instead they are deformed the same as the remained of human body. For instance, in the full-body dress mesh, the part above the waist has a skeleton similar to the body and the information from the Kinect is passed on to this portion as well. It is treated as a part of the actual avatar.
-
-\subsection{Simulated Section}
-The movements of the body are transferred into the simulated section of the cloth in three ways:
-
-\subsubsection{Transformation}
-The fixed vertices are transformed to match the remainder of the cloth. The transformation is done on the rendering level, the physx world experiences no difference in transformation manner. This process keeps the cloth aligned with the rest of the visible world.
-
-\subsubsection{Collision}
-The colliding body is updated and collided with the cloth. The colliding body consists of 16 spheres and the capsules connecting the spheres. The details of the colliding body is explained in Section \ref{section_human_avatar}. This process keeps the cloth out of the avatar’s way.
-
-\subsubsection{Inertia}
-The Inertia of transformations is passed onto the simulated cloth, increasing the realism. The passed on inertia comes from the rotation and the transformation of the root bone of the human skeleton. With this process, although there is no actual transformation in the physics world, the resulting inertia effects are visible on the cloth itself. 
+The movements of the body are transferred into the simulated section of the cloth through transformation, collision and inertia. The fixed vertices are transformed to match the remainder of the cloth. The transformation is done on the rendering level, the physx world experiences no difference in transformation manner. This process keeps the cloth aligned with the rest of the visible world. The colliding body is updated and collided with the cloth. The colliding body consists of 16 spheres and the capsules connecting the spheres. The details of the colliding body is explained in Section \ref{section_human_avatar}. This process keeps the cloth out of the avatar's way. The Inertia of transformations is passed onto the simulated cloth, increasing the realism. The passed on inertia comes from the rotation and the transformation of the root bone of the human skeleton. With this process, although there is no actual transformation in the physics world, the resulting inertia effects are visible on the cloth itself. 
 
 \section{Motion Filtering}
 \label{section_motion_filtering}
