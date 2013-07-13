@@ -87,15 +87,14 @@ $\textit{depth}_\textit{average}=\textit{depth}_\textit{sum}/n_\textit{user}$ \;
 \section{Parameter Measurement}
 In parameter measurement, there are two objectives to be handled: To determine the optimal sizes of collision spheres for cloth simulation and the required scaling parameters for the cloth to optimally fit the user. It is important that these algorithms do not take more than a thirtieth seconds on a high-end consumer computer in order to keep the real time experience smooth, since there is an averaging over time is involved.
 
-The first step is fitting spheres in various locations in the optimized body map. These fitted spheres will provide the radii for the collision spheres, which will be used to simulate the cloth. Locations of the machine-provided user joints are shown in Figure \ref{fig:nite_joints}. These are where spheres will be located.
-
 \begin{figure}[h]
 \centerline{\fbox{\psfig{figure=figures/nite_joints.eps,width=0.90\textwidth}}}
 \caption{Human joints provided by NITE~\cite{Microsoft2013}.}
 \label{fig:nite_joints}
 \end{figure}
 
-The pseudo-code of the sphere fitting is given in Algorithm~\ref{algo:sphere_fitting}. It performs the following steps:
+The first step is fitting spheres in various locations in the optimized body map. These fitted spheres will provide the radii for the collision spheres, which will be used to simulate the cloth. Locations of the machine-provided user joints are shown in Figure \ref{fig:nite_joints}. These are where spheres will be located. The pseudo-code of the sphere fitting is given in Algorithm~\ref{algo:sphere_fitting}. It performs the following steps:
+
 \begin{enumerate}
 \item Take vector $J_i$, which represents the coordinates of the $i^{th}$
 joint.
@@ -191,8 +190,6 @@ Torso Height & - & - (9) & Joint Location \\
 \label{fig:body_proportions}
 \end{figure}
 
-Along with the ratios, the actual size in meters in height and width shall be measured and recorded as well, since the cloth needs to be scaled according to the user. In the proposed approach, the whole cloth is scaled as a whole, with different parameters for three dimensions. This approach qualifies as the best option for the purposes of this application, as most shops do not offer extensive customization. As the types of cloth focus on different portions of the body, the human body proportions from different areas should not affect the scaling parameters equally. Therefore, the main body parameters for different types of clothes are listed in Table 3.
-
 \begin{table}
 \center
 \begin{tabular}{ | p{3cm} | p{3.5cm} | p{3.5cm}  |}
@@ -207,7 +204,7 @@ Short Sleeves-Sleeveless & Torso Height & Shoulder Width \\
 \label{tbl:primary_proportions}
 \end{table}
 
-The pseudo-code of the parameter estimation is given in Algorithm~\ref{algo:sphere_fitting}. It performs the following steps:
+Along with the ratios, the actual size in meters in height and width shall be measured and recorded as well, since the cloth needs to be scaled according to the user. In the proposed approach, the whole cloth is scaled as a whole, with different parameters for three dimensions. This approach qualifies as the best option for the purposes of this application, as most shops do not offer extensive customization. As the types of cloth focus on different portions of the body, the human body proportions from different areas should not affect the scaling parameters equally. Therefore, the main body parameters for different types of clothes are listed in Table 3. The pseudo-code of the parameter estimation is given in Algorithm~\ref{algo:sphere_fitting}. It performs the following steps:
 
 \begin{enumerate}
 \item For a particular cloth, take the primary measured proportion as $P_i^0$. This will be the measured dimension of said proportion. 
@@ -222,9 +219,9 @@ W,H_i^j=W,H_j \times R_i^j
 W,H_i=1/(n+1) \times \sum\limits_{j=0}^n W,H_i^j
 \label{eqn:optimized_parameter}
 \end{equation}
+\item After finding the optimized main parameter in meters, it can be used to scale the virtual cloth by calculating the ratio.
 \end{enumerate}
 
-After finding the optimized main parameter in meters, it can be used to scale the virtual cloth by calculating the ratio.
 
 \begin{algorithm}[ht]
 \DontPrintSemicolon % Some LaTeX compilers require you to use \dontprintsemicolon instead

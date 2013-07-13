@@ -1,7 +1,9 @@
 \chapter{Animation}
 \label{chapter_animation}
 
-The animatable body is exported from Blender in Ogre XML format. The XML files are converted to binary skeleton and mesh files by the OgreXML serializer and imported natively into the software. Prior to animation, the bones are set up to be updated by the data from depth sensor. Afterwards, they are updated with the orientation data.
+The animation in the system consists of moving the virtual avatar and the cloth mesh in a realistic manner, with the addition of physical simulaton of the apparel meshes. This chapter focuses on the animation of human avatar and the static cloth meshes, the physical animation is explained in Chapter~\ref{chapter_cloth_simulation}.
+
+The rigged human body mesh ready to be animated is exported from Blender in Ogre XML format. The XML files are converted to binary skeleton and mesh files by the OgreXML serializer and imported natively into the software. Prior to animation, the bones are set up to be updated by the data from depth sensor. Afterwards, they are updated with the orientation data.
 
 \section{Initialization}
 \label{section_animation_initialization}

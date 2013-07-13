@@ -1,7 +1,7 @@
 \chapter{Cloth Simulation}
 \label{chapter_cloth_simulation}
 
-The Nvidia PhysX engine is utilized as the physics solver~\cite{Kim2011}, which provides cloth simulation framework along with collision detection. 
+Rendering physically accurate apparel meshes is the goal of the physics component of the framework. Since the construction of a real-time high quality physics engine which supports collision detection is a study subject on its own, The Nvidia PhysX engine is utilized as the physics solver~\cite{Kim2011} in the simulation software. The quality of the simulation depends on a number of different steps; the model preparation, physics environment initialization and the real-time simulation including numerical solution of the spring mass sytems and collision handling. 
 
 \section{Model Setup}
 The mesh to be simulated is the dynamic part of the modeled dresses which consists vertices in the order of thousands. It is aligned precisely with the static part and the human body to be simulated realistically. 
@@ -92,12 +92,7 @@ In order to get the best performance from these solvers, they are applied on dif
 \section{Collision Handling}
 \label{section_chapter_collision}
 
-The collision between the cloth and the body parts and the self-collision of cloth particles are implemented. The collisions are handled by the PhysX engine. 
-
-\subsection{Preparation and Setting}
-\label{section_collision_preparation}
-
-Cloth vertices can collide with pre-defined spheres, capsules or planes. In order to keep the program stable and running at real-time, it is important to find the balance between collision detail and performance. 
+Preventing the apparel meshes intersecting with the virtual avatar and itself is attained with collision detection and prevention. Cloth vertices can collide with pre-defined spheres, capsules or planes. In order to keep the program stable and running at real-time, it is important to find the balance between collision detail and performance. 
 
 The female body bone information is extracted from the input skeletal mesh class, and the colliding capsules are generated automatically, although the radii of the bones are either specified manually or input through the user measurement process\ref{algo:sphere_fitting}. The collision information is specified in two arrays, one being the positions and radii of the spheres and the second defining pairs of spheres which form capsules. A total of 28 capsules and spheres are used in the whole collision model, which simulates all the movable bones of the human body (see~Figure~\ref{fig:colliding_human_body}) plus a few additional bones for regions which are not close enough to a bone.  The collision data is prepared before the cloth creation, and given as a parameter. 
 
@@ -108,8 +103,6 @@ The female body bone information is extracted from the input skeletal mesh class
 \end{figure}
 
 Other than the defined collision spheres and capsules, the cloth naturally collides with the floor actor of the PhysX environment as well. This, however, introduces a problem: the models from Blender are exported as root joint coinciding with the origin. This is required for successful animation. However, in the PhysX environment, the floor is created automatically at (0,0,0), and the initial position of the lower part of the apparel is penetrates the floor, which produces unrealistic visuals. In order to overcome this issue, the lower cloth vertices are introduced into the software with modified y coordinates, in order to keep them above ground. In the rendering process, the lower part of the apparel is attached to a scene node with negative y offset equal to the boost in the vertices, which places the lower part of the apparel exactly where it should be. Every frame, the collision sphere positions are updated with the data from the updated body skeleton, prior to the cloth simulation. 
-
-\subsection{Collision Detection and Resolution}
 
 PhysX provides two options for collision detection: \em{discrete} and \em{continuous} collision. The framework works with the latter due to more robust results, although it takes twice as long to do the calculation. The solution is performed for the trajectory of the capsule or sphere and the particle for frame interval. This approach is especially robust in fast motion, which is important because the motion is created in real time. The required solution is a sixth degree polynomial, which is approximated with a quadratic equation. The pipeline is depicted in Figure \ref{fig:collision_pipeline}. The solution is performed on the GPU, which increases the performance greatly, allowing for frame rates of 600+ frames per second (fps). The cloth is discretized as a triangle mesh, and because the collision is only detected on vertices, the density must be high enough in order to avoid penetration~\cite{Kim2011},\cite{Tonge2010}. 
 
