@@ -7,7 +7,7 @@ Although OpenNI/NITE provide the joint information, useful functions for a smoot
 
 \section{The Process}
 
-Utilizing such a powerful middleware as a depth sensor, we are able to perform very robust background subtraction with almost no effort. Skeletal body tracking is another embedded property of the software that we use, giving a speed boost. We implemented two different techniques: \em{hand state recognition} and \em{hand swipe recognition}. Hand swipe recognition is simpler compared to hand state recognition. It is just a matter of keeping track of the 3D position of the hand, and keeping a listener that is activated when the 3D velocity of the hand exceeds a certain threshold. We also perform a number of optimizations on this function to make it invariant with the size and location of the user. Open/close hand recognition is harder than hand swipe recognition. We perform advanced image processing in order to determine the state of the hand successfully at relatively low resolutions and large distances. The algorithm is shown in Figure \ref{fig:hand_recognition_cycle}:
+Utilizing such a powerful middleware as a depth sensor, we are able to perform very robust background subtraction with almost no effort. Skeletal body tracking is another embedded property of the software that we use, giving a speed boost. We implemented two different techniques: \em{hand state recognition} and \em{hand swipe recognition}. Hand swipe recognition is simpler compared to hand state recognition. It is just a matter of keeping track of the 3D position of the hand, and keeping a listener that is activated when the 3D velocity of the hand exceeds a certain threshold. We also perform a number of optimizations on this function to make it invariant with the size and location of the user. Open/close hand recognition is harder than hand swipe recognition. We perform image processing in order to determine the state of the hand successfully at relatively low resolutions and large distances. The algorithm is shown in Figure \ref{fig:hand_recognition_cycle}:
 
 \begin{figure}[h]
 \centerline{\fbox{\psfig{figure=figures/hand_recognition_cycle.eps,width=1.0\textwidth}}}
@@ -33,6 +33,7 @@ Figure \ref{fig:open_closed_hands} depicts the results of experiments. The left 
 \label{fig:open_closed_hands}
 \end{figure}
 
+The hand tracking feature is not impleneted within the simulation framework yet, as the consumer level usage requires an extensive amount of available apparel meshes as well as better user tracking and motion smoothing. Hence, the user experience aspect of the overall suite is taken as a subject for future work.
 
 %Ultimately, I plan to implement the algorithm described in~\cite{Tang2011}, where the author claims to have achieved 96\% correct 
 %results. I have not included RGB image in the process yet, neither have I implemented complex machine learning. In addition to these 
