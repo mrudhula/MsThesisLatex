@@ -141,7 +141,7 @@ $r_m=\textit{min}(r_z, r_x^-, r_x^+, r_y^-, r_y^+)$
 \section{Human Body Parameters}
 \label{section_human_body_parameters}
 
-The next step will be acquiring the optimal scaling parameters for the cloth. The width and height of the subject is important for determining the proper actual size for the cloth. However, a straightforward estimation of the body height and shoulder width is prone to errors due to the noise and quality of the incoming depth map. In order to minimize this error, an upscaled version of the subject's body is measured, to be used in width-height estimation later. The human body proportions to be used are shown in Table \ref{tbl:human_body_proportions}~(\cite{Willis2012}). In these proportions, the unit width and height are taken as the width and height of the head. The measurement source column in the table represents the source for the estimation of the respective parameter:
+The next step will be acquiring the optimal scaling parameters for the cloth. The width and height of the subject is important for determining the proper actual size for the cloth. However, a straightforward estimation of the body height and shoulder width is prone to errors due to the noise and quality of the incoming depth map. In order to minimize this error, an upscaled version of the subject's body is measured, to be used in width-height estimation later. The human body proportions to be used are shown in Table~\ref{tbl:human_body_proportions}~(\cite{Willis2012}). In these proportions, the unit width and height are taken as the width and height of the head. The measurement source column in the table represents the source for the estimation of the respective parameter:
 \begin{itemize} 
 \item
 The joint location represents that the measurement will take the input subject joint locations as the reference.
@@ -165,7 +165,7 @@ Hip Width & - (8) & - & Depth Map \\ \hline
 Torso Height & - & - (9) & Joint Location \\ 
 \hline
 \end{tabular}
-\caption{Human body proportions. Numbers in parenthesis represent the lines on Figure \ref{fig:body_proportions}.}
+\caption{Human body proportions. Numbers in parenthesis represent the lines on Figure~\ref{fig:body_proportions}.}
 \label{tbl:human_body_proportions}
 \end{table}
 
@@ -194,7 +194,7 @@ Along with the ratios, the actual size in meters in height and width shall be me
 \begin{enumerate}
 \item For a particular cloth, take the primary measured proportion as $P_i^0$. This will be the measured dimension of said proportion. 
 This process will be repeated for width (W) and height (H).
-\item With all the other measured proportions, calculate the estimated value of $P_i$ as $P_i^j$. Here, R denotes the ratio from Table \ref{tbl:human_body_proportions}.
+\item With all the other measured proportions, calculate the estimated value of $P_i$ as $P_i^j$. Here, R denotes the ratio from Table~\ref{tbl:human_body_proportions}.
 \begin{equation}
 W,H_i^j=W,H_j \times R_i^j
 \label{eqn:proportion_estimation}
@@ -211,8 +211,8 @@ W,H_i=1/(n+1) \times \sum\limits_{j=0}^n W,H_i^j
 \begin{algorithm}[ht]
 \DontPrintSemicolon % Some LaTeX compilers require you to use \dontprintsemicolon instead
 
-$t_\textit{proportion}$ = {\textrm import}({\textrm Table \ref{tbl:human_body_proportions}}) \;
-$t_\textit{primary}$ = {\textrm import}({\textrm Table \ref{tbl:primary_proportions}}) \;
+$t_\textit{proportion}$ = {\textrm import}({\textrm Table~\ref{tbl:human_body_proportions}}) \;
+$t_\textit{primary}$ = {\textrm import}({\textrm Table~\ref{tbl:primary_proportions}}) \;
 $ct=\textit{cloth}_\textit{type}$\;
 $\textit{width}_\textit{main}=t_\textit{proportion}.width(ct)$\;
 $\textit{width}_\textit{sum}=0$\;

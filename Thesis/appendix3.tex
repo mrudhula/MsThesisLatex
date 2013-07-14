@@ -7,7 +7,7 @@ Although OpenNI/NITE provide the joint information, useful functions for a smoot
 
 \section{The Process}
 
-Utilizing such a powerful middleware as a depth sensor, we are able to perform very robust background subtraction with almost no effort. Skeletal body tracking is another embedded property of the software that we use, giving a speed boost. We implemented two different techniques: \em{hand state recognition} and \em{hand swipe recognition}. Hand swipe recognition is simpler compared to hand state recognition. It is just a matter of keeping track of the 3D position of the hand, and keeping a listener that is activated when the 3D velocity of the hand exceeds a certain threshold. We also perform a number of optimizations on this function to make it invariant with the size and location of the user. Open/close hand recognition is harder than hand swipe recognition. We perform image processing in order to determine the state of the hand successfully at relatively low resolutions and large distances. The algorithm is shown in Figure \ref{fig:hand_recognition_cycle}:
+Utilizing such a powerful middleware as a depth sensor, we are able to perform very robust background subtraction with almost no effort. Skeletal body tracking is another embedded property of the software that we use, giving a speed boost. We implemented two different techniques: \em{hand state recognition} and \em{hand swipe recognition}. Hand swipe recognition is simpler compared to hand state recognition. It is just a matter of keeping track of the 3D position of the hand, and keeping a listener that is activated when the 3D velocity of the hand exceeds a certain threshold. We also perform a number of optimizations on this function to make it invariant with the size and location of the user. Open/close hand recognition is harder than hand swipe recognition. We perform image processing in order to determine the state of the hand successfully at relatively low resolutions and large distances. The algorithm is shown in Figure~\ref{fig:hand_recognition_cycle}:
 
 \begin{figure}[h]
 \centerline{\fbox{\psfig{figure=figures/hand_recognition_cycle.eps,width=1.0\textwidth}}}
@@ -25,7 +25,7 @@ Utilizing such a powerful middleware as a depth sensor, we are able to perform v
 \item The depth difference between the hull and the actual contour is taken as the reference for hand-state.
 \end{enumerate}
 
-Figure \ref{fig:open_closed_hands} depicts the results of experiments. The left part of the figure shows the hand in open state, whereas the hand is closed on the right part.
+Figure~\ref{fig:open_closed_hands} depicts the results of experiments. The left part of the figure shows the hand in open state, whereas the hand is closed on the right part.
 
 \begin{figure}[h]
 \centerline{\psfig{figure=figures/open_closed_hands.eps,width=1.0\textwidth}}
