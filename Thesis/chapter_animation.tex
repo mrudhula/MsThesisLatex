@@ -16,7 +16,7 @@ The animatable bones are set to be manually controlled and set to their initial 
 \label{section_animation}
 Every frame, the orientation information from the bones are extracted in quaternion form, along with the confidence of the sensor in that orientation. If the confidence is less than 0.5 over 1, the bones are left as they were in the previous frame to avoid unnatural movements. The root bone is translated in local space at the end to simulate the translation above rotation. This technique is used with the static parts of the apparel meshes as well. The linear weighted skin blending~\cite{Kavan2003} is used in order to simulate deformation on the characters skin. The effects of four bones with different weights are combined linearly to change the positions and normal of vertices. 
 
-The algorithm in Algorithm~\ref{algo:transformBone} is executed during the pre-render cycle. The bone orientations are set to be ready for animation, deformation and rendering. At every render cycle, update Skeleton function is called, which automatically fetches the coordinates from the Kinect and sets up the skeleton for vertex blending. 
+Algorithm~\ref{algo:transformBone} is executed during the pre-render cycle. The bone orientations are set to be ready for animation, deformation and rendering. At every render cycle, update Skeleton function is called, which automatically fetches the coordinates from the Kinect and sets up the skeleton for vertex blending. 
 
 \begin{algorithm}[ht]
 \DontPrintSemicolon % Some LaTeX compilers require you to use \dontprintsemicolon instead
@@ -91,11 +91,10 @@ $norm[4 vertex]=m_c\times norm[4 vertex]$
 $m_b$ = \textit{prepareBlendMatrices(skeleton.mesh)}\;
 \textit{vertexBlend}(m$_b$)\;
 }
-\caption{Mesh update algorithm called at every frame.}
+\caption{Mesh update algorithm called at every frame}
 \label{algo:updateMesh}
 \end{algorithm}
 
-%%Bir sonraki cumle yeniden yazilmali....
 After four weighting matrices for each of four vertices are collapsed into four matrices, the following matrix operations are performed. Four vertices are processed together in order to fully utilize the parallel matrix multiplication features. Let us take the weighted matrix for vertex $i$:
 
 \begin{equation}
@@ -167,7 +166,7 @@ The inferior quality of the orientation data is improved in two stages: applying
 	\centerline{ 
 	\fbox{\includegraphics[width=0.98\textwidth]{./figures/rotation-filter.eps}}
 	}
-\caption{The row and filtered samples for right the humerus roll angle}
+\caption{The row and filtered samples for right the humerus roll angle.}
 	\label{fig:rotation-filter}
 \end{figure}
 
@@ -207,21 +206,19 @@ During runtime, the filtered local rotation of the upper limb bones are separate
 
 \section{Handling the Foot Skating Problem}
 \label{section_foot_skating}
-The virtual model is animated by changing bone orientations and root bone position. If the orientations and root position are applied to the bones respectively, the feet of the character appear to be floating on the ground which deteriorates the realism of the system. 
-This issue, known as footskating is not limited to depth sensor applications. It has been detected in motion capture systems and solved sufficiently with approaches by Kovar et al.~\cite{Kovar2002} and Ikemoto et al.~\cite{Ikemoto2006}. However, the proposed methods in these approaches rely on some sort of preprocessing or supervised learning, which is not suitable for our system, as the motion is captured and applied im real time. Hence, a solution which does not require a training process is needed for such applications. Mankyu and Choi~\cite{Mankyu2013} proposed a similar method which does not require training for real-time depth sensor applications. Their approach is adopted into our framework to overcome the footskating problem. However, it required additional filters and constraints in order to be usable in extended animations. It is assumed that one of the feet is always on the ground, artifacts may occur if the user attempts jumping. The footskating algorithm consists of four steps. 
+The virtual model is animated by changing bone orientations and root bone position. If the orientations and root position are applied to the bones respectively, the feet of the character appear to be floating on the ground that deteriorates the realism. 
+This problem, known as footskating, is not limited to depth sensor applications. It shows up in motion-capture-based animation systems and solved in a reasonable way with approaches, such as Kovar et al.~\cite{Kovar2002} and Ikemoto et al.~\cite{Ikemoto2006}. However, these methods rely on some sort of preprocessing or supervised learning, which is not suitable for our system, as the motion is captured and applied im real time. Hence, a solution that does not require a training process is needed for such applications. Mankyu and Choi~\cite{Mankyu2013} propose a similar method that does not require training for real-time depth sensor applications. Their approach is adopted into our framework to overcome the footskating problem. However, it requires additional filters and constraints in order to be usable in our framework. It is assumed that one foot is always on the ground; otherwise, artifacts may occur, for example, if the user attempts jumping. The footskating handling algorithm consists of two parts: {\em constraint checking and adaptation} (cf.~Algorithm~\ref{algo:check_foot_constraints}) and {\em joint angle determination and application} (cf.~Algorithm~\ref{algo:foot_skating}). The whole   algorithm consists of the following four steps. 
 
 \begin{enumerate}
 \item Determine which foot is constrained by checking speed and location thresholds. The thresholds are changed adaptively in order to compensate for different sensor and user placements.
 
-\item Place the constrained foot at its last recorded position and solve the inverse kinematics problem to determine the orientations of the hip and knee joints. Solving an inverse kinematic problem is no trivial task. There are various numerical and analytical methods for inverse kinematic problems and many implementations focusing on each. For our framework, we embedded the IKAN library by University of Pennsylvania~\cite{IKAN2013}, which uses the approach described in~\cite{Tolani2000}.  
+\item Place the constrained foot at its last recorded position and solve the inverse kinematics problem to determine the orientations of the hip and knee joints. Solving an inverse kinematic problem is no trivial task. There are various numerical and analytical methods for inverse kinematic problems and many implementations focusing on each. We use the IKAN library by University of Pennsylvania~\cite{IKAN2013}, which uses the approach described in~\cite{Tolani2000}.  
 
 \item Check if the foot coincides with its intended position after the inverse kinematic orientations are applied to the bones. If there is a positional mismatch, relocate the root joint to complete alignment.
 
-\item Smooth the joint orientation difference in order to avoid jumps from frame to frame. This is especially important when the constraint switches, as the source of the orientations are different in two cases and they do not always overlap. Smoothing parameters are optimized in a try-and-error basis, they are not viable for adaptive nature. Smoothing also helps to overcome the self-occlusion and data-noisiness.
+\item Smooth the joint orientation difference in order to avoid jumps from frame to frame. This is especially important when the constraint switches, as the source of the orientations are different in two cases and they do not always overlap. Smoothing parameters are optimized using trial and error; they are not viable for adaptive nature. Smoothing also helps to overcome the self-occlusion and data-noisiness.
 \end{enumerate}
-
-The overall algorithm consists of two major parts: {\em constraint checking and adaptation} (cf.~Algorithm~\ref{algo:check_foot_constraints}) and {\em joint angle determination and application} (cf.~Algorithm~\ref{algo:foot_skating}).  
-
+  
 \begin{algorithm}[ht]
 \DontPrintSemicolon % Some LaTeX compilers require you to use \dontprintsemicolon instead
 \If{\textit{isFirstFrame}}{
@@ -290,14 +287,14 @@ $d_{{\textit{root}}}$ = $p^{\textit{foot}}_{\textit{constrained}}$ - $p^{\textit
 \label{algo:foot_skating}
 \end{algorithm}
 
-Joint smoothing consists of interpolating between frames, especially when there is a significant change in orientations, which would normally cause a non-continuous animation. Old joint orientations are always recorded in global coordinate system and updated everyframe. After we get the new orientation from the new frame, we calculate the quaternion which would rotate the old orientation to the new one:
+Joint smoothing consists of interpolating between frames, especially when there is a significant change in orientations, which would normally cause a non-continuous animation. Old joint orientations are always recorded in the global coordinate system and updated everyframe. After we get the new orientation from the new frame, we calculate the quaternion that would rotate the old orientation to the new one:
 
 \begin{equation}
 Q_{d} = Q_{new} \times Q_{old}^{-1}
 \label{eqn:rotator_quaternion}
 \end{equation} 
 
-When we get te delta quaternion, we get its axis-angle representation. Because we are interested in rotating the joint partially, we build up a new quaternion with the same axis and a fraction of the same angle. The fraction varies with whether the constraint is switched recently. 
+When we compute the delta quaternion, we get its axis-angle representation. Because we are interested in rotating the joint partially, we build up a new quaternion with the same axis and a fraction of the same angle. The fraction varies with whether the constraint is switched recently. 
 
 \begin{equation} 
 \begin{split}
@@ -307,4 +304,5 @@ Q_d^* = \textit{Quaternion}((x, y, z), \alpha / k )
 \end{split}
 \end{equation} 
 
-The fractional rotations are then applied to the joints to get a smoother movement. Other implicit operations include coordinate system transformations, as we are working with three different coordinate systems: Global-Render Coordinate System, Local-Render Coordinate System, and IKAN Coordinate System. The constraints of the IKAN library require certain to-and-from transformations to be used with our coordinate system. 
+The fractional rotations are then applied to the joints to get a smoother movement. Other implicit operations include coordinate system transformations, as we are working with three different coordinate systems: Global-Render Coordinate System, Local-Render Coordinate System, and IKAN Coordinate System. 
+%The constraints of the IKAN library require certain to-and-from transformations to be applied with the coordinate systems. 

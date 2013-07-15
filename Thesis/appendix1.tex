@@ -2,7 +2,7 @@
 \chapter{OGRE Framework}
 \label{appendix_ogre_framework}
 
-We embrace the ``do not repeat yourself'' (DRY) mindset and extreme programming methodology in the implementation of the simulation software. Furthermore, since this study required utilization of many different techniques in different fields in Computer Science, we required various third party software development kits (SDKs) to cover the lowest level code. The search for the most appropriate rendering engine yielded the following requirements:
+We embrace the ``do not repeat yourself'' mindset and extreme programming methodology in the implementation of the simulation software. Furthermore, since this study required utilization of many different techniques in different fields in Computer Science, we required various third party software development kits (SDKs) to cover the lowest level code. The search for the most appropriate rendering engine yielded the following requirements:
 
 \begin{enumerate}
 \item must be code-oriented rather than designer-oriented;
@@ -38,7 +38,7 @@ OGRE is more than just a rendering engine, despite what name implies. Among all 
   \item level of detail support,
   \item skeletal animation feature, can be used with models exported from Blender:
 \begin{itemize}
-  \item multiple-bone weighted skinning
+  \item multiple-bone weighted skinning, 
   \item hardware acceleration.
 \end{itemize}
 \end{itemize}
@@ -49,7 +49,7 @@ OGRE is more than just a rendering engine, despite what name implies. Among all 
 \end{itemize}
 
 \section{High Level Overview}
-\subsection{The Root object}
+\subsection{The Root Object}
 The root object is the entry point and core of the framework.
 \begin{itemize}
 \item It is created first and destroyed last in the application life cycle. 

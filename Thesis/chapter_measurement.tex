@@ -15,7 +15,7 @@ The cloth resizing algorithm consists of three main steps:
 
 \section{Depth Map Optimization}
 \label{section_depth_map_optimization}
-At 30 fps, Kinect provides a depth map and a user map, both at 640 $\times$ 480 resolution. The depth map contains the distances of pixels from the sensor in millimeters. The depth measurement of the Kinect sensor is not very accurate compared to high-end 3D depth systems such as laser scanners. The error in the depth value increases quadratically with the distance. The error values for different distances are shown in Table~\ref{tbl:error_kinect}~(\cite{Kourosh2012}).
+At 30 frames per second (fps), Kinect provides a depth map and a user map, both at 640 $\times$ 480 resolution. The depth map contains the distances of pixels from the sensor in millimeters. The depth measurement of the Kinect sensor is not very accurate compared to high-end 3D depth systems such as laser scanners. The error in the depth value increases quadratically with the distance. The error values for different distances are shown in Table~\ref{tbl:error_kinect}~(\cite{Kourosh2012}).
 
 \begin{table}
 \center
@@ -32,7 +32,7 @@ At 30 fps, Kinect provides a depth map and a user map, both at 640 $\times$ 480 
 For the purposes of this study, the Kinect sensor needs to be able to see the whole human body, which requires at least 3m away from the sensor for a person with 1.7m height, resulting in an erroneous depth map. In order to acquire a better depth map, the following operations are performed: Let us take the depth map $D$ as a 640 $\times$ 480 matrix. Initially, the user pixels are extracted by a pixel-by-pixel comparison with the user map. The user map is another acquired map from the sensor, with the same size as depth map. The value of a pixel is set to a non-zero value if the pixel belongs to a recognized user. In this case, we are only interested in one user; $D_1$ represents the depth pixels of the user and $U_1$ is the bit map of the user. Besides, the non-user pixels must be filled with the mean value of the user pixels in order to perform Gaussian filtering on the image.
 
 \begin{equation}
-D_1=(D-(D \times U_1 )) \times 1/n \times \sum\limits_{i=0}^n ((D \times U_1 )_i + d \times U_1 )
+D_1=(D-(D \times U_1 )) \times \frac{1}{n} \times \sum\limits_{i=0}^n ((D \times U_1 )_i + d \times U_1 )
 \label{eqn:patch_depth}
 \end{equation}
 
@@ -171,7 +171,7 @@ Torso Height & - & - (9) & Joint Location \\
 
 \begin{figure}[h]
 \centerline{\psfig{figure=figures/body_proportions.eps,width=0.50\textwidth}}
-\caption{Proportions on the body}
+\caption{Proportions of the body.}
 \label{fig:body_proportions}
 \end{figure}
 
@@ -185,7 +185,7 @@ Long Sleeves & Body Height & Elbow-Fingertip Height, Shoulder Width \\ \hline
 Short Sleeves-Sleeveless & Torso Height & Shoulder Width \\ 
 \hline
 \end{tabular}
-\caption{Primary proportions for different cloth types}
+\caption{Primary proportions for different cloth types.}
 \label{tbl:primary_proportions}
 \end{table}
 

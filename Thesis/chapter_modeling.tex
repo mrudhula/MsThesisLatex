@@ -1,4 +1,4 @@
-\chapter{Human and Cloth Modeling}
+\chapter{Human and Cloth Modeling} 
 \label{chapter_3d_model}
 
 The simulation software utilizes 3D models as the main displayed components. Since the quality of the models are a significant factor in the overall quality of the simulation, they must be prepared specifically for the purposes of the application, with attention to details. Two distinct sets of 3D meshes are required in general for the simulation: 
@@ -21,7 +21,7 @@ Animating a 3D mesh requires skinning, which is moving the vertices with respect
 
 \begin{figure}[h]
 \centerline{\psfig{figure=figures/rigging_skeleton.eps,width=1.00\textwidth}}
-\caption{The rigging base skeleton}
+\caption{The rigging base skeleton.}
 \label{fig:rigging_skeleton}
 \end{figure}
 
@@ -30,8 +30,8 @@ After assigning every vertex to the appropriate bones, there are no cracked surf
 
 \begin{figure}[h]
 \centerline{\psfig{figure=figures/weight_humerus_r.eps,width=1.00\textwidth}}
-\caption{The vertex weights for the Humerus.R bone}
-\label{fig:weight_humerus_r}
+\caption{The vertex weights for the Humerus.R bone.}
+\label{fig:weight_humerus_r} 
 \end{figure}
 
 \subsection{Material Properties}
@@ -40,21 +40,21 @@ The base models come with no material properties. In order to improve the realis
 
 \begin{figure}[h]
 \centerline{\psfig{figure=figures/detailed_face.eps,width=1.00\textwidth}}
-\caption{Detailed appearance of the face}
+\caption{Detailed appearance of the face.}
 \label{fig:detailed_face}
 \end{figure}
 
 \section{Cloth Mesh}
 \label{section_cloth_mesh}
 
-As one of the major pieces of this study is accurate cloth simulation, accurately modeled cloth meshes which are suitable for simulation for required. After a thorough research through a variety of available models, a set of base apparel meshes for both male and female models are selected ~\cite{LadyJewell2012, 3dregenerator2013,Axel2013,Borodin2013,PS3D2013,Alperin2013}. The models vary in detail and quality, all of them are optimized and enhanced for the framework. 
+As one of the major pieces of this study is accurate cloth simulation, accurately modeled cloth meshes which are suitable for simulation for required. After a thorough research through a variety of available models, a set of base apparel meshes for both male and female models are selected~\cite{LadyJewell2012,3dregenerator2013,Axel2013,Borodin2013,PS3D2013,Alperin2013}. The models vary in detail and quality, all of them are optimized and enhanced for the framework. 
 
 \subsection{Body Positioning and Splitting the Dress Mesh}
 
 For a successful animation and simulation of the dress on a human avatar, both meshes must be in proportion with each other and properly aligned. The required modifications to the meshes are performed in Blender(Figure~\ref{fig:dress_and_body}). The initial approach is to include all the vertices of the clothing mesh in the simulation. However, after various attempts to simulate all vertices on the dress mesh, this approach failed to achieve a realistic looking result because of two reasons:
 \begin{itemize}
 \item Whole meshes contain too many vertices, the dress mesh for instance consists of 4088 vertices. The simulation Runs in real-time, however the topography of the mesh is not appropriate for the physics engine because of the very large number of vertices in the cloth. It shifted from a fabric structure to more of a jelly form, over stretching and tearing with its own weight.
-\item The friction necessary to keep the dress on the human avatar's shoulders is not sufficient enough to keep the dress on the avatar. It kept sliding, stretching and acting unnaturally. The design of the used physics engine was not appropriate for this approach.
+\item The friction necessary to keep the dress on the human avatar's shoulders is not sufficient enough to keep the dress on the avatar. The dress keeps sliding, stretching and acting unnaturally. The design of the used physics engine is not appropriate for this approach.
 \end{itemize}
 
 In order to overcome these problems, we split the dress mesh into two parts and utilize different animation techniques for each.
@@ -65,7 +65,7 @@ In order to overcome these problems, we split the dress mesh into two parts and 
 \end{itemize}
 
 \begin{figure}[h]
-\centerline{\psfig{figure=figures/dress_and_body.eps,width=1.00\textwidth}}
+\centerline{\psfig{figure=figures/dress_and_body.eps,width=0.50\textwidth}}
 \caption{The dress, positioned on the body, along with the upper-part of the skeleton. In this shot, the dynamic part is highlighted with orange border.}
 \label{fig:dress_and_body}
 \end{figure}

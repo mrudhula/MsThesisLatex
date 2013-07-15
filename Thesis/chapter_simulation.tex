@@ -1,22 +1,22 @@
 \chapter{Cloth Simulation}
 \label{chapter_cloth_simulation}
 
-Rendering physically accurate apparel meshes is the goal of the physics component of the framework. Since the construction of a real-time high quality physics engine which supports collision detection is a study subject on its own, The Nvidia PhysX engine is utilized as the physics solver~\cite{Kim2011} in the simulation software. The quality of the simulation depends on a number of different steps; the model preparation, physics environment initialization and the real-time simulation including numerical solution of the spring mass sytems and collision handling. 
+Rendering physically accurate apparel meshes is the goal of the physics component of the framework. Because the construction of a real-time high quality physics engine that supports collision detection is a study subject on its own, The Nvidia PhysX engine is utilized as the physics solver~\cite{Kim2011} in the simulation software. The quality of the simulation depends on a number of different steps; the model preparation, physics environment initialization and the real-time simulation including numerical solution of the spring mass sytems and collision handling. 
 
 \section{Model Setup}
-The mesh to be simulated is the dynamic part of the modeled dresses which consists vertices in the order of thousands. It is aligned precisely with the static part and the human body to be simulated realistically. The PhysX framework requires vertex and topology information delivered separately and manually, instead of a binary file or an automatic parser. For this purpose, a custom Wavefront OBJ file parser is implemented to acquire the information exported from a modeling suite, and feed the data into the physics engine. 
+The mesh to be simulated is the dynamic part of the modeled dresses that contains vertices in the order of thousands. It is aligned precisely with the static part and the human body to be simulated realistically. The PhysX framework requires vertex and topology information delivered separately and manually, instead of a binary file or an automatic parser. For this purpose, a custom Wavefront OBJ file parser is implemented to acquire the information exported from a modeling suite, and feed the data into the physics engine. 
 
-Other than the vertex and topology information, an inverse weight property needs to be specified for every vertex.  This information can be embedded into the wavefront object as a second set of texture coordinates. On the other hand, this method adds too much extra data to the file, which is not a major problem, although not necessary. Therefore the vertex weight information is embedded into the model by specifying the material names separately for vertex groups with different weights. The vertices which have a non-zero inverse weight have the suffix ``Free'' attached to their material name. The vertices are selected manually and their materials are attached.  The current simulation required only two set of weights, which can be seen in Figure~\ref{fig:cloth_fixed_vertices}. After the weight information is implemented, the model is exported as a Wavefront OBJ file along with the MTL material file and parsed into the software.
+Other than the vertex and topology information, an inverse weight property needs to be specified for every vertex.  This information can be embedded into the wavefront object as a second set of texture coordinates. On the other hand, this method adds too much extra data to the file, which is not a major problem, although not necessary. Therefore the vertex weight information is embedded into the model by specifying the material names separately for vertex groups with different weights. The vertices that have a non-zero inverse weight have the suffix ``Free'' attached to their material name. The vertices are selected manually and their materials are attached.  The current simulation required only two set of weights, which can be seen in Figure~\ref{fig:cloth_fixed_vertices}. After the weight information is implemented, the model is exported as a Wavefront OBJ file along with the MTL material file and parsed into the software.
 
 \begin{figure}[h]
 \centerline{\psfig{figure=figures/cloth_fixed_vertices.eps,width=1.00\textwidth}}
-\caption{The fixed vertices of the cloth}
+\caption{The fixed vertices of the cloth.}
 \label{fig:cloth_fixed_vertices}
 \end{figure}
 
 \section{The Initialization}
 
-Following the parsing of the model from the OBJ file, it is stored within the memory to be used in different frames. The OBJ file is converted into the native mesh format for the rendering engine to be loaded and rendered. The process includes feeding the vertex, topology and material information into the OGRE as submeshes, to be combined as a mesh. Prior to creating the simulated cloth the PhysX engine needs to be initialized:
+Following the parsing of the model from the OBJ file, it is stored within the memory to be used in different frames. The OBJ file is converted into the native mesh format for the rendering engine to be loaded and rendered. The process includes feeding the vertex, topology and material information into the OGRE framework as submeshes, to be combined as a mesh. Prior to creating the simulated cloth the PhysX engine needs to be initialized:
 
 \begin{enumerate}
 \item The foundation and the SDK objects are created.
@@ -24,7 +24,7 @@ Following the parsing of the model from the OBJ file, it is stored within the me
 \item Afterwards, the virtual floor and the environment are created with the gravity specified as 9.8 m/s$^2$. 
 \end{enumerate}
 
-After the initialization, the cloth is loaded with specific stiffness, stretch, damping, friction, inertia, bending, and collision parameters. These parameters are decided through numerous try-and-error experiments in order to acquire the most realistic simulation results. After creating the environment and the virtual cloth, the collision spheres are created, which is explained in section~\ref{section_collision}.
+After the initialization, the cloth is loaded with specific stiffness, stretch, damping, friction, inertia, bending, and collision parameters. These parameters are decided through numerous try-and-error experiments in order to acquire the most realistic simulation results. After creating the environment and the virtual cloth, the collision spheres are created, which is explained in Section~\ref{section_collision}.
 
 \section{The Animation}
 At each frame, the following steps are performed:
@@ -66,7 +66,7 @@ $x_i \gets p_i $\;
 }
 \textit{velocityUpdate}$(v_1, \ldots, v_N)$\;
 }
-\caption{Position-based dynamics}
+\caption{Position-based dynamics solver}
 \label{algo:position_based_dynamics}
 \end{algorithm}
 
@@ -93,7 +93,7 @@ The female body bone information is extracted from the input skeletal mesh class
 
 \begin{figure}[h]
 \centerline{\psfig{figure=figures/colliding_human_body.eps,width=1.00\textwidth}}
-\caption{Character formed with collision spheres and capsules}
+\caption{Character formed with collision spheres and capsules.}
 \label{fig:colliding_human_body}
 \end{figure}
 
