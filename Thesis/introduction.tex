@@ -5,7 +5,16 @@ Computer graphics are being used in more and more areas today to help with visua
 
 One of the most time-consuming stages of apparel shopping is trying the apparels on, which is not even possible in online stores. With the advances in augmented reality technologies, virtual fitting rooms are slowly taking their places in both real and virtual stores~\cite{Fitnect2012,Styku2013} to improve the quality of apparel trial experience while also making it faster. On the low-end of the spectrum, there are super positioned 2D images of the user and the apparel, without any animation. Advanced virtual fitting rooms on the other hand, show the apparel items either on the video of the user or on a virtual avatar, both scaled to reflect the user's body characteristics~\cite{FaceCake2013}. Some of them also employ physics-based garment simulation for a better fitting experience~\cite{Styku2013}.
 
-This study is aimed to develop a novel virtual fitting room framework that provides all the basic features expected from such an application, along with enhancements in various aspects for higher realism. These enhancements include motion filtering, customized user scaling, and physics engine. Motion filtering process starts with temporal averaging of joint positions in order to overcome the high noise of the depth sensor. However, temporal averaging does not prove to be sufficient because unnatural movements take place due to limited recognition capabilities and self-occlusion. Customized joint angle filters, along with bone splitting to let limbs twist in a more natural way and footskate correction filters are implemented.
+This study is aimed to develop a novel virtual fitting room framework that provides all the basic features expected from such an application, along with enhancements in various aspects for higher realism. These enhancements include motion filtering, customized user scaling, and physics engine. Motion filtering process starts with temporal averaging of joint positions in order to overcome the high noise of the depth sensor. However, temporal averaging does not prove to be sufficient because unnatural movements take place due to limited recognition capabilities and self-occlusion. Customized joint angle filters, along with bone splitting to let limbs twist in a more natural way and footskate correction filters are implemented. The overall framework is shown in Figure~\ref{fig:overall}. 
+
+\begin{figure}[htbp]
+	\centerline{
+	\includegraphics[width=1.0\textwidth]{./figures/overall.eps}
+	}
+	\caption{The overall virtual dressing framework}
+	\label{fig:overall}
+\end{figure}
+
 
 The avatar utilizes a skeleton which conforms with the LOA 2 of H-ANIM 200x specification~\cite{HANIM}, although not all bones are used for animation because of the available data from depth sensor. The skeleton and mesh are modeled in Blender~\cite{Blender}, exported and used in binary format. The simulated apparel pieces are also modeled in Blender, although they are exported in Wavefront OBJ format in order to be parsed by the physics engine. They are binarized on-the-run to be used by the game engine. 
 
