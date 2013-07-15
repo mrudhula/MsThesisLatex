@@ -4,13 +4,9 @@
 Rendering physically accurate apparel meshes is the goal of the physics component of the framework. Since the construction of a real-time high quality physics engine which supports collision detection is a study subject on its own, The Nvidia PhysX engine is utilized as the physics solver~\cite{Kim2011} in the simulation software. The quality of the simulation depends on a number of different steps; the model preparation, physics environment initialization and the real-time simulation including numerical solution of the spring mass sytems and collision handling. 
 
 \section{Model Setup}
-The mesh to be simulated is the dynamic part of the modeled dresses which consists vertices in the order of thousands. It is aligned precisely with the static part and the human body to be simulated realistically. 
+The mesh to be simulated is the dynamic part of the modeled dresses which consists vertices in the order of thousands. It is aligned precisely with the static part and the human body to be simulated realistically. The PhysX framework requires vertex and topology information delivered separately and manually, instead of a binary file or an automatic parser. For this purpose, a custom Wavefront OBJ file parser is implemented to acquire the information exported from a modeling suite, and feed the data into the physics engine. 
 
-The PhysX framework requires vertex and topology information delivered separately and manually, instead of a binary file or an automatic parser. For this purpose, a custom Wavefront OBJ file parser is implemented to acquire the information exported from a modeling suite, and feed the data into the physics engine. 
-
-Other than the vertex and topology information, an inverse weight property needs to be specified for every vertex.  This information can be embedded into the wavefront object as a second set of texture coordinates. On the other hand, this method adds too much extra data to the file, which is not a major problem, although not necessary. Therefore the vertex weight information is embedded into the model by specifying the material names separately for vertex groups with different weights. 
-
-The vertices which have a non-zero inverse weight have the suffix ``Free'' attached to their material name. The vertices are selected manually and their materials are attached.  The current simulation required only two set of weights, which can be seen in Figure~\ref{fig:cloth_fixed_vertices}. After the weight information is implemented, the model is exported as a Wavefront OBJ file along with the MTL material file and parsed into the software.
+Other than the vertex and topology information, an inverse weight property needs to be specified for every vertex.  This information can be embedded into the wavefront object as a second set of texture coordinates. On the other hand, this method adds too much extra data to the file, which is not a major problem, although not necessary. Therefore the vertex weight information is embedded into the model by specifying the material names separately for vertex groups with different weights. The vertices which have a non-zero inverse weight have the suffix ``Free'' attached to their material name. The vertices are selected manually and their materials are attached.  The current simulation required only two set of weights, which can be seen in Figure~\ref{fig:cloth_fixed_vertices}. After the weight information is implemented, the model is exported as a Wavefront OBJ file along with the MTL material file and parsed into the software.
 
 \begin{figure}[h]
 \centerline{\psfig{figure=figures/cloth_fixed_vertices.eps,width=1.00\textwidth}}
@@ -20,7 +16,7 @@ The vertices which have a non-zero inverse weight have the suffix ``Free'' attac
 
 \section{The Initialization}
 
-Following the parsing of the model from the OBJ file, it is stored into C++ vectors initially, to be used in different frames. First, the OBJ file is converted into the OGRE native mesh format to be loaded and rendered. This simply includes feeding the vertex, topology and material information into the OGRE as submeshes, to be combined as a mesh. Prior to creating the simulated cloth the PhysX engine needs to be initialized:
+Following the parsing of the model from the OBJ file, it is stored within the memory to be used in different frames. The OBJ file is converted into the native mesh format for the rendering engine to be loaded and rendered. The process includes feeding the vertex, topology and material information into the OGRE as submeshes, to be combined as a mesh. Prior to creating the simulated cloth the PhysX engine needs to be initialized:
 
 \begin{enumerate}
 \item The foundation and the SDK objects are created.
@@ -28,7 +24,7 @@ Following the parsing of the model from the OBJ file, it is stored into C++ vect
 \item Afterwards, the virtual floor and the environment are created with the gravity specified as 9.8 m/s$^2$. 
 \end{enumerate}
 
-After the initialization, the cloth is loaded with specific stiffness, stretch, damping, friction, inertia, bending, and collision parameters. These parameters are decided through numerous try-and-error experimentations in order to acquire the most realistic simulation results. After creating the environment and the virtual cloth, the collision spheres are created, which is explained in Chapter~\ref{chapter_collision}.
+After the initialization, the cloth is loaded with specific stiffness, stretch, damping, friction, inertia, bending, and collision parameters. These parameters are decided through numerous try-and-error experiments in order to acquire the most realistic simulation results. After creating the environment and the virtual cloth, the collision spheres are created, which is explained in section~\ref{section_collision}.
 
 \section{The Animation}
 At each frame, the following steps are performed:
@@ -41,14 +37,13 @@ At each frame, the following steps are performed:
 \item The colliding human capsules are updated with the human body bone orientation. The orientation and the position of the dynamic cloth handle is synchronized with the virtual cloth. This input automatically introduces the inertia effect on the cloth.
 \item At the end, the cloth is simulated as follows:
 \begin{enumerate}
-\item PhysX is ordered to start the simulation on the GPU. The details of the simulation algorithm are explained in Section~\ref{section_cloth_simulation_algorithm}.
+\item PhysX is ordered to start the simulation on the GPU. The details of the simulation algorithm are explained in Section~\ref{section_numerical_solution}.
 \item The vertex data is read from the output, and the vectors of the OBJ object are updated, except the fixed mesh vertices. The reason for omitting the fixed vertices is to avoid unnatural bends and cracks on the fixed vertices.
-  \item The updated OBJ vectors are transformed into the OGRE mesh buffers, to be rendered. 
+  \item The updated OBJ vectors are transformed into the native mesh buffers, to be rendered. 
 \end{enumerate}
 \end{enumerate}
 
-The cloth simulation algorithm is based on the position-based dynamics, introduced by M{\"u}ller et al.~\cite{Muller2007}. The main idea is to calculate the position of the particles from their previous positions and applying constraints on mutual distance and angle. The collision is also calculated as a force and applied to both particles. The approach is stable and efficient for real time applications.
-The dynamics are stable as long as the constraint solvers converge. When this criterion is not met, rendering anomalies occur, such as a vertex being pulled too far away from the cloth. The solutiom is parallelized by fibers, as Single Instruction Multiple Data (SIMD) process. With CUDA support, however, this is even parallelized more with Single Instruction Multiple Thread (SIMT) processes, where each thread works on one fiber.
+The cloth simulation algorithm is based on the position-based dynamics, introduced by M{\"u}ller et al.~\cite{Muller2007}. The main approach is to calculate the position of the particles from their previous positions and applying constraints on mutual distance and angle. The collision is also calculated as a force and applied to both particles. The approach is stable and efficient for real time applications. The dynamics are stable as long as the constraint solvers converge. When this criteria is not met, rendering anomalies occur, such as a vertex being pulled too far away from the cloth. The solution is parallelized by fibers, as Single Instruction Multiple Data (SIMD) process. With CUDA support, however, this is even parallelized more with Single Instruction Multiple Thread (SIMT) processes, where each thread works on one fiber.
 
 \section{Numerical Solution}
 \label{section_numerical_solution}
@@ -90,7 +85,7 @@ There are two possible solvers to apply on fiber block (set) which come with Phy
 In order to get the best performance from these solvers, they are applied on different sets, taking advantage of parallel implementation. The Gauss-Seidel solver is used for horizontal stretch fibers and the shear fibers, which do not experience too much stretching, taking advantage of its low cost. A semi-implicit solver is applied only to the vertical stretch fibers, resulting in both a fast and robust solution.
 
 \section{Collision Handling}
-\label{section_chapter_collision}
+\label{section_collision}
 
 Preventing the apparel meshes intersecting with the virtual avatar and itself is attained with collision detection and prevention. Cloth vertices can collide with pre-defined spheres, capsules or planes. In order to keep the program stable and running at real-time, it is important to find the balance between collision detail and performance. 
 

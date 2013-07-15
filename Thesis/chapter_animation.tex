@@ -8,13 +8,13 @@ The rigged human body mesh ready to be animated is exported from Blender in Ogre
 \section{Initialization}
 \label{section_animation_initialization}
 
-Animatable meshes are loaded and maintained via the custom \em{SkeletalMesh} class, which is the middleware between Ogre skeletal animating system and the input from Kinect sensor. An instance of the \em{SkeletalMesh} class is initialized with a mesh file. After the mesh is loaded with the skeleton data, the bone list is iterated through, given the initial orientation uniquely for each animatable bone with the Kinect sensor. 
+Animatable meshes are loaded and maintained via the custom {\em SkeletalMesh} class, which is the middleware between Ogre skeletal animating system and the input from Kinect sensor. An instance of the {\em SkeletalMesh} class is initialized with a mesh file. After the mesh is loaded with the skeleton data, the bone list is iterated through, given the initial orientation uniquely for each animatable bone with the Kinect sensor. 
 
-The animatable bones are set to be manually controlled and given the initial orientations. The lower part of the body inherits orientations as they are filtered for footskating and use different orientation mechanisms. The upper part of the body is rotated in global space. The bones are set to initial state, to be reset at every frame and updated with new orientations. The non-animated bones are left to be automatically controlled in order to keep them aligned with their parent bones. 
+The animatable bones are set to be manually controlled and set to their initial orientations. The lower part of the body inherits orientations as they are filtered for footskating and use different orientation mechanisms. The upper part of the body is rotated in global space. The bones are set to their initial state, to be reset at every frame and updated with new orientations. The non-animated bones are left to be automatically controlled in order to keep them aligned with their parent bones. 
 
 \section{Animation}
 \label{section_animation}
-Every frame, the orientation information from the bones are extracted in quaternion form, along with the confidence of the sensor in that orientation. If the confidence is less than 0.5 over 1, the bones are left as they were in the previous frame to avoid unnatural movements. The new orientation is fed into the bone after it is multiplied with the initial orientation. The root bone is translated in local space at the end to simulate the translation above rotation. This technique is used with the static parts of the apparel meshes as well. The linear weighted skin blending~\cite{Kavan2003} is used in order to simulate deformation on the characters skin. The effects of four bones with different weights are combined linearly to change the positions and normal of vertices. 
+Every frame, the orientation information from the bones are extracted in quaternion form, along with the confidence of the sensor in that orientation. If the confidence is less than 0.5 over 1, the bones are left as they were in the previous frame to avoid unnatural movements. The root bone is translated in local space at the end to simulate the translation above rotation. This technique is used with the static parts of the apparel meshes as well. The linear weighted skin blending~\cite{Kavan2003} is used in order to simulate deformation on the characters skin. The effects of four bones with different weights are combined linearly to change the positions and normal of vertices. 
 
 The algorithm in Algorithm~\ref{algo:transformBone} is executed during the pre-render cycle. The bone orientations are set to be ready for animation, deformation and rendering. At every render cycle, update Skeleton function is called, which automatically fetches the coordinates from the Kinect and sets up the skeleton for vertex blending. 
 
@@ -109,7 +109,7 @@ m_{20}^i & m_{21}^i & m_{22}^i & m_{23}^i \\
 \label{eqn:weighted_matrix_for_i}
 \end{equation}
 
-It should be noted that this matrix is a linear combination of four linear transformation matrices from four weighting bones; hence, the $3^{rd}$ row is by default [0 0 0 1]. We also have the initial positions for the four vertices as $[p^i_x \: p^i_y  \: p^i_z  \: 1]$.$3^{rd}$ value, which is one is not included in the vertex buffer and it will not be taken into account with the calculations. In order to generate an efficient SIMD process, we perform 4$\times$3 dot product calculations in each instruction. Dot products are commanded in the machine language, which makes it more efficient to higher level matrix calculations. To compute the simulated x coordinates for  four vertices, we combine the first rows of all collapsed matrices into a 4 $\times$ 4 matrix and transpose it:
+It should be noted that this matrix is a linear combination of four linear transformation matrices from four weighting bones; hence, the $3^{rd}$ row is by default [0 0 0 1]. We also have the initial positions for the four vertices as $[p^i_x \: p^i_y  \: p^i_z  \: 1]$.$3^{rd}$ value, which is one is not included in the vertex buffer and it will not be taken into account with the calculations. In order to generate an efficient SIMD process, we perform 4$\times$3 dot product calculations in each instruction. Dot products are commanded in the machine language, which makes it more efficient compared to higher level matrix calculations. To compute the simulated x coordinates for  four vertices, we combine the first rows of all collapsed matrices into a 4 $\times$ 4 matrix and transpose it:
 
 \begin{equation}
 M_T=
@@ -190,7 +190,7 @@ Since the only problematic bones for this particular case are the upper limbs, t
 	\label{fig:forearm-weights}
 \end{figure}
 
-During runtime, the filtered local rotation of the upper limb bones are separated into two distinct rotations, one containing the yaw and the other containing pitch and roll rotations, which are applied to the extension bone and the original bone, respectively. With proper weights, the rotation of the users arm is transferred to the virtual avatar naturally without introducing any artifacts. As seen in Figure~\ref{fig:forearm-comparison}, the vertices on the forearm twist in a more natural way resembling the real motion.
+
 
 \begin{figure}[htbp]
 	\centerline{\includegraphics[width=1.0\columnwidth]{./figures/fore-arm-single-bone.eps}}
@@ -202,10 +202,13 @@ During runtime, the filtered local rotation of the upper limb bones are separate
 	\label{fig:forearm-comparison}
 \end{figure}
 
+During runtime, the filtered local rotation of the upper limb bones are separated into two distinct rotations, one containing the yaw and the other containing pitch and roll rotations, which are applied to the extension bone and the original bone, respectively. With proper weights, the rotation of the users arm is transferred to the virtual avatar naturally without introducing any artifacts. As seen in Figure~\ref{fig:forearm-comparison}, the vertices on the forearm twist in a more natural way resembling the real motion.
+
+
 \section{Handling the Foot Skating Problem}
 \label{section_foot_skating}
 The virtual model is animated by changing bone orientations and root bone position. If the orientations and root position are applied to the bones respectively, the feet of the character appear to be floating on the ground which deteriorates the realism of the system. 
-This issue, known as footskating is not limited to depth sensor applications. It has been detected in motion capture systems and solved sufficiently with approaches by Kovar et al.~\cite{Kovar2002} and Ikemoto et al.~\cite{Ikemoto2006}. However, the proposed methods in these approaches rely on some sort of preprocessing or supervised learning, which is not suitable for our system, as the motion is captured and applied im real time. Hence, a solution which does not require a training process is needed for such applications. Mankyu and Choi~\cite{Mankyu2013} proposed a similar method which does not require training for real-time depth sensor applications. Their approach is adopted into our framework to overcome the footskating problem. However, it required additional filters and constraints in order to be usable in extended animations. It is assumed that one of the feet is always on the ground, artifacts may occur if the user attempts jumping. The whole footskating algorithm consists of five steps. 
+This issue, known as footskating is not limited to depth sensor applications. It has been detected in motion capture systems and solved sufficiently with approaches by Kovar et al.~\cite{Kovar2002} and Ikemoto et al.~\cite{Ikemoto2006}. However, the proposed methods in these approaches rely on some sort of preprocessing or supervised learning, which is not suitable for our system, as the motion is captured and applied im real time. Hence, a solution which does not require a training process is needed for such applications. Mankyu and Choi~\cite{Mankyu2013} proposed a similar method which does not require training for real-time depth sensor applications. Their approach is adopted into our framework to overcome the footskating problem. However, it required additional filters and constraints in order to be usable in extended animations. It is assumed that one of the feet is always on the ground, artifacts may occur if the user attempts jumping. The footskating algorithm consists of four steps. 
 
 \begin{enumerate}
 \item Determine which foot is constrained by checking speed and location thresholds. The thresholds are changed adaptively in order to compensate for different sensor and user placements.

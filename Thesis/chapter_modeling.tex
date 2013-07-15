@@ -17,7 +17,7 @@ After taking the complexity of both 3D CAD programs and the human body itself in
 
 \subsection{Rigging}
 
-Animating a 3D mesh requires skinning, which is moving the vertices with respect to a bone on a skeleton. Because the base models have no skinning or material properties, they require custom rigging and painting. For the purposes of this research a manual rigging and painting would be preferred, in order to be able to integrate the model easily into the software. The rigging is performed in Blender~\cite{Blender}, where the base human skeleton is provided, detailed in H-ANIM2 level with a much simplified spine (Figure~\ref{fig:rigging_skeleton}). 
+Animating a 3D mesh requires skinning, which is moving the vertices with respect to a bone on a skeleton. Because the base models have no skinning or material properties, they require custom rigging and painting. For the purposes of this research a manual rigging and painting would be preferred, in order to be able to integrate the model easily into the software. The rigging is performed in Blender~\cite{Blender}, where the base human skeleton is provided, detailed in H-ANIM2 level with a simplified spine (Figure~\ref{fig:rigging_skeleton}). 
 
 \begin{figure}[h]
 \centerline{\psfig{figure=figures/rigging_skeleton.eps,width=1.00\textwidth}}
@@ -47,21 +47,21 @@ The base models come with no material properties. In order to improve the realis
 \section{Cloth Mesh}
 \label{section_cloth_mesh}
 
-As one of the major pieces of this study is accurate cloth simulation, accurately modeled cloth meshes which are suitable for simulation for required. After my searching and filtering through a variety of models online, a set of base apparel meshes for both male and female models are selected ~\cite{LadyJewell2012, 3dregenerator2013,Axel2013,Borodin2013,PS3D2013,Alperin2013}. The models vary in detail and quality, all of them are optimized and enhanced for the framework. 
+As one of the major pieces of this study is accurate cloth simulation, accurately modeled cloth meshes which are suitable for simulation for required. After a thorough research through a variety of available models, a set of base apparel meshes for both male and female models are selected ~\cite{LadyJewell2012, 3dregenerator2013,Axel2013,Borodin2013,PS3D2013,Alperin2013}. The models vary in detail and quality, all of them are optimized and enhanced for the framework. 
 
 \subsection{Body Positioning and Splitting the Dress Mesh}
 
 For a successful animation and simulation of the dress on a human avatar, both meshes must be in proportion with each other and properly aligned. The required modifications to the meshes are performed in Blender(Figure~\ref{fig:dress_and_body}). The initial approach is to include all the vertices of the clothing mesh in the simulation. However, after various attempts to simulate all vertices on the dress mesh, this approach failed to achieve a realistic looking result because of two reasons:
 \begin{itemize}
-\item The whole dress consisted of 4088 vertices. The simulation is running in real-time, however the topography of the clothing mesh is not appropriate for the physics engine due to the very large number of vertices in the cloth. It shifted from a fabric structure to more of a jelly form, over stretching and tearing with its own weight.
-\item The friction necessary to keep the dress on the human avatar's shoulders is not sufficient enough to keep the dress on the avatar. It kept sliding, stretching and acting unnaturally.
+\item Whole meshes contain too many vertices, the dress mesh for instance consists of 4088 vertices. The simulation Runs in real-time, however the topography of the mesh is not appropriate for the physics engine because of the very large number of vertices in the cloth. It shifted from a fabric structure to more of a jelly form, over stretching and tearing with its own weight.
+\item The friction necessary to keep the dress on the human avatar's shoulders is not sufficient enough to keep the dress on the avatar. It kept sliding, stretching and acting unnaturally. The design of the used physics engine was not appropriate for this approach.
 \end{itemize}
 
 In order to overcome these problems, we split the dress mesh into two parts and utilize different animation techniques for each.
 
 \begin{itemize}
 \item The static part, which should be attached to the body and not affected by the wind, is modeled as a static mesh with skinning, like the human avatar. It is animated with the same transformations as the human avatar, matching its position and staying on the body perfectly. 
-\item The dynamic part is the part to be simulated, affected by inertia, wind and other factors. Their attachment line is just above the waist of the human avatar, which is pinpointed through try-and-error experimentations with other locations (Figure~\ref{fig:dress_and_body}). Keeping the line very low resulted in both unnatural collisions and the cloth being too rigid. Keeping it too high brought out the problems in the first approach. With its current setting, the dress mesh is animated naturally on the virtual avatar.
+\item The dynamic part is the part to be simulated, affected by inertia, wind and other factors. Their attachment line is just above the waist of the human avatar, which is pinpointed through try-and-error experiments with other locations (Figure~\ref{fig:dress_and_body}). Keeping the line very low resulted in both unnatural collisions and the cloth being too rigid. Keeping it too high brought out the problems in the first approach. With its current setting, the dress mesh is animated naturally on the virtual avatar.
 \end{itemize}
 
 \begin{figure}[h]
