@@ -141,7 +141,7 @@ $r_m=\textit{min}(r_z, r_x^-, r_x^+, r_y^-, r_y^+)$
 \section{Human Body Parameters}
 \label{section_human_body_parameters}
 
-The next step will be acquiring the optimal scaling parameters for the cloth. The width and height of the subject is important for determining the proper actual size for the cloth. However, a straightforward estimation of the body height and shoulder width is prone to errors due to the noise and quality of the incoming depth map. In order to minimize this error, an upscaled version of the subject's body is measured, to be used in width-height estimation later. The human body proportions to be used are shown in Table~\ref{tbl:human_body_proportions}~(\cite{Willis2012}). In these proportions, the unit width and height are taken as the width and height of the head. The measurement source column in the table represents the source for the estimation of the respective parameter:
+The next step will be acquiring the optimal scaling parameters for the cloth. The width and height of the subject is important for determining the proper actual size for the cloth. However, a straightforward estimation of the body height and shoulder width is prone to errors due to the noise and quality of the incoming depth map. In order to minimize this error, an upscaled version of the subject's body is measured, to be used in width-height estimation later. We use the human body proportions specified in~\cite{Willis2012}, which are shown in Table~\ref{tbl:human_body_proportions}. In these proportions, the unit width and height are taken as the width and height of the head. The measurement source column in the table represents the source for the estimation of the respective parameter:
 \begin{itemize} 
 \item
 The joint location represents that the measurement will take the input subject joint locations as the reference.
@@ -169,7 +169,7 @@ Torso Height & - & - (9) & Joint Location \\
 \label{tbl:human_body_proportions}
 \end{table}
 
-\begin{figure}[h]
+\begin{figure}[ht]
 \centerline{\psfig{figure=figures/body_proportions.eps,width=0.50\textwidth}}
 \caption{Proportions of the body.}
 \label{fig:body_proportions}
@@ -189,22 +189,21 @@ Short Sleeves-Sleeveless & Torso Height & Shoulder Width \\
 \label{tbl:primary_proportions}
 \end{table}
 
-Along with the ratios, the actual size in meters in height and width shall be measured and recorded as well, since the cloth needs to be scaled according to the user. In the proposed approach, the whole cloth is scaled as a whole, with different parameters for three dimensions. This approach qualifies as the best option for the purposes of this application, as most shops do not offer extensive customization. As the types of cloth focus on different portions of the body, the human body proportions from different areas should not affect the scaling parameters equally. Therefore, the main body parameters for different types of clothes are listed in Table 3. The pseudo-code of the parameter estimation is given in Algorithm~\ref{algo:sphere_fitting}. It performs the following steps:
+Along with the ratios, the actual size in meters in height and width will be measured and recorded as well because the cloth needs to be scaled according to the user. In the proposed approach, the whole cloth is scaled as a whole, with different parameters for three dimensions. This approach qualifies as the best option for the purposes of this application, as most shops do not offer extensive customization. Because different types of cloth focus on different portions of the body, the human body proportions from different areas should not affect the scaling parameters in the same way. The main body parameters for different types of clothes are listed in Table 3. The pseudo-code of the parameter estimation is given in Algorithm~\ref{algo:sphere_fitting}. It performs the following steps:
 
 \begin{enumerate}
-\item For a particular cloth, take the primary measured proportion as $P_i^0$. This will be the measured dimension of said proportion. 
-This process will be repeated for width (W) and height (H).
-\item With all the other measured proportions, calculate the estimated value of $P_i$ as $P_i^j$. Here, R denotes the ratio from Table~\ref{tbl:human_body_proportions}.
+\item For a particular cloth, take the primary measured proportion as $P_i^0$. This will be the measured dimension of the corresponding proportion. This process will be repeated for width ($W$) and height ($H$).
+\item With all other measured proportions, calculate the estimated value of $P_i$ as $P_i^j$. Here, $R$ denotes the ratio from Table~\ref{tbl:human_body_proportions}.
 \begin{equation}
-W,H_i^j=W,H_j \times R_i^j
+(W,H)_i^j=(W,H)_j \times R_i^j, \;\; j=1, \ldots, N
 \label{eqn:proportion_estimation}
 \end{equation}
-\item Find the optimized main parameter width as the average:
+\item Find the optimized value of the main width parameter as the average:
 \begin{equation}
-W,H_i=1/(n+1) \times \sum\limits_{j=0}^n W,H_i^j
+(W,H)_i=\frac{1}{(n+1)} \times \sum\limits_{j=0}^n (W,H)_i^j
 \label{eqn:optimized_parameter}
 \end{equation}
-\item After finding the optimized main parameter in meters, it can be used to scale the virtual cloth by calculating the ratio.
+\item After finding the optimized value of the main parameter in meters, it can be used to scale the virtual cloth by calculating the ratio.
 \end{enumerate}
 
 
@@ -243,7 +242,7 @@ $y_s=\frac{\textit{height}_\textit{weighted}}{\textit{height}_\textit{cloth}}$\;
 \end{algorithm}
 
 \section{Temporal Optimization and Scaling}
-After performing Step 2 of the overall algorithm, we acquired the following usable parameters:
+After performing Step 2 of the cloth resizing algorithm (cf. Algorithm~\ref{algo:sphere_fitting}), we acquire the following usable parameters:
 
 \begin{itemize}
 \item collision sphere radii, ($r_i$) and

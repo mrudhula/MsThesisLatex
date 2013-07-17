@@ -1,4 +1,4 @@
-\chapter{Human and Cloth Modeling} 
+\chapter{Human and Cloth Modeling}
 \label{chapter_3d_model}
 
 The simulation software utilizes 3D models as the main displayed components. Since the quality of the models are a significant factor in the overall quality of the simulation, they must be prepared specifically for the purposes of the application, with attention to details. Two distinct sets of 3D meshes are required in general for the simulation: 
@@ -19,7 +19,7 @@ After taking the complexity of both 3D CAD programs and the human body itself in
 
 Animating a 3D mesh requires skinning, which is moving the vertices with respect to a bone on a skeleton. Because the base models have no skinning or material properties, they require custom rigging and painting. For the purposes of this research a manual rigging and painting would be preferred, in order to be able to integrate the model easily into the software. The rigging is performed in Blender~\cite{Blender}, where the base human skeleton is provided, detailed in H-ANIM2 level with a simplified spine (Figure~\ref{fig:rigging_skeleton}). 
 
-\begin{figure}[h]
+\begin{figure}[ht]
 \centerline{\psfig{figure=figures/rigging_skeleton.eps,width=1.00\textwidth}}
 \caption{The rigging base skeleton.}
 \label{fig:rigging_skeleton}
@@ -28,17 +28,17 @@ Animating a 3D mesh requires skinning, which is moving the vertices with respect
 Prior to rigging, the skeleton needs to be in perfect alignment with the mesh. After modifying the initial bone positions, the vertex groups are assigned to the bones with proper weights (Figure~\ref{fig:weight_humerus_r}).
 After assigning every vertex to the appropriate bones, there are no cracked surfaces with motions which are natural for humans. In the end, the models are exported in OGRE .mesh format along with the skeleton it used.
 
-\begin{figure}[h]
+\begin{figure}[ht]
 \centerline{\psfig{figure=figures/weight_humerus_r.eps,width=1.00\textwidth}}
 \caption{The vertex weights for the Humerus.R bone.}
-\label{fig:weight_humerus_r} 
+\label{fig:weight_humerus_r}
 \end{figure}
 
 \subsection{Material Properties}
 
 The base models come with no material properties. In order to improve the realism of the model, texturing/painting tasks for various parts of the body are performed. These parts include the general skin, hair, eyes and lips (Figure~\ref{fig:detailed_face}). Other additions include accessories such as hair sticks and earrings to achieve more realistic results.
 
-\begin{figure}[h]
+\begin{figure}[ht]
 \centerline{\psfig{figure=figures/detailed_face.eps,width=1.00\textwidth}}
 \caption{Detailed appearance of the face.}
 \label{fig:detailed_face}
@@ -64,7 +64,7 @@ In order to overcome these problems, we split the dress mesh into two parts and 
 \item The dynamic part is the part to be simulated, affected by inertia, wind and other factors. Their attachment line is just above the waist of the human avatar, which is pinpointed through try-and-error experiments with other locations (Figure~\ref{fig:dress_and_body}). Keeping the line very low resulted in both unnatural collisions and the cloth being too rigid. Keeping it too high brought out the problems in the first approach. With its current setting, the dress mesh is animated naturally on the virtual avatar.
 \end{itemize}
 
-\begin{figure}[h]
+\begin{figure}[ht]
 \centerline{\psfig{figure=figures/dress_and_body.eps,width=0.50\textwidth}}
 \caption{The dress, positioned on the body, along with the upper-part of the skeleton. In this shot, the dynamic part is highlighted with orange border.}
 \label{fig:dress_and_body}

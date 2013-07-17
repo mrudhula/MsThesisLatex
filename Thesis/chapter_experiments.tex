@@ -23,7 +23,7 @@ Experiments are performed on a high-end PC with Intel i7-2600 and NVIDIA GeForce
 
 Aside from the overall motion smoothing, the main motion filters are dominant over the arms and the legs. The effects of motion filtering and smoothing on the arm can be seen in Figures~\ref{fig:forearm-comparison}~and~\ref{fig:rotation-filter}, respectively. The filters on the legs focus on solving the foot skating problem. The corrected displacement values can be seen in Figure~\ref{fig:footskating}. The virtual unit is the unit step in the virtual world. For reference, the virtual avatars' height is 55 virtual units. Hence, a virtual unit corresponds close to 3.5 cm.  
 
-The measurement process to identify the body parameters starts after a subject is recognized, identified and calibrated for tracking. Following the parameter estimation, the virtual avatar and cloth are created and the simulation starts. The total time for the measurement of body parameters and resizing the cloth does not exceed 1.005 seconds. Considering the time for acquiring 30 frames of input from the depth sensor is 1.0 second, it is safe to say that the measurement algorithm does not introduce any delays for a real time application because it needs to run only once at the beginning of the simulation. The body sizes are estimated with error rates less than 4\%, which is sufficient for the realism of the simulation and determining the appropriate apparel size. Table~\ref{tbl:body_results} presents the measurements of the body dimensions, as well as the errors and standard deviations of the measurements in 30 frames for three subjects. The results are compared with the results from~\cite{Giovanni2012}~and~\cite{Samejima2012}, which are also real-time applications, in Table~\ref{tbl:performance_compare}.
+The measurement process to identify the body parameters starts after a subject is recognized, identified and calibrated for tracking. Following the parameter estimation, the virtual avatar and cloth are created and the simulation starts. The total time for the measurement of body parameters and resizing the cloth does not exceed 1.005 seconds. Considering the time for acquiring 30 frames of input from the depth sensor is 1.0 second, it is safe to say that the measurement algorithm does not introduce any delays for a real time application because it needs to run only once at the beginning of the simulation. The body sizes are estimated with error rates less than 4\%, which is sufficient for the realism of the simulation and determining the appropriate apparel size. Table~\ref{tbl:body_results} presents the measurements of the body dimensions, as well as the errors and standard deviations of the measurements in 30 frames for three subjects. The results are compared with the results from~\cite{Giovanni2012}~and~\cite{Samejima2012}, which are also real-time body size estimation techniques using Kinect depth sensor for virtual try-on applications, in Table~\ref{tbl:performance_compare}.
 
 \begin{table}
 \begin{center}
@@ -52,7 +52,7 @@ The measurement process to identify the body parameters starts after a subject i
   Samejima et al.~\cite{Samejima2012}  & 6.72  & 4.68  & n/a & PCA \\ \hline
 \end{tabular}
 \end{center}
-\caption{Performance comparison with~\cite{Giovanni2012}~and~\cite{Samejima2012} regarding height measurements.}
+\caption{Performance comparison with other state-of-the-art approaches regarding height measurements.}
 \label{tbl:performance_compare}
 \end{table}
 

@@ -8,7 +8,7 @@ The mesh to be simulated is the dynamic part of the modeled dresses that contain
 
 Other than the vertex and topology information, an inverse weight property needs to be specified for every vertex.  This information can be embedded into the wavefront object as a second set of texture coordinates. On the other hand, this method adds too much extra data to the file, which is not a major problem, although not necessary. Therefore the vertex weight information is embedded into the model by specifying the material names separately for vertex groups with different weights. The vertices that have a non-zero inverse weight have the suffix ``Free'' attached to their material name. The vertices are selected manually and their materials are attached.  The current simulation required only two set of weights, which can be seen in Figure~\ref{fig:cloth_fixed_vertices}. After the weight information is implemented, the model is exported as a Wavefront OBJ file along with the MTL material file and parsed into the software.
 
-\begin{figure}[h]
+\begin{figure}[ht]
 \centerline{\psfig{figure=figures/cloth_fixed_vertices.eps,width=1.00\textwidth}}
 \caption{The fixed vertices of the cloth.}
 \label{fig:cloth_fixed_vertices}
@@ -91,7 +91,7 @@ Preventing the apparel meshes intersecting with the virtual avatar and itself is
 
 The female body bone information is extracted from the input skeletal mesh class, and the colliding capsules are generated automatically, although the radii of the bones are either specified manually or input through the user measurement process~\ref{algo:sphere_fitting}. The collision information is specified in two arrays, one being the positions and radii of the spheres and the second defining pairs of spheres which form capsules. A total of 28 capsules and spheres are used in the whole collision model, which simulates all the movable bones of the human body (see~Figure~\ref{fig:colliding_human_body}) plus a few additional bones for regions which are not close enough to a bone.  The collision data is prepared before the cloth creation, and given as a parameter. 
 
-\begin{figure}[h]
+\begin{figure}[ht]
 \centerline{\psfig{figure=figures/colliding_human_body.eps,width=1.00\textwidth}}
 \caption{Character formed with collision spheres and capsules.}
 \label{fig:colliding_human_body}
