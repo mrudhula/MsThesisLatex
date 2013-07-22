@@ -1,21 +1,18 @@
 \chapter{Cloth Resizing}
 \label{chapter_cloth_resizing}
-For a realistic fitting experience, another requirement is acquiring a set of simulation parameters from a human test-subject for a pre-modeled apparel mesh, which is to be displayed on a virtual avatar reflecting the body characteristics of the aforementioned subject.  The set of parameters for the simulation includes the body height and width, also the radii for the collision spheres, which have their centers coinciding with the joints of the virtual avatar's skeleton.
-  
-The body width and height are then utilized to estimate the body size of the user, collision spheres are used in the dressing room simulation to detect and resolve collision with the cloth particles.
+For a realistic fitting experience, another requirement is acquiring a set of simulation parameters from a human test-subject for a pre-modeled apparel mesh, which is to be displayed on a virtual avatar reflecting the body characteristics of the aforementioned subject.  The set of parameters for the simulation includes the body height and width, and the radii for the collision spheres, which have their centers coinciding with the joints of the virtual avatar's skeleton. The body width and height are then utilized to estimate the body size of the user, collision spheres are used in the dressing room simulation to detect and resolve collision with the cloth particles.
 
-As opposed to the studies focusing on acquiring high-detail avatars of subjects for made-to measure applications, this study focuses on the speed of the overall algorithm for real-time purposes and acquire enough measurements for a `fixed-size try-on' system.   
-
-The cloth resizing algorithm consists of three main steps:
+As opposed to the studies focusing on acquiring high-detail avatars of subjects for made-to measure applications, this study focuses on the speed of the overall algorithm for real-time purposes and acquire just enough measurements for a `fixed-size try-on' system.   
+The cloth resizing algorithm consists of three stages:
 \begin{enumerate}
 \item Improve the raw depth map from Kinect by filtering.
 \item Fit the contour on the user blob and perform measurements. Compare with known human body proportions to acquire required scaling parameters.
-\item Perform the same measurements over a time frame in order to smooth the results. Scale the virtual avatar along with the cloth mesh prior to simulation.
+\item Perform the same measurements over a time frame in order to smooth the results. Scale the avatar along with the cloth mesh prior to simulation.
 \end{enumerate}
 
 \section{Depth Map Optimization}
 \label{section_depth_map_optimization}
-At 30 frames per second (fps), Kinect provides a depth map and a user map, both at 640 $\times$ 480 resolution. The depth map contains the distances of pixels from the sensor in millimeters. The depth measurement of the Kinect sensor is not very accurate compared to high-end 3D depth systems such as laser scanners. The error in the depth value increases quadratically with the distance. The error values for different distances are shown in Table~\ref{tbl:error_kinect}~(\cite{Kourosh2012}).
+At 30 frames per second (fps), Kinect provides a depth map and a user map, both at 640 $\times$ 480 resolution. The depth map contains the distances of pixels from the sensor in millimeters. The depth measurement of the Kinect sensor is not very accurate compared to high-end 3D depth systems such as laser scanners. The error in the depth value increases quadratically with the distance. The error values for different distances are shown in Table~\ref{tbl:error_kinect}~(please see~\cite{Kourosh2012} for details of the accuracy and resolution of Kinect depth data).
 
 \begin{table}
 \center
@@ -243,7 +240,6 @@ $y_s=\frac{\textit{height}_\textit{weighted}}{\textit{height}_\textit{cloth}}$\;
 
 \section{Temporal Optimization and Scaling}
 After performing Step 2 of the cloth resizing algorithm (cf. Algorithm~\ref{algo:sphere_fitting}), we acquire the following usable parameters:
-
 \begin{itemize}
 \item collision sphere radii, ($r_i$) and
 \item cloth and avatar scaling parameters ($x_s$, $y_s$).

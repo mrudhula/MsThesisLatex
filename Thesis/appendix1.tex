@@ -51,6 +51,7 @@ OGRE is more than just a rendering engine, despite what name implies. Among all 
 \section{High Level Overview}
 \subsection{The Root Object}
 The root object is the entry point and core of the framework.
+
 \begin{itemize}
 \item It is created first and destroyed last in the application life cycle. 
 \item It configures the system, delivers pointers to the managers for various resources.
@@ -58,31 +59,34 @@ The root object is the entry point and core of the framework.
 \end{itemize}
 
 \subsection{The RenderSystem Object}
-Render system is an abstract class to define the underlying 3D API (either Direct 3D or OpenGL). This class is not accessed and modified by the application programmer.
+RenderSystem is an abstract class to define the underlying 3D API (either Direct 3D or OpenGL). This class is not accessed and modified by the application programmer.
 
 \subsection{The SceneManager Object}
-SceneManager is the most used object by the application programmer, as it is in charge of the contents in the scene to be rendered.
+SceneManager is the most frequently used object by the application programmer because it is in charge of the contents in the scene to be rendered.
+
 \begin{itemize}
 \item It is used to create, destroy and update the objects.
-\item It sends the scene to the RenderSystem behind the curtains for rendering.
-\item Multiple SceneManagers can be used to create other visual resources (ex. RenderToTexture environment)
+\item It sends the scene to the RenderSystem object for rendering.
+\item Multiple SceneManagers can be used to create other visual resources (e.g., RenderToTexture environment).
 \end{itemize}
 
 \subsection{Resource Manager}
-ReosurceManager object is an abstract class, used to create, keep and dispatch a type of resource it is associated with. 
+ReosurceManager object is an abstract class, which used to create, keep and dispatch a type of resource it is associated with. 
+
 \begin{itemize}
 \item The associated type is defined by the class inheriting the ResourceManager, such as MaterialManager.
-\item There is always only one instance of every child of ReosurceManager in an application.
+\item There is always only one instance of every child of ResourceManager in an application.
 \item Resource managers search the pre-defined locations of the file system and automatically indexes the resources available, ready to be loaded upon demand.
 \end{itemize}
 
 
 \subsection{Entities, Meshes, Materials and Overlays}
-Entities are the instances of movable objects in the scene. They are based on meshes, which define the geometric and material properties of the entity. Materials contain information about what color the final pixel in the rendering should be. 
+Entities are the instances of movable objects in the scene. They are based on meshes, which define the geometric and material properties of the entity. Materials describe material properties of objects that determine the color and intensity of pixels during rendering.
+ 
 \begin{itemize}
 \item Entities are attached to scene nodes for moving and rendering. Scene nodes can be nested, which greatly simplifies the process of rendering complex scenes.
 \item Meshes consist of sub meshes, which can have different material associations. Therefore, a mesh can be composed of various parts with various materials.
 \item Materials are defined either in run-time or in .material scripts, with detailed information. They also support custom shaders.
 \item Mesh files can be created and saved with manual objects, or exported through designer programs such as Blender. The .mesh files are in binary format.
 \end{itemize}
-Overlays are used to create panels for control and HUD which are rendered above the scene. They are 2D elements are placed either by screen proportion or pixel size and rendered orthographically, last in the rendering pipeline by default (this can be overridden).
+Overlays are used to create panels for control and Head-Up-Display (HUD), which are rendered above the scene. They are 2D elements are placed either by screen proportion or pixel size and rendered orthographically, last in the rendering pipeline by default (this can be overridden).
