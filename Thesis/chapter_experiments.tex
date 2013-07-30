@@ -1,18 +1,18 @@
 \chapter{Experiments}
 \label{chapter_experiments}
  
-Experiments are performed on a high-end PC with Intel i7-2600 and NVIDIA GeForce GTX560Ti. The frame rate of the application varies, depending on the complexity of the apparel mesh and whether the avatar is female or male. If the apparel mesh contains a large number of vertices, the physics simulation takes more time and the frame rate drops. The accessories of the female mesh such as the hair and earrings are very highly detailed and cause a considerable drop in the frame rate. The minimum acceptable frame rate is 120 frames per second (fps), which is set as the simulation rate of the physics environment. Two sets of frame rates across the simulation can be seen in Figure~\ref{fig:fps}. Notice the common pattern in both of the simulations. The first drop corresponds to the start of the animation of the avatar with the input from depth sensor. Until that point, the avatar is static, the motion filters do not run and the simulation runs at a higher speed. Approximately 600 fps is lost due to the motion filtering and skinning. The first cliff in the graph corresponds to the point where the physics simulation is stopped. The second cliff starts when the input from the depth sensor is stopped and the simulation is stagnant.  
+Experiments are performed on a high-end PC with Intel i7-2600 and NVIDIA GeForce GTX560Ti. The frame rate of the application varies, depending on the complexity of the apparel mesh and whether the avatar is female or male. If the apparel mesh contains a large number of vertices, the physics simulation takes more time and the frame rate drops. The accessories of the female mesh such as the hair and earrings are very highly detailed and cause a considerable drop in the frame rate. The minimum acceptable frame rate is determined by the simulation rate of the physics environment. Simulation rate of the physics environment determines the timestep in the numerical solution of apparel simulation and collision solutions. Higher simulation rates produce better physical results, however they also increase the required computational power, decreasing the overall frame rate. If the simulation rate is specified higher than 150 frames per second(fps), the overall frame rate drops below 150 fps in the complicated models, nullifying the benefit of higher number of iterations of the physics solver. Through try-and-error experimentation, 120 fps is found to be the optimal physical simulation rate, producing good quality physical results with sufficiently high frame rates. Two sets of frame rates across the simulation can be seen in Figure~\ref{fig:fps}. Notice the common pattern in both of the simulations. The first drop corresponds to the start of the animation of the avatar with the input from depth sensor. Until that point, the avatar is static, the motion filters do not run and the simulation runs at a higher speed. Approximately 600 fps is lost due to the motion filtering and skinning. The first cliff in the graph corresponds to the point where the physics simulation is stopped. The second cliff starts when the input from the depth sensor is stopped and the simulation is stagnant.  
 
 \begin{figure}[htbp]
 	\begin{center} 
-	\fbox{\includegraphics[width=1.00\textwidth]{./figures/fps.eps}}
+	\fbox{\includegraphics[width=1.00\textwidth]{./figures/fps_without_brackets.eps}}
 	\end{center}
 	\caption{The frame rates for two different apparel meshes. }
 	\label{fig:fps}
 \end{figure}
  
  
-\begin{figure}[htbp]
+\begin{figure}[htbp] 
 	\begin{center} 
 	\fbox{\includegraphics[width=1.00\textwidth]{./figures/footskate.eps}}
 	\end{center}

@@ -2,22 +2,17 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
+\contentsline {algocf}{\numberline {1}{\ignorespaces Bone transformation algorithm}}{25}{algocf.1}
+\contentsline {algocf}{\numberline {2}{\ignorespaces Mesh update algorithm called at every frame}}{34}{algocf.2}
+\contentsline {algocf}{\numberline {3}{\ignorespaces Constrained foot determination}}{35}{algocf.3}
+\contentsline {algocf}{\numberline {4}{\ignorespaces Foot skating filtering}}{36}{algocf.4}
 \addvspace {10\p@ }
+\contentsline {algocf}{\numberline {5}{\ignorespaces Position-based dynamics solver}}{41}{algocf.5}
 \addvspace {10\p@ }
-\addvspace {10\p@ }
-\addvspace {10\p@ }
-\contentsline {algocf}{\numberline {1}{\ignorespaces Bone transformation algorithm}}{23}
-\addvspace {10\p@ }
-\contentsline {algocf}{\numberline {2}{\ignorespaces Mesh update algorithm called at every frame.}}{32}
-\contentsline {algocf}{\numberline {3}{\ignorespaces Constrained foot determination}}{33}
-\contentsline {algocf}{\numberline {4}{\ignorespaces Foot skating filtering}}{34}
-\contentsline {algocf}{\numberline {5}{\ignorespaces Position-based dynamics}}{39}
-\addvspace {10\p@ }
-\contentsline {algocf}{\numberline {6}{\ignorespaces Depth map optimization algorithm}}{45}
-\contentsline {algocf}{\numberline {7}{\ignorespaces Sphere fitting algorithm}}{47}
-\contentsline {algocf}{\numberline {8}{\ignorespaces Cloth resizing algorithm}}{50}
-\contentsline {algocf}{\numberline {9}{\ignorespaces Temporal averaging}}{51}
-\addvspace {10\p@ }
+\contentsline {algocf}{\numberline {6}{\ignorespaces Depth map optimization algorithm}}{47}{algocf.6}
+\contentsline {algocf}{\numberline {7}{\ignorespaces Sphere fitting algorithm}}{49}{algocf.7}
+\contentsline {algocf}{\numberline {8}{\ignorespaces Cloth resizing algorithm}}{52}{algocf.8}
+\contentsline {algocf}{\numberline {9}{\ignorespaces Temporal averaging}}{53}{algocf.9}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
